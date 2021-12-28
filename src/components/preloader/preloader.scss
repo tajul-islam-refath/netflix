@@ -1,0 +1,29 @@
+.preloader_div {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(0deg, #191a32 0%, rgba(25, 26, 50, 0) 218.84%),
+    url("https://cdn.hipwallpaper.com/i/98/21/dUyCkp.jpg");
+  background-size: cover;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.st0 {
+  fill: #ffffff;
+}
+.st1 {
+  font-family: "ArialRoundedMTBold";
+}
+.st2 {
+  font-size: 124.3438px;
+}
+.st3 {
+  fill: #ee2d24;
+}
+
+#Layer_1 {
+  width: 300px;
+  height: auto;
+}

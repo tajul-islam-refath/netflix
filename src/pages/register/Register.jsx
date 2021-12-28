@@ -20,13 +20,17 @@ export default function Register() {
     <div className="register">
       <div className="top">
         <div className="wrapper">
+          <div className="wrapper_inside">
           <img
             className="logo"
             src="images/icinema_logo.png"
                       alt=""
-                      style={{height: '80px'}}
+                      style={{height: '40px'}}
           />
-          <Link to="/browse"><button className="loginButton">Sign In</button></Link>
+            <span>iCinema</span>
+            </div>
+          <Link to="/login"><button className="loginButton">Sign In</button></Link>
+          {/* <Link to="/login" className="loginButton">Sign In</Link> */}
         </div>
       </div>
       <div className="container">
@@ -38,16 +42,16 @@ export default function Register() {
         {!email ? (
           <div className="input">
             <input type="email" placeholder="email address" ref={emailRef} />
-            <Link to="/browse" className="registerButton" onClick={handleStart}>
+            <button className="registerButton" onClick={handleStart}>
               Get Started
-            </Link>
+            </button>
           </div>
         ) : (
           <form className="input">
             <input type="password" placeholder="password" ref={passwordRef} />
-            <button className="registerButton" onClick={handleFinish}>
+            <Link to="/browse" className="registerButton" onClick={handleFinish}>
               Start
-            </button>
+            </Link>
           </form>
         )}
       </div>

@@ -10,6 +10,20 @@
   --red-color: #e72626;
 }
 
+html {
+  height: 100vh;
+  background-color: #151531fa;
+  // overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+// body {
+//   background-color: var(--main-color);
+// }
+
 /* html {
   font-size: 62.5%;
 } */

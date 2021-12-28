@@ -1,0 +1,33 @@
+.home {
+  background-color: var(--main-color);
+  overflow: hidden;
+}
+.mylist {
+  background-color: var(--main-color);
+  min-height: 100vh;
+
+  .mylist_main_container {
+    margin-left: 50px;
+    min-height: 40vh;
+    padding-top: 80px;
+
+    p {
+      font-size: 30px;
+      color: white;
+    }
+  }
+
+  .mylist_container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+
+    //   display: flex;
+    //   padding-top: 100px;
+    //   width: max-content;
+    //   transform: translateX(0px);
+    //   transition: all 1s ease;
+    //   align-items: center;
+  }
+}

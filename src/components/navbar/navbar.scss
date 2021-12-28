@@ -10,10 +10,11 @@
   transition: 0.5s;
 
   &.scrolled {
-    background-color: var(--main-color);
+    background-color: #24243bab;
     box-shadow: 0px 8px 10px 0px rgb(0.5, 0.5, 0.5, 0.5);
     opacity: 1;
     transition: 0.5s;
+    backdrop-filter: blur(20px);
   }
 
   .container {
@@ -28,8 +29,8 @@
       align-items: center;
 
       img {
-        height: 55px;
-        width: 56px;
+        height: 30px;
+        width: auto;
         margin-right: 40px;
         margin-top: 20px;
         margin-bottom: 20px;
@@ -39,6 +40,7 @@
       span {
         margin-right: 20px;
         cursor: pointer;
+        font-size: 20px;
 
         &:hover {
           color: rgb(218, 218, 218);
@@ -159,6 +161,10 @@
         }
       }
 
+      // .blur_bg {
+      //   display: none;
+      // }
+
       .noti {
         .notifications {
           display: flex;
@@ -261,6 +267,98 @@
           }
         }
       }
+    }
+  }
+}
+
+.notifications_hover {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  margin-top: 20px;
+  opacity: 1;
+  transition: 0.3s;
+  box-shadow: 0px 0px 10px 7px rgb(0.6, 0.6, 0.6, 0.6);
+  transform: translateY(0px);
+}
+
+.navbar_logo {
+  display: flex;
+  align-items: center;
+  margin-right: 50px;
+  text-decoration: none;
+  color: white;
+  font-size: 30px !important;
+
+  .logo_text {
+    margin-left: -35px;
+    font-size: 30px !important;
+  }
+}
+
+.navbar_left_link:hover span {
+  color: var(--red-color) !important;
+  transition: 0.5s !important;
+  // font-weight: bold;
+}
+
+.navbar_left_link:not(:hover) span {
+  transition: 0.5s !important;
+}
+
+@media screen and (max-width: 768px) {
+  .left {
+    .navbar_left_link {
+      display: none;
+    }
+  }
+
+  .navbar {
+    .container {
+      padding: 0px 20px;
+    }
+
+    .right {
+      .search_bar_active {
+        width: 100px !important;
+      }
+      .profile {
+        .arrow_icon {
+          display: none;
+        }
+        .options {
+          margin-left: -110px !important;
+        }
+      }
+      // .blur_bg {
+      //   display: block ;
+      // }
+      .noti {
+        .notifications {
+          width: 95vw !important;
+          margin-left: -70vw !important;
+        }
+      }
+    }
+
+    .left {
+      img {
+        height: 20px !important;
+      }
+    }
+  }
+
+  .navbar_logo {
+    display: flex;
+    align-items: center;
+    margin-right: 0px;
+    text-decoration: none;
+    color: white;
+    font-size: 20px !important;
+
+    .logo_text {
+      margin-left: -35px;
+      font-size: 20px !important;
     }
   }
 }
