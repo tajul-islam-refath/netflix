@@ -1,18 +1,19 @@
 .details_video {
   overflow: hidden;
   position: fixed;
-  z-index: 99999;
+  z-index: 9;
   video {
     padding-top: 70px;
     width: 100vw;
     height: 30vh;
     object-fit: cover;
+    background-color: var(--main-color);
   }
 }
 
 .details_info {
   padding: 10px 20px;
-  padding-top: 270px;
+  padding-top: 42vh;
   color: white;
   overflow-y: scroll;
 }

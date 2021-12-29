@@ -127,6 +127,7 @@ const Details = () => {
             autoPlay={true}
             controls
             loop={false}
+            playsinline
           />
         </div>
 

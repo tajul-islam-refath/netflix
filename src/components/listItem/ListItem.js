@@ -9,20 +9,25 @@ import { useState, useRef } from "react";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import Watch from "../../pages/watch/Watch";
-import LazyLoad from "react-lazyload";
+//import Watch from "../../pages/watch/Watch";
+//import LazyLoad from "react-lazyload";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export default function ListItem({ index, setSelectedId, info }) {
   const [isHovered, setIsHovered] = useState(false);
   const item = useRef();
-  const trailer =
-    "https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c0fd273d2c6d9a064f3ae35579b2bbdf&profile_id=139&oauth2_token_id=57447761";
+  // const trailer =
+  //   "https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c0fd273d2c6d9a064f3ae35579b2bbdf&profile_id=139&oauth2_token_id=57447761";
 
   // let genre_list = JSON.stringify(info.genre).split(",");
 
   const preventCardClick = (e) => {
     e.stopPropagation();
+  };
+
+  const openModal = () => {
+    setSelectedId(index);
+    document.querySelector("body").style.overflow = "hidden";
   };
 
   return (
@@ -49,11 +54,11 @@ export default function ListItem({ index, setSelectedId, info }) {
         <>
           <motion.div
             className="listItem"
-            style={{ left: isHovered && index * (225 + 5) }}
+            // style={{ left: isHovered && index * (225 + 5) }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             ref={item}
-            onClick={() => setSelectedId(index)}
+            onClick={() => openModal()}
           >
             {/* <LazyLoad
               offset={50}
@@ -80,7 +85,10 @@ export default function ListItem({ index, setSelectedId, info }) {
                 <video src={info.video} autoPlay={true} loop />
                 <div className="itemInfo">
                   <div className="icons">
-                    <Link to={"/watch/" + index}>
+                    <Link
+                      to={"/watch/" + index}
+                      onClick={(e) => preventCardClick(e)}
+                    >
                       <PlayArrow
                         className="icon list_item_play_icon"
                         style={{ color: "white" }}
@@ -100,8 +108,8 @@ export default function ListItem({ index, setSelectedId, info }) {
                     />
                     <FiMoreHorizontal
                       className="icon"
-                      layoutId={index}
-                      onClick={() => setSelectedId(index)}
+                      // layoutId={index}
+                      onClick={() => openModal()}
                     />
                   </div>
                   <div className="itemInfoTop">

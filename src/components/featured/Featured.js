@@ -77,6 +77,16 @@ export default function Featured({
     document.querySelector(".more").classList.remove("animate__pulse");
   };
 
+  const startScroll = () => {
+    document.querySelector("body").style.overflowY = "auto";
+  };
+
+  const stopScroll = () => {
+    if (window.innerWidth > 768) {
+      document.querySelector("body").style.overflow = "hidden";
+    }
+  };
+
   const watch_movie = () => {
     navigate("/watch/" + 1);
   };
@@ -260,8 +270,11 @@ export default function Featured({
               className="more animate__animated"
               onMouseEnter={moreInfoAnimate}
               onMouseLeave={moreInfoAnimateClose}
-              layoutId={index}
-              onClick={() => setSelectedId(index)}
+              // layoutId={index}
+              onClick={() => {
+                setSelectedId(index);
+                stopScroll();
+              }}
             >
               <InfoOutlined className="info_icon" />
               <span>More Info</span>
@@ -368,6 +381,7 @@ export default function Featured({
                   onClick={() => {
                     setSelectedId(null);
                     setStartVideo(false);
+                    startScroll();
                   }}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -429,7 +443,10 @@ export default function Featured({
                     }}
                     exit={{ y: 100, opacity: 0 }}
                   >
-                    <Link to={"/watch/" + selectedId}>
+                    <Link
+                      to={"/watch/" + selectedId}
+                      onClick={() => startScroll()}
+                    >
                       <PlayArrow className="more_modal_icon list_item_play_icon" />
                     </Link>
                     <Add className="more_modal_icon" />
@@ -444,6 +461,7 @@ export default function Featured({
                       onClick={() => {
                         setSelectedId(null);
                         setStartVideo(false);
+                        startScroll();
                       }}
                     />
                   </motion.div>
@@ -567,7 +585,7 @@ export default function Featured({
                               <Add className="more_like_add_icon" />
                             </div>
                             <div className="more_like_info_bottom">
-                              {item.des}
+                              {item.des.substring(0, 142)}
                             </div>
                           </div>
                         </motion.div>

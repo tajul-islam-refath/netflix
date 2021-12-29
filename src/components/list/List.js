@@ -32,14 +32,18 @@ export default function List({ list_header }) {
 
   const navigate = useNavigate();
 
-  const trailer =
-    "https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c0fd273d2c6d9a064f3ae35579b2bbdf&profile_id=139&oauth2_token_id=57447761";
+  // const trailer =
+  //   "https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c0fd273d2c6d9a064f3ae35579b2bbdf&profile_id=139&oauth2_token_id=57447761";
 
   if (selectedId !== null) {
     setTimeout(() => {
       setStartVideo(true);
     }, 4000);
   }
+
+  const openScroll = () => {
+    document.querySelector("body").style.overflowY = "auto";
+  };
 
   const listRef = useRef();
 
@@ -58,7 +62,7 @@ export default function List({ list_header }) {
     if (direction === "left" && slideNumber === 1) {
       setIsMoved(false);
     }
-    if (direction === "right" && slideNumber === 3) {
+    if (direction === "right" && slideNumber === 4) {
       setIsMovedRight(false);
     }
   };
@@ -5845,6 +5849,7 @@ export default function List({ list_header }) {
                   onClick={() => {
                     setSelectedId(null);
                     setStartVideo(false);
+                    openScroll();
                   }}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -5909,7 +5914,10 @@ export default function List({ list_header }) {
                     }}
                     exit={{ y: 100, opacity: 0 }}
                   >
-                    <Link to={"/watch/" + selectedId}>
+                    <Link
+                      to={"/watch/" + selectedId}
+                      onClick={() => openScroll()}
+                    >
                       <PlayArrow className="more_modal_icon list_item_play_icon" />
                     </Link>
                     <Add className="more_modal_icon" />
@@ -5924,6 +5932,7 @@ export default function List({ list_header }) {
                       onClick={() => {
                         setSelectedId(null);
                         setStartVideo(false);
+                        openScroll();
                       }}
                     />
                   </motion.div>
@@ -6050,7 +6059,7 @@ export default function List({ list_header }) {
                               <Add className="more_like_add_icon" />
                             </div>
                             <div className="more_like_info_bottom">
-                              {item.des}
+                              {item.des.substring(0, 142)}
                             </div>
                           </div>
                         </motion.div>
