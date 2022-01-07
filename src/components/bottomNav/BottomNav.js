@@ -12,6 +12,8 @@ import { Link } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
 import { MdMovieFilter, MdLocalMovies } from "react-icons/md";
 import { RiMovie2Fill, RiMovieFill } from "react-icons/ri";
+import { BsMusicNoteBeamed } from "react-icons/bs";
+
 //import { motion } from 'framer-motion';
 
 const BottomNav = () => {
@@ -46,7 +48,10 @@ const BottomNav = () => {
     nav
       .querySelector(".bottom_nav_about_us")
       .classList.remove("nav-item-active");
-    nav_indicator.style.left = `calc(${0 * 20 + 12.5}vw - 0px)`;
+    nav_indicator.style.left = `calc(${0 * 18 + 5}vw - 0px)`;
+    if (window.innerWidth >= 471 && window.innerWidth <= 990) {
+      nav_indicator.style.left = `calc(${0 * 19.6 + 4}vw - 0px)`;
+    }
   }
 
   function clickStories() {
@@ -62,7 +67,10 @@ const BottomNav = () => {
     nav
       .querySelector(".bottom_nav_about_us")
       .classList.remove("nav-item-active");
-    nav_indicator.style.left = `calc(${1 * 20 + 12.5}vw - 0px)`;
+    nav_indicator.style.left = `calc(${1 * 18 + 5}vw - 0px)`;
+    if (window.innerWidth >= 471 && window.innerWidth <= 990) {
+      nav_indicator.style.left = `calc(${1 * 19.6 + 4}vw - 0px)`;
+    }
   }
 
   function clickHome() {
@@ -80,7 +88,10 @@ const BottomNav = () => {
     nav
       .querySelector(".bottom_nav_about_us")
       .classList.remove("nav-item-active");
-    nav_indicator.style.left = `calc(${2 * 20 + 12.5}vw - 0px)`;
+    nav_indicator.style.left = `calc(${2 * 18 + 5}vw - 0px)`;
+    if (window.innerWidth >= 471 && window.innerWidth <= 990) {
+      nav_indicator.style.left = `calc(${2 * 19.6 + 4}vw - 0px)`;
+    }
   }
 
   function clickContact() {
@@ -96,7 +107,10 @@ const BottomNav = () => {
     nav
       .querySelector(".bottom_nav_about_us")
       .classList.remove("nav-item-active");
-    nav_indicator.style.left = `calc(${3 * 20 + 12.5}vw - 0px)`;
+    nav_indicator.style.left = `calc(${3 * 18 + 5}vw - 0px)`;
+    if (window.innerWidth >= 471 && window.innerWidth <= 990) {
+      nav_indicator.style.left = `calc(${3 * 19.6 + 4}vw - 0px)`;
+    }
   }
 
   function clickAboutUs() {
@@ -112,7 +126,10 @@ const BottomNav = () => {
     nav
       .querySelector(".bottom_nav_contact")
       .classList.remove("nav-item-active");
-    nav_indicator.style.left = `calc(${4 * 20 + 12.5}vw - 0px)`;
+    nav_indicator.style.left = `calc(${4 * 18 + 5}vw - 0px)`;
+    if (window.innerWidth >= 471 && window.innerWidth <= 990) {
+      nav_indicator.style.left = `calc(${4 * 19.6 + 4}vw - 0px)`;
+    }
   }
 
   return (
@@ -168,12 +185,12 @@ const BottomNav = () => {
 
         <li>
           <Link
-            to="/popular"
+            to="/music"
             className="bottom_nav_a bottom_nav_about_us"
             onClick={clickAboutUs}
           >
-            <RiMovieFill className="navbar_about_us_icon" />
-            <span className="title">New</span>
+            <BsMusicNoteBeamed className="navbar_about_us_icon" />
+            <span className="title">Music</span>
           </Link>
         </li>
 

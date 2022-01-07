@@ -4,6 +4,9 @@ import "./home.scss";
 import List from "../../components/list/List";
 import Footer from "../../components/footer/Footer";
 import LazyLoad from "react-lazyload";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import AppUrl from "../../classes/AppUrl";
 
 const Home = () => {
   const pic =
@@ -14,6 +17,26 @@ const Home = () => {
     "In 1981 Gotham City, a struggling, mentally ill comic battles to be seen. His life takes a dark, gut-wrenching turn after he lashes back at attackers.";
   const video =
     "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4";
+
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    const getList = async () => {
+      try {
+        const res = await axios.get("lists", {
+          headers: {
+            token:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxY2M1MWJkZmYzMmVjNmVlNjNjMTk3YyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0MTIyNDU5NywiZXhwIjoxNjQxNjU2NTk3fQ.hSQAfsFOZ0nNhdZuoMrsWO2uooaILtyrEosDrt2vgE4",
+          },
+        });
+        //console.log(res);
+        setList(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getList();
+  }, []);
 
   return (
     <>
@@ -34,15 +57,18 @@ const Home = () => {
           genre={"Action, Scary"}
         />
         <List list_header={"Continue Watching"} />
-        <LazyLoad offset={50} once={true}>
-          <List list_header={"Action Movies"} />
-          <List list_header={"Horror Movies"} />
-          <List list_header={"Family Movies"} />
-          <List list_header={"K-Dramas"} />
-          <List list_header={"Anime"} />
-          <List list_header={"Super Natural Soaps"} />
-          <List list_header={"Recently Added"} />
-        </LazyLoad>
+        {/* <LazyLoad offset={50} once={true}>
+          {list.map((item) => (
+            <List list_header={item.title} key={item._id} list={item} />
+          ))} */}
+        <List list_header={"Action Movies"} />
+        <List list_header={"Horror Movies"} />
+        <List list_header={"Family Movies"} />
+        <List list_header={"K-Dramas"} />
+        <List list_header={"Anime"} />
+        <List list_header={"Super Natural Soaps"} />
+        <List list_header={"Recently Added"} />
+        {/* </LazyLoad> */}
       </div>
       {/* <Footer /> */}
     </>

@@ -115,7 +115,7 @@
   text-decoration: none;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 990px) {
   .login {
     background: linear-gradient(0deg, #191a32 35%, rgba(25, 26, 50, 0) 180.84%),
       url("http://mppmduse2pmpovwapp.azurewebsites.net/wp-content/uploads/2019/09/netflix-background-9.jpg") !important;
@@ -145,20 +145,22 @@
 
       .container_inside {
         display: flex;
+        flex-direction: column;
+        justify-content: center;
         align-items: center;
 
         span {
           color: white;
           font-size: 24px;
-          margin-left: 5px;
-          margin-top: 20px;
+          margin-left: 0px;
+          margin-top: 10px;
         }
       }
 
       .logo_mbl {
         display: block;
 
-        width: 100px;
+        width: 80px;
       }
 
       form {

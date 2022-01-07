@@ -1,10 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../../components/footer/Footer";
 import Navbar from "../../components/navbar/Navbar";
 import "./account.scss";
+import { AnimatePresence, motion } from "framer-motion";
+import swal from "sweetalert";
 
 const Account = () => {
+  const [selectedModal, setSelectedModal] = useState(null);
+  const [selectedModalEmail, setSelectedModalEmail] = useState(null);
+  const [selectedModalPass, setSelectedModalPass] = useState(null);
+  const [selectedModalPhone, setSelectedModalPhone] = useState(null);
+
+  const openNameModal = (e, name) => {
+    e.preventDefault();
+    setSelectedModal(name);
+  };
+
+  const openEmailModal = (e, email) => {
+    e.preventDefault();
+    setSelectedModalEmail(email);
+  };
+
+  const openPassModal = (e, pass) => {
+    e.preventDefault();
+    setSelectedModalPass(pass);
+  };
+
+  const openPhoneModal = (e, phone) => {
+    e.preventDefault();
+    setSelectedModalPhone(phone);
+  };
+
+  const changeName = (e) => {
+    e.preventDefault();
+    setSelectedModal(null);
+    swal({
+      title: "Congrats!",
+      text: "Your name has been changed!",
+      icon: "success",
+    });
+  };
+  const changeEmail = (e) => {
+    e.preventDefault();
+    setSelectedModalEmail(null);
+    swal({
+      title: "Congrats!",
+      text: "Your email has been changed!",
+      icon: "success",
+    });
+  };
+  const changePass = (e) => {
+    e.preventDefault();
+    setSelectedModalPass(null);
+    swal({
+      title: "Congrats!",
+      text: "Your password has been changed!",
+      icon: "success",
+    });
+  };
+  const changePhone = (e) => {
+    e.preventDefault();
+    setSelectedModalPhone(null);
+    swal({
+      title: "Congrats!",
+      text: "Your phone number has been changed!",
+      icon: "success",
+    });
+  };
   return (
     <>
       <div className="account">
@@ -31,28 +94,44 @@ const Account = () => {
               <div className="account_email">
                 <p>Netflix</p>
                 <p>netflix@gmail.com</p>
-                <p>Password: **********</p>
+                <p>Password: *****</p>
                 <p>Phone: 01792383999</p>
               </div>
 
-              <div className="account_email">
+              <div className="account_email account_buttons">
                 <p>
-                  <Link to="/" className="edit_btn">
+                  <Link
+                    to="#"
+                    className="edit_btn"
+                    onClick={(e) => openNameModal(e, "change_name")}
+                  >
                     Change Name
                   </Link>
                 </p>
                 <p>
-                  <Link to="/" className="edit_btn">
+                  <Link
+                    to="#"
+                    className="edit_btn"
+                    onClick={(e) => openEmailModal(e, "change_email")}
+                  >
                     Change Email
                   </Link>
                 </p>
                 <p>
-                  <Link to="/" className="edit_btn">
+                  <Link
+                    to="#"
+                    className="edit_btn"
+                    onClick={(e) => openPassModal(e, "change_pass")}
+                  >
                     Change Password
                   </Link>
                 </p>
                 <p>
-                  <Link to="/" className="edit_btn">
+                  <Link
+                    to="#"
+                    className="edit_btn"
+                    onClick={(e) => openPhoneModal(e, "change_phone")}
+                  >
                     Change Phone
                   </Link>
                 </p>
@@ -67,18 +146,18 @@ const Account = () => {
                   alt="logo"
                   className="account_icinema_logo"
                 /> */}
-                <p>45.01 TL ICINEMA credit</p>
+                <p>45.01 iCinema credit</p>
                 <p>Your account is paid until January 29, 2022.</p>
               </div>
 
-              <div className="account_email">
+              <div className="account_email account_buttons account_buttons_second">
                 <p>
-                  <Link to="/" className="edit_btn">
-                    Manage payment info
+                  <Link to="/manage-payment-info" className="edit_btn">
+                    Payment info
                   </Link>
                 </p>
                 <p>
-                  <Link to="/" className="edit_btn">
+                  <Link to="/billing-details" className="edit_btn">
                     Billing details
                   </Link>
                 </p>
@@ -120,9 +199,9 @@ const Account = () => {
                 <p>Phone: 01792383999</p> */}
               </div>
 
-              <div className="account_email">
+              <div className="account_email account_buttons">
                 <p>
-                  <Link to="/" className="edit_btn">
+                  <Link to="/change-plan" className="edit_btn">
                     Change Plan
                   </Link>
                 </p>
@@ -147,6 +226,225 @@ const Account = () => {
           </div>
         </div>
       </div>
+
+      {/* modals name change */}
+      <AnimatePresence exitBeforeEnter>
+        {selectedModal && (
+          <>
+            <div
+              className="blur_bg_account"
+              onClick={() => setSelectedModal(null)}
+            ></div>
+            <motion.div
+              className="change_name_modal"
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              // transition={{
+              //   type: "spring",
+              //   stiffness: 100,
+              // }}
+              exit={{ opacity: 0, scale: 0 }}
+            >
+              <motion.p
+                initial={{ x: "-100vw", opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.4 }}
+              >
+                Change your name
+              </motion.p>
+              <motion.input
+                type="text"
+                className="change_name_input"
+                placeholder="Your Name"
+                initial={{ x: "-100vw", opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.7 }}
+              />
+              <motion.div
+                className="change_name_btn_div"
+                initial={{ x: "-100vw", opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 1 }}
+              >
+                <Link
+                  to="#"
+                  className="change_name_btn"
+                  onClick={(e) => changeName(e)}
+                >
+                  Change
+                </Link>
+              </motion.div>
+            </motion.div>
+          </>
+        )}
+
+        {selectedModalEmail && (
+          <>
+            {/* modals email change */}
+            <div
+              className="blur_bg_account"
+              onClick={() => setSelectedModalEmail(null)}
+            ></div>
+            <motion.div
+              className="change_name_modal"
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              // transition={{
+              //   type: "spring",
+              //   stiffness: 100,
+              // }}
+              exit={{ opacity: 0, scale: 0 }}
+            >
+              <motion.p
+                initial={{ x: "-100vw", opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.4 }}
+              >
+                Change your email
+              </motion.p>
+              <motion.input
+                type="text"
+                placeholder="Your Email"
+                className="change_name_input"
+                initial={{ x: "-100vw", opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.7 }}
+              />
+              <motion.div
+                className="change_name_btn_div"
+                initial={{ x: "-100vw", opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 1 }}
+              >
+                <Link
+                  to="#"
+                  className="change_name_btn"
+                  onClick={(e) => changeEmail(e)}
+                >
+                  Change
+                </Link>
+              </motion.div>
+            </motion.div>
+          </>
+        )}
+
+        {selectedModalPass && (
+          <>
+            {/* modals pass change */}
+            <div
+              className="blur_bg_account"
+              onClick={() => setSelectedModalPass(null)}
+            ></div>
+            <motion.div
+              className="change_name_modal"
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              // transition={{
+              //   type: "spring",
+              //   stiffness: 100,
+              // }}
+              exit={{ opacity: 0, scale: 0 }}
+            >
+              <motion.p
+                initial={{ x: "-100vw", opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.4 }}
+              >
+                Change your password
+              </motion.p>
+              <motion.input
+                type="password"
+                placeholder="Old Password"
+                className="change_name_input"
+                initial={{ x: "-100vw", opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.7 }}
+              />
+              <motion.input
+                type="password"
+                placeholder="New Password"
+                className="change_name_input"
+                initial={{ x: "-100vw", opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.7 }}
+              />
+              <motion.input
+                type="password"
+                placeholder="Confirm Password"
+                className="change_name_input"
+                initial={{ x: "-100vw", opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.7 }}
+              />
+              <motion.div
+                className="change_name_btn_div"
+                initial={{ x: "-100vw", opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 1 }}
+              >
+                <Link
+                  to="#"
+                  className="change_name_btn"
+                  onClick={(e) => changePass(e)}
+                >
+                  Change
+                </Link>
+              </motion.div>
+            </motion.div>
+          </>
+        )}
+
+        {selectedModalPhone && (
+          <>
+            {/* modals phone change */}
+            <div
+              className="blur_bg_account"
+              onClick={() => setSelectedModalPhone(null)}
+            ></div>
+            <motion.div
+              className="change_name_modal"
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              // transition={{
+              //   type: "spring",
+              //   stiffness: 100,
+              // }}
+              exit={{ opacity: 0, scale: 0 }}
+            >
+              <motion.p
+                initial={{ x: "-100vw", opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.4 }}
+              >
+                Change your phone
+              </motion.p>
+              <motion.input
+                type="text"
+                placeholder="Your Phone Number"
+                className="change_name_input"
+                initial={{ x: "-100vw", opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.7 }}
+              />
+
+              <motion.div
+                className="change_name_btn_div"
+                initial={{ x: "-100vw", opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 1 }}
+              >
+                <Link
+                  to="#"
+                  className="change_name_btn"
+                  onClick={(e) => changePhone(e)}
+                >
+                  Change
+                </Link>
+              </motion.div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
       {/* <Footer /> */}
     </>

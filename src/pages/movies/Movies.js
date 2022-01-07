@@ -6,8 +6,30 @@ import List from "../../components/list/List";
 import "./movies.scss";
 import Footer from "../../components/footer/Footer";
 import LazyLoad from "react-lazyload";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const Movies = () => {
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    const getList = async () => {
+      try {
+        const res = await axios.get("lists", {
+          headers: {
+            token:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxY2M1MWJkZmYzMmVjNmVlNjNjMTk3YyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0MDc5MDkwNywiZXhwIjoxNjQxMjIyOTA3fQ.MBMBdlXfQ4plX__Axh76C2gWHCH593KfX7YakHMUDuM",
+          },
+        });
+        //console.log(res);
+        setList(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getList();
+  }, []);
+
   const pic =
     "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABR5n93_UPBpOPkJIyuzSCMhERS_O7ONE64IFI0qHG32uGoHMH4Ysfn-zLqbHm6tuZ_TCRinolz1_N604T8o2Uy97Ldau.webp?r=696";
   const title_pic =
@@ -33,13 +55,17 @@ const Movies = () => {
           director={"Ronald"}
           writer={"Ronald"}
           genre={"Action, Comedy"}
+          type={"movie"}
         />
         <List list_header={"Recently Added"} />
-        <LazyLoad offset={50} once={true}>
-          <List list_header={"Trending Now"} />
-          <List list_header={"Indian Movies"} />
-          <List list_header={"Comedy Movies"} />
-        </LazyLoad>
+        {/* <LazyLoad offset={50} once={true}>
+          {list.map((item) => (
+            <List list_header={item.title} key={item._id} list={item} />
+          ))} */}
+        <List list_header={"Trending Now"} />
+        <List list_header={"Indian Movies"} />
+        <List list_header={"Comedy Movies"} />
+        {/* </LazyLoad> */}
       </div>
       {/* <div className="mylist">
         <Navbar />

@@ -7,6 +7,9 @@ import { useState, useEffect } from "react";
 import { Add, ThumbUpAltOutlined, ThumbDownOutlined } from "@material-ui/icons";
 //import { FiMoreHorizontal } from "react-icons/fi";
 import { FaTimesCircle } from "react-icons/fa";
+import { HiOutlineDownload } from "react-icons/hi";
+import { FiVolume2, FiVolumeX } from "react-icons/fi";
+import axios from "axios";
 
 export default function Featured({
   type,
@@ -28,6 +31,8 @@ export default function Featured({
   const [startHeroVideo, setStartHeroVideo] = useState(false);
   const [endHeroVideo, setEndHeroVideo] = useState(false);
   const [y, setY] = useState(window.scrollY);
+  const [volume, setVolume] = useState(false);
+  const [volume_detail, setVolumeDetail] = useState(false);
 
   const navigate = useNavigate();
 
@@ -61,6 +66,43 @@ export default function Featured({
     // }
   }, [endHeroVideo]);
 
+  const offVolume = () => {
+    setVolume(false);
+  };
+
+  const onVolume = () => {
+    setVolume(true);
+  };
+
+  const offVolumeDetail = () => {
+    setVolumeDetail(false);
+  };
+
+  const onVolumeDetail = () => {
+    setVolumeDetail(true);
+  };
+
+  const [movies, setMovies] = useState([]);
+  //const [onemovie, setOneMovie] = useState([]);
+
+  useEffect(() => {
+    const getMovies = async () => {
+      try {
+        const res = await axios.get("movies/", {
+          headers: {
+            token:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxY2M1MWJkZmYzMmVjNmVlNjNjMTk3YyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0MTIyNDU5NywiZXhwIjoxNjQxNjU2NTk3fQ.hSQAfsFOZ0nNhdZuoMrsWO2uooaILtyrEosDrt2vgE4",
+          },
+        });
+        //console.log(res);
+        setMovies(res.data[0]);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMovies();
+  }, []);
+
   const playNowAnimate = () => {
     document.querySelector(".play").classList.add("animate__pulse");
   };
@@ -82,13 +124,14 @@ export default function Featured({
   };
 
   const stopScroll = () => {
-    if (window.innerWidth > 768) {
+    if (window.innerWidth > 990) {
       document.querySelector("body").style.overflow = "hidden";
     }
   };
 
   const watch_movie = () => {
     navigate("/watch/" + 1);
+    startScroll();
   };
 
   const more_like = [
@@ -189,9 +232,9 @@ export default function Featured({
       <div className="featured">
         {type && (
           <div className="category">
-            <span>{type === "movie" ? "Movies" : "Series"}</span>
+            {/* <span>{type === "movie" ? "Movies" : "Series"}</span> */}
             <select name="genre" id="genre">
-              <option>Genre</option>
+              <option>{type === "movie" ? "Movies" : "Series"}</option>
               <option value="adventure">Adventure</option>
               <option value="comedy">Comedy</option>
               <option value="crime">Crime</option>
@@ -200,11 +243,11 @@ export default function Featured({
               <option value="horror">Horror</option>
               <option value="romance">Romance</option>
               <option value="sci-fi">Sci-fi</option>
-              <option value="thriller">Thriller</option>
+              {/* <option value="thriller">Thriller</option>
               <option value="western">Western</option>
               <option value="animation">Animation</option>
               <option value="drama">Drama</option>
-              <option value="documentary">Documentary</option>
+              <option value="documentary">Documentary</option> */}
             </select>
           </div>
         )}
@@ -224,6 +267,7 @@ export default function Featured({
                 setStartHeroVideo(false);
                 setEndHeroVideo(true);
               }}
+              muted={volume}
             />
           </>
         ) : (
@@ -231,6 +275,38 @@ export default function Featured({
             <img src={pic} alt="" className="hero_img" />
           </>
         )}
+
+        <div
+          className="volume"
+          data-aos="fade-up"
+          data-aos-delay="1000"
+          data-aos-duration="1000"
+          data-aos-easing="ease-in-out"
+        >
+          {volume ? (
+            <>
+              <FiVolumeX
+                className="featured_volume"
+                onClick={() => offVolume()}
+              />
+              {/* <FiVolume2
+                className="featured_volume"
+                onClick={() => offVolume()}
+              /> */}
+            </>
+          ) : (
+            <>
+              <FiVolume2
+                className="featured_volume"
+                onClick={() => onVolume()}
+              />
+              {/* <FiVolumeX
+                className="featured_volume"
+                onClick={() => onVolume()}
+              /> */}
+            </>
+          )}
+        </div>
 
         <div className="info">
           <img
@@ -283,7 +359,7 @@ export default function Featured({
         </div>
       </div>
 
-      {window.innerWidth <= 768 ? (
+      {window.innerWidth <= 990 ? (
         <>
           <AnimatePresence exitBeforeEnter>
             {selectedId && (
@@ -329,9 +405,7 @@ export default function Featured({
                         stiffness: 40,
                       }}
                     >
-                      <h4 className="more_card_info_title">
-                        Spiderman: Homecoming
-                      </h4>
+                      <h4 className="more_card_info_title">{"Spider Man"}</h4>
                       <div className="more_card_info_other">
                         <p className="more_card_info_year">{year}</p>
                         <p className="more_card_info_age">{age}</p>
@@ -408,6 +482,7 @@ export default function Featured({
                           height: "28vw",
                           objectFit: "cover",
                         }}
+                        muted={volume_detail}
                       />
                     </>
                   ) : (
@@ -452,6 +527,23 @@ export default function Featured({
                     <Add className="more_modal_icon" />
                     <ThumbUpAltOutlined className="more_modal_icon" />
                     <ThumbDownOutlined className="more_modal_icon" />
+                    <HiOutlineDownload className="more_modal_icon" />
+                    {volume_detail ? (
+                      <>
+                        <FiVolumeX
+                          className="more_modal_icon"
+                          onClick={offVolumeDetail}
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <FiVolume2
+                          className="more_modal_icon"
+                          onClick={onVolumeDetail}
+                        />
+                      </>
+                    )}
+
                     {/* <FiMoreHorizontal className="icon" /> */}
                   </motion.div>
 

@@ -1,0 +1,163 @@
+.change_plan_div {
+  padding: 100px 50px;
+
+  @media screen and (max-width: 870px) {
+    padding: 70px 20px;
+  }
+
+  h4 {
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+  }
+
+  .change_plan_card {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    // background-color: var(--main-color) 50%;
+    // background: linear-gradient(
+    //   to right,
+    //   var(--main-color) 20%,
+    //   transparent 80%
+    // );
+    // padding: 30px 30px;
+    border: 3px solid gray;
+    border-radius: 15px;
+    position: relative;
+    cursor: pointer;
+    transition: 0.5s;
+    margin-top: 15px;
+
+    @media screen and (max-width: 870px) {
+      flex-direction: column;
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      background: var(--main-color);
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 15%; /* Specify the width.. */
+      z-index: -1;
+
+      @media screen and (max-width: 552px) {
+        width: 100%;
+        height: 28%;
+      }
+      @media screen and (min-width: 553px) and (max-width: 870px) {
+        width: 100%;
+        height: 33%;
+      }
+    }
+
+    &:hover {
+      border: 3px solid var(--red-color) !important;
+      transition: 0.5s;
+      transform: scale(1.02);
+    }
+
+    .basic_plan_card_inside_header {
+      width: 5%;
+      padding: 2% 5.5%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .change_plan_card_check_icon {
+      position: absolute;
+      left: -20px;
+      color: var(--red-color);
+      font-size: 40px;
+      transform: scale(0);
+      transition: 0.5s;
+
+      @media screen and (max-width: 552px) {
+        top: 21%;
+        left: 45%;
+      }
+      @media screen and (min-width: 553px) and (max-width: 870px) {
+        top: 26%;
+        left: 47%;
+      }
+    }
+
+    .active_change_plan_card_check_icon {
+      transform: scale(1);
+      transition: 0.5s;
+    }
+
+    p {
+      color: white;
+      font-size: 22px;
+      //   background-color: var(--main-color);
+      //   padding: 2% 5.5%;
+    }
+
+    .change_plan_card_inside {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      width: 80%;
+      //   padding: 0px 30px;
+
+      p {
+        margin-left: 10px;
+        padding: 0px 0px;
+      }
+
+      //   p:nth-child(1) {
+      //     width: 80%;
+      //   }
+    }
+  }
+
+  .change_plan_footer1,
+  .change_plan_footer2 {
+    color: rgb(172, 172, 172);
+  }
+
+  .change_plan_buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+
+    .change_plan_btn1 {
+      background-color: lightgray;
+      padding: 10px 25px;
+      text-decoration: none;
+      color: black;
+      border-radius: 6px;
+      margin-right: 20px;
+      font-size: 18px;
+      transition: 0.5s;
+
+      &:hover {
+        background-color: rgb(194, 193, 193) !important;
+        transform: scale(1.1);
+        transition: 0.5s;
+      }
+    }
+
+    .change_plan_btn2 {
+      background-color: var(--red-color);
+      padding: 10px 25px;
+      text-decoration: none;
+      color: white;
+      border-radius: 6px;
+      margin-right: 20px;
+      font-size: 18px;
+      transition: 0.5s;
+
+      &:hover {
+        transform: scale(1.1);
+        transition: 0.5s;
+      }
+    }
+  }
+}

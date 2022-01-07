@@ -2,7 +2,7 @@ import {
   ArrowBackIosOutlined,
   ArrowForwardIosOutlined,
 } from "@material-ui/icons";
-import { useRef, useState, Suspense, lazy } from "react";
+import { useRef, useState, useEffect, Suspense, lazy } from "react";
 //import ListItem from "../listItem/ListItem";
 import "./list.scss";
 import {
@@ -14,21 +14,27 @@ import {
 } from "@material-ui/icons";
 //import { FiMoreHorizontal } from "react-icons/fi";
 import { FaTimesCircle } from "react-icons/fa";
+import { HiOutlineDownload } from "react-icons/hi";
+import { FiVolume2, FiVolumeX } from "react-icons/fi";
 
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import LazyLoad from "react-lazyload";
+import axios from "axios";
+import AppUrl from "../../classes/AppUrl";
 
 const ListItem = lazy(() => import("../listItem/ListItem"));
 
-export default function List({ list_header }) {
+export default function List({ list_header, list }) {
   const [isMoved, setIsMoved] = useState(false);
   const [isMovedRight, setIsMovedRight] = useState(true);
   const [slideNumber, setSlideNumber] = useState(0);
 
   const [selectedId, setSelectedId] = useState(null);
   const [startVideo, setStartVideo] = useState(false);
+
+  const [volume_detail, setVolumeDetail] = useState(false);
 
   const navigate = useNavigate();
 
@@ -40,6 +46,14 @@ export default function List({ list_header }) {
       setStartVideo(true);
     }, 4000);
   }
+
+  const offVolumeDetail = () => {
+    setVolumeDetail(false);
+  };
+
+  const onVolumeDetail = () => {
+    setVolumeDetail(true);
+  };
 
   const openScroll = () => {
     document.querySelector("body").style.overflowY = "auto";
@@ -69,7 +83,52 @@ export default function List({ list_header }) {
 
   const watch_movie = () => {
     navigate("/watch/" + 1);
+    openScroll();
   };
+
+  const [movies, setMovies] = useState([]);
+  //const [onemovie, setOneMovie] = useState([]);
+
+  useEffect(() => {
+    const getMovies = async () => {
+      try {
+        const res = await axios.get("movies/findbylistid/" + list._id, {
+          headers: {
+            token:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxY2M1MWJkZmYzMmVjNmVlNjNjMTk3YyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0MTIyNDU5NywiZXhwIjoxNjQxNjU2NTk3fQ.hSQAfsFOZ0nNhdZuoMrsWO2uooaILtyrEosDrt2vgE4",
+          },
+        });
+        //console.log(res);
+        setMovies(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMovies();
+
+    // const getMoviesOne = async () => {
+    //   try {
+    //     const res1 = await axios.get("movies/find/" + selectedId, {
+    //       headers: {
+    //         token:
+    //           "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxY2M1MWJkZmYzMmVjNmVlNjNjMTk3YyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0MTIyNDU5NywiZXhwIjoxNjQxNjU2NTk3fQ.hSQAfsFOZ0nNhdZuoMrsWO2uooaILtyrEosDrt2vgE4",
+    //       },
+    //     });
+    //     console.log(res1);
+    //     setOneMovie(res1.data);
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // };
+    // getMoviesOne();
+  }, []);
+
+  // useEffect(() => {
+
+  // }, []);
+
+  // let one_movie = "";
+  // one_movie = onemovie.map((item) => item);
 
   let cw = [];
 
@@ -5679,25 +5738,25 @@ export default function List({ list_header }) {
             onClick={() => handleClick("left")}
             style={{ display: !isMoved && "none" }}
           />
-          {window.innerWidth <= 768 ? (
+          {window.innerWidth <= 990 ? (
             <>
               <motion.div className="main_div">
                 <div className="center_div">
                   {cw.map((item, index) => (
-                    <Suspense fallback={<div></div>}>
-                      <LazyLoad
+                    <Suspense fallback={<div></div>} key={index}>
+                      {/* <LazyLoad
                         offset={50}
                         height={200}
                         once={true}
                         scroll={true}
-                        // overflow={true}
-                      >
-                        <ListItem
-                          index={index}
-                          setSelectedId={setSelectedId}
-                          info={item}
-                        />
-                      </LazyLoad>
+                        
+                      > */}
+                      <ListItem
+                        index={index}
+                        setSelectedId={setSelectedId}
+                        info={item}
+                      />
+                      {/* </LazyLoad> */}
                     </Suspense>
                   ))}
                 </div>
@@ -5713,7 +5772,6 @@ export default function List({ list_header }) {
                       height={200}
                       once={true}
                       scroll={true}
-                      // overflow={true}
                     >
                       <ListItem
                         index={index}
@@ -5745,7 +5803,7 @@ export default function List({ list_header }) {
         </div>
       </div>
 
-      {window.innerWidth <= 768 ? (
+      {window.innerWidth <= 990 ? (
         <>
           <AnimatePresence exitBeforeEnter>
             {selectedId && (
@@ -5791,9 +5849,12 @@ export default function List({ list_header }) {
                         stiffness: 40,
                       }}
                     >
-                      <h4 className="more_card_info_title">
-                        Spiderman: Homecoming
-                      </h4>
+                      <div className="more_card_info_title_div">
+                        <h4 className="more_card_info_title">
+                          {"Man of Steel"}
+                        </h4>
+                        <HiOutlineDownload className="more_card_info_download" />
+                      </div>
                       <div className="more_card_info_other">
                         <p className="more_card_info_year">
                           {cw[selectedId].year}
@@ -5825,7 +5886,6 @@ export default function List({ list_header }) {
                       <PlayArrow className="more_card_info_play_icon " />
                       Play
                     </Link>
-
                     <Link
                       to={"/details/" + selectedId}
                       className="more_card_info_play_btn"
@@ -5875,6 +5935,7 @@ export default function List({ list_header }) {
                           height: "28vw",
                           objectFit: "cover",
                         }}
+                        muted={volume_detail}
                       />
                     </>
                   ) : (
@@ -5924,6 +5985,22 @@ export default function List({ list_header }) {
                     <ThumbUpAltOutlined className="more_modal_icon" />
                     <ThumbDownOutlined className="more_modal_icon" />
                     {/* <FiMoreHorizontal className="icon" /> */}
+                    <HiOutlineDownload className="more_modal_icon" />
+                    {volume_detail ? (
+                      <>
+                        <FiVolumeX
+                          className="more_modal_icon"
+                          onClick={offVolumeDetail}
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <FiVolume2
+                          className="more_modal_icon"
+                          onClick={onVolumeDetail}
+                        />
+                      </>
+                    )}
                   </motion.div>
 
                   <motion.div className="more_modal_cross">
@@ -5953,7 +6030,7 @@ export default function List({ list_header }) {
                       <motion.div className="more_modal_itemInfoTop">
                         <motion.span>{cw[selectedId].year}</motion.span>
                         <motion.span className="more_modal_limit">
-                          +16
+                          {cw[selectedId].age}+
                         </motion.span>
                         <motion.span>{cw[selectedId].time}</motion.span>
                       </motion.div>

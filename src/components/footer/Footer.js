@@ -79,6 +79,13 @@ const Footer = () => {
     document.querySelector(".footer_movies").classList.remove("animate__pulse");
   };
 
+  const musicAnimate = () => {
+    document.querySelector(".footer_music").classList.add("animate__pulse");
+  };
+  const musicAnimateClose = () => {
+    document.querySelector(".footer_music").classList.remove("animate__pulse");
+  };
+
   const seriesAnimate = () => {
     document.querySelector(".footer_series").classList.add("animate__pulse");
   };
@@ -109,6 +116,22 @@ const Footer = () => {
     document
       .querySelector(".footer_account")
       .classList.remove("animate__pulse");
+  };
+
+  const privacyAnimate = () => {
+    document.querySelector(".footer_privacy").classList.add("animate__pulse");
+  };
+  const privacyAnimateClose = () => {
+    document
+      .querySelector(".footer_privacy")
+      .classList.remove("animate__pulse");
+  };
+
+  const termsAnimate = () => {
+    document.querySelector(".footer_terms").classList.add("animate__pulse");
+  };
+  const termsAnimateClose = () => {
+    document.querySelector(".footer_terms").classList.remove("animate__pulse");
   };
   return (
     <>
@@ -141,7 +164,7 @@ const Footer = () => {
             </div>
 
             <div className="footer_first_column_location_div">
-              All rights reserved by ICINEMA
+              All rights reserved by iCinema
             </div>
 
             {/* <div className="footer_first_column_phone_div"></div>
@@ -224,6 +247,15 @@ const Footer = () => {
               >
                 Movies
               </Link>
+
+              <Link
+                to="/music"
+                className="footer_second_column_service_child animate__animated footer_music"
+                onMouseEnter={musicAnimate}
+                onMouseLeave={musicAnimateClose}
+              >
+                Music
+              </Link>
               {/* <Link
                 to="/contact"
                 className="footer_second_column_service_child"
@@ -268,6 +300,15 @@ const Footer = () => {
               >
                 New & Popular
               </Link>
+
+              <Link
+                to="/my-list"
+                className="footer_third_column_company_child animate__animated footer_mylist"
+                onMouseEnter={mylistAnimate}
+                onMouseLeave={mylistAnimateClose}
+              >
+                My List
+              </Link>
               {/* <a href="." className="footer_second_column_service_child">
               Menu
             </a> */}
@@ -281,15 +322,6 @@ const Footer = () => {
               {/* <a href="." className="footer_third_column_company">
               Company
             </a> */}
-
-              <Link
-                to="/my-list"
-                className="footer_third_column_company_child animate__animated footer_mylist"
-                onMouseEnter={mylistAnimate}
-                onMouseLeave={mylistAnimateClose}
-              >
-                My List
-              </Link>
               <Link
                 to="/account"
                 className="footer_third_column_company_child animate__animated footer_account"
@@ -298,6 +330,25 @@ const Footer = () => {
               >
                 Account
               </Link>
+
+              <Link
+                to="/privacy"
+                className="footer_third_column_company_child animate__animated footer_privacy"
+                onMouseEnter={privacyAnimate}
+                onMouseLeave={privacyAnimateClose}
+              >
+                Privacy
+              </Link>
+
+              <Link
+                to="/terms"
+                className="footer_third_column_company_child animate__animated footer_terms"
+                onMouseEnter={termsAnimate}
+                onMouseLeave={termsAnimateClose}
+              >
+                Terms of Use
+              </Link>
+
               {/* <a href="." className="footer_third_column_company_child">
               New users FAQ
             </a> */}

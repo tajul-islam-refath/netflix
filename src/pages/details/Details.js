@@ -9,6 +9,7 @@ import {
   ThumbDownOutlined,
   InfoOutlined,
 } from "@material-ui/icons";
+import { HiOutlineDownload } from "react-icons/hi";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -124,7 +125,7 @@ const Details = () => {
         <div className="details_video">
           <video
             src={cw[last_url].video}
-            autoPlay={true}
+            autoPlay={false}
             controls
             loop={false}
             playsinline
@@ -232,6 +233,16 @@ const Details = () => {
                 data-aos="fade-up"
                 data-aos-offset="0"
                 data-aos-delay="1700"
+                data-aos-duration="500"
+                data-aos-easing="ease-in-out"
+              />
+            </Link>
+            <Link to="#">
+              <HiOutlineDownload
+                className="details_dislike_btn details_btn"
+                data-aos="fade-up"
+                data-aos-offset="0"
+                data-aos-delay="1800"
                 data-aos-duration="500"
                 data-aos-easing="ease-in-out"
               />

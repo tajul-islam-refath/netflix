@@ -1,15 +1,17 @@
 import { ArrowBackOutlined } from "@material-ui/icons";
 import "./watch.scss";
 import ReactNetflixPlayer from "react-netflix-player";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
 export default function Watch() {
+  // const location = useLocation();
+  // const movies = location.movies;
   const dataNext = { title: "Texto a ser exibido", description: "Descrição" };
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (window.innerWidth > 768) {
+    if (window.innerWidth > 990) {
       document.querySelector(".back div svg").addEventListener("click", () => {
         navigate("/browse");
       });
@@ -32,7 +34,7 @@ export default function Watch() {
         <ArrowBackOutlined />
         Home
       </div>
-      {window.innerWidth <= 768 ? (
+      {window.innerWidth <= 990 ? (
         <>
           <video
             className="video"

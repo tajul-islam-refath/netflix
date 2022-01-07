@@ -32,11 +32,11 @@ export default function ListItem({ index, setSelectedId, info }) {
 
   return (
     <>
-      {window.innerWidth <= 768 ? (
+      {window.innerWidth <= 990 ? (
         <>
           {/* <LazyLoad offset={50} height={200} once={true} scroll={true}> */}
-          <LazyLoadImage
-            // <motion.img
+          {/* <LazyLoadImage */}
+          <motion.img
             src={info.pic}
             alt=""
             className="list_item_img"
@@ -48,6 +48,7 @@ export default function ListItem({ index, setSelectedId, info }) {
             data-aos-duration="500"
             data-aos-easing="ease-in-out"
           />
+
           {/* </LazyLoad> */}
         </>
       ) : (

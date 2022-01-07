@@ -1,0 +1,31 @@
+.blur_screen_div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 100px 50px;
+  column-count: 5;
+}
+
+.blur_screen_card {
+  width: 225px;
+  height: 120px;
+  border-radius: 15px;
+  background-color: gray;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.blur_screen_card_skeleton {
+  opacity: 0.5;
+  animation: screen_skeleton 1s ease-in-out infinite alternate;
+}
+
+@keyframes screen_skeleton {
+  0% {
+    background-color: hsl(197, 3%, 41%);
+  }
+  100% {
+    background-color: hsl(202, 6%, 63%);
+  }
+}

@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchbar, setSearchbar] = useState(false);
-  //const [notiOpen, setNotiOpen] = useState(false);
+  const [notiOpen, setNotiOpen] = useState(false);
 
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
@@ -27,8 +27,8 @@ const Navbar = () => {
   useEffect(() => {
     document.querySelector(".options").style.pointerEvents = "none";
     document.querySelector(".notifications").style.pointerEvents = "none";
-    document.querySelector(".notifications").style.opacity = 0;
-    // setNotiOpen(false);
+    // document.querySelector(".notifications").style.opacity = 0;
+    setNotiOpen(true);
   }, []);
 
   const closeOption = () => {
@@ -60,19 +60,51 @@ const Navbar = () => {
   //   }
   // };
 
-  const closeNoti = () => {
-    // setTimeout(function () {
-    //   document.querySelector(".options").style.visibility = "hidden";
-    // }, 400);
-    document.querySelector(".notifications").style.opacity = 0;
-    document.querySelector(".notifications").style.pointerEvents = "none";
-  };
+  // const closeNoti = () => {
 
-  const openNoti = () => {
+  //   document.querySelector(".notifications").style.opacity = 0;
+  //   document.querySelector(".notifications").style.pointerEvents = "none";
+  // };
+
+  const openNoti = (e) => {
     // document.querySelector(".options").style.visibility = "visible";
     // document.querySelector(".options").style.transition = "0.5s";
-    document.querySelector(".notifications").style.opacity = 1;
-    document.querySelector(".notifications").style.pointerEvents = "auto";
+    e.stopPropagation();
+    setNotiOpen(!notiOpen);
+
+    if (notiOpen === true) {
+      document
+        .querySelector(".notifications")
+        .classList.add("notifications_active");
+      document.querySelector(".noti_icon").classList.add("noti_icon_red");
+      document.querySelector(".notifications").style.opacity = 1;
+      document.querySelector(".notifications").style.pointerEvents = "auto";
+      document.querySelector("body").addEventListener("click", () => {
+        document
+          .querySelector(".notifications")
+          .classList.remove("notifications_active");
+        document.querySelector(".noti_icon").classList.remove("noti_icon_red");
+        document.querySelector(".notifications").style.opacity = 0;
+        document.querySelector(".notifications").style.pointerEvents = "none";
+        if (window.innerWidth <= 990) {
+          document.querySelector("body").style.overflowY = "auto";
+        }
+        setNotiOpen(true);
+      });
+      if (window.innerWidth <= 990) {
+        document.querySelector("body").style.overflowY = "hidden";
+      }
+    } else {
+      document
+        .querySelector(".notifications")
+        .classList.remove("notifications_active");
+      document.querySelector(".noti_icon").classList.remove("noti_icon_red");
+      document.querySelector(".notifications").style.opacity = 0;
+      document.querySelector(".notifications").style.pointerEvents = "none";
+      if (window.innerWidth <= 990) {
+        document.querySelector("body").style.overflowY = "auto";
+      }
+    }
   };
 
   const homeAnimate = () => {
@@ -108,6 +140,13 @@ const Navbar = () => {
   };
   const mylistAnimateClose = () => {
     document.querySelector(".mylists").classList.remove("animate__pulse");
+  };
+
+  const musicAnimate = () => {
+    document.querySelector(".music").classList.add("animate__pulse");
+  };
+  const musicAnimateClose = () => {
+    document.querySelector(".music").classList.remove("animate__pulse");
   };
 
   const searchbarAnimate = () => {
@@ -177,6 +216,15 @@ const Navbar = () => {
           >
             <span>My List</span>
           </Link>
+          <Link
+            className="navbar_left_link animate__animated music"
+            to="/music"
+            style={{ textDecoration: "none", color: "white" }}
+            onMouseEnter={musicAnimate}
+            onMouseLeave={musicAnimateClose}
+          >
+            <span>Music</span>
+          </Link>
         </div>
         <div className="right">
           <Search
@@ -196,8 +244,9 @@ const Navbar = () => {
 
           <div
             className="noti"
-            onMouseLeave={closeNoti}
-            onMouseEnter={openNoti}
+            // onMouseLeave={closeNoti}
+            // onMouseEnter={openNoti}
+            onClick={(e) => openNoti(e)}
           >
             <Notifications
               className="icon animate__animated noti_icon"
@@ -265,6 +314,14 @@ const Navbar = () => {
                 </Link>
               </span>
               {/* <span>Help Center</span> */}
+              <span>
+                <Link
+                  to="/my-downloads"
+                  style={{ color: "white", textDecoration: "none" }}
+                >
+                  My Downloads{" "}
+                </Link>
+              </span>
 
               <span>
                 <Link

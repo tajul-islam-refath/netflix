@@ -8,6 +8,8 @@
   padding-bottom: 23px;
   background-color: #151531fa;
   flex-wrap: wrap;
+  padding-right: 25px;
+  padding-left: 25px;
 }
 
 .footer_section_inside {
@@ -203,7 +205,11 @@
   transition: 0.5s;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 990px) {
+  .footer_section {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
   .footer_section_inside {
     display: flex;
     justify-content: space-between;

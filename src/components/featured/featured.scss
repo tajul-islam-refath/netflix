@@ -3,14 +3,17 @@
   position: relative;
 
   .category {
-    position: absolute;
-    top: 80px;
-    left: 50px;
+    position: fixed;
+    top: 19px;
+    left: 825px;
     font-size: 30px;
     font-weight: 500;
     color: white;
     display: flex;
     align-items: center;
+    z-index: 9999;
+    // background-color: rgb(0, 0, 0, 0.1);
+    // width: 100%;
 
     select {
       cursor: pointer;
@@ -19,6 +22,8 @@
       color: white;
       margin-left: 20px;
       padding: 5px;
+      // border-radius: 14px;
+      font-size: 16px;
     }
   }
 
@@ -113,9 +118,54 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+.volume {
+  position: absolute;
+  left: 93%;
+  bottom: 100px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgb(168, 168, 168);
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  padding: 10px;
+  background-color: rgb(0, 0, 0, 0.1);
+  cursor: pointer;
+
+  .featured_volume {
+    color: white;
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width: 990px) {
   .featured {
     height: 70vh;
+
+    .category {
+      position: fixed;
+      top: 23px;
+      left: 25px;
+      font-size: 30px;
+      font-weight: 500;
+      color: white;
+      display: flex;
+      align-items: center;
+      z-index: 9999;
+
+      select {
+        cursor: pointer;
+        background-color: var(--main-color);
+        border: 1px solid white;
+        color: white;
+        margin-left: 20px;
+        padding: 2px;
+        border-radius: 4px;
+        font-size: 14px;
+        outline: none;
+      }
+    }
 
     .hero_img {
       min-height: 76vh !important;
@@ -126,8 +176,8 @@
     }
 
     .info {
-      width: 90vw;
-      left: 17px;
+      width: 70vw;
+      left: 20px;
       bottom: 60px;
       display: flex;
       justify-content: center;
@@ -143,9 +193,49 @@
       }
 
       .buttons {
+        margin-left: -45px;
         button {
           padding: 5px 10px;
         }
+      }
+    }
+  }
+
+  .volume {
+    left: 84%;
+    bottom: 55.4px;
+    height: 20px;
+    width: 20px;
+
+    .featured_volume {
+      font-size: 20px;
+    }
+  }
+}
+
+@media screen and (min-width: 991px) and (max-width: 1259px) {
+  .featured {
+    .category {
+      position: fixed;
+      top: 55px;
+      left: 30px;
+      font-size: 30px;
+      font-weight: 500;
+      color: white;
+      display: flex;
+      align-items: center;
+      z-index: 9999;
+
+      select {
+        cursor: pointer;
+        background-color: var(--main-color);
+        border: 1px solid white;
+        color: white;
+        margin-left: 20px;
+        padding: 2px;
+        border-radius: 4px;
+        font-size: 14px;
+        outline: none;
       }
     }
   }

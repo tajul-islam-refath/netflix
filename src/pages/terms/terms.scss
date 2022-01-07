@@ -1,0 +1,60 @@
+.terms {
+  padding: 80px 50px;
+
+  @media screen and (max-width: 990px) {
+    padding: 70px 20px;
+  }
+
+  .privacy_back {
+    color: var(--red-color);
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: 0.5s;
+
+    &:hover {
+      transform: scale(1.02);
+      transform-origin: center;
+      transform-box: fill-box;
+      transition: 0.5s;
+    }
+
+    p {
+      margin-left: 2px;
+    }
+
+    .privacy_prev_icon {
+      color: var(--red-color);
+      font-size: 20px;
+      display: none;
+    }
+  }
+
+  .terms_of_use {
+    white-space: pre-line;
+    h4 {
+      font-size: 35px;
+      color: white;
+      margin-top: 10px;
+    }
+    p {
+      color: rgb(194, 194, 194);
+      font-size: 17px;
+      line-height: 26px;
+    }
+  }
+
+  .membership {
+    h4 {
+      color: white;
+      font-size: 22px;
+    }
+    .membership_points {
+      margin-left: 17px;
+      p {
+        font-size: 17px;
+        color: rgb(194, 194, 194);
+      }
+    }
+  }
+}

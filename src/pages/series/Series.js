@@ -34,6 +34,7 @@ const Series = () => {
           director={"Ronald"}
           writer={"Ronald"}
           genre={"Action, Comedy"}
+          type={"series"}
         />
         <List list_header={"Korean TV Shows"} />
         <LazyLoad offset={50} once={true}>

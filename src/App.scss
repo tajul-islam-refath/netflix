@@ -6,7 +6,8 @@
 }
 
 :root {
-  --main-color: #24243b;
+  // --main-color: #24243b;
+  --main-color: #151531fa;
   --red-color: #e72626;
 }
 
@@ -18,6 +19,18 @@ html {
 
 body {
   overflow-x: hidden;
+}
+
+.swal-overlay--show-modal .swal-modal {
+  border-radius: 15px;
+}
+
+.swal-button {
+  background-color: var(--main-color);
+}
+
+.swal-button:hover {
+  background-color: var(--main-color) !important;
 }
 
 // body {

@@ -2,21 +2,26 @@
   position: fixed;
   list-style-type: none;
 
-  background-color: rgb(255, 255, 255, 0.35);
+  background-color: white;
   height: 55px;
-  border-radius: 0px;
-  bottom: -16px;
-  width: 100vw;
+  border-radius: 15px;
+  bottom: -5px;
+  width: 86.5vw;
   z-index: 9999;
   display: none;
-  margin-left: -40px;
+  left: 2vw;
+
   backdrop-filter: blur(20px);
+}
+
+#bottom_nav_menu {
+  margin-left: -6.5vw !important;
 }
 
 .nav li .bottom_nav_a {
   text-decoration: none;
-  color: rgb(39, 38, 38);
-  width: 20vw;
+  color: rgb(71, 71, 71);
+  width: 18vw;
   height: 100%;
   display: inline-grid;
   place-items: center;
@@ -36,7 +41,7 @@
 }
 
 .nav li .bottom_nav_a.nav-item-active {
-  color: rgb(0, 2, 26);
+  color: var(--red-color);
   //   transform: translateY(-20%);
   font-size: 28px;
   transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -55,13 +60,59 @@
   background-color: var(--red-color);
   position: absolute;
   top: 0px;
-  left: calc(52.5vw - 0px);
+  left: calc(41vw - 0vw);
   transition: left 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: 1.5px solid var(--red-color);
+  border: 2px solid var(--red-color);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 470px) {
   .nav {
     display: flex;
+    // justify-content: center;
+    // align-items: center;
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (min-width: 471px) and (max-width: 990px) {
+  .nav {
+    position: fixed;
+    list-style-type: none;
+
+    background-color: white;
+    height: 55px;
+    border-radius: 15px;
+    bottom: -5px;
+    width: 90vw;
+    z-index: 9999;
+    display: flex;
+    left: 2.4vw;
+
+    backdrop-filter: blur(20px);
+  }
+
+  .nav .nav-indicator {
+    width: 55px;
+    //   height: 0px;
+    border-radius: 4px;
+    background-color: var(--red-color);
+    position: absolute;
+    top: 0px;
+    left: calc(43.5vw - 0vw);
+    transition: left 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid var(--red-color);
+  }
+
+  .nav li .bottom_nav_a {
+    text-decoration: none;
+    color: rgb(71, 71, 71);
+    width: 19.6vw;
+    height: 100%;
+    display: inline-grid;
+    place-items: center;
+    font-size: 23px;
+    z-index: 1;
+    position: relative;
+    margin-top: 3px;
   }
 }
