@@ -13,7 +13,12 @@ import { Link } from "react-router-dom";
 //import LazyLoad from "react-lazyload";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-export default function ListItem({ index, setSelectedId, info }) {
+export default function ListItem({
+  item_id,
+  setSelectedId,
+  info,
+  setMoreDetail,
+}) {
   const [isHovered, setIsHovered] = useState(false);
   const item = useRef();
   // const trailer =
@@ -26,8 +31,15 @@ export default function ListItem({ index, setSelectedId, info }) {
   };
 
   const openModal = () => {
-    setSelectedId(index);
+    setSelectedId(item_id);
+    setMoreDetail(info);
+
     document.querySelector("body").style.overflow = "hidden";
+  };
+
+  const openModalMbl = () => {
+    setSelectedId(item_id);
+    setMoreDetail(info);
   };
 
   return (
@@ -41,10 +53,10 @@ export default function ListItem({ index, setSelectedId, info }) {
             alt=""
             className="list_item_img"
             effect="blur"
-            onClick={() => setSelectedId(index)}
+            onClick={() => openModalMbl()}
             data-aos="zoom-in"
             data-aos-offset="0"
-            data-aos-delay={index * 150}
+            data-aos-delay={item_id * 150}
             data-aos-duration="500"
             data-aos-easing="ease-in-out"
           />
@@ -75,7 +87,7 @@ export default function ListItem({ index, setSelectedId, info }) {
               // effect="blur"
               data-aos="zoom-in"
               data-aos-offset="0"
-              data-aos-delay={index * 150}
+              data-aos-delay={item_id * 150}
               data-aos-duration="500"
               data-aos-easing="ease-in-out"
               className="list_item_images"
@@ -87,7 +99,7 @@ export default function ListItem({ index, setSelectedId, info }) {
                 <div className="itemInfo">
                   <div className="icons">
                     <Link
-                      to={"/watch/" + index}
+                      to={"/watch/" + item_id}
                       onClick={(e) => preventCardClick(e)}
                     >
                       <PlayArrow

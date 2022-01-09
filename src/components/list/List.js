@@ -33,10 +33,15 @@ export default function List({ list_header, list }) {
 
   const [selectedId, setSelectedId] = useState(null);
   const [startVideo, setStartVideo] = useState(false);
+  const [more_detail, setMoreDetail] = useState(null);
 
   const [volume_detail, setVolumeDetail] = useState(false);
 
   const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   setMoreDetail(cw.find((item) => item.id === selectedId));
+  // }, []);
 
   // const trailer =
   //   "https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c0fd273d2c6d9a064f3ae35579b2bbdf&profile_id=139&oauth2_token_id=57447761";
@@ -135,6 +140,7 @@ export default function List({ list_header, list }) {
   if (list_header === "Continue Watching") {
     cw = [
       {
+        id: "1",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABX6QPuU2wUKTrISH7UkthsTD4mTPRpfGIojVGAfhTtmlwB_K-b-yujeN1zgpW0txJLLNWCDMCSPBP8qwhmFVX5jn32FM.webp?r=d57",
         video:
@@ -151,6 +157,7 @@ export default function List({ list_header, list }) {
         genre: "Suspenseful, Exciting",
       },
       {
+        id: "2",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABaUyF3kexjPto1IHIhDpmIYadqvYLEIQIyDx7IVyl7YbSziHb11WDdfFMtqIQeGfy_Se5qZjWh2uCamN9D7LXGgW8J7Ch2Ef5TUowkj9EnxLaCaN7TibUc-2ptLhBGf2i3WCD3a3cooyblg9koj8cWgpGR8DQkbNnGu1db1Fz7r9hSn3AJMZDFrgO3522AZ0N0QE2894mlkFZQkGjqlwT8pO5A.jpg?r=603",
         video:
@@ -167,6 +174,7 @@ export default function List({ list_header, list }) {
         genre: "Fantasy TV Shows, TV Shows Based on Books",
       },
       {
+        id: "3",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABW-1LCLK7T5DCx0eQXvqjHuMTOAm8AzDi3qy84LgIvpFjRihmb0gUw5LUWPqsl6W25F1jIMzCi6OFuEcym-I7_6J6uTDJwHnV7kW5qsLLb5ZMPwpCTgMz9Az8tXWfg.jpg?r=7de",
         video:
@@ -183,6 +191,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic TV Dramas, Romantic TV Comedies",
       },
       {
+        id: "4",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb12t1Hiq8L4MPDkW8mAZUqQGTuL7l6XSGJTr8-h7H88Xqr1jfXsS_PvdtvFnmhJo5-to8Ram3BuHbsEYH_U7rRxpTZG.webp?r=9d5",
         video:
@@ -199,6 +208,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Romantic, Comedy",
       },
       {
+        id: "5",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeBmbY-sgZUJpNW-vdJt_V5cEwl7hWAebY7APIjeb2Xu7f9EydFEaXEa6Z8NO0lryqWL6uhSiy_X7kul2tmNf0zK0LHawWM71CddrJDxAs0Og5RW1aD904ReaAarjoHuK7_ZBxzraD_QQvDxMMXIuwCGrN2jVNvzZsnysD42imckOSjz6u5zxhas.jpg?r=f9b",
         video:
@@ -215,6 +225,7 @@ export default function List({ list_header, list }) {
         genre: "Thriller, Drama",
       },
       {
+        id: "6",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a",
         video:
@@ -231,6 +242,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "7",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeLVErP129jGeUFtzk002EQ0tPWougJ2SGYuw4GNbO0CJLNr8S6YM9YLOUDrtpZJRYsT0VCNkxx5X5a4RAzBNgc67Nk5A0s6tF6vWOPvxBrxXLLxOPn-2EKLnDf_ruoHo3-KSZFGSbbDbDZKXkXyd5cZfVnOD4Q.jpg?r=3da",
         video:
@@ -247,6 +259,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting",
       },
       {
+        id: "8",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWjOTYhOvCQCcOd1CYlauJYz21htLjSD7eS_xnnkZEqKlgy4TCluO-NOYj78pLuPS3Puk7qcRz5kOoeo0qMKOejVluAFzwAQ6b-c3Es2dA-0fIKMkmQNBjYPkSbw3A.jpg?r=68e",
         video:
@@ -263,6 +276,7 @@ export default function List({ list_header, list }) {
         genre: "Charming, Intimate, Romantic",
       },
       {
+        id: "9",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video:
@@ -279,6 +293,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "10",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video:
@@ -298,6 +313,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Action Movies") {
     cw = [
       {
+        id: "11",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABf2JfL0KO049JlNtybXwdPFushYF1a4uHhkLu7kDt6MouWGU_BB_F2oKBjKvm-RgqhOtMkpsjz2eXDwJkKYrqYBnEDZ2.webp?r=93b",
         video:
@@ -314,6 +330,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-Fi, Exciting, Offbeat",
       },
       {
+        id: "12",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQkIkzfTFHfadapfd_BF-G-K_UpmHk8fFq6Ds_dMyZ0QGOM1crvrSDN-Uc6D36OWrMi-zhJC9GvWx-D_1gduTUKTsRjp.webp?r=7d1",
         video:
@@ -330,6 +347,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-Fi, Exciting",
       },
       {
+        id: "13",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABTQ61jRcb0vcHYHcnkdgWM-BDuifM-ET2c3ZJAIZ5zktBvsP9QrK39hsUzikUPNwsEa7zsyM3arZNFOsn1wEZLn6uQnU.webp?r=ce8",
         video:
@@ -346,6 +364,7 @@ export default function List({ list_header, list }) {
         genre: "Martial Arts, Sci-Fi",
       },
       {
+        id: "14",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABVmiBxFUhsJ0r_EVRLSAW8kLzbu4kzx8QejcWekq5f1K-ElLctQy5y46O1waNeZlNIIOJEFUOQmZlNKmJVYKQSn0IZio.webp?r=457",
         video:
@@ -362,6 +381,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Action",
       },
       {
+        id: "15",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABVE_ix7Cpy7bHaIw5SL_h7lff-vHpY9GQ-D4GJhLSmL8rtHFLaC_pg7hrIcAOQSRqS7TQb_jSbO8vd9fMx-NtLXVFhxV.webp?r=b5a",
         video:
@@ -378,6 +398,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-FI, Exciting",
       },
       {
+        id: "16",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUL1vKw0qM1BUE5C-Am-_MeX050ZUhPrkCjIP7hff44ZZL9J_oaTBNrH8DVCmep_bS5l3hWewuJdreuvv7X92XQiUg4g.webp?r=2dc",
         video:
@@ -394,6 +415,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "17",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABXkjkpGWgVDfc8O1toyqjGHpjEEUHSqSwqsuF18v-PRV3ljIyJB-_6VIJZXIgcR31zxfmivVinEuNP9gZbv1nJ2-D46s.webp?r=7c0",
         video:
@@ -410,6 +432,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting, Romantic, Comedy",
       },
       {
+        id: "18",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABXKH_O2XtvOG0xZmTuG3QPNH_E73Ntf6VB00vf0A5Heie4jgBKaVG8yFMgx9Oq8FmJpoZJXvlXaQc5jfx_1jy7azpkIA.webp?r=f82",
         video:
@@ -426,6 +449,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic, Emotional",
       },
       {
+        id: "19",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABcgOB0Tgko8FeTqPGcd_ukVDAM-XPBxdZu2Mmjo188bZOf7rMUENiaS9yskySjMCl2o80EmD7TT1nrdXWVhZezRpLs9O.webp?r=9a6",
         video:
@@ -442,6 +466,7 @@ export default function List({ list_header, list }) {
         genre: "Action, Goofy",
       },
       {
+        id: "20",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeSSlFkFxFhDfNYdVZ4doQJPGLF1HhvqxYlNIQqfj_NsK65gT1pbRRYePpD6KgYGS10hVWv0N79KwHQgcYyb_2MB6bkU.webp?r=516",
         video:
@@ -461,6 +486,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Horror Movies") {
     cw = [
       {
+        id: "21",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABegK2Y5ordgaCmFTJfHA8Hsz8vdXMLvq_GcGvK8NjVGFsF2I9yJsZ7LxleRpuS8X-P1dT0LgmpoC8vtaz0oRFewDezyJ0DprEVJN69MDTdO_odX_j2ZHHVcfRwbazg.jpg?r=231",
         video:
@@ -477,6 +503,7 @@ export default function List({ list_header, list }) {
         genre: "Horror, Gruesome",
       },
       {
+        id: "22",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb8ykbycKEvO4tkNi5JT0PjhZKf_xp-iNMNtXXdSgImbUfC_ajD6LI8pxJ4uIk2J6ISb6Ftn6FVp86Le4cNj8qeAKi1t.webp?r=2dd",
         video:
@@ -493,6 +520,7 @@ export default function List({ list_header, list }) {
         genre: "Scary, Suspense",
       },
       {
+        id: "23",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYmndOzmCP0gMq1q3EHeHTUn9xQhFvfeNDqz3gNGa6oOlTjbwal17jGpDYKuImE8iF0BiTfj-zEFEfpAysp2NO8DDFfl.webp?r=d8d",
         video:
@@ -509,6 +537,7 @@ export default function List({ list_header, list }) {
         genre: "Scary, Sunspenseful",
       },
       {
+        id: "24",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWG-PUrZFOhYRUwASiCY9s0coJXL2q0mVxu_AscCNFc7cvLhZEmGjfBIbmrZUw1F3Vdadj8SPCErBk2mL6_6HEeQQdU3.webp?r=bcd",
         video:
@@ -525,6 +554,7 @@ export default function List({ list_header, list }) {
         genre: "Horror, Scary",
       },
       {
+        id: "25",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYaTiON2HfU1M7RRfZJbg_oHGM4BOtTS96PoOA0yPhPhRrdU6RjALsZ-cTDyisn_n9JJDswnEETGiZDpxsSj8i7AnTQ6.webp?r=0aa",
         video:
@@ -541,6 +571,7 @@ export default function List({ list_header, list }) {
         genre: "Scary, Suspense",
       },
       {
+        id: "26",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQHS8OjMDFh_sJjd3oiemLubfBiFHiRNQeOehpZoKyZ4557wq5_icfO1Z4hHhne-uo4FEMSv1owbR6V_UEI_AAQps_XQ0ur9-XvL0uQ3qzk_QuVY82PW-LSRKrihlA.jpg?r=a52",
         video:
@@ -557,6 +588,7 @@ export default function List({ list_header, list }) {
         genre: "Omnious, Scary, Suspenseful",
       },
       {
+        id: "27",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABTaUwQRDGBxQSBu-873Y6D8bqRELZT941nb0ONGez1ABXsjoI4dZ5eD4VEnh-PkGppz3gRpxw0sRWzn3aTk7npJvbib2.webp?r=e8d",
         video:
@@ -573,6 +605,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Violent",
       },
       {
+        id: "28",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQl3tSqCiNKY4mAcjoJOeBufGSEfneTsviTeLkMRDEiSXKi5GE0K-SgScQqb9YnOvu7EttdyA835WKI5ef85-ebNn5Uq.webp?r=98d",
         video:
@@ -589,6 +622,7 @@ export default function List({ list_header, list }) {
         genre: "Chilling, Omnious, Scary",
       },
       {
+        id: "29",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video:
@@ -605,6 +639,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "30",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video:
@@ -624,6 +659,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Family Movies") {
     cw = [
       {
+        id: "31",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABX6QPuU2wUKTrISH7UkthsTD4mTPRpfGIojVGAfhTtmlwB_K-b-yujeN1zgpW0txJLLNWCDMCSPBP8qwhmFVX5jn32FM.webp?r=d57",
         video:
@@ -640,6 +676,7 @@ export default function List({ list_header, list }) {
         genre: "Suspenseful, Exciting",
       },
       {
+        id: "32",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABaUyF3kexjPto1IHIhDpmIYadqvYLEIQIyDx7IVyl7YbSziHb11WDdfFMtqIQeGfy_Se5qZjWh2uCamN9D7LXGgW8J7Ch2Ef5TUowkj9EnxLaCaN7TibUc-2ptLhBGf2i3WCD3a3cooyblg9koj8cWgpGR8DQkbNnGu1db1Fz7r9hSn3AJMZDFrgO3522AZ0N0QE2894mlkFZQkGjqlwT8pO5A.jpg?r=603",
         video:
@@ -656,6 +693,7 @@ export default function List({ list_header, list }) {
         genre: "Fantasy TV Shows, TV Shows Based on Books",
       },
       {
+        id: "33",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABW-1LCLK7T5DCx0eQXvqjHuMTOAm8AzDi3qy84LgIvpFjRihmb0gUw5LUWPqsl6W25F1jIMzCi6OFuEcym-I7_6J6uTDJwHnV7kW5qsLLb5ZMPwpCTgMz9Az8tXWfg.jpg?r=7de",
         video:
@@ -672,6 +710,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic TV Dramas, Romantic TV Comedies",
       },
       {
+        id: "34",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb12t1Hiq8L4MPDkW8mAZUqQGTuL7l6XSGJTr8-h7H88Xqr1jfXsS_PvdtvFnmhJo5-to8Ram3BuHbsEYH_U7rRxpTZG.webp?r=9d5",
         video:
@@ -688,6 +727,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Romantic, Comedy",
       },
       {
+        id: "35",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeBmbY-sgZUJpNW-vdJt_V5cEwl7hWAebY7APIjeb2Xu7f9EydFEaXEa6Z8NO0lryqWL6uhSiy_X7kul2tmNf0zK0LHawWM71CddrJDxAs0Og5RW1aD904ReaAarjoHuK7_ZBxzraD_QQvDxMMXIuwCGrN2jVNvzZsnysD42imckOSjz6u5zxhas.jpg?r=f9b",
         video:
@@ -704,6 +744,7 @@ export default function List({ list_header, list }) {
         genre: "Thriller, Drama",
       },
       {
+        id: "36",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a",
         video:
@@ -720,6 +761,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "37",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeLVErP129jGeUFtzk002EQ0tPWougJ2SGYuw4GNbO0CJLNr8S6YM9YLOUDrtpZJRYsT0VCNkxx5X5a4RAzBNgc67Nk5A0s6tF6vWOPvxBrxXLLxOPn-2EKLnDf_ruoHo3-KSZFGSbbDbDZKXkXyd5cZfVnOD4Q.jpg?r=3da",
         video:
@@ -736,6 +778,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting",
       },
       {
+        id: "38",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWjOTYhOvCQCcOd1CYlauJYz21htLjSD7eS_xnnkZEqKlgy4TCluO-NOYj78pLuPS3Puk7qcRz5kOoeo0qMKOejVluAFzwAQ6b-c3Es2dA-0fIKMkmQNBjYPkSbw3A.jpg?r=68e",
         video:
@@ -752,6 +795,7 @@ export default function List({ list_header, list }) {
         genre: "Charming, Intimate, Romantic",
       },
       {
+        id: "39",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video:
@@ -768,6 +812,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "40",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video:
@@ -787,6 +832,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Korean TV Shows") {
     cw = [
       {
+        id: "41",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABX6QPuU2wUKTrISH7UkthsTD4mTPRpfGIojVGAfhTtmlwB_K-b-yujeN1zgpW0txJLLNWCDMCSPBP8qwhmFVX5jn32FM.webp?r=d57",
         video:
@@ -803,6 +849,7 @@ export default function List({ list_header, list }) {
         genre: "Suspenseful, Exciting",
       },
       {
+        id: "42",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABaUyF3kexjPto1IHIhDpmIYadqvYLEIQIyDx7IVyl7YbSziHb11WDdfFMtqIQeGfy_Se5qZjWh2uCamN9D7LXGgW8J7Ch2Ef5TUowkj9EnxLaCaN7TibUc-2ptLhBGf2i3WCD3a3cooyblg9koj8cWgpGR8DQkbNnGu1db1Fz7r9hSn3AJMZDFrgO3522AZ0N0QE2894mlkFZQkGjqlwT8pO5A.jpg?r=603",
         video: "",
@@ -818,6 +865,7 @@ export default function List({ list_header, list }) {
         genre: "Fantasy TV Shows, TV Shows Based on Books",
       },
       {
+        id: "43",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABW-1LCLK7T5DCx0eQXvqjHuMTOAm8AzDi3qy84LgIvpFjRihmb0gUw5LUWPqsl6W25F1jIMzCi6OFuEcym-I7_6J6uTDJwHnV7kW5qsLLb5ZMPwpCTgMz9Az8tXWfg.jpg?r=7de",
         video:
@@ -834,6 +882,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic TV Dramas, Romantic TV Comedies",
       },
       {
+        id: "44",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb12t1Hiq8L4MPDkW8mAZUqQGTuL7l6XSGJTr8-h7H88Xqr1jfXsS_PvdtvFnmhJo5-to8Ram3BuHbsEYH_U7rRxpTZG.webp?r=9d5",
         video:
@@ -850,6 +899,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Romantic, Comedy",
       },
       {
+        id: "45",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeBmbY-sgZUJpNW-vdJt_V5cEwl7hWAebY7APIjeb2Xu7f9EydFEaXEa6Z8NO0lryqWL6uhSiy_X7kul2tmNf0zK0LHawWM71CddrJDxAs0Og5RW1aD904ReaAarjoHuK7_ZBxzraD_QQvDxMMXIuwCGrN2jVNvzZsnysD42imckOSjz6u5zxhas.jpg?r=f9b",
         video: "",
@@ -865,6 +915,7 @@ export default function List({ list_header, list }) {
         genre: "Thriller, Drama",
       },
       {
+        id: "46",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a",
         video:
@@ -881,6 +932,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "47",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeLVErP129jGeUFtzk002EQ0tPWougJ2SGYuw4GNbO0CJLNr8S6YM9YLOUDrtpZJRYsT0VCNkxx5X5a4RAzBNgc67Nk5A0s6tF6vWOPvxBrxXLLxOPn-2EKLnDf_ruoHo3-KSZFGSbbDbDZKXkXyd5cZfVnOD4Q.jpg?r=3da",
         video:
@@ -897,6 +949,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting",
       },
       {
+        id: "48",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWjOTYhOvCQCcOd1CYlauJYz21htLjSD7eS_xnnkZEqKlgy4TCluO-NOYj78pLuPS3Puk7qcRz5kOoeo0qMKOejVluAFzwAQ6b-c3Es2dA-0fIKMkmQNBjYPkSbw3A.jpg?r=68e",
         video:
@@ -913,6 +966,7 @@ export default function List({ list_header, list }) {
         genre: "Charming, Intimate, Romantic",
       },
       {
+        id: "49",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video:
@@ -929,6 +983,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "50",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video:
@@ -948,6 +1003,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Award-winning TV Shows") {
     cw = [
       {
+        id: "51",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABf2JfL0KO049JlNtybXwdPFushYF1a4uHhkLu7kDt6MouWGU_BB_F2oKBjKvm-RgqhOtMkpsjz2eXDwJkKYrqYBnEDZ2.webp?r=93b",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4",
@@ -963,6 +1019,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-Fi, Exciting, Offbeat",
       },
       {
+        id: "52",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQkIkzfTFHfadapfd_BF-G-K_UpmHk8fFq6Ds_dMyZ0QGOM1crvrSDN-Uc6D36OWrMi-zhJC9GvWx-D_1gduTUKTsRjp.webp?r=7d1",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
@@ -978,6 +1035,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-Fi, Exciting",
       },
       {
+        id: "53",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABTQ61jRcb0vcHYHcnkdgWM-BDuifM-ET2c3ZJAIZ5zktBvsP9QrK39hsUzikUPNwsEa7zsyM3arZNFOsn1wEZLn6uQnU.webp?r=ce8",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
@@ -993,6 +1051,7 @@ export default function List({ list_header, list }) {
         genre: "Martial Arts, Sci-Fi",
       },
       {
+        id: "54",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABVmiBxFUhsJ0r_EVRLSAW8kLzbu4kzx8QejcWekq5f1K-ElLctQy5y46O1waNeZlNIIOJEFUOQmZlNKmJVYKQSn0IZio.webp?r=457",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
@@ -1008,6 +1067,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Action",
       },
       {
+        id: "55",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABVE_ix7Cpy7bHaIw5SL_h7lff-vHpY9GQ-D4GJhLSmL8rtHFLaC_pg7hrIcAOQSRqS7TQb_jSbO8vd9fMx-NtLXVFhxV.webp?r=b5a",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
@@ -1023,6 +1083,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-FI, Exciting",
       },
       {
+        id: "56",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUL1vKw0qM1BUE5C-Am-_MeX050ZUhPrkCjIP7hff44ZZL9J_oaTBNrH8DVCmep_bS5l3hWewuJdreuvv7X92XQiUg4g.webp?r=2dc",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
@@ -1038,6 +1099,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "57",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABXkjkpGWgVDfc8O1toyqjGHpjEEUHSqSwqsuF18v-PRV3ljIyJB-_6VIJZXIgcR31zxfmivVinEuNP9gZbv1nJ2-D46s.webp?r=7c0",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
@@ -1053,6 +1115,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting, Romantic, Comedy",
       },
       {
+        id: "58",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABXKH_O2XtvOG0xZmTuG3QPNH_E73Ntf6VB00vf0A5Heie4jgBKaVG8yFMgx9Oq8FmJpoZJXvlXaQc5jfx_1jy7azpkIA.webp?r=f82",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
@@ -1068,6 +1131,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic, Emotional",
       },
       {
+        id: "59",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABcgOB0Tgko8FeTqPGcd_ukVDAM-XPBxdZu2Mmjo188bZOf7rMUENiaS9yskySjMCl2o80EmD7TT1nrdXWVhZezRpLs9O.webp?r=9a6",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
@@ -1083,6 +1147,7 @@ export default function List({ list_header, list }) {
         genre: "Action, Goofy",
       },
       {
+        id: "60",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeSSlFkFxFhDfNYdVZ4doQJPGLF1HhvqxYlNIQqfj_NsK65gT1pbRRYePpD6KgYGS10hVWv0N79KwHQgcYyb_2MB6bkU.webp?r=516",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
@@ -1101,6 +1166,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Family TV Shows") {
     cw = [
       {
+        id: "61",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABegK2Y5ordgaCmFTJfHA8Hsz8vdXMLvq_GcGvK8NjVGFsF2I9yJsZ7LxleRpuS8X-P1dT0LgmpoC8vtaz0oRFewDezyJ0DprEVJN69MDTdO_odX_j2ZHHVcfRwbazg.jpg?r=231",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
@@ -1116,6 +1182,7 @@ export default function List({ list_header, list }) {
         genre: "Horror, Gruesome",
       },
       {
+        id: "62",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb8ykbycKEvO4tkNi5JT0PjhZKf_xp-iNMNtXXdSgImbUfC_ajD6LI8pxJ4uIk2J6ISb6Ftn6FVp86Le4cNj8qeAKi1t.webp?r=2dd",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
@@ -1131,6 +1198,7 @@ export default function List({ list_header, list }) {
         genre: "Scary, Suspense",
       },
       {
+        id: "63",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYmndOzmCP0gMq1q3EHeHTUn9xQhFvfeNDqz3gNGa6oOlTjbwal17jGpDYKuImE8iF0BiTfj-zEFEfpAysp2NO8DDFfl.webp?r=d8d",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4",
@@ -1146,6 +1214,7 @@ export default function List({ list_header, list }) {
         genre: "Scary, Sunspenseful",
       },
       {
+        id: "64",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWG-PUrZFOhYRUwASiCY9s0coJXL2q0mVxu_AscCNFc7cvLhZEmGjfBIbmrZUw1F3Vdadj8SPCErBk2mL6_6HEeQQdU3.webp?r=bcd",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
@@ -1161,6 +1230,7 @@ export default function List({ list_header, list }) {
         genre: "Horror, Scary",
       },
       {
+        id: "65",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYaTiON2HfU1M7RRfZJbg_oHGM4BOtTS96PoOA0yPhPhRrdU6RjALsZ-cTDyisn_n9JJDswnEETGiZDpxsSj8i7AnTQ6.webp?r=0aa",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4",
@@ -1176,6 +1246,7 @@ export default function List({ list_header, list }) {
         genre: "Scary, Suspense",
       },
       {
+        id: "66",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQHS8OjMDFh_sJjd3oiemLubfBiFHiRNQeOehpZoKyZ4557wq5_icfO1Z4hHhne-uo4FEMSv1owbR6V_UEI_AAQps_XQ0ur9-XvL0uQ3qzk_QuVY82PW-LSRKrihlA.jpg?r=a52",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
@@ -1191,6 +1262,7 @@ export default function List({ list_header, list }) {
         genre: "Omnious, Scary, Suspenseful",
       },
       {
+        id: "67",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABTaUwQRDGBxQSBu-873Y6D8bqRELZT941nb0ONGez1ABXsjoI4dZ5eD4VEnh-PkGppz3gRpxw0sRWzn3aTk7npJvbib2.webp?r=e8d",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
@@ -1206,6 +1278,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Violent",
       },
       {
+        id: "68",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQl3tSqCiNKY4mAcjoJOeBufGSEfneTsviTeLkMRDEiSXKi5GE0K-SgScQqb9YnOvu7EttdyA835WKI5ef85-ebNn5Uq.webp?r=98d",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
@@ -1221,6 +1294,7 @@ export default function List({ list_header, list }) {
         genre: "Chilling, Omnious, Scary",
       },
       {
+        id: "69",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
@@ -1236,6 +1310,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "70",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
@@ -1254,6 +1329,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Indian TV Shows") {
     cw = [
       {
+        id: "71",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABX6QPuU2wUKTrISH7UkthsTD4mTPRpfGIojVGAfhTtmlwB_K-b-yujeN1zgpW0txJLLNWCDMCSPBP8qwhmFVX5jn32FM.webp?r=d57",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
@@ -1269,6 +1345,7 @@ export default function List({ list_header, list }) {
         genre: "Suspenseful, Exciting",
       },
       {
+        id: "72",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABaUyF3kexjPto1IHIhDpmIYadqvYLEIQIyDx7IVyl7YbSziHb11WDdfFMtqIQeGfy_Se5qZjWh2uCamN9D7LXGgW8J7Ch2Ef5TUowkj9EnxLaCaN7TibUc-2ptLhBGf2i3WCD3a3cooyblg9koj8cWgpGR8DQkbNnGu1db1Fz7r9hSn3AJMZDFrgO3522AZ0N0QE2894mlkFZQkGjqlwT8pO5A.jpg?r=603",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
@@ -1284,6 +1361,7 @@ export default function List({ list_header, list }) {
         genre: "Fantasy TV Shows, TV Shows Based on Books",
       },
       {
+        id: "73",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABW-1LCLK7T5DCx0eQXvqjHuMTOAm8AzDi3qy84LgIvpFjRihmb0gUw5LUWPqsl6W25F1jIMzCi6OFuEcym-I7_6J6uTDJwHnV7kW5qsLLb5ZMPwpCTgMz9Az8tXWfg.jpg?r=7de",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
@@ -1299,6 +1377,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic TV Dramas, Romantic TV Comedies",
       },
       {
+        id: "74",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb12t1Hiq8L4MPDkW8mAZUqQGTuL7l6XSGJTr8-h7H88Xqr1jfXsS_PvdtvFnmhJo5-to8Ram3BuHbsEYH_U7rRxpTZG.webp?r=9d5",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
@@ -1314,6 +1393,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Romantic, Comedy",
       },
       {
+        id: "75",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeBmbY-sgZUJpNW-vdJt_V5cEwl7hWAebY7APIjeb2Xu7f9EydFEaXEa6Z8NO0lryqWL6uhSiy_X7kul2tmNf0zK0LHawWM71CddrJDxAs0Og5RW1aD904ReaAarjoHuK7_ZBxzraD_QQvDxMMXIuwCGrN2jVNvzZsnysD42imckOSjz6u5zxhas.jpg?r=f9b",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
@@ -1329,6 +1409,7 @@ export default function List({ list_header, list }) {
         genre: "Thriller, Drama",
       },
       {
+        id: "76",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4",
@@ -1344,6 +1425,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "77",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeLVErP129jGeUFtzk002EQ0tPWougJ2SGYuw4GNbO0CJLNr8S6YM9YLOUDrtpZJRYsT0VCNkxx5X5a4RAzBNgc67Nk5A0s6tF6vWOPvxBrxXLLxOPn-2EKLnDf_ruoHo3-KSZFGSbbDbDZKXkXyd5cZfVnOD4Q.jpg?r=3da",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
@@ -1359,6 +1441,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting",
       },
       {
+        id: "78",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWjOTYhOvCQCcOd1CYlauJYz21htLjSD7eS_xnnkZEqKlgy4TCluO-NOYj78pLuPS3Puk7qcRz5kOoeo0qMKOejVluAFzwAQ6b-c3Es2dA-0fIKMkmQNBjYPkSbw3A.jpg?r=68e",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4",
@@ -1374,6 +1457,7 @@ export default function List({ list_header, list }) {
         genre: "Charming, Intimate, Romantic",
       },
       {
+        id: "79",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
@@ -1389,6 +1473,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "80",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
@@ -1407,6 +1492,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Recently Added") {
     cw = [
       {
+        id: "81",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABX6QPuU2wUKTrISH7UkthsTD4mTPRpfGIojVGAfhTtmlwB_K-b-yujeN1zgpW0txJLLNWCDMCSPBP8qwhmFVX5jn32FM.webp?r=d57",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
@@ -1422,6 +1508,7 @@ export default function List({ list_header, list }) {
         genre: "Suspenseful, Exciting",
       },
       {
+        id: "82",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABaUyF3kexjPto1IHIhDpmIYadqvYLEIQIyDx7IVyl7YbSziHb11WDdfFMtqIQeGfy_Se5qZjWh2uCamN9D7LXGgW8J7Ch2Ef5TUowkj9EnxLaCaN7TibUc-2ptLhBGf2i3WCD3a3cooyblg9koj8cWgpGR8DQkbNnGu1db1Fz7r9hSn3AJMZDFrgO3522AZ0N0QE2894mlkFZQkGjqlwT8pO5A.jpg?r=603",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
@@ -1437,6 +1524,7 @@ export default function List({ list_header, list }) {
         genre: "Fantasy TV Shows, TV Shows Based on Books",
       },
       {
+        id: "83",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABW-1LCLK7T5DCx0eQXvqjHuMTOAm8AzDi3qy84LgIvpFjRihmb0gUw5LUWPqsl6W25F1jIMzCi6OFuEcym-I7_6J6uTDJwHnV7kW5qsLLb5ZMPwpCTgMz9Az8tXWfg.jpg?r=7de",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
@@ -1452,6 +1540,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic TV Dramas, Romantic TV Comedies",
       },
       {
+        id: "84",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb12t1Hiq8L4MPDkW8mAZUqQGTuL7l6XSGJTr8-h7H88Xqr1jfXsS_PvdtvFnmhJo5-to8Ram3BuHbsEYH_U7rRxpTZG.webp?r=9d5",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
@@ -1467,6 +1556,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Romantic, Comedy",
       },
       {
+        id: "85",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeBmbY-sgZUJpNW-vdJt_V5cEwl7hWAebY7APIjeb2Xu7f9EydFEaXEa6Z8NO0lryqWL6uhSiy_X7kul2tmNf0zK0LHawWM71CddrJDxAs0Og5RW1aD904ReaAarjoHuK7_ZBxzraD_QQvDxMMXIuwCGrN2jVNvzZsnysD42imckOSjz6u5zxhas.jpg?r=f9b",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
@@ -1482,6 +1572,7 @@ export default function List({ list_header, list }) {
         genre: "Thriller, Drama",
       },
       {
+        id: "86",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4",
@@ -1497,6 +1588,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "87",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeLVErP129jGeUFtzk002EQ0tPWougJ2SGYuw4GNbO0CJLNr8S6YM9YLOUDrtpZJRYsT0VCNkxx5X5a4RAzBNgc67Nk5A0s6tF6vWOPvxBrxXLLxOPn-2EKLnDf_ruoHo3-KSZFGSbbDbDZKXkXyd5cZfVnOD4Q.jpg?r=3da",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
@@ -1512,6 +1604,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting",
       },
       {
+        id: "88",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWjOTYhOvCQCcOd1CYlauJYz21htLjSD7eS_xnnkZEqKlgy4TCluO-NOYj78pLuPS3Puk7qcRz5kOoeo0qMKOejVluAFzwAQ6b-c3Es2dA-0fIKMkmQNBjYPkSbw3A.jpg?r=68e",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4",
@@ -1527,6 +1620,7 @@ export default function List({ list_header, list }) {
         genre: "Charming, Intimate, Romantic",
       },
       {
+        id: "89",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
@@ -1542,6 +1636,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "90",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
@@ -1560,6 +1655,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Trending Now") {
     cw = [
       {
+        id: "91",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABegK2Y5ordgaCmFTJfHA8Hsz8vdXMLvq_GcGvK8NjVGFsF2I9yJsZ7LxleRpuS8X-P1dT0LgmpoC8vtaz0oRFewDezyJ0DprEVJN69MDTdO_odX_j2ZHHVcfRwbazg.jpg?r=231",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
@@ -1575,6 +1671,7 @@ export default function List({ list_header, list }) {
         genre: "Horror, Gruesome",
       },
       {
+        id: "92",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb8ykbycKEvO4tkNi5JT0PjhZKf_xp-iNMNtXXdSgImbUfC_ajD6LI8pxJ4uIk2J6ISb6Ftn6FVp86Le4cNj8qeAKi1t.webp?r=2dd",
         video: "",
         title_pic:
@@ -1589,6 +1686,7 @@ export default function List({ list_header, list }) {
         genre: "Scary, Suspense",
       },
       {
+        id: "93",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYmndOzmCP0gMq1q3EHeHTUn9xQhFvfeNDqz3gNGa6oOlTjbwal17jGpDYKuImE8iF0BiTfj-zEFEfpAysp2NO8DDFfl.webp?r=d8d",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4",
@@ -1604,6 +1702,7 @@ export default function List({ list_header, list }) {
         genre: "Scary, Sunspenseful",
       },
       {
+        id: "94",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWG-PUrZFOhYRUwASiCY9s0coJXL2q0mVxu_AscCNFc7cvLhZEmGjfBIbmrZUw1F3Vdadj8SPCErBk2mL6_6HEeQQdU3.webp?r=bcd",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
@@ -1619,6 +1718,7 @@ export default function List({ list_header, list }) {
         genre: "Horror, Scary",
       },
       {
+        id: "95",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYaTiON2HfU1M7RRfZJbg_oHGM4BOtTS96PoOA0yPhPhRrdU6RjALsZ-cTDyisn_n9JJDswnEETGiZDpxsSj8i7AnTQ6.webp?r=0aa",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4",
@@ -1634,6 +1734,7 @@ export default function List({ list_header, list }) {
         genre: "Scary, Suspense",
       },
       {
+        id: "96",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQHS8OjMDFh_sJjd3oiemLubfBiFHiRNQeOehpZoKyZ4557wq5_icfO1Z4hHhne-uo4FEMSv1owbR6V_UEI_AAQps_XQ0ur9-XvL0uQ3qzk_QuVY82PW-LSRKrihlA.jpg?r=a52",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
@@ -1649,6 +1750,7 @@ export default function List({ list_header, list }) {
         genre: "Omnious, Scary, Suspenseful",
       },
       {
+        id: "97",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABTaUwQRDGBxQSBu-873Y6D8bqRELZT941nb0ONGez1ABXsjoI4dZ5eD4VEnh-PkGppz3gRpxw0sRWzn3aTk7npJvbib2.webp?r=e8d",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
@@ -1664,6 +1766,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Violent",
       },
       {
+        id: "98",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQl3tSqCiNKY4mAcjoJOeBufGSEfneTsviTeLkMRDEiSXKi5GE0K-SgScQqb9YnOvu7EttdyA835WKI5ef85-ebNn5Uq.webp?r=98d",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
@@ -1679,6 +1782,7 @@ export default function List({ list_header, list }) {
         genre: "Chilling, Omnious, Scary",
       },
       {
+        id: "99",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
@@ -1694,6 +1798,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "100",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
@@ -1712,6 +1817,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Indian Movies") {
     cw = [
       {
+        id: "101",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABf2JfL0KO049JlNtybXwdPFushYF1a4uHhkLu7kDt6MouWGU_BB_F2oKBjKvm-RgqhOtMkpsjz2eXDwJkKYrqYBnEDZ2.webp?r=93b",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4",
@@ -1727,6 +1833,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-Fi, Exciting, Offbeat",
       },
       {
+        id: "102",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQkIkzfTFHfadapfd_BF-G-K_UpmHk8fFq6Ds_dMyZ0QGOM1crvrSDN-Uc6D36OWrMi-zhJC9GvWx-D_1gduTUKTsRjp.webp?r=7d1",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
@@ -1742,6 +1849,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-Fi, Exciting",
       },
       {
+        id: "103",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABTQ61jRcb0vcHYHcnkdgWM-BDuifM-ET2c3ZJAIZ5zktBvsP9QrK39hsUzikUPNwsEa7zsyM3arZNFOsn1wEZLn6uQnU.webp?r=ce8",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
@@ -1757,6 +1865,7 @@ export default function List({ list_header, list }) {
         genre: "Martial Arts, Sci-Fi",
       },
       {
+        id: "104",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABVmiBxFUhsJ0r_EVRLSAW8kLzbu4kzx8QejcWekq5f1K-ElLctQy5y46O1waNeZlNIIOJEFUOQmZlNKmJVYKQSn0IZio.webp?r=457",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
@@ -1772,6 +1881,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Action",
       },
       {
+        id: "105",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABVE_ix7Cpy7bHaIw5SL_h7lff-vHpY9GQ-D4GJhLSmL8rtHFLaC_pg7hrIcAOQSRqS7TQb_jSbO8vd9fMx-NtLXVFhxV.webp?r=b5a",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
@@ -1787,6 +1897,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-FI, Exciting",
       },
       {
+        id: "106",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUL1vKw0qM1BUE5C-Am-_MeX050ZUhPrkCjIP7hff44ZZL9J_oaTBNrH8DVCmep_bS5l3hWewuJdreuvv7X92XQiUg4g.webp?r=2dc",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
@@ -1802,6 +1913,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "107",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABXkjkpGWgVDfc8O1toyqjGHpjEEUHSqSwqsuF18v-PRV3ljIyJB-_6VIJZXIgcR31zxfmivVinEuNP9gZbv1nJ2-D46s.webp?r=7c0",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
@@ -1817,6 +1929,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting, Romantic, Comedy",
       },
       {
+        id: "108",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABXKH_O2XtvOG0xZmTuG3QPNH_E73Ntf6VB00vf0A5Heie4jgBKaVG8yFMgx9Oq8FmJpoZJXvlXaQc5jfx_1jy7azpkIA.webp?r=f82",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
@@ -1832,6 +1945,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic, Emotional",
       },
       {
+        id: "109",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABcgOB0Tgko8FeTqPGcd_ukVDAM-XPBxdZu2Mmjo188bZOf7rMUENiaS9yskySjMCl2o80EmD7TT1nrdXWVhZezRpLs9O.webp?r=9a6",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
@@ -1847,6 +1961,7 @@ export default function List({ list_header, list }) {
         genre: "Action, Goofy",
       },
       {
+        id: "110",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeSSlFkFxFhDfNYdVZ4doQJPGLF1HhvqxYlNIQqfj_NsK65gT1pbRRYePpD6KgYGS10hVWv0N79KwHQgcYyb_2MB6bkU.webp?r=516",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
@@ -1865,6 +1980,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Comedy Movies") {
     cw = [
       {
+        id: "111",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABX6QPuU2wUKTrISH7UkthsTD4mTPRpfGIojVGAfhTtmlwB_K-b-yujeN1zgpW0txJLLNWCDMCSPBP8qwhmFVX5jn32FM.webp?r=d57",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
@@ -1880,6 +1996,7 @@ export default function List({ list_header, list }) {
         genre: "Suspenseful, Exciting",
       },
       {
+        id: "112",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABaUyF3kexjPto1IHIhDpmIYadqvYLEIQIyDx7IVyl7YbSziHb11WDdfFMtqIQeGfy_Se5qZjWh2uCamN9D7LXGgW8J7Ch2Ef5TUowkj9EnxLaCaN7TibUc-2ptLhBGf2i3WCD3a3cooyblg9koj8cWgpGR8DQkbNnGu1db1Fz7r9hSn3AJMZDFrgO3522AZ0N0QE2894mlkFZQkGjqlwT8pO5A.jpg?r=603",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
@@ -1895,6 +2012,7 @@ export default function List({ list_header, list }) {
         genre: "Fantasy TV Shows, TV Shows Based on Books",
       },
       {
+        id: "113",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABW-1LCLK7T5DCx0eQXvqjHuMTOAm8AzDi3qy84LgIvpFjRihmb0gUw5LUWPqsl6W25F1jIMzCi6OFuEcym-I7_6J6uTDJwHnV7kW5qsLLb5ZMPwpCTgMz9Az8tXWfg.jpg?r=7de",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
@@ -1910,6 +2028,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic TV Dramas, Romantic TV Comedies",
       },
       {
+        id: "114",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb12t1Hiq8L4MPDkW8mAZUqQGTuL7l6XSGJTr8-h7H88Xqr1jfXsS_PvdtvFnmhJo5-to8Ram3BuHbsEYH_U7rRxpTZG.webp?r=9d5",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
@@ -1925,6 +2044,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Romantic, Comedy",
       },
       {
+        id: "115",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeBmbY-sgZUJpNW-vdJt_V5cEwl7hWAebY7APIjeb2Xu7f9EydFEaXEa6Z8NO0lryqWL6uhSiy_X7kul2tmNf0zK0LHawWM71CddrJDxAs0Og5RW1aD904ReaAarjoHuK7_ZBxzraD_QQvDxMMXIuwCGrN2jVNvzZsnysD42imckOSjz6u5zxhas.jpg?r=f9b",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
@@ -1940,6 +2060,7 @@ export default function List({ list_header, list }) {
         genre: "Thriller, Drama",
       },
       {
+        id: "116",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
@@ -1955,6 +2076,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "117",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeLVErP129jGeUFtzk002EQ0tPWougJ2SGYuw4GNbO0CJLNr8S6YM9YLOUDrtpZJRYsT0VCNkxx5X5a4RAzBNgc67Nk5A0s6tF6vWOPvxBrxXLLxOPn-2EKLnDf_ruoHo3-KSZFGSbbDbDZKXkXyd5cZfVnOD4Q.jpg?r=3da",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
@@ -1970,6 +2092,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting",
       },
       {
+        id: "118",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWjOTYhOvCQCcOd1CYlauJYz21htLjSD7eS_xnnkZEqKlgy4TCluO-NOYj78pLuPS3Puk7qcRz5kOoeo0qMKOejVluAFzwAQ6b-c3Es2dA-0fIKMkmQNBjYPkSbw3A.jpg?r=68e",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
@@ -1985,6 +2108,7 @@ export default function List({ list_header, list }) {
         genre: "Charming, Intimate, Romantic",
       },
       {
+        id: "119",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4",
@@ -2000,6 +2124,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "120",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
@@ -2018,6 +2143,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "New on Icinema") {
     cw = [
       {
+        id: "121",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABX6QPuU2wUKTrISH7UkthsTD4mTPRpfGIojVGAfhTtmlwB_K-b-yujeN1zgpW0txJLLNWCDMCSPBP8qwhmFVX5jn32FM.webp?r=d57",
         video: "",
         title_pic:
@@ -2032,6 +2158,7 @@ export default function List({ list_header, list }) {
         genre: "Suspenseful, Exciting",
       },
       {
+        id: "122",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABaUyF3kexjPto1IHIhDpmIYadqvYLEIQIyDx7IVyl7YbSziHb11WDdfFMtqIQeGfy_Se5qZjWh2uCamN9D7LXGgW8J7Ch2Ef5TUowkj9EnxLaCaN7TibUc-2ptLhBGf2i3WCD3a3cooyblg9koj8cWgpGR8DQkbNnGu1db1Fz7r9hSn3AJMZDFrgO3522AZ0N0QE2894mlkFZQkGjqlwT8pO5A.jpg?r=603",
         video: "",
         title_pic:
@@ -2046,6 +2173,7 @@ export default function List({ list_header, list }) {
         genre: "Fantasy TV Shows, TV Shows Based on Books",
       },
       {
+        id: "123",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABW-1LCLK7T5DCx0eQXvqjHuMTOAm8AzDi3qy84LgIvpFjRihmb0gUw5LUWPqsl6W25F1jIMzCi6OFuEcym-I7_6J6uTDJwHnV7kW5qsLLb5ZMPwpCTgMz9Az8tXWfg.jpg?r=7de",
         video: "",
         title_pic:
@@ -2060,6 +2188,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic TV Dramas, Romantic TV Comedies",
       },
       {
+        id: "124",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb12t1Hiq8L4MPDkW8mAZUqQGTuL7l6XSGJTr8-h7H88Xqr1jfXsS_PvdtvFnmhJo5-to8Ram3BuHbsEYH_U7rRxpTZG.webp?r=9d5",
         video: "",
         title_pic:
@@ -2074,6 +2203,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Romantic, Comedy",
       },
       {
+        id: "125",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeBmbY-sgZUJpNW-vdJt_V5cEwl7hWAebY7APIjeb2Xu7f9EydFEaXEa6Z8NO0lryqWL6uhSiy_X7kul2tmNf0zK0LHawWM71CddrJDxAs0Og5RW1aD904ReaAarjoHuK7_ZBxzraD_QQvDxMMXIuwCGrN2jVNvzZsnysD42imckOSjz6u5zxhas.jpg?r=f9b",
         video: "",
         title_pic:
@@ -2088,6 +2218,7 @@ export default function List({ list_header, list }) {
         genre: "Thriller, Drama",
       },
       {
+        id: "126",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a",
         video: "",
         title_pic:
@@ -2102,6 +2233,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "127",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeLVErP129jGeUFtzk002EQ0tPWougJ2SGYuw4GNbO0CJLNr8S6YM9YLOUDrtpZJRYsT0VCNkxx5X5a4RAzBNgc67Nk5A0s6tF6vWOPvxBrxXLLxOPn-2EKLnDf_ruoHo3-KSZFGSbbDbDZKXkXyd5cZfVnOD4Q.jpg?r=3da",
         video: "",
         title_pic:
@@ -2116,6 +2248,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting",
       },
       {
+        id: "128",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWjOTYhOvCQCcOd1CYlauJYz21htLjSD7eS_xnnkZEqKlgy4TCluO-NOYj78pLuPS3Puk7qcRz5kOoeo0qMKOejVluAFzwAQ6b-c3Es2dA-0fIKMkmQNBjYPkSbw3A.jpg?r=68e",
         video: "",
         title_pic:
@@ -2130,6 +2263,7 @@ export default function List({ list_header, list }) {
         genre: "Charming, Intimate, Romantic",
       },
       {
+        id: "129",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video: "",
         title_pic:
@@ -2144,6 +2278,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "130",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video: "",
         title_pic:
@@ -2161,6 +2296,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Coming This Week") {
     cw = [
       {
+        id: "131",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABf2JfL0KO049JlNtybXwdPFushYF1a4uHhkLu7kDt6MouWGU_BB_F2oKBjKvm-RgqhOtMkpsjz2eXDwJkKYrqYBnEDZ2.webp?r=93b",
         video: "",
         title_pic:
@@ -2175,6 +2311,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-Fi, Exciting, Offbeat",
       },
       {
+        id: "132",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQkIkzfTFHfadapfd_BF-G-K_UpmHk8fFq6Ds_dMyZ0QGOM1crvrSDN-Uc6D36OWrMi-zhJC9GvWx-D_1gduTUKTsRjp.webp?r=7d1",
         video: "",
         title_pic:
@@ -2189,6 +2326,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-Fi, Exciting",
       },
       {
+        id: "133",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABTQ61jRcb0vcHYHcnkdgWM-BDuifM-ET2c3ZJAIZ5zktBvsP9QrK39hsUzikUPNwsEa7zsyM3arZNFOsn1wEZLn6uQnU.webp?r=ce8",
         video: "",
         title_pic:
@@ -2203,6 +2341,7 @@ export default function List({ list_header, list }) {
         genre: "Martial Arts, Sci-Fi",
       },
       {
+        id: "134",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABVmiBxFUhsJ0r_EVRLSAW8kLzbu4kzx8QejcWekq5f1K-ElLctQy5y46O1waNeZlNIIOJEFUOQmZlNKmJVYKQSn0IZio.webp?r=457",
         video: "",
         title_pic:
@@ -2217,6 +2356,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Action",
       },
       {
+        id: "135",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABVE_ix7Cpy7bHaIw5SL_h7lff-vHpY9GQ-D4GJhLSmL8rtHFLaC_pg7hrIcAOQSRqS7TQb_jSbO8vd9fMx-NtLXVFhxV.webp?r=b5a",
         video: "",
         title_pic:
@@ -2231,6 +2371,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-FI, Exciting",
       },
       {
+        id: "136",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUL1vKw0qM1BUE5C-Am-_MeX050ZUhPrkCjIP7hff44ZZL9J_oaTBNrH8DVCmep_bS5l3hWewuJdreuvv7X92XQiUg4g.webp?r=2dc",
         video: "",
         title_pic:
@@ -2245,6 +2386,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "137",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABXkjkpGWgVDfc8O1toyqjGHpjEEUHSqSwqsuF18v-PRV3ljIyJB-_6VIJZXIgcR31zxfmivVinEuNP9gZbv1nJ2-D46s.webp?r=7c0",
         video: "",
         title_pic:
@@ -2259,6 +2401,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting, Romantic, Comedy",
       },
       {
+        id: "138",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABXKH_O2XtvOG0xZmTuG3QPNH_E73Ntf6VB00vf0A5Heie4jgBKaVG8yFMgx9Oq8FmJpoZJXvlXaQc5jfx_1jy7azpkIA.webp?r=f82",
         video: "",
         title_pic:
@@ -2273,6 +2416,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic, Emotional",
       },
       {
+        id: "139",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABcgOB0Tgko8FeTqPGcd_ukVDAM-XPBxdZu2Mmjo188bZOf7rMUENiaS9yskySjMCl2o80EmD7TT1nrdXWVhZezRpLs9O.webp?r=9a6",
         video: "",
         title_pic:
@@ -2287,6 +2431,7 @@ export default function List({ list_header, list }) {
         genre: "Action, Goofy",
       },
       {
+        id: "140",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeSSlFkFxFhDfNYdVZ4doQJPGLF1HhvqxYlNIQqfj_NsK65gT1pbRRYePpD6KgYGS10hVWv0N79KwHQgcYyb_2MB6bkU.webp?r=516",
         video: "",
         title_pic:
@@ -2304,6 +2449,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Coming Next Week") {
     cw = [
       {
+        id: "141",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABegK2Y5ordgaCmFTJfHA8Hsz8vdXMLvq_GcGvK8NjVGFsF2I9yJsZ7LxleRpuS8X-P1dT0LgmpoC8vtaz0oRFewDezyJ0DprEVJN69MDTdO_odX_j2ZHHVcfRwbazg.jpg?r=231",
         video: "",
         title_pic:
@@ -2318,6 +2464,7 @@ export default function List({ list_header, list }) {
         genre: "Horror, Gruesome",
       },
       {
+        id: "142",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb8ykbycKEvO4tkNi5JT0PjhZKf_xp-iNMNtXXdSgImbUfC_ajD6LI8pxJ4uIk2J6ISb6Ftn6FVp86Le4cNj8qeAKi1t.webp?r=2dd",
         video: "",
         title_pic:
@@ -2332,6 +2479,7 @@ export default function List({ list_header, list }) {
         genre: "Scary, Suspense",
       },
       {
+        id: "143",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYmndOzmCP0gMq1q3EHeHTUn9xQhFvfeNDqz3gNGa6oOlTjbwal17jGpDYKuImE8iF0BiTfj-zEFEfpAysp2NO8DDFfl.webp?r=d8d",
         video: "",
         title_pic:
@@ -2346,6 +2494,7 @@ export default function List({ list_header, list }) {
         genre: "Scary, Sunspenseful",
       },
       {
+        id: "144",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWG-PUrZFOhYRUwASiCY9s0coJXL2q0mVxu_AscCNFc7cvLhZEmGjfBIbmrZUw1F3Vdadj8SPCErBk2mL6_6HEeQQdU3.webp?r=bcd",
         video: "",
         title_pic:
@@ -2360,6 +2509,7 @@ export default function List({ list_header, list }) {
         genre: "Horror, Scary",
       },
       {
+        id: "145",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYaTiON2HfU1M7RRfZJbg_oHGM4BOtTS96PoOA0yPhPhRrdU6RjALsZ-cTDyisn_n9JJDswnEETGiZDpxsSj8i7AnTQ6.webp?r=0aa",
         video: "",
         title_pic:
@@ -2374,6 +2524,7 @@ export default function List({ list_header, list }) {
         genre: "Scary, Suspense",
       },
       {
+        id: "146",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQHS8OjMDFh_sJjd3oiemLubfBiFHiRNQeOehpZoKyZ4557wq5_icfO1Z4hHhne-uo4FEMSv1owbR6V_UEI_AAQps_XQ0ur9-XvL0uQ3qzk_QuVY82PW-LSRKrihlA.jpg?r=a52",
         video: "",
         title_pic:
@@ -2388,6 +2539,7 @@ export default function List({ list_header, list }) {
         genre: "Omnious, Scary, Suspenseful",
       },
       {
+        id: "147",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABTaUwQRDGBxQSBu-873Y6D8bqRELZT941nb0ONGez1ABXsjoI4dZ5eD4VEnh-PkGppz3gRpxw0sRWzn3aTk7npJvbib2.webp?r=e8d",
         video: "",
         title_pic:
@@ -2402,6 +2554,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Violent",
       },
       {
+        id: "148",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQl3tSqCiNKY4mAcjoJOeBufGSEfneTsviTeLkMRDEiSXKi5GE0K-SgScQqb9YnOvu7EttdyA835WKI5ef85-ebNn5Uq.webp?r=98d",
         video: "",
         title_pic:
@@ -2416,6 +2569,7 @@ export default function List({ list_header, list }) {
         genre: "Chilling, Omnious, Scary",
       },
       {
+        id: "149",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video: "",
         title_pic:
@@ -2430,6 +2584,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "150",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video: "",
         title_pic:
@@ -2447,6 +2602,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Worth The Wait") {
     cw = [
       {
+        id: "151",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABX6QPuU2wUKTrISH7UkthsTD4mTPRpfGIojVGAfhTtmlwB_K-b-yujeN1zgpW0txJLLNWCDMCSPBP8qwhmFVX5jn32FM.webp?r=d57",
         video: "",
         title_pic:
@@ -2461,6 +2617,7 @@ export default function List({ list_header, list }) {
         genre: "Suspenseful, Exciting",
       },
       {
+        id: "152",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABaUyF3kexjPto1IHIhDpmIYadqvYLEIQIyDx7IVyl7YbSziHb11WDdfFMtqIQeGfy_Se5qZjWh2uCamN9D7LXGgW8J7Ch2Ef5TUowkj9EnxLaCaN7TibUc-2ptLhBGf2i3WCD3a3cooyblg9koj8cWgpGR8DQkbNnGu1db1Fz7r9hSn3AJMZDFrgO3522AZ0N0QE2894mlkFZQkGjqlwT8pO5A.jpg?r=603",
         video: "",
         title_pic:
@@ -2475,6 +2632,7 @@ export default function List({ list_header, list }) {
         genre: "Fantasy TV Shows, TV Shows Based on Books",
       },
       {
+        id: "153",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABW-1LCLK7T5DCx0eQXvqjHuMTOAm8AzDi3qy84LgIvpFjRihmb0gUw5LUWPqsl6W25F1jIMzCi6OFuEcym-I7_6J6uTDJwHnV7kW5qsLLb5ZMPwpCTgMz9Az8tXWfg.jpg?r=7de",
         video: "",
         title_pic:
@@ -2489,6 +2647,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic TV Dramas, Romantic TV Comedies",
       },
       {
+        id: "154",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb12t1Hiq8L4MPDkW8mAZUqQGTuL7l6XSGJTr8-h7H88Xqr1jfXsS_PvdtvFnmhJo5-to8Ram3BuHbsEYH_U7rRxpTZG.webp?r=9d5",
         video: "",
         title_pic:
@@ -2503,6 +2662,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Romantic, Comedy",
       },
       {
+        id: "155",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeBmbY-sgZUJpNW-vdJt_V5cEwl7hWAebY7APIjeb2Xu7f9EydFEaXEa6Z8NO0lryqWL6uhSiy_X7kul2tmNf0zK0LHawWM71CddrJDxAs0Og5RW1aD904ReaAarjoHuK7_ZBxzraD_QQvDxMMXIuwCGrN2jVNvzZsnysD42imckOSjz6u5zxhas.jpg?r=f9b",
         video: "",
         title_pic:
@@ -2517,6 +2677,7 @@ export default function List({ list_header, list }) {
         genre: "Thriller, Drama",
       },
       {
+        id: "156",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a",
         video: "",
         title_pic:
@@ -2531,6 +2692,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "157",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeLVErP129jGeUFtzk002EQ0tPWougJ2SGYuw4GNbO0CJLNr8S6YM9YLOUDrtpZJRYsT0VCNkxx5X5a4RAzBNgc67Nk5A0s6tF6vWOPvxBrxXLLxOPn-2EKLnDf_ruoHo3-KSZFGSbbDbDZKXkXyd5cZfVnOD4Q.jpg?r=3da",
         video: "",
         title_pic:
@@ -2545,6 +2707,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting",
       },
       {
+        id: "158",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWjOTYhOvCQCcOd1CYlauJYz21htLjSD7eS_xnnkZEqKlgy4TCluO-NOYj78pLuPS3Puk7qcRz5kOoeo0qMKOejVluAFzwAQ6b-c3Es2dA-0fIKMkmQNBjYPkSbw3A.jpg?r=68e",
         video: "",
         title_pic:
@@ -2559,6 +2722,7 @@ export default function List({ list_header, list }) {
         genre: "Charming, Intimate, Romantic",
       },
       {
+        id: "159",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video: "",
         title_pic:
@@ -2573,6 +2737,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "160",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video: "",
         title_pic:
@@ -2590,6 +2755,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Movies") {
     cw = [
       {
+        id: "161",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABf2JfL0KO049JlNtybXwdPFushYF1a4uHhkLu7kDt6MouWGU_BB_F2oKBjKvm-RgqhOtMkpsjz2eXDwJkKYrqYBnEDZ2.webp?r=93b",
         video: "",
         title_pic:
@@ -2604,6 +2770,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-Fi, Exciting, Offbeat",
       },
       {
+        id: "162",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQkIkzfTFHfadapfd_BF-G-K_UpmHk8fFq6Ds_dMyZ0QGOM1crvrSDN-Uc6D36OWrMi-zhJC9GvWx-D_1gduTUKTsRjp.webp?r=7d1",
         video: "",
         title_pic:
@@ -2618,6 +2785,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-Fi, Exciting",
       },
       {
+        id: "163",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABTQ61jRcb0vcHYHcnkdgWM-BDuifM-ET2c3ZJAIZ5zktBvsP9QrK39hsUzikUPNwsEa7zsyM3arZNFOsn1wEZLn6uQnU.webp?r=ce8",
         video: "",
         title_pic:
@@ -2632,6 +2800,7 @@ export default function List({ list_header, list }) {
         genre: "Martial Arts, Sci-Fi",
       },
       {
+        id: "164",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABVmiBxFUhsJ0r_EVRLSAW8kLzbu4kzx8QejcWekq5f1K-ElLctQy5y46O1waNeZlNIIOJEFUOQmZlNKmJVYKQSn0IZio.webp?r=457",
         video: "",
         title_pic:
@@ -2646,6 +2815,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Action",
       },
       {
+        id: "165",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABVE_ix7Cpy7bHaIw5SL_h7lff-vHpY9GQ-D4GJhLSmL8rtHFLaC_pg7hrIcAOQSRqS7TQb_jSbO8vd9fMx-NtLXVFhxV.webp?r=b5a",
         video: "",
         title_pic:
@@ -2660,6 +2830,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-FI, Exciting",
       },
       {
+        id: "166",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUL1vKw0qM1BUE5C-Am-_MeX050ZUhPrkCjIP7hff44ZZL9J_oaTBNrH8DVCmep_bS5l3hWewuJdreuvv7X92XQiUg4g.webp?r=2dc",
         video: "",
         title_pic:
@@ -2674,6 +2845,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "167",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABXkjkpGWgVDfc8O1toyqjGHpjEEUHSqSwqsuF18v-PRV3ljIyJB-_6VIJZXIgcR31zxfmivVinEuNP9gZbv1nJ2-D46s.webp?r=7c0",
         video: "",
         title_pic:
@@ -2688,6 +2860,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting, Romantic, Comedy",
       },
       {
+        id: "168",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABXKH_O2XtvOG0xZmTuG3QPNH_E73Ntf6VB00vf0A5Heie4jgBKaVG8yFMgx9Oq8FmJpoZJXvlXaQc5jfx_1jy7azpkIA.webp?r=f82",
         video: "",
         title_pic:
@@ -2702,6 +2875,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic, Emotional",
       },
       {
+        id: "169",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABcgOB0Tgko8FeTqPGcd_ukVDAM-XPBxdZu2Mmjo188bZOf7rMUENiaS9yskySjMCl2o80EmD7TT1nrdXWVhZezRpLs9O.webp?r=9a6",
         video: "",
         title_pic:
@@ -2716,6 +2890,7 @@ export default function List({ list_header, list }) {
         genre: "Action, Goofy",
       },
       {
+        id: "170",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeSSlFkFxFhDfNYdVZ4doQJPGLF1HhvqxYlNIQqfj_NsK65gT1pbRRYePpD6KgYGS10hVWv0N79KwHQgcYyb_2MB6bkU.webp?r=516",
         video: "",
         title_pic:
@@ -2733,6 +2908,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "TV Shows") {
     cw = [
       {
+        id: "171",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABX6QPuU2wUKTrISH7UkthsTD4mTPRpfGIojVGAfhTtmlwB_K-b-yujeN1zgpW0txJLLNWCDMCSPBP8qwhmFVX5jn32FM.webp?r=d57",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
@@ -2748,6 +2924,7 @@ export default function List({ list_header, list }) {
         genre: "Suspenseful, Exciting",
       },
       {
+        id: "172",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABaUyF3kexjPto1IHIhDpmIYadqvYLEIQIyDx7IVyl7YbSziHb11WDdfFMtqIQeGfy_Se5qZjWh2uCamN9D7LXGgW8J7Ch2Ef5TUowkj9EnxLaCaN7TibUc-2ptLhBGf2i3WCD3a3cooyblg9koj8cWgpGR8DQkbNnGu1db1Fz7r9hSn3AJMZDFrgO3522AZ0N0QE2894mlkFZQkGjqlwT8pO5A.jpg?r=603",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
@@ -2763,6 +2940,7 @@ export default function List({ list_header, list }) {
         genre: "Fantasy TV Shows, TV Shows Based on Books",
       },
       {
+        id: "173",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABW-1LCLK7T5DCx0eQXvqjHuMTOAm8AzDi3qy84LgIvpFjRihmb0gUw5LUWPqsl6W25F1jIMzCi6OFuEcym-I7_6J6uTDJwHnV7kW5qsLLb5ZMPwpCTgMz9Az8tXWfg.jpg?r=7de",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
@@ -2778,6 +2956,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic TV Dramas, Romantic TV Comedies",
       },
       {
+        id: "174",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb12t1Hiq8L4MPDkW8mAZUqQGTuL7l6XSGJTr8-h7H88Xqr1jfXsS_PvdtvFnmhJo5-to8Ram3BuHbsEYH_U7rRxpTZG.webp?r=9d5",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
@@ -2793,6 +2972,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Romantic, Comedy",
       },
       {
+        id: "175",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeBmbY-sgZUJpNW-vdJt_V5cEwl7hWAebY7APIjeb2Xu7f9EydFEaXEa6Z8NO0lryqWL6uhSiy_X7kul2tmNf0zK0LHawWM71CddrJDxAs0Og5RW1aD904ReaAarjoHuK7_ZBxzraD_QQvDxMMXIuwCGrN2jVNvzZsnysD42imckOSjz6u5zxhas.jpg?r=f9b",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
@@ -2808,6 +2988,7 @@ export default function List({ list_header, list }) {
         genre: "Thriller, Drama",
       },
       {
+        id: "176",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
@@ -2823,6 +3004,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "177",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeLVErP129jGeUFtzk002EQ0tPWougJ2SGYuw4GNbO0CJLNr8S6YM9YLOUDrtpZJRYsT0VCNkxx5X5a4RAzBNgc67Nk5A0s6tF6vWOPvxBrxXLLxOPn-2EKLnDf_ruoHo3-KSZFGSbbDbDZKXkXyd5cZfVnOD4Q.jpg?r=3da",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
@@ -2838,6 +3020,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting",
       },
       {
+        id: "178",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWjOTYhOvCQCcOd1CYlauJYz21htLjSD7eS_xnnkZEqKlgy4TCluO-NOYj78pLuPS3Puk7qcRz5kOoeo0qMKOejVluAFzwAQ6b-c3Es2dA-0fIKMkmQNBjYPkSbw3A.jpg?r=68e",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
@@ -2853,6 +3036,7 @@ export default function List({ list_header, list }) {
         genre: "Charming, Intimate, Romantic",
       },
       {
+        id: "179",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4",
@@ -2868,6 +3052,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "180",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
@@ -2886,6 +3071,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "K-Dramas") {
     cw = [
       {
+        id: "181",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABX6QPuU2wUKTrISH7UkthsTD4mTPRpfGIojVGAfhTtmlwB_K-b-yujeN1zgpW0txJLLNWCDMCSPBP8qwhmFVX5jn32FM.webp?r=d57",
         video:
@@ -2902,6 +3088,7 @@ export default function List({ list_header, list }) {
         genre: "Suspenseful, Exciting",
       },
       {
+        id: "182",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABaUyF3kexjPto1IHIhDpmIYadqvYLEIQIyDx7IVyl7YbSziHb11WDdfFMtqIQeGfy_Se5qZjWh2uCamN9D7LXGgW8J7Ch2Ef5TUowkj9EnxLaCaN7TibUc-2ptLhBGf2i3WCD3a3cooyblg9koj8cWgpGR8DQkbNnGu1db1Fz7r9hSn3AJMZDFrgO3522AZ0N0QE2894mlkFZQkGjqlwT8pO5A.jpg?r=603",
         video:
@@ -2918,6 +3105,7 @@ export default function List({ list_header, list }) {
         genre: "Fantasy TV Shows, TV Shows Based on Books",
       },
       {
+        id: "183",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABW-1LCLK7T5DCx0eQXvqjHuMTOAm8AzDi3qy84LgIvpFjRihmb0gUw5LUWPqsl6W25F1jIMzCi6OFuEcym-I7_6J6uTDJwHnV7kW5qsLLb5ZMPwpCTgMz9Az8tXWfg.jpg?r=7de",
         video:
@@ -2934,6 +3122,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic TV Dramas, Romantic TV Comedies",
       },
       {
+        id: "184",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb12t1Hiq8L4MPDkW8mAZUqQGTuL7l6XSGJTr8-h7H88Xqr1jfXsS_PvdtvFnmhJo5-to8Ram3BuHbsEYH_U7rRxpTZG.webp?r=9d5",
         video:
@@ -2950,6 +3139,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Romantic, Comedy",
       },
       {
+        id: "185",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeBmbY-sgZUJpNW-vdJt_V5cEwl7hWAebY7APIjeb2Xu7f9EydFEaXEa6Z8NO0lryqWL6uhSiy_X7kul2tmNf0zK0LHawWM71CddrJDxAs0Og5RW1aD904ReaAarjoHuK7_ZBxzraD_QQvDxMMXIuwCGrN2jVNvzZsnysD42imckOSjz6u5zxhas.jpg?r=f9b",
         video:
@@ -2966,6 +3156,7 @@ export default function List({ list_header, list }) {
         genre: "Thriller, Drama",
       },
       {
+        id: "186",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a",
         video:
@@ -2982,6 +3173,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "187",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeLVErP129jGeUFtzk002EQ0tPWougJ2SGYuw4GNbO0CJLNr8S6YM9YLOUDrtpZJRYsT0VCNkxx5X5a4RAzBNgc67Nk5A0s6tF6vWOPvxBrxXLLxOPn-2EKLnDf_ruoHo3-KSZFGSbbDbDZKXkXyd5cZfVnOD4Q.jpg?r=3da",
         video:
@@ -2998,6 +3190,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting",
       },
       {
+        id: "188",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWjOTYhOvCQCcOd1CYlauJYz21htLjSD7eS_xnnkZEqKlgy4TCluO-NOYj78pLuPS3Puk7qcRz5kOoeo0qMKOejVluAFzwAQ6b-c3Es2dA-0fIKMkmQNBjYPkSbw3A.jpg?r=68e",
         video:
@@ -3014,6 +3207,7 @@ export default function List({ list_header, list }) {
         genre: "Charming, Intimate, Romantic",
       },
       {
+        id: "189",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video:
@@ -3030,6 +3224,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "190",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video:
@@ -3049,6 +3244,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Anime") {
     cw = [
       {
+        id: "191",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABf2JfL0KO049JlNtybXwdPFushYF1a4uHhkLu7kDt6MouWGU_BB_F2oKBjKvm-RgqhOtMkpsjz2eXDwJkKYrqYBnEDZ2.webp?r=93b",
         video:
@@ -3065,6 +3261,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-Fi, Exciting, Offbeat",
       },
       {
+        id: "192",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQkIkzfTFHfadapfd_BF-G-K_UpmHk8fFq6Ds_dMyZ0QGOM1crvrSDN-Uc6D36OWrMi-zhJC9GvWx-D_1gduTUKTsRjp.webp?r=7d1",
         video:
@@ -3081,6 +3278,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-Fi, Exciting",
       },
       {
+        id: "193",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABTQ61jRcb0vcHYHcnkdgWM-BDuifM-ET2c3ZJAIZ5zktBvsP9QrK39hsUzikUPNwsEa7zsyM3arZNFOsn1wEZLn6uQnU.webp?r=ce8",
         video:
@@ -3097,6 +3295,7 @@ export default function List({ list_header, list }) {
         genre: "Martial Arts, Sci-Fi",
       },
       {
+        id: "194",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABVmiBxFUhsJ0r_EVRLSAW8kLzbu4kzx8QejcWekq5f1K-ElLctQy5y46O1waNeZlNIIOJEFUOQmZlNKmJVYKQSn0IZio.webp?r=457",
         video:
@@ -3113,6 +3312,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Action",
       },
       {
+        id: "195",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABVE_ix7Cpy7bHaIw5SL_h7lff-vHpY9GQ-D4GJhLSmL8rtHFLaC_pg7hrIcAOQSRqS7TQb_jSbO8vd9fMx-NtLXVFhxV.webp?r=b5a",
         video:
@@ -3129,6 +3329,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-FI, Exciting",
       },
       {
+        id: "196",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUL1vKw0qM1BUE5C-Am-_MeX050ZUhPrkCjIP7hff44ZZL9J_oaTBNrH8DVCmep_bS5l3hWewuJdreuvv7X92XQiUg4g.webp?r=2dc",
         video:
@@ -3145,6 +3346,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "197",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABXkjkpGWgVDfc8O1toyqjGHpjEEUHSqSwqsuF18v-PRV3ljIyJB-_6VIJZXIgcR31zxfmivVinEuNP9gZbv1nJ2-D46s.webp?r=7c0",
         video:
@@ -3161,6 +3363,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting, Romantic, Comedy",
       },
       {
+        id: "198",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABXKH_O2XtvOG0xZmTuG3QPNH_E73Ntf6VB00vf0A5Heie4jgBKaVG8yFMgx9Oq8FmJpoZJXvlXaQc5jfx_1jy7azpkIA.webp?r=f82",
         video:
@@ -3177,6 +3380,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic, Emotional",
       },
       {
+        id: "199",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABcgOB0Tgko8FeTqPGcd_ukVDAM-XPBxdZu2Mmjo188bZOf7rMUENiaS9yskySjMCl2o80EmD7TT1nrdXWVhZezRpLs9O.webp?r=9a6",
         video:
@@ -3193,6 +3397,7 @@ export default function List({ list_header, list }) {
         genre: "Action, Goofy",
       },
       {
+        id: "200",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeSSlFkFxFhDfNYdVZ4doQJPGLF1HhvqxYlNIQqfj_NsK65gT1pbRRYePpD6KgYGS10hVWv0N79KwHQgcYyb_2MB6bkU.webp?r=516",
         video:
@@ -3212,6 +3417,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Super Natural Soaps") {
     cw = [
       {
+        id: "201",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABegK2Y5ordgaCmFTJfHA8Hsz8vdXMLvq_GcGvK8NjVGFsF2I9yJsZ7LxleRpuS8X-P1dT0LgmpoC8vtaz0oRFewDezyJ0DprEVJN69MDTdO_odX_j2ZHHVcfRwbazg.jpg?r=231",
         video:
@@ -3228,6 +3434,7 @@ export default function List({ list_header, list }) {
         genre: "Horror, Gruesome",
       },
       {
+        id: "202",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb8ykbycKEvO4tkNi5JT0PjhZKf_xp-iNMNtXXdSgImbUfC_ajD6LI8pxJ4uIk2J6ISb6Ftn6FVp86Le4cNj8qeAKi1t.webp?r=2dd",
         video:
@@ -3244,6 +3451,7 @@ export default function List({ list_header, list }) {
         genre: "Scary, Suspense",
       },
       {
+        id: "203",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYmndOzmCP0gMq1q3EHeHTUn9xQhFvfeNDqz3gNGa6oOlTjbwal17jGpDYKuImE8iF0BiTfj-zEFEfpAysp2NO8DDFfl.webp?r=d8d",
         video:
@@ -3260,6 +3468,7 @@ export default function List({ list_header, list }) {
         genre: "Scary, Sunspenseful",
       },
       {
+        id: "204",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWG-PUrZFOhYRUwASiCY9s0coJXL2q0mVxu_AscCNFc7cvLhZEmGjfBIbmrZUw1F3Vdadj8SPCErBk2mL6_6HEeQQdU3.webp?r=bcd",
         video:
@@ -3276,6 +3485,7 @@ export default function List({ list_header, list }) {
         genre: "Horror, Scary",
       },
       {
+        id: "205",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYaTiON2HfU1M7RRfZJbg_oHGM4BOtTS96PoOA0yPhPhRrdU6RjALsZ-cTDyisn_n9JJDswnEETGiZDpxsSj8i7AnTQ6.webp?r=0aa",
         video:
@@ -3292,6 +3502,7 @@ export default function List({ list_header, list }) {
         genre: "Scary, Suspense",
       },
       {
+        id: "206",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQHS8OjMDFh_sJjd3oiemLubfBiFHiRNQeOehpZoKyZ4557wq5_icfO1Z4hHhne-uo4FEMSv1owbR6V_UEI_AAQps_XQ0ur9-XvL0uQ3qzk_QuVY82PW-LSRKrihlA.jpg?r=a52",
         video:
@@ -3308,6 +3519,7 @@ export default function List({ list_header, list }) {
         genre: "Omnious, Scary, Suspenseful",
       },
       {
+        id: "207",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABTaUwQRDGBxQSBu-873Y6D8bqRELZT941nb0ONGez1ABXsjoI4dZ5eD4VEnh-PkGppz3gRpxw0sRWzn3aTk7npJvbib2.webp?r=e8d",
         video:
@@ -3324,6 +3536,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Violent",
       },
       {
+        id: "208",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQl3tSqCiNKY4mAcjoJOeBufGSEfneTsviTeLkMRDEiSXKi5GE0K-SgScQqb9YnOvu7EttdyA835WKI5ef85-ebNn5Uq.webp?r=98d",
         video:
@@ -3340,6 +3553,7 @@ export default function List({ list_header, list }) {
         genre: "Chilling, Omnious, Scary",
       },
       {
+        id: "209",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video:
@@ -3356,6 +3570,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "210",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video:
@@ -3375,6 +3590,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Recently Added") {
     cw = [
       {
+        id: "211",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABX6QPuU2wUKTrISH7UkthsTD4mTPRpfGIojVGAfhTtmlwB_K-b-yujeN1zgpW0txJLLNWCDMCSPBP8qwhmFVX5jn32FM.webp?r=d57",
         video:
@@ -3391,6 +3607,7 @@ export default function List({ list_header, list }) {
         genre: "Suspenseful, Exciting",
       },
       {
+        id: "212",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABaUyF3kexjPto1IHIhDpmIYadqvYLEIQIyDx7IVyl7YbSziHb11WDdfFMtqIQeGfy_Se5qZjWh2uCamN9D7LXGgW8J7Ch2Ef5TUowkj9EnxLaCaN7TibUc-2ptLhBGf2i3WCD3a3cooyblg9koj8cWgpGR8DQkbNnGu1db1Fz7r9hSn3AJMZDFrgO3522AZ0N0QE2894mlkFZQkGjqlwT8pO5A.jpg?r=603",
         video:
@@ -3407,6 +3624,7 @@ export default function List({ list_header, list }) {
         genre: "Fantasy TV Shows, TV Shows Based on Books",
       },
       {
+        id: "213",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABW-1LCLK7T5DCx0eQXvqjHuMTOAm8AzDi3qy84LgIvpFjRihmb0gUw5LUWPqsl6W25F1jIMzCi6OFuEcym-I7_6J6uTDJwHnV7kW5qsLLb5ZMPwpCTgMz9Az8tXWfg.jpg?r=7de",
         video:
@@ -3423,6 +3641,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic TV Dramas, Romantic TV Comedies",
       },
       {
+        id: "214",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb12t1Hiq8L4MPDkW8mAZUqQGTuL7l6XSGJTr8-h7H88Xqr1jfXsS_PvdtvFnmhJo5-to8Ram3BuHbsEYH_U7rRxpTZG.webp?r=9d5",
         video:
@@ -3439,6 +3658,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Romantic, Comedy",
       },
       {
+        id: "215",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeBmbY-sgZUJpNW-vdJt_V5cEwl7hWAebY7APIjeb2Xu7f9EydFEaXEa6Z8NO0lryqWL6uhSiy_X7kul2tmNf0zK0LHawWM71CddrJDxAs0Og5RW1aD904ReaAarjoHuK7_ZBxzraD_QQvDxMMXIuwCGrN2jVNvzZsnysD42imckOSjz6u5zxhas.jpg?r=f9b",
         video:
@@ -3455,6 +3675,7 @@ export default function List({ list_header, list }) {
         genre: "Thriller, Drama",
       },
       {
+        id: "216",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a",
         video:
@@ -3471,6 +3692,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "217",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeLVErP129jGeUFtzk002EQ0tPWougJ2SGYuw4GNbO0CJLNr8S6YM9YLOUDrtpZJRYsT0VCNkxx5X5a4RAzBNgc67Nk5A0s6tF6vWOPvxBrxXLLxOPn-2EKLnDf_ruoHo3-KSZFGSbbDbDZKXkXyd5cZfVnOD4Q.jpg?r=3da",
         video:
@@ -3487,6 +3709,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting",
       },
       {
+        id: "218",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWjOTYhOvCQCcOd1CYlauJYz21htLjSD7eS_xnnkZEqKlgy4TCluO-NOYj78pLuPS3Puk7qcRz5kOoeo0qMKOejVluAFzwAQ6b-c3Es2dA-0fIKMkmQNBjYPkSbw3A.jpg?r=68e",
         video:
@@ -3503,6 +3726,7 @@ export default function List({ list_header, list }) {
         genre: "Charming, Intimate, Romantic",
       },
       {
+        id: "219",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video:
@@ -3519,6 +3743,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "220",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video:
@@ -3538,6 +3763,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Korean TV Shows") {
     cw = [
       {
+        id: "221",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABX6QPuU2wUKTrISH7UkthsTD4mTPRpfGIojVGAfhTtmlwB_K-b-yujeN1zgpW0txJLLNWCDMCSPBP8qwhmFVX5jn32FM.webp?r=d57",
         video:
@@ -3554,6 +3780,7 @@ export default function List({ list_header, list }) {
         genre: "Suspenseful, Exciting",
       },
       {
+        id: "222",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABaUyF3kexjPto1IHIhDpmIYadqvYLEIQIyDx7IVyl7YbSziHb11WDdfFMtqIQeGfy_Se5qZjWh2uCamN9D7LXGgW8J7Ch2Ef5TUowkj9EnxLaCaN7TibUc-2ptLhBGf2i3WCD3a3cooyblg9koj8cWgpGR8DQkbNnGu1db1Fz7r9hSn3AJMZDFrgO3522AZ0N0QE2894mlkFZQkGjqlwT8pO5A.jpg?r=603",
         video: "",
@@ -3569,6 +3796,7 @@ export default function List({ list_header, list }) {
         genre: "Fantasy TV Shows, TV Shows Based on Books",
       },
       {
+        id: "223",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABW-1LCLK7T5DCx0eQXvqjHuMTOAm8AzDi3qy84LgIvpFjRihmb0gUw5LUWPqsl6W25F1jIMzCi6OFuEcym-I7_6J6uTDJwHnV7kW5qsLLb5ZMPwpCTgMz9Az8tXWfg.jpg?r=7de",
         video:
@@ -3585,6 +3813,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic TV Dramas, Romantic TV Comedies",
       },
       {
+        id: "224",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb12t1Hiq8L4MPDkW8mAZUqQGTuL7l6XSGJTr8-h7H88Xqr1jfXsS_PvdtvFnmhJo5-to8Ram3BuHbsEYH_U7rRxpTZG.webp?r=9d5",
         video:
@@ -3601,6 +3830,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Romantic, Comedy",
       },
       {
+        id: "225",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeBmbY-sgZUJpNW-vdJt_V5cEwl7hWAebY7APIjeb2Xu7f9EydFEaXEa6Z8NO0lryqWL6uhSiy_X7kul2tmNf0zK0LHawWM71CddrJDxAs0Og5RW1aD904ReaAarjoHuK7_ZBxzraD_QQvDxMMXIuwCGrN2jVNvzZsnysD42imckOSjz6u5zxhas.jpg?r=f9b",
         video: "",
@@ -3616,6 +3846,7 @@ export default function List({ list_header, list }) {
         genre: "Thriller, Drama",
       },
       {
+        id: "226",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a",
         video:
@@ -3632,6 +3863,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "227",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeLVErP129jGeUFtzk002EQ0tPWougJ2SGYuw4GNbO0CJLNr8S6YM9YLOUDrtpZJRYsT0VCNkxx5X5a4RAzBNgc67Nk5A0s6tF6vWOPvxBrxXLLxOPn-2EKLnDf_ruoHo3-KSZFGSbbDbDZKXkXyd5cZfVnOD4Q.jpg?r=3da",
         video:
@@ -3648,6 +3880,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting",
       },
       {
+        id: "228",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWjOTYhOvCQCcOd1CYlauJYz21htLjSD7eS_xnnkZEqKlgy4TCluO-NOYj78pLuPS3Puk7qcRz5kOoeo0qMKOejVluAFzwAQ6b-c3Es2dA-0fIKMkmQNBjYPkSbw3A.jpg?r=68e",
         video:
@@ -3664,6 +3897,7 @@ export default function List({ list_header, list }) {
         genre: "Charming, Intimate, Romantic",
       },
       {
+        id: "229",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video:
@@ -3680,6 +3914,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "230",
         title: "",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video:
@@ -3699,6 +3934,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Award-winning TV Shows") {
     cw = [
       {
+        id: "231",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABf2JfL0KO049JlNtybXwdPFushYF1a4uHhkLu7kDt6MouWGU_BB_F2oKBjKvm-RgqhOtMkpsjz2eXDwJkKYrqYBnEDZ2.webp?r=93b",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4",
@@ -3714,6 +3950,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-Fi, Exciting, Offbeat",
       },
       {
+        id: "232",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQkIkzfTFHfadapfd_BF-G-K_UpmHk8fFq6Ds_dMyZ0QGOM1crvrSDN-Uc6D36OWrMi-zhJC9GvWx-D_1gduTUKTsRjp.webp?r=7d1",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
@@ -3729,6 +3966,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-Fi, Exciting",
       },
       {
+        id: "233",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABTQ61jRcb0vcHYHcnkdgWM-BDuifM-ET2c3ZJAIZ5zktBvsP9QrK39hsUzikUPNwsEa7zsyM3arZNFOsn1wEZLn6uQnU.webp?r=ce8",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
@@ -3744,6 +3982,7 @@ export default function List({ list_header, list }) {
         genre: "Martial Arts, Sci-Fi",
       },
       {
+        id: "234",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABVmiBxFUhsJ0r_EVRLSAW8kLzbu4kzx8QejcWekq5f1K-ElLctQy5y46O1waNeZlNIIOJEFUOQmZlNKmJVYKQSn0IZio.webp?r=457",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
@@ -3759,6 +3998,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Action",
       },
       {
+        id: "235",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABVE_ix7Cpy7bHaIw5SL_h7lff-vHpY9GQ-D4GJhLSmL8rtHFLaC_pg7hrIcAOQSRqS7TQb_jSbO8vd9fMx-NtLXVFhxV.webp?r=b5a",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
@@ -3774,6 +4014,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-FI, Exciting",
       },
       {
+        id: "236",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUL1vKw0qM1BUE5C-Am-_MeX050ZUhPrkCjIP7hff44ZZL9J_oaTBNrH8DVCmep_bS5l3hWewuJdreuvv7X92XQiUg4g.webp?r=2dc",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
@@ -3789,6 +4030,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "237",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABXkjkpGWgVDfc8O1toyqjGHpjEEUHSqSwqsuF18v-PRV3ljIyJB-_6VIJZXIgcR31zxfmivVinEuNP9gZbv1nJ2-D46s.webp?r=7c0",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
@@ -3804,6 +4046,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting, Romantic, Comedy",
       },
       {
+        id: "238",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABXKH_O2XtvOG0xZmTuG3QPNH_E73Ntf6VB00vf0A5Heie4jgBKaVG8yFMgx9Oq8FmJpoZJXvlXaQc5jfx_1jy7azpkIA.webp?r=f82",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
@@ -3819,6 +4062,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic, Emotional",
       },
       {
+        id: "239",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABcgOB0Tgko8FeTqPGcd_ukVDAM-XPBxdZu2Mmjo188bZOf7rMUENiaS9yskySjMCl2o80EmD7TT1nrdXWVhZezRpLs9O.webp?r=9a6",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
@@ -3834,6 +4078,7 @@ export default function List({ list_header, list }) {
         genre: "Action, Goofy",
       },
       {
+        id: "240",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeSSlFkFxFhDfNYdVZ4doQJPGLF1HhvqxYlNIQqfj_NsK65gT1pbRRYePpD6KgYGS10hVWv0N79KwHQgcYyb_2MB6bkU.webp?r=516",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
@@ -3852,6 +4097,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Family TV Shows") {
     cw = [
       {
+        id: "241",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABegK2Y5ordgaCmFTJfHA8Hsz8vdXMLvq_GcGvK8NjVGFsF2I9yJsZ7LxleRpuS8X-P1dT0LgmpoC8vtaz0oRFewDezyJ0DprEVJN69MDTdO_odX_j2ZHHVcfRwbazg.jpg?r=231",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
@@ -3867,6 +4113,7 @@ export default function List({ list_header, list }) {
         genre: "Horror, Gruesome",
       },
       {
+        id: "242",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb8ykbycKEvO4tkNi5JT0PjhZKf_xp-iNMNtXXdSgImbUfC_ajD6LI8pxJ4uIk2J6ISb6Ftn6FVp86Le4cNj8qeAKi1t.webp?r=2dd",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
@@ -3882,6 +4129,7 @@ export default function List({ list_header, list }) {
         genre: "Scary, Suspense",
       },
       {
+        id: "243",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYmndOzmCP0gMq1q3EHeHTUn9xQhFvfeNDqz3gNGa6oOlTjbwal17jGpDYKuImE8iF0BiTfj-zEFEfpAysp2NO8DDFfl.webp?r=d8d",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4",
@@ -3897,6 +4145,7 @@ export default function List({ list_header, list }) {
         genre: "Scary, Sunspenseful",
       },
       {
+        id: "244",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWG-PUrZFOhYRUwASiCY9s0coJXL2q0mVxu_AscCNFc7cvLhZEmGjfBIbmrZUw1F3Vdadj8SPCErBk2mL6_6HEeQQdU3.webp?r=bcd",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
@@ -3912,6 +4161,7 @@ export default function List({ list_header, list }) {
         genre: "Horror, Scary",
       },
       {
+        id: "245",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYaTiON2HfU1M7RRfZJbg_oHGM4BOtTS96PoOA0yPhPhRrdU6RjALsZ-cTDyisn_n9JJDswnEETGiZDpxsSj8i7AnTQ6.webp?r=0aa",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4",
@@ -3927,6 +4177,7 @@ export default function List({ list_header, list }) {
         genre: "Scary, Suspense",
       },
       {
+        id: "246",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQHS8OjMDFh_sJjd3oiemLubfBiFHiRNQeOehpZoKyZ4557wq5_icfO1Z4hHhne-uo4FEMSv1owbR6V_UEI_AAQps_XQ0ur9-XvL0uQ3qzk_QuVY82PW-LSRKrihlA.jpg?r=a52",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
@@ -3942,6 +4193,7 @@ export default function List({ list_header, list }) {
         genre: "Omnious, Scary, Suspenseful",
       },
       {
+        id: "247",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABTaUwQRDGBxQSBu-873Y6D8bqRELZT941nb0ONGez1ABXsjoI4dZ5eD4VEnh-PkGppz3gRpxw0sRWzn3aTk7npJvbib2.webp?r=e8d",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
@@ -3957,6 +4209,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Violent",
       },
       {
+        id: "248",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQl3tSqCiNKY4mAcjoJOeBufGSEfneTsviTeLkMRDEiSXKi5GE0K-SgScQqb9YnOvu7EttdyA835WKI5ef85-ebNn5Uq.webp?r=98d",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
@@ -3972,6 +4225,7 @@ export default function List({ list_header, list }) {
         genre: "Chilling, Omnious, Scary",
       },
       {
+        id: "249",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
@@ -3987,6 +4241,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "250",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
@@ -4005,6 +4260,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Indian TV Shows") {
     cw = [
       {
+        id: "251",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABX6QPuU2wUKTrISH7UkthsTD4mTPRpfGIojVGAfhTtmlwB_K-b-yujeN1zgpW0txJLLNWCDMCSPBP8qwhmFVX5jn32FM.webp?r=d57",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
@@ -4020,6 +4276,7 @@ export default function List({ list_header, list }) {
         genre: "Suspenseful, Exciting",
       },
       {
+        id: "252",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABaUyF3kexjPto1IHIhDpmIYadqvYLEIQIyDx7IVyl7YbSziHb11WDdfFMtqIQeGfy_Se5qZjWh2uCamN9D7LXGgW8J7Ch2Ef5TUowkj9EnxLaCaN7TibUc-2ptLhBGf2i3WCD3a3cooyblg9koj8cWgpGR8DQkbNnGu1db1Fz7r9hSn3AJMZDFrgO3522AZ0N0QE2894mlkFZQkGjqlwT8pO5A.jpg?r=603",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
@@ -4034,7 +4291,9 @@ export default function List({ list_header, list }) {
         writer: "Lauren Schmidt Hissrich",
         genre: "Fantasy TV Shows, TV Shows Based on Books",
       },
+
       {
+        id: "253",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABW-1LCLK7T5DCx0eQXvqjHuMTOAm8AzDi3qy84LgIvpFjRihmb0gUw5LUWPqsl6W25F1jIMzCi6OFuEcym-I7_6J6uTDJwHnV7kW5qsLLb5ZMPwpCTgMz9Az8tXWfg.jpg?r=7de",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
@@ -4050,6 +4309,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic TV Dramas, Romantic TV Comedies",
       },
       {
+        id: "254",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb12t1Hiq8L4MPDkW8mAZUqQGTuL7l6XSGJTr8-h7H88Xqr1jfXsS_PvdtvFnmhJo5-to8Ram3BuHbsEYH_U7rRxpTZG.webp?r=9d5",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
@@ -4065,6 +4325,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Romantic, Comedy",
       },
       {
+        id: "255",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeBmbY-sgZUJpNW-vdJt_V5cEwl7hWAebY7APIjeb2Xu7f9EydFEaXEa6Z8NO0lryqWL6uhSiy_X7kul2tmNf0zK0LHawWM71CddrJDxAs0Og5RW1aD904ReaAarjoHuK7_ZBxzraD_QQvDxMMXIuwCGrN2jVNvzZsnysD42imckOSjz6u5zxhas.jpg?r=f9b",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
@@ -4080,6 +4341,7 @@ export default function List({ list_header, list }) {
         genre: "Thriller, Drama",
       },
       {
+        id: "256",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4",
@@ -4095,6 +4357,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "257",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeLVErP129jGeUFtzk002EQ0tPWougJ2SGYuw4GNbO0CJLNr8S6YM9YLOUDrtpZJRYsT0VCNkxx5X5a4RAzBNgc67Nk5A0s6tF6vWOPvxBrxXLLxOPn-2EKLnDf_ruoHo3-KSZFGSbbDbDZKXkXyd5cZfVnOD4Q.jpg?r=3da",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
@@ -4110,6 +4373,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting",
       },
       {
+        id: "258",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWjOTYhOvCQCcOd1CYlauJYz21htLjSD7eS_xnnkZEqKlgy4TCluO-NOYj78pLuPS3Puk7qcRz5kOoeo0qMKOejVluAFzwAQ6b-c3Es2dA-0fIKMkmQNBjYPkSbw3A.jpg?r=68e",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4",
@@ -4125,6 +4389,7 @@ export default function List({ list_header, list }) {
         genre: "Charming, Intimate, Romantic",
       },
       {
+        id: "259",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
@@ -4140,6 +4405,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "260",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
@@ -4158,6 +4424,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Recently Added") {
     cw = [
       {
+        id: "261",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABX6QPuU2wUKTrISH7UkthsTD4mTPRpfGIojVGAfhTtmlwB_K-b-yujeN1zgpW0txJLLNWCDMCSPBP8qwhmFVX5jn32FM.webp?r=d57",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
@@ -4173,6 +4440,7 @@ export default function List({ list_header, list }) {
         genre: "Suspenseful, Exciting",
       },
       {
+        id: "262",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABaUyF3kexjPto1IHIhDpmIYadqvYLEIQIyDx7IVyl7YbSziHb11WDdfFMtqIQeGfy_Se5qZjWh2uCamN9D7LXGgW8J7Ch2Ef5TUowkj9EnxLaCaN7TibUc-2ptLhBGf2i3WCD3a3cooyblg9koj8cWgpGR8DQkbNnGu1db1Fz7r9hSn3AJMZDFrgO3522AZ0N0QE2894mlkFZQkGjqlwT8pO5A.jpg?r=603",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
@@ -4188,6 +4456,7 @@ export default function List({ list_header, list }) {
         genre: "Fantasy TV Shows, TV Shows Based on Books",
       },
       {
+        id: "263",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABW-1LCLK7T5DCx0eQXvqjHuMTOAm8AzDi3qy84LgIvpFjRihmb0gUw5LUWPqsl6W25F1jIMzCi6OFuEcym-I7_6J6uTDJwHnV7kW5qsLLb5ZMPwpCTgMz9Az8tXWfg.jpg?r=7de",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
@@ -4203,6 +4472,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic TV Dramas, Romantic TV Comedies",
       },
       {
+        id: "264",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb12t1Hiq8L4MPDkW8mAZUqQGTuL7l6XSGJTr8-h7H88Xqr1jfXsS_PvdtvFnmhJo5-to8Ram3BuHbsEYH_U7rRxpTZG.webp?r=9d5",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
@@ -4218,6 +4488,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Romantic, Comedy",
       },
       {
+        id: "265",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeBmbY-sgZUJpNW-vdJt_V5cEwl7hWAebY7APIjeb2Xu7f9EydFEaXEa6Z8NO0lryqWL6uhSiy_X7kul2tmNf0zK0LHawWM71CddrJDxAs0Og5RW1aD904ReaAarjoHuK7_ZBxzraD_QQvDxMMXIuwCGrN2jVNvzZsnysD42imckOSjz6u5zxhas.jpg?r=f9b",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
@@ -4233,6 +4504,7 @@ export default function List({ list_header, list }) {
         genre: "Thriller, Drama",
       },
       {
+        id: "266",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4",
@@ -4248,6 +4520,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "277",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeLVErP129jGeUFtzk002EQ0tPWougJ2SGYuw4GNbO0CJLNr8S6YM9YLOUDrtpZJRYsT0VCNkxx5X5a4RAzBNgc67Nk5A0s6tF6vWOPvxBrxXLLxOPn-2EKLnDf_ruoHo3-KSZFGSbbDbDZKXkXyd5cZfVnOD4Q.jpg?r=3da",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
@@ -4263,6 +4536,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting",
       },
       {
+        id: "268",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWjOTYhOvCQCcOd1CYlauJYz21htLjSD7eS_xnnkZEqKlgy4TCluO-NOYj78pLuPS3Puk7qcRz5kOoeo0qMKOejVluAFzwAQ6b-c3Es2dA-0fIKMkmQNBjYPkSbw3A.jpg?r=68e",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4",
@@ -4278,6 +4552,7 @@ export default function List({ list_header, list }) {
         genre: "Charming, Intimate, Romantic",
       },
       {
+        id: "269",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
@@ -4293,6 +4568,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "270",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
@@ -4311,6 +4587,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Trending Now") {
     cw = [
       {
+        id: "271",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABegK2Y5ordgaCmFTJfHA8Hsz8vdXMLvq_GcGvK8NjVGFsF2I9yJsZ7LxleRpuS8X-P1dT0LgmpoC8vtaz0oRFewDezyJ0DprEVJN69MDTdO_odX_j2ZHHVcfRwbazg.jpg?r=231",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
@@ -4326,6 +4603,7 @@ export default function List({ list_header, list }) {
         genre: "Horror, Gruesome",
       },
       {
+        id: "272",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb8ykbycKEvO4tkNi5JT0PjhZKf_xp-iNMNtXXdSgImbUfC_ajD6LI8pxJ4uIk2J6ISb6Ftn6FVp86Le4cNj8qeAKi1t.webp?r=2dd",
         video: "",
         title_pic:
@@ -4340,6 +4618,7 @@ export default function List({ list_header, list }) {
         genre: "Scary, Suspense",
       },
       {
+        id: "273",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYmndOzmCP0gMq1q3EHeHTUn9xQhFvfeNDqz3gNGa6oOlTjbwal17jGpDYKuImE8iF0BiTfj-zEFEfpAysp2NO8DDFfl.webp?r=d8d",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4",
@@ -4355,6 +4634,7 @@ export default function List({ list_header, list }) {
         genre: "Scary, Sunspenseful",
       },
       {
+        id: "274",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWG-PUrZFOhYRUwASiCY9s0coJXL2q0mVxu_AscCNFc7cvLhZEmGjfBIbmrZUw1F3Vdadj8SPCErBk2mL6_6HEeQQdU3.webp?r=bcd",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
@@ -4370,6 +4650,7 @@ export default function List({ list_header, list }) {
         genre: "Horror, Scary",
       },
       {
+        id: "275",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYaTiON2HfU1M7RRfZJbg_oHGM4BOtTS96PoOA0yPhPhRrdU6RjALsZ-cTDyisn_n9JJDswnEETGiZDpxsSj8i7AnTQ6.webp?r=0aa",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4",
@@ -4385,6 +4666,7 @@ export default function List({ list_header, list }) {
         genre: "Scary, Suspense",
       },
       {
+        id: "276",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQHS8OjMDFh_sJjd3oiemLubfBiFHiRNQeOehpZoKyZ4557wq5_icfO1Z4hHhne-uo4FEMSv1owbR6V_UEI_AAQps_XQ0ur9-XvL0uQ3qzk_QuVY82PW-LSRKrihlA.jpg?r=a52",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
@@ -4400,6 +4682,7 @@ export default function List({ list_header, list }) {
         genre: "Omnious, Scary, Suspenseful",
       },
       {
+        id: "277",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABTaUwQRDGBxQSBu-873Y6D8bqRELZT941nb0ONGez1ABXsjoI4dZ5eD4VEnh-PkGppz3gRpxw0sRWzn3aTk7npJvbib2.webp?r=e8d",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
@@ -4415,6 +4698,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Violent",
       },
       {
+        id: "278",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQl3tSqCiNKY4mAcjoJOeBufGSEfneTsviTeLkMRDEiSXKi5GE0K-SgScQqb9YnOvu7EttdyA835WKI5ef85-ebNn5Uq.webp?r=98d",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
@@ -4430,6 +4714,7 @@ export default function List({ list_header, list }) {
         genre: "Chilling, Omnious, Scary",
       },
       {
+        id: "279",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
@@ -4445,6 +4730,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "280",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
@@ -4463,6 +4749,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Indian Movies") {
     cw = [
       {
+        id: "281",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABf2JfL0KO049JlNtybXwdPFushYF1a4uHhkLu7kDt6MouWGU_BB_F2oKBjKvm-RgqhOtMkpsjz2eXDwJkKYrqYBnEDZ2.webp?r=93b",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4",
@@ -4478,6 +4765,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-Fi, Exciting, Offbeat",
       },
       {
+        id: "282",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQkIkzfTFHfadapfd_BF-G-K_UpmHk8fFq6Ds_dMyZ0QGOM1crvrSDN-Uc6D36OWrMi-zhJC9GvWx-D_1gduTUKTsRjp.webp?r=7d1",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
@@ -4493,6 +4781,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-Fi, Exciting",
       },
       {
+        id: "283",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABTQ61jRcb0vcHYHcnkdgWM-BDuifM-ET2c3ZJAIZ5zktBvsP9QrK39hsUzikUPNwsEa7zsyM3arZNFOsn1wEZLn6uQnU.webp?r=ce8",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
@@ -4508,6 +4797,7 @@ export default function List({ list_header, list }) {
         genre: "Martial Arts, Sci-Fi",
       },
       {
+        id: "284",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABVmiBxFUhsJ0r_EVRLSAW8kLzbu4kzx8QejcWekq5f1K-ElLctQy5y46O1waNeZlNIIOJEFUOQmZlNKmJVYKQSn0IZio.webp?r=457",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
@@ -4523,6 +4813,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Action",
       },
       {
+        id: "285",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABVE_ix7Cpy7bHaIw5SL_h7lff-vHpY9GQ-D4GJhLSmL8rtHFLaC_pg7hrIcAOQSRqS7TQb_jSbO8vd9fMx-NtLXVFhxV.webp?r=b5a",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
@@ -4538,6 +4829,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-FI, Exciting",
       },
       {
+        id: "286",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUL1vKw0qM1BUE5C-Am-_MeX050ZUhPrkCjIP7hff44ZZL9J_oaTBNrH8DVCmep_bS5l3hWewuJdreuvv7X92XQiUg4g.webp?r=2dc",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
@@ -4553,6 +4845,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "287",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABXkjkpGWgVDfc8O1toyqjGHpjEEUHSqSwqsuF18v-PRV3ljIyJB-_6VIJZXIgcR31zxfmivVinEuNP9gZbv1nJ2-D46s.webp?r=7c0",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
@@ -4568,6 +4861,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting, Romantic, Comedy",
       },
       {
+        id: "288",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABXKH_O2XtvOG0xZmTuG3QPNH_E73Ntf6VB00vf0A5Heie4jgBKaVG8yFMgx9Oq8FmJpoZJXvlXaQc5jfx_1jy7azpkIA.webp?r=f82",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
@@ -4583,6 +4877,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic, Emotional",
       },
       {
+        id: "289",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABcgOB0Tgko8FeTqPGcd_ukVDAM-XPBxdZu2Mmjo188bZOf7rMUENiaS9yskySjMCl2o80EmD7TT1nrdXWVhZezRpLs9O.webp?r=9a6",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
@@ -4598,6 +4893,7 @@ export default function List({ list_header, list }) {
         genre: "Action, Goofy",
       },
       {
+        id: "290",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeSSlFkFxFhDfNYdVZ4doQJPGLF1HhvqxYlNIQqfj_NsK65gT1pbRRYePpD6KgYGS10hVWv0N79KwHQgcYyb_2MB6bkU.webp?r=516",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
@@ -4616,6 +4912,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Comedy Movies") {
     cw = [
       {
+        id: "291",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABX6QPuU2wUKTrISH7UkthsTD4mTPRpfGIojVGAfhTtmlwB_K-b-yujeN1zgpW0txJLLNWCDMCSPBP8qwhmFVX5jn32FM.webp?r=d57",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
@@ -4631,6 +4928,7 @@ export default function List({ list_header, list }) {
         genre: "Suspenseful, Exciting",
       },
       {
+        id: "292",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABaUyF3kexjPto1IHIhDpmIYadqvYLEIQIyDx7IVyl7YbSziHb11WDdfFMtqIQeGfy_Se5qZjWh2uCamN9D7LXGgW8J7Ch2Ef5TUowkj9EnxLaCaN7TibUc-2ptLhBGf2i3WCD3a3cooyblg9koj8cWgpGR8DQkbNnGu1db1Fz7r9hSn3AJMZDFrgO3522AZ0N0QE2894mlkFZQkGjqlwT8pO5A.jpg?r=603",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
@@ -4646,6 +4944,7 @@ export default function List({ list_header, list }) {
         genre: "Fantasy TV Shows, TV Shows Based on Books",
       },
       {
+        id: "293",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABW-1LCLK7T5DCx0eQXvqjHuMTOAm8AzDi3qy84LgIvpFjRihmb0gUw5LUWPqsl6W25F1jIMzCi6OFuEcym-I7_6J6uTDJwHnV7kW5qsLLb5ZMPwpCTgMz9Az8tXWfg.jpg?r=7de",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
@@ -4661,6 +4960,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic TV Dramas, Romantic TV Comedies",
       },
       {
+        id: "294",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb12t1Hiq8L4MPDkW8mAZUqQGTuL7l6XSGJTr8-h7H88Xqr1jfXsS_PvdtvFnmhJo5-to8Ram3BuHbsEYH_U7rRxpTZG.webp?r=9d5",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
@@ -4676,6 +4976,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Romantic, Comedy",
       },
       {
+        id: "295",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeBmbY-sgZUJpNW-vdJt_V5cEwl7hWAebY7APIjeb2Xu7f9EydFEaXEa6Z8NO0lryqWL6uhSiy_X7kul2tmNf0zK0LHawWM71CddrJDxAs0Og5RW1aD904ReaAarjoHuK7_ZBxzraD_QQvDxMMXIuwCGrN2jVNvzZsnysD42imckOSjz6u5zxhas.jpg?r=f9b",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
@@ -4691,6 +4992,7 @@ export default function List({ list_header, list }) {
         genre: "Thriller, Drama",
       },
       {
+        id: "296",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
@@ -4706,6 +5008,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "297",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeLVErP129jGeUFtzk002EQ0tPWougJ2SGYuw4GNbO0CJLNr8S6YM9YLOUDrtpZJRYsT0VCNkxx5X5a4RAzBNgc67Nk5A0s6tF6vWOPvxBrxXLLxOPn-2EKLnDf_ruoHo3-KSZFGSbbDbDZKXkXyd5cZfVnOD4Q.jpg?r=3da",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
@@ -4721,6 +5024,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting",
       },
       {
+        id: "298",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWjOTYhOvCQCcOd1CYlauJYz21htLjSD7eS_xnnkZEqKlgy4TCluO-NOYj78pLuPS3Puk7qcRz5kOoeo0qMKOejVluAFzwAQ6b-c3Es2dA-0fIKMkmQNBjYPkSbw3A.jpg?r=68e",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
@@ -4736,6 +5040,7 @@ export default function List({ list_header, list }) {
         genre: "Charming, Intimate, Romantic",
       },
       {
+        id: "299",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4",
@@ -4751,6 +5056,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "300",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
@@ -4769,6 +5075,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "New on Icinema") {
     cw = [
       {
+        id: "301",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABX6QPuU2wUKTrISH7UkthsTD4mTPRpfGIojVGAfhTtmlwB_K-b-yujeN1zgpW0txJLLNWCDMCSPBP8qwhmFVX5jn32FM.webp?r=d57",
         video: "",
         title_pic:
@@ -4783,6 +5090,7 @@ export default function List({ list_header, list }) {
         genre: "Suspenseful, Exciting",
       },
       {
+        id: "302",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABaUyF3kexjPto1IHIhDpmIYadqvYLEIQIyDx7IVyl7YbSziHb11WDdfFMtqIQeGfy_Se5qZjWh2uCamN9D7LXGgW8J7Ch2Ef5TUowkj9EnxLaCaN7TibUc-2ptLhBGf2i3WCD3a3cooyblg9koj8cWgpGR8DQkbNnGu1db1Fz7r9hSn3AJMZDFrgO3522AZ0N0QE2894mlkFZQkGjqlwT8pO5A.jpg?r=603",
         video: "",
         title_pic:
@@ -4797,6 +5105,7 @@ export default function List({ list_header, list }) {
         genre: "Fantasy TV Shows, TV Shows Based on Books",
       },
       {
+        id: "303",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABW-1LCLK7T5DCx0eQXvqjHuMTOAm8AzDi3qy84LgIvpFjRihmb0gUw5LUWPqsl6W25F1jIMzCi6OFuEcym-I7_6J6uTDJwHnV7kW5qsLLb5ZMPwpCTgMz9Az8tXWfg.jpg?r=7de",
         video: "",
         title_pic:
@@ -4811,6 +5120,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic TV Dramas, Romantic TV Comedies",
       },
       {
+        id: "304",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb12t1Hiq8L4MPDkW8mAZUqQGTuL7l6XSGJTr8-h7H88Xqr1jfXsS_PvdtvFnmhJo5-to8Ram3BuHbsEYH_U7rRxpTZG.webp?r=9d5",
         video: "",
         title_pic:
@@ -4825,6 +5135,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Romantic, Comedy",
       },
       {
+        id: "305",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeBmbY-sgZUJpNW-vdJt_V5cEwl7hWAebY7APIjeb2Xu7f9EydFEaXEa6Z8NO0lryqWL6uhSiy_X7kul2tmNf0zK0LHawWM71CddrJDxAs0Og5RW1aD904ReaAarjoHuK7_ZBxzraD_QQvDxMMXIuwCGrN2jVNvzZsnysD42imckOSjz6u5zxhas.jpg?r=f9b",
         video: "",
         title_pic:
@@ -4839,6 +5150,7 @@ export default function List({ list_header, list }) {
         genre: "Thriller, Drama",
       },
       {
+        id: "306",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a",
         video: "",
         title_pic:
@@ -4853,6 +5165,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "307",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeLVErP129jGeUFtzk002EQ0tPWougJ2SGYuw4GNbO0CJLNr8S6YM9YLOUDrtpZJRYsT0VCNkxx5X5a4RAzBNgc67Nk5A0s6tF6vWOPvxBrxXLLxOPn-2EKLnDf_ruoHo3-KSZFGSbbDbDZKXkXyd5cZfVnOD4Q.jpg?r=3da",
         video: "",
         title_pic:
@@ -4867,6 +5180,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting",
       },
       {
+        id: "308",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWjOTYhOvCQCcOd1CYlauJYz21htLjSD7eS_xnnkZEqKlgy4TCluO-NOYj78pLuPS3Puk7qcRz5kOoeo0qMKOejVluAFzwAQ6b-c3Es2dA-0fIKMkmQNBjYPkSbw3A.jpg?r=68e",
         video: "",
         title_pic:
@@ -4881,6 +5195,7 @@ export default function List({ list_header, list }) {
         genre: "Charming, Intimate, Romantic",
       },
       {
+        id: "309",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video: "",
         title_pic:
@@ -4895,6 +5210,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "310",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video: "",
         title_pic:
@@ -4912,6 +5228,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Coming This Week") {
     cw = [
       {
+        id: "311",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABf2JfL0KO049JlNtybXwdPFushYF1a4uHhkLu7kDt6MouWGU_BB_F2oKBjKvm-RgqhOtMkpsjz2eXDwJkKYrqYBnEDZ2.webp?r=93b",
         video: "",
         title_pic:
@@ -4926,6 +5243,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-Fi, Exciting, Offbeat",
       },
       {
+        id: "312",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQkIkzfTFHfadapfd_BF-G-K_UpmHk8fFq6Ds_dMyZ0QGOM1crvrSDN-Uc6D36OWrMi-zhJC9GvWx-D_1gduTUKTsRjp.webp?r=7d1",
         video: "",
         title_pic:
@@ -4940,6 +5258,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-Fi, Exciting",
       },
       {
+        id: "313",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABTQ61jRcb0vcHYHcnkdgWM-BDuifM-ET2c3ZJAIZ5zktBvsP9QrK39hsUzikUPNwsEa7zsyM3arZNFOsn1wEZLn6uQnU.webp?r=ce8",
         video: "",
         title_pic:
@@ -4954,6 +5273,7 @@ export default function List({ list_header, list }) {
         genre: "Martial Arts, Sci-Fi",
       },
       {
+        id: "314",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABVmiBxFUhsJ0r_EVRLSAW8kLzbu4kzx8QejcWekq5f1K-ElLctQy5y46O1waNeZlNIIOJEFUOQmZlNKmJVYKQSn0IZio.webp?r=457",
         video: "",
         title_pic:
@@ -4968,6 +5288,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Action",
       },
       {
+        id: "315",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABVE_ix7Cpy7bHaIw5SL_h7lff-vHpY9GQ-D4GJhLSmL8rtHFLaC_pg7hrIcAOQSRqS7TQb_jSbO8vd9fMx-NtLXVFhxV.webp?r=b5a",
         video: "",
         title_pic:
@@ -4982,6 +5303,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-FI, Exciting",
       },
       {
+        id: "316",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUL1vKw0qM1BUE5C-Am-_MeX050ZUhPrkCjIP7hff44ZZL9J_oaTBNrH8DVCmep_bS5l3hWewuJdreuvv7X92XQiUg4g.webp?r=2dc",
         video: "",
         title_pic:
@@ -4996,6 +5318,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "317",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABXkjkpGWgVDfc8O1toyqjGHpjEEUHSqSwqsuF18v-PRV3ljIyJB-_6VIJZXIgcR31zxfmivVinEuNP9gZbv1nJ2-D46s.webp?r=7c0",
         video: "",
         title_pic:
@@ -5010,6 +5333,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting, Romantic, Comedy",
       },
       {
+        id: "318",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABXKH_O2XtvOG0xZmTuG3QPNH_E73Ntf6VB00vf0A5Heie4jgBKaVG8yFMgx9Oq8FmJpoZJXvlXaQc5jfx_1jy7azpkIA.webp?r=f82",
         video: "",
         title_pic:
@@ -5024,6 +5348,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic, Emotional",
       },
       {
+        id: "319",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABcgOB0Tgko8FeTqPGcd_ukVDAM-XPBxdZu2Mmjo188bZOf7rMUENiaS9yskySjMCl2o80EmD7TT1nrdXWVhZezRpLs9O.webp?r=9a6",
         video: "",
         title_pic:
@@ -5038,6 +5363,7 @@ export default function List({ list_header, list }) {
         genre: "Action, Goofy",
       },
       {
+        id: "320",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeSSlFkFxFhDfNYdVZ4doQJPGLF1HhvqxYlNIQqfj_NsK65gT1pbRRYePpD6KgYGS10hVWv0N79KwHQgcYyb_2MB6bkU.webp?r=516",
         video: "",
         title_pic:
@@ -5055,6 +5381,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Coming Next Week") {
     cw = [
       {
+        id: "321",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABegK2Y5ordgaCmFTJfHA8Hsz8vdXMLvq_GcGvK8NjVGFsF2I9yJsZ7LxleRpuS8X-P1dT0LgmpoC8vtaz0oRFewDezyJ0DprEVJN69MDTdO_odX_j2ZHHVcfRwbazg.jpg?r=231",
         video: "",
         title_pic:
@@ -5069,6 +5396,7 @@ export default function List({ list_header, list }) {
         genre: "Horror, Gruesome",
       },
       {
+        id: "322",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb8ykbycKEvO4tkNi5JT0PjhZKf_xp-iNMNtXXdSgImbUfC_ajD6LI8pxJ4uIk2J6ISb6Ftn6FVp86Le4cNj8qeAKi1t.webp?r=2dd",
         video: "",
         title_pic:
@@ -5083,6 +5411,7 @@ export default function List({ list_header, list }) {
         genre: "Scary, Suspense",
       },
       {
+        id: "323",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYmndOzmCP0gMq1q3EHeHTUn9xQhFvfeNDqz3gNGa6oOlTjbwal17jGpDYKuImE8iF0BiTfj-zEFEfpAysp2NO8DDFfl.webp?r=d8d",
         video: "",
         title_pic:
@@ -5097,6 +5426,7 @@ export default function List({ list_header, list }) {
         genre: "Scary, Sunspenseful",
       },
       {
+        id: "324",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWG-PUrZFOhYRUwASiCY9s0coJXL2q0mVxu_AscCNFc7cvLhZEmGjfBIbmrZUw1F3Vdadj8SPCErBk2mL6_6HEeQQdU3.webp?r=bcd",
         video: "",
         title_pic:
@@ -5111,6 +5441,7 @@ export default function List({ list_header, list }) {
         genre: "Horror, Scary",
       },
       {
+        id: "325",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYaTiON2HfU1M7RRfZJbg_oHGM4BOtTS96PoOA0yPhPhRrdU6RjALsZ-cTDyisn_n9JJDswnEETGiZDpxsSj8i7AnTQ6.webp?r=0aa",
         video: "",
         title_pic:
@@ -5125,6 +5456,7 @@ export default function List({ list_header, list }) {
         genre: "Scary, Suspense",
       },
       {
+        id: "326",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQHS8OjMDFh_sJjd3oiemLubfBiFHiRNQeOehpZoKyZ4557wq5_icfO1Z4hHhne-uo4FEMSv1owbR6V_UEI_AAQps_XQ0ur9-XvL0uQ3qzk_QuVY82PW-LSRKrihlA.jpg?r=a52",
         video: "",
         title_pic:
@@ -5139,6 +5471,7 @@ export default function List({ list_header, list }) {
         genre: "Omnious, Scary, Suspenseful",
       },
       {
+        id: "327",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABTaUwQRDGBxQSBu-873Y6D8bqRELZT941nb0ONGez1ABXsjoI4dZ5eD4VEnh-PkGppz3gRpxw0sRWzn3aTk7npJvbib2.webp?r=e8d",
         video: "",
         title_pic:
@@ -5153,6 +5486,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Violent",
       },
       {
+        id: "328",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQl3tSqCiNKY4mAcjoJOeBufGSEfneTsviTeLkMRDEiSXKi5GE0K-SgScQqb9YnOvu7EttdyA835WKI5ef85-ebNn5Uq.webp?r=98d",
         video: "",
         title_pic:
@@ -5167,6 +5501,7 @@ export default function List({ list_header, list }) {
         genre: "Chilling, Omnious, Scary",
       },
       {
+        id: "329",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video: "",
         title_pic:
@@ -5181,6 +5516,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "330",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video: "",
         title_pic:
@@ -5198,6 +5534,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Worth The Wait") {
     cw = [
       {
+        id: "331",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABX6QPuU2wUKTrISH7UkthsTD4mTPRpfGIojVGAfhTtmlwB_K-b-yujeN1zgpW0txJLLNWCDMCSPBP8qwhmFVX5jn32FM.webp?r=d57",
         video: "",
         title_pic:
@@ -5212,6 +5549,7 @@ export default function List({ list_header, list }) {
         genre: "Suspenseful, Exciting",
       },
       {
+        id: "332",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABaUyF3kexjPto1IHIhDpmIYadqvYLEIQIyDx7IVyl7YbSziHb11WDdfFMtqIQeGfy_Se5qZjWh2uCamN9D7LXGgW8J7Ch2Ef5TUowkj9EnxLaCaN7TibUc-2ptLhBGf2i3WCD3a3cooyblg9koj8cWgpGR8DQkbNnGu1db1Fz7r9hSn3AJMZDFrgO3522AZ0N0QE2894mlkFZQkGjqlwT8pO5A.jpg?r=603",
         video: "",
         title_pic:
@@ -5226,6 +5564,7 @@ export default function List({ list_header, list }) {
         genre: "Fantasy TV Shows, TV Shows Based on Books",
       },
       {
+        id: "333",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABW-1LCLK7T5DCx0eQXvqjHuMTOAm8AzDi3qy84LgIvpFjRihmb0gUw5LUWPqsl6W25F1jIMzCi6OFuEcym-I7_6J6uTDJwHnV7kW5qsLLb5ZMPwpCTgMz9Az8tXWfg.jpg?r=7de",
         video: "",
         title_pic:
@@ -5240,6 +5579,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic TV Dramas, Romantic TV Comedies",
       },
       {
+        id: "334",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb12t1Hiq8L4MPDkW8mAZUqQGTuL7l6XSGJTr8-h7H88Xqr1jfXsS_PvdtvFnmhJo5-to8Ram3BuHbsEYH_U7rRxpTZG.webp?r=9d5",
         video: "",
         title_pic:
@@ -5254,6 +5594,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Romantic, Comedy",
       },
       {
+        id: "335",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeBmbY-sgZUJpNW-vdJt_V5cEwl7hWAebY7APIjeb2Xu7f9EydFEaXEa6Z8NO0lryqWL6uhSiy_X7kul2tmNf0zK0LHawWM71CddrJDxAs0Og5RW1aD904ReaAarjoHuK7_ZBxzraD_QQvDxMMXIuwCGrN2jVNvzZsnysD42imckOSjz6u5zxhas.jpg?r=f9b",
         video: "",
         title_pic:
@@ -5268,6 +5609,7 @@ export default function List({ list_header, list }) {
         genre: "Thriller, Drama",
       },
       {
+        id: "336",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a",
         video: "",
         title_pic:
@@ -5282,6 +5624,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "337",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeLVErP129jGeUFtzk002EQ0tPWougJ2SGYuw4GNbO0CJLNr8S6YM9YLOUDrtpZJRYsT0VCNkxx5X5a4RAzBNgc67Nk5A0s6tF6vWOPvxBrxXLLxOPn-2EKLnDf_ruoHo3-KSZFGSbbDbDZKXkXyd5cZfVnOD4Q.jpg?r=3da",
         video: "",
         title_pic:
@@ -5296,6 +5639,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting",
       },
       {
+        id: "338",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWjOTYhOvCQCcOd1CYlauJYz21htLjSD7eS_xnnkZEqKlgy4TCluO-NOYj78pLuPS3Puk7qcRz5kOoeo0qMKOejVluAFzwAQ6b-c3Es2dA-0fIKMkmQNBjYPkSbw3A.jpg?r=68e",
         video: "",
         title_pic:
@@ -5310,6 +5654,7 @@ export default function List({ list_header, list }) {
         genre: "Charming, Intimate, Romantic",
       },
       {
+        id: "339",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video: "",
         title_pic:
@@ -5324,6 +5669,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "340",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video: "",
         title_pic:
@@ -5341,6 +5687,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "Movies") {
     cw = [
       {
+        id: "341",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABf2JfL0KO049JlNtybXwdPFushYF1a4uHhkLu7kDt6MouWGU_BB_F2oKBjKvm-RgqhOtMkpsjz2eXDwJkKYrqYBnEDZ2.webp?r=93b",
         video: "",
         title_pic:
@@ -5355,6 +5702,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-Fi, Exciting, Offbeat",
       },
       {
+        id: "342",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABQkIkzfTFHfadapfd_BF-G-K_UpmHk8fFq6Ds_dMyZ0QGOM1crvrSDN-Uc6D36OWrMi-zhJC9GvWx-D_1gduTUKTsRjp.webp?r=7d1",
         video: "",
         title_pic:
@@ -5369,6 +5717,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-Fi, Exciting",
       },
       {
+        id: "343",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABTQ61jRcb0vcHYHcnkdgWM-BDuifM-ET2c3ZJAIZ5zktBvsP9QrK39hsUzikUPNwsEa7zsyM3arZNFOsn1wEZLn6uQnU.webp?r=ce8",
         video: "",
         title_pic:
@@ -5383,6 +5732,7 @@ export default function List({ list_header, list }) {
         genre: "Martial Arts, Sci-Fi",
       },
       {
+        id: "344",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABVmiBxFUhsJ0r_EVRLSAW8kLzbu4kzx8QejcWekq5f1K-ElLctQy5y46O1waNeZlNIIOJEFUOQmZlNKmJVYKQSn0IZio.webp?r=457",
         video: "",
         title_pic:
@@ -5397,6 +5747,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Action",
       },
       {
+        id: "345",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABVE_ix7Cpy7bHaIw5SL_h7lff-vHpY9GQ-D4GJhLSmL8rtHFLaC_pg7hrIcAOQSRqS7TQb_jSbO8vd9fMx-NtLXVFhxV.webp?r=b5a",
         video: "",
         title_pic:
@@ -5411,6 +5762,7 @@ export default function List({ list_header, list }) {
         genre: "Sci-FI, Exciting",
       },
       {
+        id: "346",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABUL1vKw0qM1BUE5C-Am-_MeX050ZUhPrkCjIP7hff44ZZL9J_oaTBNrH8DVCmep_bS5l3hWewuJdreuvv7X92XQiUg4g.webp?r=2dc",
         video: "",
         title_pic:
@@ -5425,6 +5777,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "347",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABXkjkpGWgVDfc8O1toyqjGHpjEEUHSqSwqsuF18v-PRV3ljIyJB-_6VIJZXIgcR31zxfmivVinEuNP9gZbv1nJ2-D46s.webp?r=7c0",
         video: "",
         title_pic:
@@ -5439,6 +5792,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting, Romantic, Comedy",
       },
       {
+        id: "348",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABXKH_O2XtvOG0xZmTuG3QPNH_E73Ntf6VB00vf0A5Heie4jgBKaVG8yFMgx9Oq8FmJpoZJXvlXaQc5jfx_1jy7azpkIA.webp?r=f82",
         video: "",
         title_pic:
@@ -5453,6 +5807,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic, Emotional",
       },
       {
+        id: "349",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABcgOB0Tgko8FeTqPGcd_ukVDAM-XPBxdZu2Mmjo188bZOf7rMUENiaS9yskySjMCl2o80EmD7TT1nrdXWVhZezRpLs9O.webp?r=9a6",
         video: "",
         title_pic:
@@ -5467,6 +5822,7 @@ export default function List({ list_header, list }) {
         genre: "Action, Goofy",
       },
       {
+        id: "350",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeSSlFkFxFhDfNYdVZ4doQJPGLF1HhvqxYlNIQqfj_NsK65gT1pbRRYePpD6KgYGS10hVWv0N79KwHQgcYyb_2MB6bkU.webp?r=516",
         video: "",
         title_pic:
@@ -5484,6 +5840,7 @@ export default function List({ list_header, list }) {
   } else if (list_header === "TV Shows") {
     cw = [
       {
+        id: "351",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABX6QPuU2wUKTrISH7UkthsTD4mTPRpfGIojVGAfhTtmlwB_K-b-yujeN1zgpW0txJLLNWCDMCSPBP8qwhmFVX5jn32FM.webp?r=d57",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
@@ -5499,6 +5856,7 @@ export default function List({ list_header, list }) {
         genre: "Suspenseful, Exciting",
       },
       {
+        id: "352",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABaUyF3kexjPto1IHIhDpmIYadqvYLEIQIyDx7IVyl7YbSziHb11WDdfFMtqIQeGfy_Se5qZjWh2uCamN9D7LXGgW8J7Ch2Ef5TUowkj9EnxLaCaN7TibUc-2ptLhBGf2i3WCD3a3cooyblg9koj8cWgpGR8DQkbNnGu1db1Fz7r9hSn3AJMZDFrgO3522AZ0N0QE2894mlkFZQkGjqlwT8pO5A.jpg?r=603",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
@@ -5514,6 +5872,7 @@ export default function List({ list_header, list }) {
         genre: "Fantasy TV Shows, TV Shows Based on Books",
       },
       {
+        id: "353",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABW-1LCLK7T5DCx0eQXvqjHuMTOAm8AzDi3qy84LgIvpFjRihmb0gUw5LUWPqsl6W25F1jIMzCi6OFuEcym-I7_6J6uTDJwHnV7kW5qsLLb5ZMPwpCTgMz9Az8tXWfg.jpg?r=7de",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
@@ -5529,6 +5888,7 @@ export default function List({ list_header, list }) {
         genre: "Romantic TV Dramas, Romantic TV Comedies",
       },
       {
+        id: "354",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb12t1Hiq8L4MPDkW8mAZUqQGTuL7l6XSGJTr8-h7H88Xqr1jfXsS_PvdtvFnmhJo5-to8Ram3BuHbsEYH_U7rRxpTZG.webp?r=9d5",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
@@ -5544,6 +5904,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Romantic, Comedy",
       },
       {
+        id: "355",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeBmbY-sgZUJpNW-vdJt_V5cEwl7hWAebY7APIjeb2Xu7f9EydFEaXEa6Z8NO0lryqWL6uhSiy_X7kul2tmNf0zK0LHawWM71CddrJDxAs0Og5RW1aD904ReaAarjoHuK7_ZBxzraD_QQvDxMMXIuwCGrN2jVNvzZsnysD42imckOSjz6u5zxhas.jpg?r=f9b",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
@@ -5559,6 +5920,7 @@ export default function List({ list_header, list }) {
         genre: "Thriller, Drama",
       },
       {
+        id: "356",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
@@ -5574,6 +5936,7 @@ export default function List({ list_header, list }) {
         genre: "Quirky, Heart Felt",
       },
       {
+        id: "357",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeLVErP129jGeUFtzk002EQ0tPWougJ2SGYuw4GNbO0CJLNr8S6YM9YLOUDrtpZJRYsT0VCNkxx5X5a4RAzBNgc67Nk5A0s6tF6vWOPvxBrxXLLxOPn-2EKLnDf_ruoHo3-KSZFGSbbDbDZKXkXyd5cZfVnOD4Q.jpg?r=3da",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
@@ -5589,6 +5952,7 @@ export default function List({ list_header, list }) {
         genre: "Emotional, Exciting",
       },
       {
+        id: "358",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWjOTYhOvCQCcOd1CYlauJYz21htLjSD7eS_xnnkZEqKlgy4TCluO-NOYj78pLuPS3Puk7qcRz5kOoeo0qMKOejVluAFzwAQ6b-c3Es2dA-0fIKMkmQNBjYPkSbw3A.jpg?r=68e",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
@@ -5604,6 +5968,7 @@ export default function List({ list_header, list }) {
         genre: "Charming, Intimate, Romantic",
       },
       {
+        id: "359",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABbsqIXnewGXPTk1nYprVyBNCrWO5OJiFHJPLMgw1s570IjiCnaRntSf9wPHm_u5aGBbxnrwu2uQNzrmBKSfFQR9REx_OpZn9_A1g9EKkNbVzwC88-epfJkt8DhPUvQ.jpg?r=d0c",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4",
@@ -5619,6 +5984,7 @@ export default function List({ list_header, list }) {
         genre: "Dark, Suspenseful",
       },
       {
+        id: "360",
         pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABdt8WUtmS7pjZ8GDHqWQKuerb_aO9oqPwlKCibQky_MT-HaMniWIhcSr2LRQmEwAgcgu81-nm7OVspF6tYj7dloG5yIWQx2v705aZjWYHE4P67AVTq-ZnWDeUSrd1w.jpg?r=136",
         video:
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
@@ -5743,7 +6109,7 @@ export default function List({ list_header, list }) {
               <motion.div className="main_div">
                 <div className="center_div">
                   {cw.map((item, index) => (
-                    <Suspense fallback={<div></div>} key={index}>
+                    <Suspense fallback={<div></div>} key={item.id}>
                       {/* <LazyLoad
                         offset={50}
                         height={200}
@@ -5752,9 +6118,10 @@ export default function List({ list_header, list }) {
                         
                       > */}
                       <ListItem
-                        index={index}
+                        item_id={item.id}
                         setSelectedId={setSelectedId}
                         info={item}
+                        setMoreDetail={setMoreDetail}
                       />
                       {/* </LazyLoad> */}
                     </Suspense>
@@ -5774,9 +6141,10 @@ export default function List({ list_header, list }) {
                       scroll={true}
                     >
                       <ListItem
-                        index={index}
+                        item_id={item.id}
                         setSelectedId={setSelectedId}
                         info={item}
+                        setMoreDetail={setMoreDetail}
                       />
                     </LazyLoad>
                   </Suspense>
@@ -5837,7 +6205,7 @@ export default function List({ list_header, list }) {
                       //   stiffness: 80,
                       // }}
                     >
-                      <img src={cw[selectedId].pic} alt="" />
+                      <img src={more_detail.pic} alt="" />
                     </motion.div>
                     <motion.div
                       className="more_card_info"
@@ -5857,16 +6225,14 @@ export default function List({ list_header, list }) {
                       </div>
                       <div className="more_card_info_other">
                         <p className="more_card_info_year">
-                          {cw[selectedId].year}
+                          {more_detail.year}
                         </p>
-                        <p className="more_card_info_age">
-                          {cw[selectedId].age}
-                        </p>
+                        <p className="more_card_info_age">{more_detail.age}</p>
                         <p className="more_card_info_time">
-                          {cw[selectedId].time}
+                          {more_detail.time}
                         </p>
                       </div>
-                      <p className="more_card_info_des">{cw[selectedId].des}</p>
+                      <p className="more_card_info_des">{more_detail.des}</p>
                     </motion.div>
                   </motion.div>
                   <motion.div
@@ -5887,7 +6253,7 @@ export default function List({ list_header, list }) {
                       Play
                     </Link>
                     <Link
-                      to={"/details/" + selectedId}
+                      to={"/details/" + 1}
                       className="more_card_info_play_btn"
                     >
                       <InfoOutlined className="more_card_info_play_icon" />
@@ -5927,7 +6293,7 @@ export default function List({ list_header, list }) {
                   {startVideo ? (
                     <>
                       <video
-                        src={cw[selectedId].video}
+                        src={more_detail.video}
                         autoPlay={true}
                         loop
                         style={{
@@ -5941,7 +6307,7 @@ export default function List({ list_header, list }) {
                   ) : (
                     <>
                       <motion.img
-                        src={cw[selectedId].pic}
+                        src={more_detail.pic}
                         alt=""
                         className="more_modal_img"
                       />
@@ -5949,7 +6315,7 @@ export default function List({ list_header, list }) {
                   )}
 
                   <motion.img
-                    src={cw[selectedId].title_pic}
+                    src={more_detail.title_pic}
                     alt=""
                     className="more_title_image"
                     initial={{ y: 100, opacity: 0 }}
@@ -6028,14 +6394,14 @@ export default function List({ list_header, list }) {
                       exit={{ x: -100, opacity: 0 }}
                     >
                       <motion.div className="more_modal_itemInfoTop">
-                        <motion.span>{cw[selectedId].year}</motion.span>
+                        <motion.span>{more_detail.year}</motion.span>
                         <motion.span className="more_modal_limit">
-                          {cw[selectedId].age}+
+                          {more_detail.age}+
                         </motion.span>
-                        <motion.span>{cw[selectedId].time}</motion.span>
+                        <motion.span>{more_detail.time}</motion.span>
                       </motion.div>
                       <motion.div className="more_modal_iteminfo_des">
-                        {cw[selectedId].des}
+                        {more_detail.des}
                       </motion.div>
                     </motion.div>
 
@@ -6054,24 +6420,23 @@ export default function List({ list_header, list }) {
                       <motion.div className="more_modal_info_right_director">
                         <motion.p>
                           <motion.span>Director:</motion.span>{" "}
-                          {cw[selectedId].director}
+                          {more_detail.director}
                         </motion.p>
                       </motion.div>
                       <motion.div className="more_modal_info_right_cast">
                         <motion.p>
-                          <motion.span>Cast:</motion.span> {cw[selectedId].cast}
+                          <motion.span>Cast:</motion.span> {more_detail.cast}
                         </motion.p>
                       </motion.div>
                       <motion.div className="more_modal_info_right_writer">
                         <motion.p>
                           <motion.span>Writer:</motion.span>{" "}
-                          {cw[selectedId].writer}
+                          {more_detail.writer}
                         </motion.p>
                       </motion.div>
                       <motion.div className="more_modal_info_right_genres">
                         <motion.p>
-                          <motion.span>Genres:</motion.span>{" "}
-                          {cw[selectedId].genre}
+                          <motion.span>Genres:</motion.span> {more_detail.genre}
                         </motion.p>
                       </motion.div>
                     </motion.div>

@@ -45,6 +45,7 @@ const Music = lazy(() => import("./pages/music/Music"));
 const Privacy = lazy(() => import("./pages/privacy/Privacy"));
 const Terms = lazy(() => import("./pages/terms/Terms"));
 const BlurScreen = lazy(() => import("./pages/blurscreen/BlurScreen"));
+const OurStory = lazy(() => import("./pages/our-story/OurStory"));
 
 const App = () => {
   const { pathname } = useLocation();
@@ -146,6 +147,7 @@ const App = () => {
           <Route exact path="/music" element={<Music />} />
           <Route exact path="/privacy" element={<Privacy />} />
           <Route exact path="/terms" element={<Terms />} />
+          <Route exact path="/our-story" element={<OurStory />} />
           {/* </>
               ) : (
                 <>

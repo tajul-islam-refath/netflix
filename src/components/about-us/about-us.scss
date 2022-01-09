@@ -1,0 +1,439 @@
+.about_us {
+  padding: 80px 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (max-width: 990px) {
+    padding: 25px 25px;
+  }
+
+  .about_us_our_story_text,
+  .about_us_services_text {
+    color: white;
+    font-size: 50px;
+    position: relative;
+
+    @media screen and (max-width: 990px) {
+      font-size: 35px;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      height: 4px;
+      width: 90px;
+      background-color: var(--red-color);
+      top: 62px;
+      left: 70px;
+      border-radius: 10px;
+
+      @media screen and (max-width: 990px) {
+        top: 52px;
+        left: 30px;
+        height: 3px;
+      }
+    }
+  }
+
+  .about_us_services_text {
+    margin-top: 150px;
+    @media screen and (max-width: 990px) {
+      margin-top: 50px;
+    }
+    &::after {
+      left: 58px;
+      border-radius: 10px;
+
+      @media screen and (max-width: 990px) {
+        top: 52px;
+        left: 30px;
+      }
+    }
+  }
+
+  .about_us_main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media screen and (max-width: 990px) {
+      flex-direction: column;
+    }
+
+    .about_us_left {
+      p {
+        font-size: 22px;
+        color: rgb(226, 224, 224);
+        line-height: 30px;
+        @media screen and (max-width: 990px) {
+          font-size: 19px;
+        }
+      }
+    }
+  }
+
+  .about_us_services1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // flex-wrap: wrap;
+
+    @media screen and (max-width: 990px) {
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      margin-top: -100px;
+    }
+
+    .about_us_services1_right {
+      margin-left: 8%;
+      @media screen and (max-width: 990px) {
+        margin-left: auto;
+        margin-top: -160px;
+      }
+      h4 {
+        color: var(--red-color);
+        font-size: 40px;
+        @media screen and (max-width: 990px) {
+          font-size: 35px;
+        }
+      }
+      p {
+        color: rgb(226, 224, 224);
+        font-size: 20px;
+        margin-top: -25px;
+        line-height: 30px;
+        @media screen and (max-width: 990px) {
+          font-size: 19px;
+        }
+      }
+    }
+  }
+
+  .about_us_services2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // flex-wrap: wrap;
+    @media screen and (max-width: 990px) {
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      flex-wrap: wrap;
+    }
+
+    .about_us_services2_left {
+      margin-right: 8%;
+      @media screen and (max-width: 990px) {
+        margin-right: auto;
+      }
+      h4 {
+        color: var(--red-color);
+        font-size: 40px;
+        @media screen and (max-width: 990px) {
+          font-size: 35px;
+        }
+      }
+      p {
+        color: rgb(226, 224, 224);
+        font-size: 20px;
+        margin-top: -25px;
+        line-height: 30px;
+        @media screen and (max-width: 990px) {
+          font-size: 19px;
+        }
+      }
+    }
+  }
+}
+
+//video svg
+.about_us_svg {
+  @media screen and (max-width: 990px) {
+    width: 100vw;
+  }
+  #right_hand {
+    animation: right_hand 1s ease-in-out alternate infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+
+  @keyframes right_hand {
+    100% {
+      transform: rotateZ(-20deg) translateX(-150px);
+    }
+  }
+
+  #video_play {
+    animation: video_play 1s ease-in-out alternate-reverse infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+
+  @keyframes video_play {
+    100% {
+      transform: scale(1.2);
+    }
+  }
+
+  #like_hand {
+    animation: like_hand 1s ease-in-out alternate infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+
+  @keyframes like_hand {
+    100% {
+      transform: translateY(-50px);
+    }
+  }
+
+  #like_heart {
+    animation: like_heart 0.7s ease-in-out alternate infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+
+  @keyframes like_heart {
+    100% {
+      transform: translateY(-50px);
+    }
+  }
+
+  #favorite_star {
+    animation: favorite_star 0.85s ease-in-out alternate infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+
+  @keyframes favorite_star {
+    100% {
+      transform: translateY(-50px);
+    }
+  }
+
+  #video_like_hand {
+    animation: video_like_hand 0.9s ease-in-out alternate infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+
+  @keyframes video_like_hand {
+    100% {
+      transform: rotateZ(-20deg);
+    }
+  }
+
+  #video_live {
+    animation: video_live 0.9s ease-in-out alternate infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+    opacity: 0;
+  }
+
+  @keyframes video_live {
+    100% {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+  }
+
+  #video_dot1 {
+    animation: video_dot1 0.8s ease-in-out alternate infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+    opacity: 0;
+  }
+
+  @keyframes video_dot1 {
+    100% {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+  }
+  #video_dot2 {
+    animation: video_dot2 0.7s ease-in-out alternate infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+    opacity: 0;
+  }
+
+  @keyframes video_dot2 {
+    100% {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+  }
+  #video_dot3 {
+    animation: video_dot3 0.6s ease-in-out alternate infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+    opacity: 0;
+  }
+
+  @keyframes video_dot3 {
+    100% {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+  }
+
+  #comment1 {
+    animation: comment1 1s ease-in-out alternate infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+
+  @keyframes comment1 {
+    100% {
+      transform: translateX(100px);
+    }
+  }
+
+  #comment2 {
+    animation: comment2 1s ease-in-out alternate infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+
+  @keyframes comment2 {
+    100% {
+      transform: translateX(-100px);
+    }
+  }
+
+  #video_bg {
+    animation: video_bg 1s ease-in-out alternate infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+
+  @keyframes video_bg {
+    100% {
+      transform: translateX(50px);
+    }
+  }
+}
+
+//music svg
+.about_us_music {
+  @media screen and (max-width: 990px) {
+    width: 100vw;
+  }
+  #music_head {
+    animation: music_head 0.8s ease-in-out alternate infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+
+  @keyframes music_head {
+    100% {
+      transform: rotateZ(-10deg) translateY(10px);
+    }
+  }
+
+  #music_left_hand {
+    animation: music_left_hand 0.8s ease-in-out alternate infinite;
+    transform-origin: right;
+    transform-box: fill-box;
+  }
+
+  @keyframes music_left_hand {
+    100% {
+      transform: rotateZ(90deg) translateX(-50px) translateY(80px);
+    }
+  }
+
+  #music_right_hand {
+    animation: music_right_hand 0.8s ease-in-out alternate infinite;
+    transform-origin: right;
+    transform-box: fill-box;
+  }
+
+  @keyframes music_right_hand {
+    100% {
+      transform: rotateZ(90deg) translateX(-0px) translateY(100px);
+    }
+  }
+
+  #music_body,
+  #music_pant {
+    animation: music_body 0.8s ease-in-out alternate infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+
+  @keyframes music_body {
+    100% {
+      transform: translateY(10px);
+    }
+  }
+
+  #music_right_shoe {
+    animation: music_right_shoe 0.8s ease-in-out alternate infinite;
+    transform-origin: left;
+    transform-box: fill-box;
+  }
+
+  @keyframes music_right_shoe {
+    100% {
+      transform: translateY(10px) rotateZ(-10deg);
+    }
+  }
+
+  #music_play {
+    animation: music_play 0.8s ease-in-out alternate infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+
+  @keyframes music_play {
+    100% {
+      transform: scale(1.3);
+    }
+  }
+
+  #music_para1 {
+    animation: music_para1 1.5s ease-in-out alternate infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+
+  @keyframes music_para1 {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.23);
+    }
+    75% {
+      transform: scale(1.23) translateY(120px);
+    }
+    100% {
+      transform: scale(1) translateY(120px);
+    }
+  }
+
+  #music_para2 {
+    animation: music_para2 1.5s linear alternate infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+
+  @keyframes music_para2 {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-40px);
+    }
+    75% {
+      transform: translateY(-80px);
+    }
+    100% {
+      transform: translateY(-120px);
+    }
+  }
+}

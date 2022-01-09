@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./footer.scss";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   BsFacebook,
   BsInstagram,
@@ -10,6 +10,18 @@ import {
 } from "react-icons/bs";
 
 const Footer = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (pathname === "/music") {
+      document.querySelector(".footer_bottom_section").style.paddingBottom =
+        "123px";
+    } else {
+      document.querySelector(".footer_bottom_section").style.paddingBottom =
+        "0px";
+    }
+  }, [pathname]);
+
   const fbAnimate = () => {
     document
       .querySelector(".footer_first_column_social_media_fb")
@@ -132,6 +144,13 @@ const Footer = () => {
   };
   const termsAnimateClose = () => {
     document.querySelector(".footer_terms").classList.remove("animate__pulse");
+  };
+
+  const storyAnimate = () => {
+    document.querySelector(".footer_story").classList.add("animate__pulse");
+  };
+  const storyAnimateClose = () => {
+    document.querySelector(".footer_story").classList.remove("animate__pulse");
   };
   return (
     <>
@@ -256,6 +275,15 @@ const Footer = () => {
               >
                 Music
               </Link>
+
+              <Link
+                to="/series"
+                className="footer_second_column_service_child animate__animated footer_series"
+                onMouseEnter={seriesAnimate}
+                onMouseLeave={seriesAnimateClose}
+              >
+                Series
+              </Link>
               {/* <Link
                 to="/contact"
                 className="footer_second_column_service_child"
@@ -284,14 +312,14 @@ const Footer = () => {
               <Link to="/menu" className="footer_second_column_service_child">
                 Menu
               </Link> */}
-              <Link
+              {/* <Link
                 to="/series"
                 className="footer_second_column_service_child animate__animated footer_series"
                 onMouseEnter={seriesAnimate}
                 onMouseLeave={seriesAnimateClose}
               >
                 Series
-              </Link>
+              </Link> */}
               <Link
                 to="/popular"
                 className="footer_third_column_company_child animate__animated footer_popular"
@@ -309,6 +337,24 @@ const Footer = () => {
               >
                 My List
               </Link>
+
+              <Link
+                to="/account"
+                className="footer_third_column_company_child animate__animated footer_account"
+                onMouseEnter={accountAnimate}
+                onMouseLeave={accountAnimateClose}
+              >
+                Account
+              </Link>
+
+              <Link
+                to="/our-story"
+                className="footer_third_column_company_child animate__animated footer_story"
+                onMouseEnter={storyAnimate}
+                onMouseLeave={storyAnimateClose}
+              >
+                Our Story
+              </Link>
               {/* <a href="." className="footer_second_column_service_child">
               Menu
             </a> */}
@@ -322,14 +368,23 @@ const Footer = () => {
               {/* <a href="." className="footer_third_column_company">
               Company
             </a> */}
-              <Link
+              {/* <Link
                 to="/account"
                 className="footer_third_column_company_child animate__animated footer_account"
                 onMouseEnter={accountAnimate}
                 onMouseLeave={accountAnimateClose}
               >
                 Account
-              </Link>
+              </Link> */}
+
+              {/* <Link
+                to="/our-story"
+                className="footer_third_column_company_child animate__animated footer_story"
+                onMouseEnter={storyAnimate}
+                onMouseLeave={storyAnimateClose}
+              >
+                Our Story
+              </Link> */}
 
               <Link
                 to="/privacy"
