@@ -115,6 +115,13 @@
   text-decoration: none;
 }
 
+.signin_loader {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media screen and (max-width: 990px) {
   .login {
     background: linear-gradient(0deg, #191a32 35%, rgba(25, 26, 50, 0) 180.84%),

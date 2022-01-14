@@ -1,16 +1,25 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../../components/footer/Footer";
 import Navbar from "../../components/navbar/Navbar";
 import "./account.scss";
 import { AnimatePresence, motion } from "framer-motion";
 import swal from "sweetalert";
+import { UserContext } from "../../context/userContext/UserContext";
+import { updateUser } from "../../context/userContext/apiCalls";
 
 const Account = () => {
   const [selectedModal, setSelectedModal] = useState(null);
   const [selectedModalEmail, setSelectedModalEmail] = useState(null);
   const [selectedModalPass, setSelectedModalPass] = useState(null);
   const [selectedModalPhone, setSelectedModalPhone] = useState(null);
+
+  const { user, error, dispatch } = useContext(UserContext);
+
+  const [username, setUsername] = useState(user.username);
+  const [email, setEmail] = useState(user.email);
+
+  const [id, setId] = useState(user._id);
 
   const openNameModal = (e, name) => {
     e.preventDefault();
@@ -27,28 +36,48 @@ const Account = () => {
     setSelectedModalPass(pass);
   };
 
-  const openPhoneModal = (e, phone) => {
-    e.preventDefault();
-    setSelectedModalPhone(phone);
-  };
+  // const openPhoneModal = (e, phone) => {
+  //   e.preventDefault();
+  //   setSelectedModalPhone(phone);
+  // };
+  // const changeUsername = (e) => {
+  //   setUsername(e.target.value);
+  // };
 
   const changeName = (e) => {
     e.preventDefault();
     setSelectedModal(null);
-    swal({
-      title: "Congrats!",
-      text: "Your name has been changed!",
-      icon: "success",
-    });
+    updateUser({ username }, id, dispatch);
+    if (!error) {
+      var user = JSON.parse(localStorage.getItem("user"));
+      user["username"] = username;
+      localStorage.setItem("user", JSON.stringify(user));
+
+      swal({
+        title: "Congrats!",
+        text: "Your name has been changed!",
+        icon: "success",
+      });
+      setUsername(username);
+    }
   };
   const changeEmail = (e) => {
     e.preventDefault();
     setSelectedModalEmail(null);
-    swal({
-      title: "Congrats!",
-      text: "Your email has been changed!",
-      icon: "success",
-    });
+    updateUser({ email }, id, dispatch);
+
+    if (!error) {
+      var user = JSON.parse(localStorage.getItem("user"));
+      user["email"] = email;
+      localStorage.setItem("user", JSON.stringify(user));
+
+      swal({
+        title: "Congrats!",
+        text: "Your email has been changed!",
+        icon: "success",
+      });
+      setEmail(email);
+    }
   };
   const changePass = (e) => {
     e.preventDefault();
@@ -74,11 +103,8 @@ const Account = () => {
         {/* <Navbar /> */}
         <div className="account_header">
           <h4>Account</h4>
-          <img
-            src="https://images.pexels.com/photos/6899260/pexels-photo-6899260.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-            alt="image_account"
-          />
-          <p>Member since June 2021</p>
+          <img src="images/user.svg" alt="image_account" />
+          <p>Member since {user.createdAt.substr(0, 10)}</p>
         </div>
         <div className="divider"></div>
         <div className="account_info">
@@ -92,10 +118,10 @@ const Account = () => {
           <div className="account_column">
             <div className="account_row">
               <div className="account_email">
-                <p>Netflix</p>
-                <p>netflix@gmail.com</p>
+                <p>{username}</p>
+                <p>{email}</p>
                 <p>Password: *****</p>
-                <p>Phone: 01792383999</p>
+                {/* <p>Phone: {user.phone}</p> */}
               </div>
 
               <div className="account_email account_buttons">
@@ -126,7 +152,7 @@ const Account = () => {
                     Change Password
                   </Link>
                 </p>
-                <p>
+                {/* <p>
                   <Link
                     to="#"
                     className="edit_btn"
@@ -134,7 +160,7 @@ const Account = () => {
                   >
                     Change Phone
                   </Link>
-                </p>
+                </p> */}
               </div>
             </div>
             <div className="divider1"></div>
@@ -193,7 +219,7 @@ const Account = () => {
           <div className="account_column account_column_plan_details">
             <div className="account_row">
               <div className="account_email">
-                <p>Premium</p>
+                <p>{user.pricingPlan}</p>
                 {/* <p>netflix@gmail.com</p>
                 <p>Password: **********</p>
                 <p>Phone: 01792383999</p> */}
@@ -259,6 +285,8 @@ const Account = () => {
                 initial={{ x: "-100vw", opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.7 }}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
               <motion.div
                 className="change_name_btn_div"
@@ -309,6 +337,8 @@ const Account = () => {
                 initial={{ x: "-100vw", opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.7 }}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <motion.div
                 className="change_name_btn_div"

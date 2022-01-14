@@ -15,11 +15,12 @@ import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import ScrollToTop from "./functions/ScrollToTop";
 import { useLocation, Navigate } from "react-router-dom";
-import { useEffect, useState, Suspense, lazy } from "react";
+import { useEffect, useState, Suspense, lazy, useContext } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Preloader from "./components/preloader/Preloader";
 import swal from "sweetalert";
+import { AuthContext } from "./context/authContext/AuthContext";
 
 const Home = lazy(() => import("./pages/home/Home"));
 const Register = lazy(() => import("./pages/register/Register"));
@@ -48,6 +49,7 @@ const BlurScreen = lazy(() => import("./pages/blurscreen/BlurScreen"));
 const OurStory = lazy(() => import("./pages/our-story/OurStory"));
 
 const App = () => {
+  const { user } = useContext(AuthContext);
   const { pathname } = useLocation();
 
   //const [location_success, setLocationSuccess] = useState(false);
@@ -124,30 +126,86 @@ const App = () => {
             exact
             path="/browse"
             // element={user ? <Home /> : <Navigate to="/login" />}
-            element={<Home />}
+            element={user ? <Home /> : <Navigate to="/login" />}
           />
           {/* {user ? (
                 <> */}
-          <Route exact path="/watch/:id" element={<Watch />} />
+          <Route
+            exact
+            path="/watch/:id"
+            element={user ? <Watch /> : <Navigate to="/login" />}
+          />
 
-          <Route exact path="/account" element={<Account />} />
-          <Route exact path="/my-list" element={<MyList />} />
-          <Route exact path="/series" element={<Series />} />
-          <Route exact path="/movies" element={<Movies />} />
-          <Route exact path="/popular" element={<Popular />} />
-          <Route exact path="/details/:id" element={<Details />} />
-          <Route exact path="/billing-details" element={<BillingDetails />} />
+          <Route
+            exact
+            path="/account"
+            element={user ? <Account /> : <Navigate to="/login" />}
+          />
+          <Route
+            exact
+            path="/my-list"
+            element={user ? <MyList /> : <Navigate to="/login" />}
+          />
+          <Route
+            exact
+            path="/series"
+            element={user ? <Series /> : <Navigate to="/login" />}
+          />
+          <Route
+            exact
+            path="/movies"
+            element={user ? <Movies /> : <Navigate to="/login" />}
+          />
+          <Route
+            exact
+            path="/popular"
+            element={user ? <Popular /> : <Navigate to="/login" />}
+          />
+          <Route
+            exact
+            path="/details/:id"
+            element={user ? <Details /> : <Navigate to="/login" />}
+          />
+          <Route
+            exact
+            path="/billing-details"
+            element={user ? <BillingDetails /> : <Navigate to="/login" />}
+          />
           <Route
             exact
             path="/manage-payment-info"
-            element={<ManagePaymentInfo />}
+            element={user ? <ManagePaymentInfo /> : <Navigate to="/login" />}
           />
-          <Route exact path="/payment-picker" element={<PaymentPicker />} />
-          <Route exact path="/change-plan" element={<ChangePlan />} />
-          <Route exact path="/music" element={<Music />} />
-          <Route exact path="/privacy" element={<Privacy />} />
-          <Route exact path="/terms" element={<Terms />} />
-          <Route exact path="/our-story" element={<OurStory />} />
+          <Route
+            exact
+            path="/payment-picker"
+            element={user ? <PaymentPicker /> : <Navigate to="/login" />}
+          />
+          <Route
+            exact
+            path="/change-plan"
+            element={user ? <ChangePlan /> : <Navigate to="/login" />}
+          />
+          <Route
+            exact
+            path="/music"
+            element={user ? <Music /> : <Navigate to="/login" />}
+          />
+          <Route
+            exact
+            path="/privacy"
+            element={user ? <Privacy /> : <Navigate to="/login" />}
+          />
+          <Route
+            exact
+            path="/terms"
+            element={user ? <Terms /> : <Navigate to="/login" />}
+          />
+          <Route
+            exact
+            path="/our-story"
+            element={user ? <OurStory /> : <Navigate to="/login" />}
+          />
           {/* </>
               ) : (
                 <>
@@ -159,13 +217,13 @@ const App = () => {
             exact
             path="/login"
             // element={!user ? <Login /> : <Navigate to="/browse" />}
-            element={<Login />}
+            element={!user ? <Login /> : <Navigate to="/browse" />}
           />
 
           <Route
             path="/"
             // element={!user ? <Register /> : <Navigate to="/browse" />}
-            element={<Register />}
+            element={!user ? <Register /> : <Navigate to="/browse" />}
           />
         </Routes>
       </Suspense>

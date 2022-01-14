@@ -65,6 +65,7 @@ export default function ListItem({
         </>
       ) : (
         <>
+          <div className="list_item_images_duplicate"></div>
           <motion.div
             className="listItem"
             // style={{ left: isHovered && index * (225 + 5) }}

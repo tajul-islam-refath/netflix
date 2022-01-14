@@ -21,6 +21,11 @@ body {
   overflow-x: hidden;
 }
 
+.Toastify__toast-theme--light {
+  background-color: var(--toastify-color-dark) !important;
+  color: white !important;
+}
+
 .swal-overlay--show-modal .swal-modal {
   border-radius: 15px;
 }

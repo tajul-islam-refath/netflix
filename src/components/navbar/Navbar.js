@@ -1,8 +1,10 @@
 import { ArrowDropDown, Notifications, Search } from "@material-ui/icons";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "./navbar.scss";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { AuthContext } from "../../context/authContext/AuthContext";
+import { logout } from "../../context/authContext/AuthActions";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -12,6 +14,14 @@ const Navbar = () => {
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
+  };
+
+  const { dispatch } = useContext(AuthContext);
+
+  const signOut = (e) => {
+    e.preventDefault();
+
+    dispatch(logout());
   };
 
   const searchbarActive = (e) => {
@@ -298,13 +308,31 @@ const Navbar = () => {
             onMouseLeave={closeOption}
             onMouseEnter={openOption}
           >
-            <img
-              className="user_small_img"
-              src="https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a"
-              alt=""
-            />
+            <img className="user_small_img" src="images/user.svg" alt="" />
             <ArrowDropDown className="arrow_icon" />
             <div className="options">
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "0px",
+                  fontSize: "16px",
+                  backgroundColor: "#e72626",
+                  padding: "10px 0px",
+                }}
+              >
+                {JSON.parse(localStorage.getItem("user")).username}
+              </div>
+              {/* <div
+                style={{
+                  width: "100%",
+                  height: "1px",
+                  backgroundColor: "red",
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "5px",
+                }}
+              /> */}
               <span>
                 <Link
                   to="/account"
@@ -325,8 +353,9 @@ const Navbar = () => {
 
               <span>
                 <Link
-                  to="/login"
+                  to="#"
                   style={{ color: "white", textDecoration: "none" }}
+                  onClick={(e) => signOut(e)}
                 >
                   Sign out
                 </Link>

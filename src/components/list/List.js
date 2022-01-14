@@ -30,6 +30,7 @@ export default function List({ list_header, list }) {
   const [isMoved, setIsMoved] = useState(false);
   const [isMovedRight, setIsMovedRight] = useState(true);
   const [slideNumber, setSlideNumber] = useState(0);
+  const [clickLimit, setClickLimit] = useState(window.innerWidth / 230);
 
   const [selectedId, setSelectedId] = useState(null);
   const [startVideo, setStartVideo] = useState(false);
@@ -74,7 +75,7 @@ export default function List({ list_header, list }) {
       setSlideNumber(slideNumber - 1);
       listRef.current.style.transform = `translateX(${230 + distance}px)`;
     }
-    if (direction === "right" && slideNumber < 4) {
+    if (direction === "right" && slideNumber < 10 - clickLimit) {
       setSlideNumber(slideNumber + 1);
       listRef.current.style.transform = `translateX(${-230 + distance}px)`;
     }
