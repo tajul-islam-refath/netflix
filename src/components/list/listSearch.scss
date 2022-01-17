@@ -1,6 +1,12 @@
-.list {
+.searched_content_text {
+  font-size: 30px;
+  color: white;
+  margin-left: 50px;
+  margin-top: 100px;
+}
+.list_searched {
   width: 100%;
-  margin-top: 0px;
+  margin-top: 60px;
   margin-bottom: 90px;
 
   .listTitle {
@@ -39,9 +45,10 @@
       margin-left: 50px;
       display: flex;
       margin-top: 10px;
-      width: max-content;
-      transform: translateX(0px);
+      width: auto;
+      //   transform: translateX(0px);
       transition: all 0.3s linear;
+      flex-wrap: wrap;
     }
   }
 }
@@ -343,8 +350,241 @@
   backdrop-filter: blur(4px);
 }
 
+//music
+.music_list_div1 {
+  padding: 0px 50px;
+  margin-top: 50px;
+  position: relative;
+  color: white;
+  margin-bottom: 100px;
+
+  @media screen and (max-width: 900px) {
+    padding: 0px 20px;
+  }
+
+  .music_list_header {
+    p {
+      font-size: 20px;
+    }
+
+    p:nth-child(2) {
+      font-size: 16px;
+      color: rgb(179, 179, 179);
+    }
+  }
+
+  .music_list_main {
+    margin-top: 30px;
+
+    .music_list_slider_main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      column-count: 6;
+
+      @media screen and (max-width: 538px) {
+        justify-content: flex-start;
+        gap: 10px;
+      }
+      .slick-track {
+        margin-left: 0.5vw;
+      }
+      .music_list_slider_card {
+        overflow: hidden;
+        width: 15% !important;
+        cursor: pointer;
+        border-radius: 15px;
+        position: relative;
+        box-shadow: 0px 0px 0px 0px rgb(0.2, 0.2, 0.2, 0.2);
+        // margin-right: 10px;
+        // z-index: -1;
+
+        @media screen and (max-width: 599px) {
+          width: 48% !important;
+        }
+
+        @media screen and (min-width: 600px) and (max-width: 859px) {
+          width: 30% !important;
+        }
+
+        @media screen and (min-width: 860px) and (max-width: 1000px) {
+          width: 24% !important;
+        }
+
+        &:hover img {
+          transform: scale(1.5);
+          transition: 0.3s;
+        }
+
+        &:not(:hover) img {
+          transition: 0.3s;
+        }
+
+        &:hover .red_shade {
+          background-color: rgba(255, 23, 68, 0.8);
+          transition: 0.5s;
+        }
+
+        &:not(:hover) .red_shade {
+          transition: 0.5s;
+        }
+
+        &:hover .red_shade_info {
+          top: 13%;
+          opacity: 1;
+          transition: 0.3s;
+        }
+
+        &:not(:hover) .red_shade_info {
+          transition: 0.3s;
+        }
+        img {
+          width: 100%;
+          height: 240px;
+          object-fit: cover;
+          border-radius: 15px;
+          border-bottom-left-radius: 0px;
+          border-bottom-right-radius: 0px;
+        }
+
+        .music_list_slider_card_info {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          flex-wrap: wrap;
+          line-height: 0px;
+          background-color: #313152;
+          border-bottom-left-radius: 15px;
+          border-bottom-right-radius: 15px;
+          padding: 5px 0px;
+
+          p:nth-child(1) {
+            font-size: 18px;
+          }
+          p:nth-child(2) {
+            font-size: 16px;
+            color: rgb(148, 148, 148);
+            margin-top: 5px;
+          }
+        }
+
+        .red_shade {
+          background-color: transparent;
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          z-index: 99;
+          top: 0;
+          left: 0;
+        }
+
+        .red_shade_info {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          flex-wrap: wrap;
+          position: absolute;
+          z-index: 999;
+          top: 100%;
+          left: 8%;
+          text-align: center;
+          opacity: 0;
+
+          @media screen and (max-width: 480px) {
+            left: 14%;
+            top: 28% !important;
+          }
+          @media screen and (min-width: 601px) and (max-width: 700px) {
+            left: 17%;
+            top: 28% !important;
+          }
+          @media screen and (min-width: 1331px) and (max-width: 1400px) {
+            left: 2%;
+          }
+          @media screen and (min-width: 1600px) and (max-width: 1800px) {
+            left: 12%;
+          }
+          @media screen and (min-width: 1801px) and (max-width: 2100px) {
+            left: 16.5%;
+          }
+          @media screen and (min-width: 2101px) and (max-width: 2700px) {
+            left: 22.5%;
+          }
+
+          .red_shade_icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .red_shade_heart_icon {
+              font-size: 26px;
+              transition: 0.5s;
+
+              &:hover {
+                transform: scale(1.1);
+                transition: 0.5s;
+              }
+              @media screen and (max-width: 480px) {
+                font-size: 18px;
+              }
+              @media screen and (min-width: 601px) and (max-width: 700px) {
+                font-size: 18px;
+              }
+            }
+            .red_shade_play_icon {
+              font-size: 70px;
+              font-weight: normal;
+              margin: 30px;
+              transition: 0.5s;
+
+              &:hover {
+                transform: scale(1.1);
+                transition: 0.5s;
+              }
+
+              @media screen and (max-width: 480px) {
+                margin: 10px;
+                font-size: 50px;
+              }
+              @media screen and (min-width: 601px) and (max-width: 700px) {
+                margin: 10px;
+                font-size: 50px;
+              }
+            }
+            .red_shade_more_icon {
+              font-size: 26px;
+              transition: 0.5s;
+
+              &:hover {
+                transform: scale(1.1);
+                transition: 0.5s;
+              }
+            }
+          }
+
+          .red_shade_name_info {
+            p:nth-child(1) {
+              font-size: 20;
+            }
+            p:nth-child(2) {
+              font-size: 18;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 990px) {
-  .list {
+  .searched_content_text {
+    margin-left: 25px;
+  }
+  .list_searched {
     margin-bottom: 50px;
     .listTitle {
       margin-left: 20px !important;

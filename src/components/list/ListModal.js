@@ -1,78 +1,47 @@
-import { InfoOutlined, PlayArrow } from "@material-ui/icons";
-import "./featured.scss";
-import "animate.css";
-import { Link, useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
-import { Add, ThumbUpAltOutlined, ThumbDownOutlined } from "@material-ui/icons";
+import React, { useContext, useState } from "react";
+
+//import ListItem from "../listItem/ListItem";
+import "./list.scss";
+import {
+  PlayArrow,
+  Add,
+  ThumbUpAltOutlined,
+  ThumbDownOutlined,
+  InfoOutlined,
+} from "@material-ui/icons";
 //import { FiMoreHorizontal } from "react-icons/fi";
 import { FaTimesCircle } from "react-icons/fa";
 import { HiOutlineDownload } from "react-icons/hi";
 import { FiVolume2, FiVolumeX } from "react-icons/fi";
-import axios from "axios";
+import { BsCheck2 } from "react-icons/bs";
 
-export default function Featured({
-  type,
-  pic,
-  title_pic,
-  des,
-  video,
-  genre,
-  cast,
-  writer,
-  director,
-  age,
-  time,
-  year,
-  index,
-}) {
-  const [selectedId, setSelectedId] = useState(null);
-  const [startVideo, setStartVideo] = useState(false);
-  const [startHeroVideo, setStartHeroVideo] = useState(false);
-  const [endHeroVideo, setEndHeroVideo] = useState(false);
-  const [y, setY] = useState(window.scrollY);
-  const [volume, setVolume] = useState(false);
+import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+// import LazyLoad from "react-lazyload";
+import axios from "axios";
+import AppUrl from "../../classes/AppUrl";
+import { UserContext } from "../../context/userContext/UserContext";
+import { deleteUser, updateUser } from "../../context/userContext/apiCalls";
+
+const ListModal = ({
+  selectedId,
+  setSelectedId,
+  more_detail,
+  startVideo,
+  setStartVideo,
+  openScroll,
+}) => {
   const [volume_detail, setVolumeDetail] = useState(false);
 
+  const { user, error, dispatch } = useContext(UserContext);
+
+  const [addToList, setAddToList] = useState(false);
+
+  const [id, setId] = useState(user._id);
+  const [mylist, setMyList] = useState([]);
+
   const navigate = useNavigate();
-
-  if (selectedId !== null) {
-    setTimeout(() => {
-      setStartVideo(true);
-    }, 4000);
-  }
-
-  useEffect(() => {
-    window.addEventListener("scroll", () => setStartHeroVideo(false));
-
-    return () => {
-      // return a cleanup function to unregister our function since its gonna run multiple times
-      window.removeEventListener("scroll", () => setStartHeroVideo(false));
-    };
-  }, [y]);
-
-  useEffect(() => {
-    if (endHeroVideo === false) {
-      setTimeout(() => {
-        setStartHeroVideo(true);
-      }, 3000);
-    }
-
-    // document
-    //   .getElementById("hero_video")
-    //   .addEventListener("ended", myHandler, false);
-    // function myHandler(e) {
-    //   setStartHeroVideo(false);
-    // }
-  }, [endHeroVideo]);
-
-  const offVolume = () => {
-    setVolume(false);
-  };
-
-  const onVolume = () => {
-    setVolume(true);
-  };
 
   const offVolumeDetail = () => {
     setVolumeDetail(false);
@@ -82,60 +51,56 @@ export default function Featured({
     setVolumeDetail(true);
   };
 
-  //const [movies, setMovies] = useState([]);
-  //const [onemovie, setOneMovie] = useState([]);
-
-  // useEffect(() => {
-  //   const getMovies = async () => {
-  //     try {
-  //       const res = await axios.get("movies/", {
-  //         headers: {
-  //           token:
-  //             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxY2M1MWJkZmYzMmVjNmVlNjNjMTk3YyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0MTIyNDU5NywiZXhwIjoxNjQxNjU2NTk3fQ.hSQAfsFOZ0nNhdZuoMrsWO2uooaILtyrEosDrt2vgE4",
-  //         },
-  //       });
-  //       //console.log(res);
-  //       setMovies(res.data[0]);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   getMovies();
-  // }, []);
-
-  const playNowAnimate = () => {
-    document.querySelector(".play").classList.add("animate__pulse");
-  };
-
-  const moreInfoAnimate = () => {
-    document.querySelector(".more").classList.add("animate__pulse");
-  };
-
-  const playNowAnimateClose = () => {
-    document.querySelector(".play").classList.remove("animate__pulse");
-  };
-
-  const moreInfoAnimateClose = () => {
-    document.querySelector(".more").classList.remove("animate__pulse");
-  };
-
-  const startScroll = () => {
-    document.querySelector("body").style.overflowY = "auto";
-  };
-
-  const stopScroll = () => {
-    if (window.innerWidth > 990) {
-      document.querySelector("body").style.overflow = "hidden";
-    }
-  };
-
   const watch_movie = () => {
     navigate("/watch/" + 1);
-    startScroll();
+    openScroll();
+  };
+
+  const addToFav = async (id, myList) => {
+    setAddToList(true);
+
+    //setMyList([...user.myList, myList]);
+    user.myList = [...user.myList, myList];
+    setMyList(user.myList);
+    // setMyList([...mylist, myList]);
+    console.log(mylist);
+
+    var formdata = new FormData();
+    formdata.append("data", JSON.stringify(mylist));
+
+    // fetch(`/users/${id}`, {
+    //   method: "PUT",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //     token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+    //   },
+    //   body: JSON.stringify(item),
+    // }).then((result) => {
+    //   result.json().then((resp) => {
+    //     console.warn(resp);
+    //   });
+    // });
+
+    try {
+      const res = await axios.put("/users/" + id, formdata, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          token:
+            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+        },
+      });
+      //console.log(res);
+      setMyList(res.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const more_like = [
     {
+      id: "351",
       pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABX6QPuU2wUKTrISH7UkthsTD4mTPRpfGIojVGAfhTtmlwB_K-b-yujeN1zgpW0txJLLNWCDMCSPBP8qwhmFVX5jn32FM.webp?r=d57",
       video:
         "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
@@ -151,6 +116,7 @@ export default function Featured({
       genre: "Suspenseful, Exciting",
     },
     {
+      id: "352",
       pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABaUyF3kexjPto1IHIhDpmIYadqvYLEIQIyDx7IVyl7YbSziHb11WDdfFMtqIQeGfy_Se5qZjWh2uCamN9D7LXGgW8J7Ch2Ef5TUowkj9EnxLaCaN7TibUc-2ptLhBGf2i3WCD3a3cooyblg9koj8cWgpGR8DQkbNnGu1db1Fz7r9hSn3AJMZDFrgO3522AZ0N0QE2894mlkFZQkGjqlwT8pO5A.jpg?r=603",
       video:
         "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
@@ -166,6 +132,7 @@ export default function Featured({
       genre: "Fantasy TV Shows, TV Shows Based on Books",
     },
     {
+      id: "353",
       pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABW-1LCLK7T5DCx0eQXvqjHuMTOAm8AzDi3qy84LgIvpFjRihmb0gUw5LUWPqsl6W25F1jIMzCi6OFuEcym-I7_6J6uTDJwHnV7kW5qsLLb5ZMPwpCTgMz9Az8tXWfg.jpg?r=7de",
       video:
         "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
@@ -181,6 +148,7 @@ export default function Featured({
       genre: "Romantic TV Dramas, Romantic TV Comedies",
     },
     {
+      id: "354",
       pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABb12t1Hiq8L4MPDkW8mAZUqQGTuL7l6XSGJTr8-h7H88Xqr1jfXsS_PvdtvFnmhJo5-to8Ram3BuHbsEYH_U7rRxpTZG.webp?r=9d5",
       video:
         "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
@@ -196,6 +164,7 @@ export default function Featured({
       genre: "Emotional, Romantic, Comedy",
     },
     {
+      id: "355",
       pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABeBmbY-sgZUJpNW-vdJt_V5cEwl7hWAebY7APIjeb2Xu7f9EydFEaXEa6Z8NO0lryqWL6uhSiy_X7kul2tmNf0zK0LHawWM71CddrJDxAs0Og5RW1aD904ReaAarjoHuK7_ZBxzraD_QQvDxMMXIuwCGrN2jVNvzZsnysD42imckOSjz6u5zxhas.jpg?r=f9b",
       video:
         "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
@@ -211,6 +180,7 @@ export default function Featured({
       genre: "Thriller, Drama",
     },
     {
+      id: "356",
       pic: "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a",
       video:
         "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
@@ -229,136 +199,6 @@ export default function Featured({
 
   return (
     <>
-      <div className="featured">
-        {type && (
-          <div className="category">
-            {/* <span>{type === "movie" ? "Movies" : "Series"}</span> */}
-            <select name="genre" id="genre">
-              <option>{type === "movie" ? "Movies" : "Series"}</option>
-              <option value="adventure">Adventure</option>
-              <option value="comedy">Comedy</option>
-              <option value="crime">Crime</option>
-              <option value="fantasy">Fantasy</option>
-              <option value="historical">Historical</option>
-              <option value="horror">Horror</option>
-              <option value="romance">Romance</option>
-              <option value="sci-fi">Sci-fi</option>
-              {/* <option value="thriller">Thriller</option>
-              <option value="western">Western</option>
-              <option value="animation">Animation</option>
-              <option value="drama">Drama</option>
-              <option value="documentary">Documentary</option> */}
-            </select>
-          </div>
-        )}
-
-        {startHeroVideo ? (
-          <>
-            <video
-              src={video}
-              autoPlay={true}
-              id="hero_video"
-              style={{
-                width: "100%",
-                height: "100vh",
-                objectFit: "cover",
-              }}
-              onEnded={() => {
-                setStartHeroVideo(false);
-                setEndHeroVideo(true);
-              }}
-              muted={volume}
-            />
-          </>
-        ) : (
-          <>
-            <img src={pic} alt="" className="hero_img" />
-          </>
-        )}
-
-        <div
-          className="volume"
-          data-aos="fade-up"
-          data-aos-delay="1000"
-          data-aos-duration="1000"
-          data-aos-easing="ease-in-out"
-        >
-          {volume ? (
-            <>
-              <FiVolumeX
-                className="featured_volume"
-                onClick={() => offVolume()}
-              />
-              {/* <FiVolume2
-                className="featured_volume"
-                onClick={() => offVolume()}
-              /> */}
-            </>
-          ) : (
-            <>
-              <FiVolume2
-                className="featured_volume"
-                onClick={() => onVolume()}
-              />
-              {/* <FiVolumeX
-                className="featured_volume"
-                onClick={() => onVolume()}
-              /> */}
-            </>
-          )}
-        </div>
-
-        <div className="info">
-          <img
-            src={title_pic}
-            alt=""
-            data-aos="fade-right"
-            data-aos-duration="1000"
-            data-aos-easing="ease-in-out"
-          />
-          <span
-            className="desc"
-            data-aos="fade-up"
-            data-aos-delay="550"
-            data-aos-duration="1000"
-            data-aos-easing="ease-in-out"
-          >
-            {des}
-          </span>
-          <div
-            className="buttons"
-            data-aos="fade-up"
-            data-aos-delay="1000"
-            data-aos-duration="1000"
-            data-aos-easing="ease-in-out"
-          >
-            <Link to="/watch/1" style={{ textDecoration: "none" }}>
-              <button
-                className="play animate__animated"
-                onMouseEnter={playNowAnimate}
-                onMouseLeave={playNowAnimateClose}
-              >
-                <PlayArrow className="play_icon " />
-                <span>Play</span>
-              </button>
-            </Link>
-            <button
-              className="more animate__animated"
-              onMouseEnter={moreInfoAnimate}
-              onMouseLeave={moreInfoAnimateClose}
-              // layoutId={index}
-              onClick={() => {
-                setSelectedId(index);
-                stopScroll();
-              }}
-            >
-              <InfoOutlined className="info_icon" />
-              <span>More Info</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
       {window.innerWidth <= 990 ? (
         <>
           <AnimatePresence exitBeforeEnter>
@@ -393,7 +233,7 @@ export default function Featured({
                       //   stiffness: 80,
                       // }}
                     >
-                      <img src={pic} alt="" />
+                      <img src={AppUrl.base_url + more_detail.imgSm} alt="" />
                     </motion.div>
                     <motion.div
                       className="more_card_info"
@@ -405,13 +245,22 @@ export default function Featured({
                         stiffness: 40,
                       }}
                     >
-                      <h4 className="more_card_info_title">{"Spider Man"}</h4>
-                      <div className="more_card_info_other">
-                        <p className="more_card_info_year">{year}</p>
-                        <p className="more_card_info_age">{age}</p>
-                        <p className="more_card_info_time">{time}</p>
+                      <div className="more_card_info_title_div">
+                        <h4 className="more_card_info_title">
+                          {"Man of Steel"}
+                        </h4>
+                        <HiOutlineDownload className="more_card_info_download" />
                       </div>
-                      <p className="more_card_info_des">{des}</p>
+                      <div className="more_card_info_other">
+                        <p className="more_card_info_year">
+                          {more_detail.year}
+                        </p>
+                        <p className="more_card_info_age">{more_detail.age}</p>
+                        <p className="more_card_info_time">
+                          {more_detail.time}
+                        </p>
+                      </div>
+                      <p className="more_card_info_des">{more_detail.desc}</p>
                     </motion.div>
                   </motion.div>
                   <motion.div
@@ -431,9 +280,8 @@ export default function Featured({
                       <PlayArrow className="more_card_info_play_icon " />
                       Play
                     </Link>
-
                     <Link
-                      to={"/details/" + selectedId}
+                      to={"/details/" + 1}
                       className="more_card_info_play_btn"
                     >
                       <InfoOutlined className="more_card_info_play_icon" />
@@ -455,26 +303,29 @@ export default function Featured({
                   onClick={() => {
                     setSelectedId(null);
                     setStartVideo(false);
-                    startScroll();
+                    openScroll();
                   }}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5 }}
                   exit={{ opacity: 0 }}
                 ></motion.div>
-
                 <motion.div
                   className="more_modal"
                   initial={{ y: "-100vh" }}
                   animate={{ y: 0 }}
-                  transition={{ duration: 0.4, type: "spring", stiffness: 100 }}
+                  transition={{
+                    duration: 0.4,
+                    type: "spring",
+                    stiffness: 100,
+                  }}
                   exit={{ y: "-100vh" }}
                   // layoutId={selectedId}
                 >
                   {startVideo ? (
                     <>
                       <video
-                        src={video}
+                        src={AppUrl.base_url + more_detail.trailer}
                         autoPlay={true}
                         loop
                         style={{
@@ -487,12 +338,16 @@ export default function Featured({
                     </>
                   ) : (
                     <>
-                      <img src={pic} alt="" className="more_modal_img" />
+                      <motion.img
+                        src={AppUrl.base_url + more_detail.imgSm}
+                        alt=""
+                        className="more_modal_img"
+                      />
                     </>
                   )}
 
                   <motion.img
-                    src={title_pic}
+                    src={AppUrl.base_url + more_detail.imgTitle}
                     alt=""
                     className="more_title_image"
                     initial={{ y: 100, opacity: 0 }}
@@ -520,13 +375,42 @@ export default function Featured({
                   >
                     <Link
                       to={"/watch/" + selectedId}
-                      onClick={() => startScroll()}
+                      onClick={() => openScroll()}
                     >
                       <PlayArrow className="more_modal_icon list_item_play_icon" />
                     </Link>
-                    <Add className="more_modal_icon" />
+                    {addToList ? (
+                      <>
+                        <BsCheck2
+                          id={"more_modal_remove_from_list" + more_detail._id}
+                          className="more_modal_icon"
+                          onClick={() => {
+                            setAddToList(false);
+                            // updateUser(
+                            //   { $pull: { myList: null } },
+                            //   id,
+                            //   dispatch
+                            // );
+                          }}
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <Add
+                          id={"more_modal_add_to_list" + more_detail._id}
+                          className="more_modal_icon"
+                          onClick={() => {
+                            addToFav(id, more_detail);
+                            // setAddToList(true);
+                            // updateUser({ myList: more_detail }, id, dispatch);
+                          }}
+                        />
+                      </>
+                    )}
+
                     <ThumbUpAltOutlined className="more_modal_icon" />
                     <ThumbDownOutlined className="more_modal_icon" />
+                    {/* <FiMoreHorizontal className="icon" /> */}
                     <HiOutlineDownload className="more_modal_icon" />
                     {volume_detail ? (
                       <>
@@ -543,8 +427,6 @@ export default function Featured({
                         />
                       </>
                     )}
-
-                    {/* <FiMoreHorizontal className="icon" /> */}
                   </motion.div>
 
                   <motion.div className="more_modal_cross">
@@ -553,7 +435,7 @@ export default function Featured({
                       onClick={() => {
                         setSelectedId(null);
                         setStartVideo(false);
-                        startScroll();
+                        openScroll();
                       }}
                     />
                   </motion.div>
@@ -572,14 +454,14 @@ export default function Featured({
                       exit={{ x: -100, opacity: 0 }}
                     >
                       <motion.div className="more_modal_itemInfoTop">
-                        <motion.span>{year}</motion.span>
+                        <motion.span>{more_detail.year}</motion.span>
                         <motion.span className="more_modal_limit">
-                          {age}
+                          {more_detail.age}+
                         </motion.span>
-                        <motion.span>{time}</motion.span>
+                        <motion.span>{more_detail.time}</motion.span>
                       </motion.div>
                       <motion.div className="more_modal_iteminfo_des">
-                        {des}
+                        {more_detail.desc}
                       </motion.div>
                     </motion.div>
 
@@ -597,22 +479,24 @@ export default function Featured({
                     >
                       <motion.div className="more_modal_info_right_director">
                         <motion.p>
-                          <motion.span>Director:</motion.span> {director}
+                          <motion.span>Director:</motion.span>{" "}
+                          {more_detail.director}
                         </motion.p>
                       </motion.div>
                       <motion.div className="more_modal_info_right_cast">
                         <motion.p>
-                          <motion.span>Cast:</motion.span> {cast}
+                          <motion.span>Cast:</motion.span> {more_detail.cast}
                         </motion.p>
                       </motion.div>
                       <motion.div className="more_modal_info_right_writer">
                         <motion.p>
-                          <motion.span>Writer:</motion.span> {writer}
+                          <motion.span>Writer:</motion.span>{" "}
+                          {more_detail.writer}
                         </motion.p>
                       </motion.div>
                       <motion.div className="more_modal_info_right_genres">
                         <motion.p>
-                          <motion.span>Genres:</motion.span> {genre}
+                          <motion.span>Genres:</motion.span> {more_detail.genre}
                         </motion.p>
                       </motion.div>
                     </motion.div>
@@ -654,6 +538,7 @@ export default function Featured({
                             type: "spring",
                             stiffness: 160,
                           }}
+                          key={item.id}
                         >
                           <div className="more_like_img_div">
                             <img
@@ -692,4 +577,6 @@ export default function Featured({
       )}
     </>
   );
-}
+};
+
+export default ListModal;

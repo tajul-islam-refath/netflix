@@ -45,12 +45,27 @@ const ChangePlan = lazy(() => import("./pages/changePlan/ChangePlan"));
 const Music = lazy(() => import("./pages/music/Music"));
 const Privacy = lazy(() => import("./pages/privacy/Privacy"));
 const Terms = lazy(() => import("./pages/terms/Terms"));
+const Search = lazy(() => import("./pages/search/Search"));
 const BlurScreen = lazy(() => import("./pages/blurscreen/BlurScreen"));
 const OurStory = lazy(() => import("./pages/our-story/OurStory"));
 
 const App = () => {
   const { user } = useContext(AuthContext);
   const { pathname } = useLocation();
+
+  const [searchTerms, setSearchTerms] = useState("");
+
+  const [searchPlaceHolder, setSearchPlaceHolder] = useState("");
+
+  useEffect(() => {
+    if (pathname === "/music") {
+      setSearchPlaceHolder("Search by Music");
+    } else if (pathname === "/search") {
+      setSearchPlaceHolder(searchPlaceHolder);
+    } else {
+      setSearchPlaceHolder("Search by Movie/Series");
+    }
+  }, [pathname, searchPlaceHolder]);
 
   //const [location_success, setLocationSuccess] = useState(false);
   const [countryName, setCountryName] = useState("");
@@ -107,7 +122,12 @@ const App = () => {
           <>
             {/* {user && (
               <> */}
-            <Navbar />
+            <Navbar
+              searchTerms={searchTerms}
+              setSearchTerms={setSearchTerms}
+              searchPlaceHolder={searchPlaceHolder}
+              setSearchPlaceHolder={setSearchPlaceHolder}
+            />
             <BottomNav />
             {/* </>
             )} */}
@@ -205,6 +225,22 @@ const App = () => {
             exact
             path="/our-story"
             element={user ? <OurStory /> : <Navigate to="/login" />}
+          />
+
+          <Route
+            exact
+            path="/search"
+            element={
+              user ? (
+                <Search
+                  searchTerms={searchTerms}
+                  setSearchTerms={setSearchTerms}
+                  searchPlaceHolder={searchPlaceHolder}
+                />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
           />
           {/* </>
               ) : (

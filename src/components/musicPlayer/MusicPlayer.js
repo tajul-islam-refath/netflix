@@ -13,7 +13,16 @@ import {
 } from "react-icons/fa";
 import { BsDownload } from "react-icons/bs";
 
-function MusicPlayer({ song, imgSrc, auto }) {
+function MusicPlayer({
+  song,
+  imgSrc,
+  auto,
+  musicList,
+  musicId,
+  setMusicId,
+  musicAudio,
+  setMusicAudio,
+}) {
   const [isLove, setLove] = useState(false);
   const [isPlaying, setPlay] = useState(false);
   //   duration state
@@ -98,9 +107,10 @@ function MusicPlayer({ song, imgSrc, auto }) {
       </div>
       <div className="songAttributes">
         <audio
-          src="https://assets.codepen.io/4358584/Anitek_-_Komorebi.mp3"
+          src={musicAudio}
           preload="metadata"
           ref={audioPlayer}
+          className="audio_player"
         />
 
         <div className="top">

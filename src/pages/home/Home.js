@@ -18,25 +18,25 @@ const Home = () => {
   const video =
     "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4";
 
-  const [list, setList] = useState([]);
+  //const [list, setList] = useState([]);
 
-  useEffect(() => {
-    const getList = async () => {
-      try {
-        const res = await axios.get("lists", {
-          headers: {
-            token:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxY2M1MWJkZmYzMmVjNmVlNjNjMTk3YyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0MTIyNDU5NywiZXhwIjoxNjQxNjU2NTk3fQ.hSQAfsFOZ0nNhdZuoMrsWO2uooaILtyrEosDrt2vgE4",
-          },
-        });
-        //console.log(res);
-        setList(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getList();
-  }, []);
+  // useEffect(() => {
+  //   const getList = async () => {
+  //     try {
+  //       const res = await axios.get("lists", {
+  //         headers: {
+  //           token:
+  //             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxY2M1MWJkZmYzMmVjNmVlNjNjMTk3YyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0MTIyNDU5NywiZXhwIjoxNjQxNjU2NTk3fQ.hSQAfsFOZ0nNhdZuoMrsWO2uooaILtyrEosDrt2vgE4",
+  //         },
+  //       });
+  //       //console.log(res);
+  //       setList(res.data);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   getList();
+  // }, []);
 
   return (
     <>

@@ -12,12 +12,14 @@ import { Link } from "react-router-dom";
 //import Watch from "../../pages/watch/Watch";
 //import LazyLoad from "react-lazyload";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import AppUrl from "../../classes/AppUrl";
 
 export default function ListItem({
   item_id,
   setSelectedId,
   info,
   setMoreDetail,
+  marginBottom,
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const item = useRef();
@@ -49,7 +51,7 @@ export default function ListItem({
           {/* <LazyLoad offset={50} height={200} once={true} scroll={true}> */}
           {/* <LazyLoadImage */}
           <motion.img
-            src={info.pic}
+            src={AppUrl.base_url + info.img}
             alt=""
             className="list_item_img"
             effect="blur"
@@ -58,7 +60,7 @@ export default function ListItem({
             data-aos-offset="0"
             data-aos-delay={item_id * 150}
             data-aos-duration="500"
-            data-aos-easing="ease-in-out"
+            // data-aos-easing="ease-in-out"
           />
 
           {/* </LazyLoad> */}
@@ -73,6 +75,7 @@ export default function ListItem({
             onMouseLeave={() => setIsHovered(false)}
             ref={item}
             onClick={() => openModal()}
+            style={{ marginBottom: `${marginBottom}` }}
           >
             {/* <LazyLoad
               offset={50}
@@ -83,20 +86,24 @@ export default function ListItem({
             > */}
             {/* <LazyLoadImage */}
             <img
-              src={info.pic}
+              src={AppUrl.base_url + info.img}
               alt=""
               // effect="blur"
               data-aos="zoom-in"
               data-aos-offset="0"
               data-aos-delay={item_id * 150}
               data-aos-duration="500"
-              data-aos-easing="ease-in-out"
+              // data-aos-easing="ease-in-out"
               className="list_item_images"
             />
             {/* </LazyLoad> */}
             {isHovered && (
               <>
-                <video src={info.video} autoPlay={true} loop />
+                <video
+                  src={AppUrl.base_url + info.trailer}
+                  autoPlay={true}
+                  loop
+                />
                 <div className="itemInfo">
                   <div className="icons">
                     <Link
@@ -128,7 +135,7 @@ export default function ListItem({
                   </div>
                   <div className="itemInfoTop">
                     <span>{info.time}</span>
-                    <span className="limit">{info.age}</span>
+                    <span className="limit">{info.age}+</span>
                     {/* <span>1999</span> */}
                   </div>
                   {/* <div className="desc">

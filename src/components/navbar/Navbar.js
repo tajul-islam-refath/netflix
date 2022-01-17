@@ -1,22 +1,104 @@
 import { ArrowDropDown, Notifications, Search } from "@material-ui/icons";
 import { useState, useEffect, useContext } from "react";
 import "./navbar.scss";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { AuthContext } from "../../context/authContext/AuthContext";
 import { logout } from "../../context/authContext/AuthActions";
+//import { MovieContext } from "../../context/movieContext/MovieContext";
+//import { getMovies } from "../../context/movieContext/apiCalls";
+import axios from "axios";
+import AppUrl from "../../classes/AppUrl";
+import ListModal from "../list/ListModal";
 
-const Navbar = () => {
+const Navbar = ({
+  searchTerms,
+  setSearchTerms,
+  searchPlaceHolder,
+  setSearchPlaceHolder,
+}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchbar, setSearchbar] = useState(false);
   const [notiOpen, setNotiOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  // const [searchPlaceHolder, setSearchPlaceHolder] = useState("");
+
+  // const { pathname } = useLocation();
+
+  // useEffect(() => {
+  //   if (pathname === "/music") {
+  //     setSearchPlaceHolder("Search by Music");
+  //   } else {
+  //     setSearchPlaceHolder("Search by Movie/Series");
+  //   }
+  // }, [pathname]);
+
+  // useEffect(() => {
+  //   setSearchTerm(searchTerm);
+  // }, [searchTerm]);
+
+  const searchMovie = (e) => {
+    setSearchTerms(e.target.value);
+    navigate("/search");
+    console.log(searchTerms);
+    // if (searchTerm !== "") {
+    //   navigate("/search");
+    // } else {
+    //   navigate(-1);
+    // }
+  };
 
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
   };
 
+  const [selectedId, setSelectedId] = useState(null);
+  const [startVideo, setStartVideo] = useState(false);
+  const [more_detail, setMoreDetail] = useState(null);
+
+  const openScroll = () => {
+    document.querySelector("body").style.overflowY = "auto";
+  };
+
+  if (selectedId !== null) {
+    setTimeout(() => {
+      setStartVideo(true);
+    }, 4000);
+  }
+
+  // const openModal = () => {
+  //   setSelectedId(item_id);
+  //   setMoreDetail(info);
+
+  //   document.querySelector("body").style.overflow = "hidden";
+  // };
+
   const { dispatch } = useContext(AuthContext);
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const getMovies = async () => {
+      try {
+        const res = await axios.get("/movies", {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        });
+        console.log(res);
+        setMovies(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMovies();
+    return () => {
+      setMovies([]); // This worked for me
+    };
+  }, []);
 
   const signOut = (e) => {
     e.preventDefault();
@@ -174,156 +256,189 @@ const Navbar = () => {
   };
 
   return (
-    <div className={isScrolled ? "navbar scrolled" : "navbar"}>
-      <div className="container">
-        <div className="left">
-          <Link to="/browse" className="navbar_logo">
-            <img src="images/icinema_logo.png" alt="logo" />
-            <span className="logo_text">iCinema</span>
-          </Link>
-          <Link
-            className="navbar_left_link animate__animated homes"
-            to="/browse"
-            style={{ textDecoration: "none", color: "white" }}
-            onMouseEnter={homeAnimate}
-            onMouseLeave={homeAnimateClose}
-          >
-            <span>Home</span>
-          </Link>
-          <Link
-            className="navbar_left_link animate__animated series"
-            to="/series"
-            style={{ textDecoration: "none", color: "white" }}
-            onMouseEnter={seriesAnimate}
-            onMouseLeave={seriesAnimateClose}
-          >
-            <span>Series</span>
-          </Link>
-          <Link
-            className="navbar_left_link animate__animated movies"
-            to="/movies"
-            style={{ textDecoration: "none", color: "white" }}
-            onMouseEnter={moviesAnimate}
-            onMouseLeave={moviesAnimateClose}
-          >
-            <span>Movies</span>
-          </Link>
-          <Link
-            className="navbar_left_link animate__animated popular"
-            to="/popular"
-            style={{ textDecoration: "none", color: "white" }}
-            onMouseEnter={popularAnimate}
-            onMouseLeave={popularAnimateClose}
-          >
-            <span>New and Popular</span>
-          </Link>
-          <Link
-            className="navbar_left_link animate__animated mylists"
-            to="/my-list"
-            style={{ textDecoration: "none", color: "white" }}
-            onMouseEnter={mylistAnimate}
-            onMouseLeave={mylistAnimateClose}
-          >
-            <span>My List</span>
-          </Link>
-          <Link
-            className="navbar_left_link animate__animated music"
-            to="/music"
-            style={{ textDecoration: "none", color: "white" }}
-            onMouseEnter={musicAnimate}
-            onMouseLeave={musicAnimateClose}
-          >
-            <span>Music</span>
-          </Link>
-        </div>
-        <div className="right">
-          <Search
-            className="search_icon animate__animated"
-            onClick={(e) => searchbarActive(e)}
-            onMouseEnter={searchbarAnimate}
-            onMouseLeave={searchbarAnimateClose}
-          />
-          <input
-            type="text"
-            className={searchbar ? "search_bar_active" : "search_bar"}
-            id="search_bar"
-            placeholder="Search by Movie/Series"
-            onClick={(e) => e.stopPropagation()}
-          />
-          {/* <span>KID</span> */}
-
-          <div
-            className="noti"
-            // onMouseLeave={closeNoti}
-            // onMouseEnter={openNoti}
-            onClick={(e) => openNoti(e)}
-          >
-            <Notifications
-              className="icon animate__animated noti_icon"
-              onMouseEnter={notiAnimate}
-              onMouseLeave={notiAnimateClose}
-            />
-            <div className="notifications">
-              <span>
-                <div className="noti_row">
-                  <img
-                    src="https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a"
-                    alt="notification_pic"
-                  />
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Fugiat ratione atque dolorum cupiditate impedit
-                  </p>
-                </div>
-              </span>
-              <span>
-                <div className="noti_row">
-                  <img
-                    src="https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a"
-                    alt="notification_pic"
-                  />
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Fugiat ratione atque dolorum cupiditate impedit
-                  </p>
-                </div>
-              </span>
-              <span>
-                <div className="noti_row">
-                  <img
-                    src="https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a"
-                    alt="notification_pic"
-                  />
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Fugiat ratione atque dolorum cupiditate impedit
-                  </p>
-                </div>
-              </span>
-            </div>
+    <>
+      <div className={isScrolled ? "navbar scrolled" : "navbar"}>
+        <div className="container">
+          <div className="left">
+            <Link to="/browse" className="navbar_logo">
+              <img src="images/icinema_logo.png" alt="logo" />
+              <span className="logo_text">iCinema</span>
+            </Link>
+            <Link
+              className="navbar_left_link animate__animated homes"
+              to="/browse"
+              style={{ textDecoration: "none", color: "white" }}
+              onMouseEnter={homeAnimate}
+              onMouseLeave={homeAnimateClose}
+            >
+              <span>Home</span>
+            </Link>
+            <Link
+              className="navbar_left_link animate__animated series"
+              to="/series"
+              style={{ textDecoration: "none", color: "white" }}
+              onMouseEnter={seriesAnimate}
+              onMouseLeave={seriesAnimateClose}
+            >
+              <span>Series</span>
+            </Link>
+            <Link
+              className="navbar_left_link animate__animated movies"
+              to="/movies"
+              style={{ textDecoration: "none", color: "white" }}
+              onMouseEnter={moviesAnimate}
+              onMouseLeave={moviesAnimateClose}
+            >
+              <span>Movies</span>
+            </Link>
+            <Link
+              className="navbar_left_link animate__animated popular"
+              to="/popular"
+              style={{ textDecoration: "none", color: "white" }}
+              onMouseEnter={popularAnimate}
+              onMouseLeave={popularAnimateClose}
+            >
+              <span>New and Popular</span>
+            </Link>
+            <Link
+              className="navbar_left_link animate__animated mylists"
+              to="/my-list"
+              style={{ textDecoration: "none", color: "white" }}
+              onMouseEnter={mylistAnimate}
+              onMouseLeave={mylistAnimateClose}
+            >
+              <span>My List</span>
+            </Link>
+            <Link
+              className="navbar_left_link animate__animated music"
+              to="/music"
+              style={{ textDecoration: "none", color: "white" }}
+              onMouseEnter={musicAnimate}
+              onMouseLeave={musicAnimateClose}
+            >
+              <span>Music</span>
+            </Link>
           </div>
+          <div className="right">
+            <Search
+              className="search_icon animate__animated"
+              onClick={(e) => searchbarActive(e)}
+              onMouseEnter={searchbarAnimate}
+              onMouseLeave={searchbarAnimateClose}
+            />
+            <input
+              type="text"
+              className={searchbar ? "search_bar_active" : "search_bar"}
+              id="search_bar"
+              placeholder={searchPlaceHolder}
+              autoComplete={"off"}
+              onClick={(e) => e.stopPropagation()}
+              onChange={(e) => searchMovie(e)}
+            />
+            {/* <span>KID</span> */}
 
-          <div
-            className="profile"
-            onMouseLeave={closeOption}
-            onMouseEnter={openOption}
-          >
-            <img className="user_small_img" src="images/user.svg" alt="" />
-            <ArrowDropDown className="arrow_icon" />
-            <div className="options">
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "0px",
-                  fontSize: "16px",
-                  backgroundColor: "#e72626",
-                  padding: "10px 0px",
-                }}
-              >
-                {JSON.parse(localStorage.getItem("user")).username}
+            <div
+              className="noti"
+              // onMouseLeave={closeNoti}
+              // onMouseEnter={openNoti}
+              onClick={(e) => openNoti(e)}
+            >
+              <Notifications
+                className="icon animate__animated noti_icon"
+                onMouseEnter={notiAnimate}
+                onMouseLeave={notiAnimateClose}
+              />
+              <div className="notifications">
+                {movies
+                  .filter((val) => val.type !== "Music")
+                  .slice(0, 10)
+                  .map((item, index) => (
+                    <span
+                      key={item._id}
+                      onClick={() => {
+                        setSelectedId(item._id);
+                        setMoreDetail(item);
+                        document.querySelector("body").style.overflow =
+                          "hidden";
+                        //console.log(item);
+                      }}
+                    >
+                      <div className="noti_row" key={item._id}>
+                        <img
+                          src={AppUrl.base_url + item.imgSm}
+                          alt="notification_pic"
+                        />
+                        <div className="noti_des">
+                          <p>New Arrival</p>
+                          <p>{item.title}</p>
+                          <p>{item.createdAt.substr(0, 10)}</p>
+                        </div>
+                      </div>
+                    </span>
+                  ))}
+                {/* <span>
+                <div className="noti_row">
+                  <img
+                    src="https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a"
+                    alt="notification_pic"
+                  />
+                  <div className="noti_des">
+                    <p>New Arrival</p>
+                    <p>Superman</p>
+                    <p>2020-02-02</p>
+                  </div>
+                </div>
+              </span>
+              <span>
+                <div className="noti_row">
+                  <img
+                    src="https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a"
+                    alt="notification_pic"
+                  />
+                  <div className="noti_des">
+                    <p>New Arrival</p>
+                    <p>Superman</p>
+                    <p>2020-02-02</p>
+                  </div>
+                </div>
+              </span>
+              <span>
+                <div className="noti_row">
+                  <img
+                    src="https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABYzkkv7oCtXAsjyTApW0NF145ECSShki-GxjJ0tUGYNkvroBnoEwBRqt3RnkBRVl_97Ha3ckPLo4R3Gh7w8onh9H99OHgPJecBEez8cCm5G0dNP2hg1Zc7K0V0226w.jpg?r=71a"
+                    alt="notification_pic"
+                  />
+                  <div className="noti_des">
+                    <p>New Arrival</p>
+                    <p>Superman</p>
+                    <p>2020-02-02</p>
+                  </div>
+                </div>
+              </span> */}
               </div>
-              {/* <div
+            </div>
+
+            <div
+              className="profile"
+              onMouseLeave={closeOption}
+              onMouseEnter={openOption}
+            >
+              <img className="user_small_img" src="images/user.svg" alt="" />
+              <ArrowDropDown className="arrow_icon" />
+              <div className="options">
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: "0px",
+                    fontSize: "16px",
+                    backgroundColor: "#e72626",
+                    padding: "10px 0px",
+                  }}
+                >
+                  {JSON.parse(localStorage.getItem("user")).username}
+                </div>
+                {/* <div
                 style={{
                   width: "100%",
                   height: "1px",
@@ -333,38 +448,49 @@ const Navbar = () => {
                   marginTop: "5px",
                 }}
               /> */}
-              <span>
-                <Link
-                  to="/account"
-                  style={{ color: "white", textDecoration: "none" }}
-                >
-                  Account{" "}
-                </Link>
-              </span>
-              {/* <span>Help Center</span> */}
-              <span>
-                <Link
-                  to="/my-downloads"
-                  style={{ color: "white", textDecoration: "none" }}
-                >
-                  My Downloads{" "}
-                </Link>
-              </span>
+                <span>
+                  <Link
+                    to="/account"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    Account{" "}
+                  </Link>
+                </span>
+                {/* <span>Help Center</span> */}
+                <span>
+                  <Link
+                    to="/my-downloads"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    My Downloads{" "}
+                  </Link>
+                </span>
 
-              <span>
-                <Link
-                  to="#"
-                  style={{ color: "white", textDecoration: "none" }}
-                  onClick={(e) => signOut(e)}
-                >
-                  Sign out
-                </Link>
-              </span>
+                <span>
+                  <Link
+                    to="#"
+                    style={{ color: "white", textDecoration: "none" }}
+                    onClick={(e) => signOut(e)}
+                  >
+                    Sign out
+                  </Link>
+                </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+
+      <ListModal
+        // key={selectedId}
+        selectedId={selectedId}
+        setSelectedId={setSelectedId}
+        more_detail={more_detail}
+        startVideo={startVideo}
+        setStartVideo={setStartVideo}
+        openScroll={openScroll}
+      />
+    </>
   );
 };
 

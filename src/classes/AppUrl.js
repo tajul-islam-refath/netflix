@@ -1,5 +1,5 @@
 export default class AppUrl {
-  static base_url = "http://localhost:8800/api/";
+  static base_url = "http://localhost:8800";
   static image_url = "http://localhost:8800/";
   //static image_url_backend = "http://localhost:8000/";
   // static base_url =

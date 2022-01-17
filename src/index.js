@@ -5,12 +5,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { AuthContextProvider } from "./context/authContext/AuthContext";
+import { MovieContextProvider } from "./context/movieContext/MovieContext";
+import { UserContextProvider } from "./context/userContext/UserContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthContextProvider>
-        <App />
+        {/* <MovieContextProvider> */}
+        <UserContextProvider>
+          <App />
+        </UserContextProvider>
+        {/* </MovieContextProvider> */}
       </AuthContextProvider>
     </BrowserRouter>
   </React.StrictMode>,

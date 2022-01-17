@@ -151,6 +151,7 @@ export default function Register() {
                   type="text"
                   placeholder="Username"
                   ref={usernameRef}
+                  maxLength={15}
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                 />

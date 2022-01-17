@@ -7,6 +7,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import swal from "sweetalert";
 import { UserContext } from "../../context/userContext/UserContext";
 import { updateUser } from "../../context/userContext/apiCalls";
+import { AuthContext } from "../../context/authContext/AuthContext";
+import { logout } from "../../context/authContext/AuthActions";
 
 const Account = () => {
   const [selectedModal, setSelectedModal] = useState(null);
@@ -15,9 +17,11 @@ const Account = () => {
   const [selectedModalPhone, setSelectedModalPhone] = useState(null);
 
   const { user, error, dispatch } = useContext(UserContext);
+  const { dispatch: authDispatch } = useContext(AuthContext);
 
   const [username, setUsername] = useState(user.username);
   const [email, setEmail] = useState(user.email);
+  const [password, setPassword] = useState("");
 
   const [id, setId] = useState(user._id);
 
@@ -55,8 +59,14 @@ const Account = () => {
 
       swal({
         title: "Congrats!",
-        text: "Your name has been changed!",
+        text: "Your name has been changed! You will be signout!",
         icon: "success",
+      }).then((willLogout) => {
+        if (willLogout) {
+          authDispatch(logout());
+        } else {
+          authDispatch(logout());
+        }
       });
       setUsername(username);
     }
@@ -73,20 +83,56 @@ const Account = () => {
 
       swal({
         title: "Congrats!",
-        text: "Your email has been changed!",
+        text: "Your email has been changed! You will be signout!",
         icon: "success",
+      }).then((willLogout) => {
+        if (willLogout) {
+          authDispatch(logout());
+        } else {
+          authDispatch(logout());
+        }
       });
       setEmail(email);
+    } else {
+      swal({
+        title: "Oops!",
+        text: "Your email cannot be changed!",
+        icon: "error",
+      });
     }
   };
   const changePass = (e) => {
     e.preventDefault();
-    setSelectedModalPass(null);
-    swal({
-      title: "Congrats!",
-      text: "Your password has been changed!",
-      icon: "success",
-    });
+    if (password !== "") {
+      setSelectedModalPass(null);
+      updateUser({ password }, id, dispatch);
+
+      if (!error) {
+        swal({
+          title: "Congrats!",
+          text: "Your password has been changed! You will be signout!",
+          icon: "success",
+        }).then((willLogout) => {
+          if (willLogout) {
+            authDispatch(logout());
+          } else {
+            authDispatch(logout());
+          }
+        });
+      } else {
+        swal({
+          title: "Oops!",
+          text: "Your password cannot be changed!",
+          icon: "error",
+        });
+      }
+    } else {
+      swal({
+        title: "Oops!",
+        text: "Your need to enter a password!",
+        icon: "error",
+      });
+    }
   };
   const changePhone = (e) => {
     e.preventDefault();
@@ -382,14 +428,14 @@ const Account = () => {
               >
                 Change your password
               </motion.p>
-              <motion.input
+              {/* <motion.input
                 type="password"
                 placeholder="Old Password"
                 className="change_name_input"
                 initial={{ x: "-100vw", opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.7 }}
-              />
+              /> */}
               <motion.input
                 type="password"
                 placeholder="New Password"
@@ -397,15 +443,16 @@ const Account = () => {
                 initial={{ x: "-100vw", opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.7 }}
+                onChange={(e) => setPassword(e.target.value)}
               />
-              <motion.input
+              {/* <motion.input
                 type="password"
                 placeholder="Confirm Password"
                 className="change_name_input"
                 initial={{ x: "-100vw", opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.7 }}
-              />
+              /> */}
               <motion.div
                 className="change_name_btn_div"
                 initial={{ x: "-100vw", opacity: 0 }}

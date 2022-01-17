@@ -9,7 +9,16 @@ import { CgMore } from "react-icons/cg";
 import PrevArrow from "./PrevArrow";
 import NextArrow from "./NextArrow";
 
-const MusicList = ({ header, header_below, marginTop }) => {
+const MusicList = ({
+  header,
+  header_below,
+  marginTop,
+  musicList,
+  musicId,
+  setMusicId,
+  musicAudio,
+  setMusicAudio,
+}) => {
   var settings1 = {
     // dots: true,
     // centerMode: true,
@@ -35,7 +44,7 @@ const MusicList = ({ header, header_below, marginTop }) => {
           slidesToShow: 4,
           slidesToScroll: 4,
           infinite: true,
-          dots: true,
+          // dots: true,
         },
       },
       {
@@ -44,7 +53,7 @@ const MusicList = ({ header, header_below, marginTop }) => {
           slidesToShow: 5,
           slidesToScroll: 5,
           infinite: true,
-          dots: true,
+          // dots: true,
         },
       },
       {
@@ -53,7 +62,7 @@ const MusicList = ({ header, header_below, marginTop }) => {
           slidesToShow: 3,
           slidesToScroll: 3,
           infinite: true,
-          dots: true,
+          // dots: true,
         },
       },
       {
@@ -74,7 +83,13 @@ const MusicList = ({ header, header_below, marginTop }) => {
     ],
   };
 
-  const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+  const playMusic = (id, audio) => {
+    setMusicId(id);
+    setMusicAudio(audio);
+    document.querySelector(".audio_player").play();
+  };
+
+  //const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
 
   return (
     <>
@@ -85,7 +100,7 @@ const MusicList = ({ header, header_below, marginTop }) => {
         </div>
         <div className="music_list_main">
           <Slider className="music_list_slider_main" {...settings1}>
-            {array.map((item, index) => (
+            {musicList.map((item, index) => (
               <div
                 className="music_list_slider_card"
                 data-aos="zoom-in"
@@ -94,24 +109,26 @@ const MusicList = ({ header, header_below, marginTop }) => {
                 data-aos-duration="500"
                 // data-aos-easing="ease-in-out"
               >
-                <img
-                  src="https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABX6QPuU2wUKTrISH7UkthsTD4mTPRpfGIojVGAfhTtmlwB_K-b-yujeN1zgpW0txJLLNWCDMCSPBP8qwhmFVX5jn32FM.webp?r=d57"
-                  alt=""
-                />
+                <img src={item.imgSm} alt="" />
                 <div className="music_list_slider_card_info">
-                  <p className="music_list_slider_card_name">Rihaa</p>
-                  <p className="music_list_slider_card_artist">Arijit Singh</p>
+                  <p className="music_list_slider_card_name">{item.title}</p>
+                  <p className="music_list_slider_card_artist">{item.cast}</p>
                 </div>
+                {/* <audio src="horse.mp3" type="audio/mpeg" controls /> */}
+
                 <div className="red_shade"></div>
                 <div className="red_shade_info">
                   <div className="red_shade_icons">
                     <AiOutlineHeart className="red_shade_heart_icon" />{" "}
-                    <FiPlay className="red_shade_play_icon" />
+                    <FiPlay
+                      className="red_shade_play_icon"
+                      onClick={() => playMusic(item.id, item.video)}
+                    />
                     <CgMore className="red_shade_more_icon" />
                   </div>
                   <div className="red_shade_name_info">
-                    <p className="red_shade_name">Rihaa</p>
-                    <p className="red_shade_artist">Arijit Singh</p>
+                    <p className="red_shade_name">{item.title}</p>
+                    <p className="red_shade_artist">{item.cast}</p>
                   </div>
                 </div>
               </div>

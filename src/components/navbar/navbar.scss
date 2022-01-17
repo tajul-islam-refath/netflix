@@ -180,6 +180,9 @@
           margin-left: -19%;
           transform: translateY(200px);
           border-top: 2px solid var(--red-color);
+          height: 50vh;
+          overflow: hidden;
+          overflow-y: auto;
         }
 
         .arrow_icon {
@@ -218,12 +221,22 @@
           .noti_row {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-start;
 
             img {
               width: 150px;
               height: 80px;
               margin-right: 20px;
+            }
+
+            .noti_des {
+              line-height: 11px;
+              p {
+                font-size: 16px;
+              }
+              p:nth-child(3) {
+                font-size: 12px;
+              }
             }
           }
         }
