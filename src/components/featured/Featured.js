@@ -3,13 +3,15 @@ import "./featured.scss";
 import "animate.css";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Add, ThumbUpAltOutlined, ThumbDownOutlined } from "@material-ui/icons";
 //import { FiMoreHorizontal } from "react-icons/fi";
 import { FaTimesCircle } from "react-icons/fa";
 import { HiOutlineDownload } from "react-icons/hi";
 import { FiVolume2, FiVolumeX } from "react-icons/fi";
 import axios from "axios";
+import { ListContext } from "../../context/listContext/ListContext";
+import { getLists } from "../../context/listContext/apiCalls";
 
 export default function Featured({
   type,
@@ -33,6 +35,12 @@ export default function Featured({
   const [y, setY] = useState(window.scrollY);
   const [volume, setVolume] = useState(false);
   const [volume_detail, setVolumeDetail] = useState(false);
+
+  const { lists, dispatch: listDispatch } = useContext(ListContext);
+
+  useEffect(() => {
+    getLists(listDispatch);
+  }, [listDispatch]);
 
   const navigate = useNavigate();
 
@@ -234,20 +242,38 @@ export default function Featured({
           <div className="category">
             {/* <span>{type === "movie" ? "Movies" : "Series"}</span> */}
             <select name="genre" id="genre">
-              <option>{type === "movie" ? "Movies" : "Series"}</option>
-              <option value="adventure">Adventure</option>
+              <option value={""}>
+                {type === "movie" ? "Select a category" : "Select a category"}
+              </option>
+              {type === "movie"
+                ? lists
+                    // eslint-disable-next-line array-callback-return
+                    .filter((i) => {
+                      if (i.type === "Movies") {
+                        return i;
+                      }
+                    })
+                    .map((item) => (
+                      <option value={item._id}>{item.title}</option>
+                    ))
+                : lists
+                    // eslint-disable-next-line array-callback-return
+                    .filter((i) => {
+                      if (i.type === "Series") {
+                        return i;
+                      }
+                    })
+                    .map((item) => (
+                      <option value={item._id}>{item.title}</option>
+                    ))}
+              {/* <option value="adventure">Adventure</option>
               <option value="comedy">Comedy</option>
               <option value="crime">Crime</option>
               <option value="fantasy">Fantasy</option>
               <option value="historical">Historical</option>
               <option value="horror">Horror</option>
               <option value="romance">Romance</option>
-              <option value="sci-fi">Sci-fi</option>
-              {/* <option value="thriller">Thriller</option>
-              <option value="western">Western</option>
-              <option value="animation">Animation</option>
-              <option value="drama">Drama</option>
-              <option value="documentary">Documentary</option> */}
+              <option value="sci-fi">Sci-fi</option> */}
             </select>
           </div>
         )}
