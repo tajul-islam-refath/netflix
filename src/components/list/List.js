@@ -27,7 +27,7 @@ import ListModal from "./ListModal";
 
 const ListItem = lazy(() => import("../listItem/ListItem"));
 
-export default function List({ list_header, list }) {
+export default function List({ list_header, list, list_id }) {
   const [isMoved, setIsMoved] = useState(false);
   const [isMovedRight, setIsMovedRight] = useState(true);
   const [slideNumber, setSlideNumber] = useState(0);
@@ -87,6 +87,29 @@ export default function List({ list_header, list }) {
       setIsMovedRight(false);
     }
   };
+
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const getMovies = async () => {
+      try {
+        const res = await axios.get("/movies", {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        });
+        console.log(res);
+        setMovies(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMovies();
+    return () => {
+      setMovies([]); // This worked for me
+    };
+  }, []);
 
   // const watch_movie = () => {
   //   navigate("/watch/" + 1);
@@ -6003,48 +6026,62 @@ export default function List({ list_header, list }) {
             <>
               <motion.div className="main_div">
                 <div className="center_div">
-                  {cw.map((item, index) => (
-                    <Suspense fallback={<div></div>} key={item.id}>
-                      {/* <LazyLoad
+                  {movies
+                    // eslint-disable-next-line array-callback-return
+                    .filter((m) => {
+                      if (m.category === list_id) {
+                        return m;
+                      }
+                    })
+                    .map((item, index) => (
+                      <Suspense fallback={<div></div>} key={item._id}>
+                        {/* <LazyLoad
                         offset={50}
                         height={200}
                         once={true}
                         scroll={true}
                         
                       > */}
-                      <ListItem
-                        item_id={item.id}
-                        setSelectedId={setSelectedId}
-                        info={item}
-                        setMoreDetail={setMoreDetail}
-                      />
-                      {/* </LazyLoad> */}
-                    </Suspense>
-                  ))}
+                        <ListItem
+                          item_id={item._id}
+                          setSelectedId={setSelectedId}
+                          info={item}
+                          setMoreDetail={setMoreDetail}
+                        />
+                        {/* </LazyLoad> */}
+                      </Suspense>
+                    ))}
                 </div>
               </motion.div>
             </>
           ) : (
             <>
               <div className="container" ref={listRef}>
-                {cw.map((item, index) => (
-                  <Suspense fallback={<div></div>} key={item.id}>
-                    <LazyLoad
-                      offset={50}
-                      height={200}
-                      once={true}
-                      scroll={true}
-                    >
-                      <ListItem
-                        item_id={item.id}
-                        setSelectedId={setSelectedId}
-                        info={item}
-                        setMoreDetail={setMoreDetail}
-                        marginBottom={"0px"}
-                      />
-                    </LazyLoad>
-                  </Suspense>
-                ))}
+                {movies
+                  // eslint-disable-next-line array-callback-return
+                  .filter((m) => {
+                    if (m.category === list_id) {
+                      return m;
+                    }
+                  })
+                  .map((item, index) => (
+                    <Suspense fallback={<div></div>} key={item._id}>
+                      <LazyLoad
+                        offset={50}
+                        height={200}
+                        once={true}
+                        scroll={true}
+                      >
+                        <ListItem
+                          item_id={item._id}
+                          setSelectedId={setSelectedId}
+                          info={item}
+                          setMoreDetail={setMoreDetail}
+                          marginBottom={"0px"}
+                        />
+                      </LazyLoad>
+                    </Suspense>
+                  ))}
                 {/* <ListItem index={0} setSelectedId={setSelectedId} /> */}
                 {/* <ListItem index={1} setSelectedId={setSelectedId} />
             <ListItem index={2} setSelectedId={setSelectedId} />

@@ -23,6 +23,7 @@ import axios from "axios";
 import AppUrl from "../../classes/AppUrl";
 import { UserContext } from "../../context/userContext/UserContext";
 import { deleteUser, updateUser } from "../../context/userContext/apiCalls";
+import ListModalSeries from "./ListModalSeries";
 
 const ListModal = ({
   selectedId,
@@ -501,6 +502,9 @@ const ListModal = ({
                       </motion.div>
                     </motion.div>
                   </motion.div>
+
+                  {/* episodes for series */}
+                  <ListModalSeries />
 
                   <div className="more_like_div">
                     <motion.p

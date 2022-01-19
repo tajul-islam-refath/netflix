@@ -12,6 +12,7 @@ import { FiVolume2, FiVolumeX } from "react-icons/fi";
 import axios from "axios";
 import { ListContext } from "../../context/listContext/ListContext";
 import { getLists } from "../../context/listContext/apiCalls";
+import ListModalSeries from "../list/ListModalSeries";
 
 export default function Featured({
   type,
@@ -643,6 +644,8 @@ export default function Featured({
                       </motion.div>
                     </motion.div>
                   </motion.div>
+
+                  <ListModalSeries />
 
                   <div className="more_like_div">
                     <motion.p

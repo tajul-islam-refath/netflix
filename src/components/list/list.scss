@@ -343,6 +343,210 @@
   backdrop-filter: blur(4px);
 }
 
+//episodes
+.episode_div {
+  padding: 20px 25px;
+
+  @media screen and (max-width: 826px) {
+    padding: 20px 0px;
+    margin-top: 20px;
+  }
+  .episode_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid rgb(99, 99, 99);
+    line-height: 10px;
+    margin-bottom: 18px;
+    h4 {
+      font-size: 28px;
+      color: white;
+      @media screen and (max-width: 826px) {
+        font-size: 22px;
+      }
+    }
+    .episode_select_div {
+      position: relative;
+      font-size: 30px;
+      font-weight: 500;
+      color: white;
+      // display: flex;
+      // align-items: center;
+      // z-index: 9999;
+      // background-color: rgb(0, 0, 0, 0.1);
+      // width: 100%;
+      &::after {
+        content: "^";
+        // font-size: 1rem;
+        top: 3.5px;
+        right: 12px;
+        position: absolute;
+        transform: rotate(180deg);
+        font-size: 38px;
+        color: gray;
+        @media screen and (max-width: 826px) {
+          top: 2.5px;
+        }
+      }
+      select {
+        cursor: pointer;
+        background-color: var(--main-color);
+        border: 1px solid white;
+        color: white;
+        margin-left: 20px;
+        padding: 8px 18px;
+        padding-right: 32px;
+        border-radius: 4px;
+        font-size: 20px;
+        appearance: none;
+        @media screen and (max-width: 826px) {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+
+  .episode_info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    cursor: pointer;
+    border-bottom: 1px solid rgb(92, 92, 92);
+    line-height: 25px;
+    margin-bottom: 20px;
+    padding-bottom: 23px;
+    width: 100%;
+
+    @media screen and (max-width: 826px) {
+      line-height: 20px;
+    }
+
+    &:not(:first-child) {
+      margin-top: -20px;
+    }
+
+    &:hover .episode_info_play_btn {
+      opacity: 1 !important;
+      transition: 0.5s;
+    }
+
+    &:hover .episode_info_img img {
+      transform: scale(1.06);
+      transition: 0.5s;
+    }
+
+    &:hover .episode_info_title h4 {
+      color: white !important;
+      transition: 0.5s;
+    }
+
+    &:hover .episode_info_title p {
+      color: white !important;
+      transition: 0.5s;
+    }
+
+    &:hover .episode_info_des {
+      color: white !important;
+      transition: 0.5s;
+    }
+
+    p {
+      color: white;
+      font-size: 26px;
+      margin-right: 20px;
+      @media screen and (max-width: 826px) {
+        display: none;
+      }
+    }
+
+    .episode_info_img {
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+      margin-top: 30px;
+      @media screen and (max-width: 826px) {
+        margin-right: 15px;
+      }
+      img {
+        height: 90px;
+        width: 170px;
+        transition: 0.5s;
+        border-radius: 10px;
+        @media screen and (max-width: 826px) {
+          height: 80px;
+          width: 140px;
+        }
+      }
+      .episode_info_play_btn {
+        position: absolute;
+        height: 40px;
+        width: 40px;
+        font-size: 20px;
+        background-color: var(--red-color);
+        color: white;
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: 0.5s;
+        @media screen and (max-width: 826px) {
+          height: 27px;
+          width: 27px;
+          opacity: 1;
+          font-size: 15px;
+        }
+      }
+    }
+
+    .episode_info_des_div {
+      width: 70%;
+      @media screen and (max-width: 826px) {
+        width: 45vw;
+      }
+
+      .episode_info_title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+
+        h4 {
+          color: rgb(187, 187, 187);
+          font-size: 20px;
+          transition: 0.5s;
+          @media screen and (max-width: 826px) {
+            font-size: 14px;
+          }
+        }
+        p {
+          color: rgb(187, 187, 187);
+          font-size: 20px;
+          transition: 0.5s;
+          @media screen and (max-width: 826px) {
+            display: none;
+            font-size: 14px;
+          }
+        }
+      }
+
+      .episode_info_des {
+        color: rgb(187, 187, 187);
+        font-size: 16px;
+        margin-top: -20px;
+        transition: 0.5s;
+        @media screen and (max-width: 826px) {
+          font-size: 12px;
+          margin-top: -15px;
+        }
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 990px) {
   .list {
     margin-bottom: 50px;

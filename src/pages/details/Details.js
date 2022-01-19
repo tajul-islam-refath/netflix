@@ -12,6 +12,7 @@ import {
 import { HiOutlineDownload } from "react-icons/hi";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import ListModalSeries from "../../components/list/ListModalSeries";
 
 const Details = () => {
   const [selectedId, setSelectedId] = useState(null);
@@ -248,6 +249,8 @@ const Details = () => {
               />
             </Link>
           </div>
+
+          <ListModalSeries />
 
           <div className="more_content">
             <p
