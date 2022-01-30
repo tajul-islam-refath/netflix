@@ -8,6 +8,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { CgMore } from "react-icons/cg";
 import PrevArrow from "./PrevArrow";
 import NextArrow from "./NextArrow";
+import AppUrl from "../../classes/AppUrl";
 
 const MusicList = ({
   header,
@@ -96,7 +97,7 @@ const MusicList = ({
       <div className="music_list_div" style={{ marginTop: marginTop }}>
         <div className="music_list_header">
           <p>{header}</p>
-          <p>{header_below}</p>
+          {/* <p>{header_below}</p> */}
         </div>
         <div className="music_list_main">
           <Slider className="music_list_slider_main" {...settings1}>
@@ -109,7 +110,7 @@ const MusicList = ({
                 data-aos-duration="500"
                 // data-aos-easing="ease-in-out"
               >
-                <img src={item.imgSm} alt="" />
+                <img src={AppUrl.base_url + item.imgSm} alt="" />
                 <div className="music_list_slider_card_info">
                   <p className="music_list_slider_card_name">{item.title}</p>
                   <p className="music_list_slider_card_artist">{item.cast}</p>

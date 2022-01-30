@@ -66,28 +66,6 @@ export default function List({ list_header, list, list_id }) {
     document.querySelector("body").style.overflowY = "auto";
   };
 
-  const listRef = useRef();
-
-  const handleClick = (direction) => {
-    setIsMoved(true);
-    setIsMovedRight(true);
-    let distance = listRef.current.getBoundingClientRect().x - 50;
-    if (direction === "left" && slideNumber > 0) {
-      setSlideNumber(slideNumber - 1);
-      listRef.current.style.transform = `translateX(${230 + distance}px)`;
-    }
-    if (direction === "right" && slideNumber < 10 - clickLimit) {
-      setSlideNumber(slideNumber + 1);
-      listRef.current.style.transform = `translateX(${-230 + distance}px)`;
-    }
-    if (direction === "left" && slideNumber === 1) {
-      setIsMoved(false);
-    }
-    if (direction === "right" && slideNumber === 4) {
-      setIsMovedRight(false);
-    }
-  };
-
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -110,6 +88,28 @@ export default function List({ list_header, list, list_id }) {
       setMovies([]); // This worked for me
     };
   }, []);
+
+  const listRef = useRef();
+
+  const handleClick = (direction) => {
+    setIsMoved(true);
+    setIsMovedRight(true);
+    let distance = listRef.current.getBoundingClientRect().x - 50;
+    if (direction === "left" && slideNumber > 0) {
+      setSlideNumber(slideNumber - 1);
+      listRef.current.style.transform = `translateX(${230 + distance}px)`;
+    }
+    if (direction === "right" && slideNumber < movies.length - clickLimit) {
+      setSlideNumber(slideNumber + 1);
+      listRef.current.style.transform = `translateX(${-230 + distance}px)`;
+    }
+    if (direction === "left" && slideNumber === 1) {
+      setIsMoved(false);
+    }
+    if (direction === "right" && slideNumber === 4) {
+      setIsMovedRight(false);
+    }
+  };
 
   // const watch_movie = () => {
   //   navigate("/watch/" + 1);
@@ -6112,6 +6112,7 @@ export default function List({ list_header, list, list_id }) {
         startVideo={startVideo}
         setStartVideo={setStartVideo}
         openScroll={openScroll}
+        mov = {movies}
       />
     </>
   );

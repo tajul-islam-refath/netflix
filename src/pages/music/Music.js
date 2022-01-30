@@ -1,10 +1,42 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import MusicHero from "../../components/musicHero/MusicHero";
 import MusicList from "../../components/musicList/MusicList";
 import MusicPlayer from "../../components/musicPlayer/MusicPlayer";
+import { getLists } from "../../context/listContext/apiCalls";
+import { ListContext } from "../../context/listContext/ListContext";
 import "./music.scss";
+import axios from "axios";
 
 const Music = () => {
+  const { lists, dispatch: listDispatch } = useContext(ListContext);
+
+  useEffect(() => {
+    getLists(listDispatch);
+  }, [listDispatch]);
+
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const getMovies = async () => {
+      try {
+        const res = await axios.get("/movies", {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        });
+        console.log(res);
+        setMovies(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMovies();
+    return () => {
+      setMovies([]); // This worked for me
+    };
+  }, []);
+
   const musicList = [
     {
       id: "1",
@@ -112,8 +144,35 @@ const Music = () => {
   return (
     <>
       <div className="music_div">
-        <MusicHero />
-        <MusicList
+        <MusicHero musics={movies} />
+
+        {lists
+          // eslint-disable-next-line array-callback-return
+          .filter((i) => {
+            if (i.type === "Music") {
+              return i;
+            }
+          })
+          .map((item) => (
+            <MusicList
+              key={item._id}
+              marginTop={"-50px"}
+              header={item.title}
+              header_below={"Enjoy some new awesome music"}
+              // eslint-disable-next-line array-callback-return
+              musicList={movies.filter((m) => {
+                if (m.type === "Music") {
+                  return m;
+                }
+              })}
+              musicId={playMusicId}
+              setMusicId={setPlayMusicId}
+              musicAudio={playMusicAudio}
+              setMusicAudio={setPlayMusicAudio}
+            />
+          ))}
+
+        {/* <MusicList
           marginTop={"-50px"}
           header={"New Releases For You"}
           header_below={"Enjoy some new awesome music"}
@@ -142,9 +201,14 @@ const Music = () => {
           setMusicId={setPlayMusicId}
           musicAudio={playMusicAudio}
           setMusicAudio={setPlayMusicAudio}
-        />
+        /> */}
         <MusicPlayer
-          musicList={musicList}
+          // eslint-disable-next-line array-callback-return
+          musicList={movies.filter((m) => {
+            if (m.type === "Music") {
+              return m;
+            }
+          })}
           musicId={playMusicId}
           setMusicId={setPlayMusicId}
           musicAudio={playMusicAudio}

@@ -32,6 +32,7 @@ const ListModal = ({
   startVideo,
   setStartVideo,
   openScroll,
+  mov,
 }) => {
   const [volume_detail, setVolumeDetail] = useState(false);
 
@@ -52,8 +53,8 @@ const ListModal = ({
     setVolumeDetail(true);
   };
 
-  const watch_movie = () => {
-    navigate("/watch/" + 1);
+  const watch_movie = (id) => {
+    navigate("/watch/" + id);
     openScroll();
   };
 
@@ -248,7 +249,7 @@ const ListModal = ({
                     >
                       <div className="more_card_info_title_div">
                         <h4 className="more_card_info_title">
-                          {"Man of Steel"}
+                          {more_detail.title}
                         </h4>
                         <HiOutlineDownload className="more_card_info_download" />
                       </div>
@@ -275,14 +276,14 @@ const ListModal = ({
                     }}
                   >
                     <Link
-                      to={"/watch/" + selectedId}
+                      to={"/watch/" + more_detail._id}
                       className="more_card_info_play_btn"
                     >
                       <PlayArrow className="more_card_info_play_icon " />
                       Play
                     </Link>
                     <Link
-                      to={"/details/" + 1}
+                      to={"/details/" + selectedId}
                       className="more_card_info_play_btn"
                     >
                       <InfoOutlined className="more_card_info_play_icon" />
@@ -375,7 +376,7 @@ const ListModal = ({
                     exit={{ y: 100, opacity: 0 }}
                   >
                     <Link
-                      to={"/watch/" + selectedId}
+                      to={"/watch/" + more_detail._id}
                       onClick={() => openScroll()}
                     >
                       <PlayArrow className="more_modal_icon list_item_play_icon" />
@@ -504,7 +505,14 @@ const ListModal = ({
                   </motion.div>
 
                   {/* episodes for series */}
-                  <ListModalSeries />
+                  {more_detail.type === "Series" && (
+                    <ListModalSeries
+                      mov={mov}
+                      more_detail={more_detail}
+                      selectedId={selectedId}
+                      setSelectedId={setSelectedId}
+                    />
+                  )}
 
                   <div className="more_like_div">
                     <motion.p
@@ -531,46 +539,58 @@ const ListModal = ({
                         stiffness: 100,
                       }}
                     >
-                      {more_like.map((item, index) => (
-                        <motion.div
-                          className="more_like_card"
-                          onClick={() => watch_movie()}
-                          initial={{ scale: 1 }}
-                          whileHover={{ scale: 1.1 }}
-                          transition={{
-                            duration: 0.5,
-                            type: "spring",
-                            stiffness: 160,
-                          }}
-                          key={item.id}
-                        >
-                          <div className="more_like_img_div">
-                            <img
-                              src={item.pic}
-                              alt=""
-                              className="more_like_img"
-                            />
-                            <Link to={"/watch/" + selectedId}>
-                              <PlayArrow className="more_like_play_btn list_item_play_icon" />
-                            </Link>
-                          </div>
-                          <div className="more_like_info">
-                            <div className="more_like_info_top">
-                              <div>
-                                <span>{item.year}</span>
-                                <span className="more_like_limit">
-                                  {item.age}
-                                </span>
-                                <span>{item.time}</span>
+                      {mov
+                        // eslint-disable-next-line array-callback-return
+                        .filter((m) => {
+                          if (
+                            more_detail.genre
+                              .toLowerCase()
+
+                              .includes(m.genre.toLowerCase())
+                          ) {
+                            return m;
+                          }
+                        })
+                        .map((item, index) => (
+                          <motion.div
+                            className="more_like_card"
+                            onClick={() => watch_movie(item._id)}
+                            initial={{ scale: 1 }}
+                            whileHover={{ scale: 1.1 }}
+                            transition={{
+                              duration: 0.5,
+                              type: "spring",
+                              stiffness: 160,
+                            }}
+                            key={item._id}
+                          >
+                            <div className="more_like_img_div">
+                              <img
+                                src={AppUrl.base_url + item.imgSm}
+                                alt=""
+                                className="more_like_img"
+                              />
+                              <Link to={"/watch/" + item._id}>
+                                <PlayArrow className="more_like_play_btn list_item_play_icon" />
+                              </Link>
+                            </div>
+                            <div className="more_like_info">
+                              <div className="more_like_info_top">
+                                <div>
+                                  <span>{item.year}</span>
+                                  <span className="more_like_limit">
+                                    {item.age}
+                                  </span>
+                                  <span>{item.time}</span>
+                                </div>
+                                <Add className="more_like_add_icon" />
                               </div>
-                              <Add className="more_like_add_icon" />
+                              <div className="more_like_info_bottom">
+                                {item.desc.substring(0, 142)}
+                              </div>
                             </div>
-                            <div className="more_like_info_bottom">
-                              {item.des.substring(0, 142)}
-                            </div>
-                          </div>
-                        </motion.div>
-                      ))}
+                          </motion.div>
+                        ))}
                     </motion.div>
                   </div>
                 </motion.div>

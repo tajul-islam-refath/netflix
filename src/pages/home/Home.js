@@ -4,11 +4,42 @@ import "./home.scss";
 import List from "../../components/list/List";
 import Footer from "../../components/footer/Footer";
 import LazyLoad from "react-lazyload";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import AppUrl from "../../classes/AppUrl";
+import { ListContext } from "../../context/listContext/ListContext";
+import { getLists } from "../../context/listContext/apiCalls";
 
 const Home = () => {
+  const { lists, dispatch: listDispatch } = useContext(ListContext);
+
+  useEffect(() => {
+    getLists(listDispatch);
+  }, [listDispatch]);
+
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const getMovies = async () => {
+      try {
+        const res = await axios.get("/movies/random", {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        });
+        console.log(res);
+        setMovies(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMovies();
+    return () => {
+      setMovies([]); // This worked for me
+    };
+  }, []);
+
   const pic =
     "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABQiIBJXiMiiUS9zi_1pBO1NF-kBzmpZfw2IkNs_Uh6cWYQestVnV4Wy7vQDXdFHdoPjQp4JNFCySFpoU6yEeBSOh8JM5.webp?r=46a";
   const title_pic =
@@ -42,32 +73,54 @@ const Home = () => {
     <>
       <div className="home">
         {/* <Navbar /> */}
-        <Featured
-          index={1}
-          pic={pic}
-          title_pic={title_pic}
-          des={des}
-          video={video}
-          year={"2021"}
-          age={"18+"}
-          time={"1h 30m"}
-          cast={"Ronald, Shreya"}
-          director={"Ronald"}
-          writer={"Ronald"}
-          genre={"Action, Scary"}
-        />
-        <List list_header={"Continue Watching"} />
+        {movies
+          // eslint-disable-next-line array-callback-return
+          .filter((i) => {
+            if (i.type === "Movie" || i.type === "Series") {
+              return i;
+            }
+          })
+          .map((item) => (
+            <Featured
+              key={item._id}
+              index={1}
+              pic={pic}
+              title_pic={title_pic}
+              des={des}
+              video={video}
+              year={"2021"}
+              age={"18+"}
+              time={"1h 30m"}
+              cast={"Ronald, Shreya"}
+              director={"Ronald"}
+              writer={"Ronald"}
+              genre={"Action, Scary"}
+              movies={item}
+            />
+          ))}
+
+        {lists
+          // eslint-disable-next-line array-callback-return
+          .filter((i) => {
+            if (i.type === "Home") {
+              return i;
+            }
+          })
+          .map((item) => (
+            <List key={item._id} list_header={item.title} list_id={item._id} />
+          ))}
+        {/* <List list_header={"Continue Watching"} /> */}
         {/* <LazyLoad offset={50} once={true}>
           {list.map((item) => (
             <List list_header={item.title} key={item._id} list={item} />
           ))} */}
-        <List list_header={"Action Movies"} />
+        {/* <List list_header={"Action Movies"} />
         <List list_header={"Horror Movies"} />
         <List list_header={"Family Movies"} />
         <List list_header={"K-Dramas"} />
         <List list_header={"Anime"} />
         <List list_header={"Super Natural Soaps"} />
-        <List list_header={"Recently Added"} />
+        <List list_header={"Recently Added"} /> */}
         {/* </LazyLoad> */}
       </div>
       {/* <Footer /> */}

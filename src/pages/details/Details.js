@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "../../components/footer/Footer";
 import Navbar from "../../components/navbar/Navbar";
 import "./details.scss";
@@ -13,12 +13,83 @@ import { HiOutlineDownload } from "react-icons/hi";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import ListModalSeries from "../../components/list/ListModalSeries";
+import AppUrl from "../../classes/AppUrl";
+import axios from "axios";
 
 const Details = () => {
   const [selectedId, setSelectedId] = useState(null);
   const { pathname } = useLocation();
 
   const last_url = pathname.substring(pathname.lastIndexOf("/") + 1);
+
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const getMovies = async () => {
+      try {
+        const res = await axios.get("/movies/", {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        });
+        console.log(res);
+        setMovies(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMovies();
+    return () => {
+      setMovies([]); // This worked for me
+    };
+  }, []);
+
+  const [mov, setMov] = useState([]);
+
+  useEffect(() => {
+    const getMovies = async () => {
+      try {
+        const res = await axios.get("/movies/find/" + last_url, {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        });
+        console.log(res);
+        setMov(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMovies();
+    return () => {
+      setMov([]); // This worked for me
+    };
+  }, [last_url]);
+
+  const [single_mov, setSingleMov] = useState([]);
+
+  useEffect(() => {
+    const getMovies = async () => {
+      try {
+        const res = await axios.get("/movies/find/" + selectedId, {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        });
+        console.log(res);
+        setSingleMov(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMovies();
+    return () => {
+      setSingleMov([]); // This worked for me
+    };
+  }, [selectedId]);
 
   const cw = [
     {
@@ -125,7 +196,7 @@ const Details = () => {
         {/* <Navbar /> */}
         <div className="details_video">
           <video
-            src={cw[last_url].video}
+            src={AppUrl.base_url + mov.trailer}
             autoPlay={false}
             controls
             loop={false}
@@ -142,7 +213,7 @@ const Details = () => {
             data-aos-duration="1000"
             data-aos-easing="ease-in-out"
           >
-            {cw[last_url].title}
+            {mov.title}
           </p>
 
           <div
@@ -153,9 +224,9 @@ const Details = () => {
             data-aos-duration="500"
             data-aos-easing="ease-in-out"
           >
-            <span className="details_info_year">{cw[last_url].year}</span>
-            <span className="details_info_age">{cw[last_url].age}</span>
-            <span className="details_info_time">{cw[last_url].time}</span>
+            <span className="details_info_year">{mov.year}</span>
+            <span className="details_info_age">{mov.age}</span>
+            <span className="details_info_time">{mov.time}</span>
           </div>
 
           <div className="details_info_bottom">
@@ -166,7 +237,7 @@ const Details = () => {
               data-aos-duration="500"
               data-aos-easing="ease-in-out"
             >
-              {cw[last_url].des}
+              {mov.desc}
             </p>
             <p
               data-aos="fade-up"
@@ -175,7 +246,7 @@ const Details = () => {
               data-aos-duration="500"
               data-aos-easing="ease-in-out"
             >
-              <span>Starring:</span> {cw[last_url].cast}
+              <span>Starring:</span> {mov.cast}
             </p>
             <p
               data-aos="fade-up"
@@ -184,7 +255,7 @@ const Details = () => {
               data-aos-duration="500"
               data-aos-easing="ease-in-out"
             >
-              <span>Director:</span> {cw[last_url].director}
+              <span>Director:</span> {mov.director}
             </p>
             <p
               data-aos="fade-up"
@@ -193,12 +264,12 @@ const Details = () => {
               data-aos-duration="500"
               data-aos-easing="ease-in-out"
             >
-              <span>Genre:</span> {cw[last_url].genre}
+              <span>Genre:</span> {mov.genre}
             </p>
           </div>
 
           <div className="details_btns">
-            <Link to="/watch/1">
+            <Link to={"/watch/" + mov._id}>
               <PlayArrow
                 className="details_play_btn details_btn list_item_play_icon"
                 data-aos="fade-up"
@@ -250,7 +321,14 @@ const Details = () => {
             </Link>
           </div>
 
-          <ListModalSeries />
+          {mov.type === "Series" && (
+            <ListModalSeries
+              mov={movies}
+              more_detail={mov}
+              selectedId={selectedId}
+              setSelectedId={setSelectedId}
+            />
+          )}
 
           <div className="more_content">
             <p
@@ -263,22 +341,35 @@ const Details = () => {
               More Like This
             </p>
             <div className="more_content_cards">
-              {cw.map((item, index) => (
-                <motion.div
-                  className="more_content_card"
-                  onClick={() => setSelectedId(index)}
-                >
-                  <img
-                    src={item.pic}
-                    alt=""
-                    data-aos="zoom-in"
-                    data-aos-offset="0"
-                    data-aos-delay={index * 100}
-                    data-aos-duration="500"
-                    data-aos-easing="ease-in-out"
-                  />
-                </motion.div>
-              ))}
+              {movies
+                // eslint-disable-next-line array-callback-return
+                .filter((m) => {
+                  if (
+                    mov.genre
+                      .toLowerCase()
+
+                      .includes(m.genre.toLowerCase())
+                  ) {
+                    return m;
+                  }
+                })
+                .map((item, index) => (
+                  <motion.div
+                    className="more_content_card"
+                    onClick={() => setSelectedId(item._id)}
+                    key={item._id}
+                  >
+                    <img
+                      src={AppUrl.base_url + item.imgSm}
+                      alt=""
+                      data-aos="zoom-in"
+                      data-aos-offset="0"
+                      data-aos-delay={index * 100}
+                      data-aos-duration="500"
+                      data-aos-easing="ease-in-out"
+                    />
+                  </motion.div>
+                ))}
             </div>
           </div>
         </div>
@@ -315,7 +406,7 @@ const Details = () => {
                     //   stiffness: 80,
                     // }}
                   >
-                    <img src={cw[selectedId].pic} alt="" />
+                    <img src={AppUrl.base_url + single_mov.imgSm} alt="" />
                   </motion.div>
                   <motion.div
                     className="more_card_info"
@@ -327,19 +418,13 @@ const Details = () => {
                       stiffness: 40,
                     }}
                   >
-                    <h4 className="more_card_info_title">
-                      Spiderman: Homecoming
-                    </h4>
+                    <h4 className="more_card_info_title">{single_mov.title}</h4>
                     <div className="more_card_info_other">
-                      <p className="more_card_info_year">
-                        {cw[selectedId].year}
-                      </p>
-                      <p className="more_card_info_age">{cw[selectedId].age}</p>
-                      <p className="more_card_info_time">
-                        {cw[selectedId].time}
-                      </p>
+                      <p className="more_card_info_year">{single_mov.year}</p>
+                      <p className="more_card_info_age">{single_mov.age}</p>
+                      <p className="more_card_info_time">{single_mov.time}</p>
                     </div>
-                    <p className="more_card_info_des">{cw[selectedId].des}</p>
+                    <p className="more_card_info_des">{single_mov.desc}</p>
                   </motion.div>
                 </motion.div>
                 <motion.div
@@ -353,7 +438,7 @@ const Details = () => {
                   }}
                 >
                   <Link
-                    to={"/watch/" + selectedId}
+                    to={"/watch/" + single_mov._id}
                     className="more_card_info_play_btn"
                   >
                     <PlayArrow className="more_card_info_play_icon list_item_play_icon" />
@@ -361,7 +446,7 @@ const Details = () => {
                   </Link>
 
                   <Link
-                    to={"/details/" + selectedId}
+                    to={"/details/" + single_mov._id}
                     className="more_card_info_play_btn"
                     onClick={() => setSelectedId(null)}
                   >

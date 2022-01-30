@@ -13,6 +13,7 @@ import axios from "axios";
 import { ListContext } from "../../context/listContext/ListContext";
 import { getLists } from "../../context/listContext/apiCalls";
 import ListModalSeries from "../list/ListModalSeries";
+import AppUrl from "../../classes/AppUrl";
 
 export default function Featured({
   type,
@@ -28,6 +29,9 @@ export default function Featured({
   time,
   year,
   index,
+  selectTerm,
+  setSelectTerm,
+  movies,
 }) {
   const [selectedId, setSelectedId] = useState(null);
   const [startVideo, setStartVideo] = useState(false);
@@ -74,6 +78,29 @@ export default function Featured({
     //   setStartHeroVideo(false);
     // }
   }, [endHeroVideo]);
+
+  const [mov, setMov] = useState([]);
+
+  useEffect(() => {
+    const getMovies = async () => {
+      try {
+        const res = await axios.get("/movies", {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        });
+        console.log(res);
+        setMov(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMovies();
+    return () => {
+      setMov([]); // This worked for me
+    };
+  }, []);
 
   const offVolume = () => {
     setVolume(false);
@@ -138,9 +165,14 @@ export default function Featured({
     }
   };
 
-  const watch_movie = () => {
-    navigate("/watch/" + 1);
+  const watch_movie = (id) => {
+    navigate("/watch/" + id);
     startScroll();
+  };
+
+  const changeSelect = (e) => {
+    setSelectTerm(e.target.value);
+    console.log(selectTerm);
   };
 
   const more_like = [
@@ -242,7 +274,7 @@ export default function Featured({
         {type && (
           <div className="category">
             {/* <span>{type === "movie" ? "Movies" : "Series"}</span> */}
-            <select name="genre" id="genre">
+            <select name="genre" id="genre" onChange={(e) => changeSelect(e)}>
               <option value={""}>
                 {type === "movie" ? "Select a category" : "Select a category"}
               </option>
@@ -282,7 +314,7 @@ export default function Featured({
         {startHeroVideo ? (
           <>
             <video
-              src={video}
+              src={AppUrl.base_url + movies.trailer}
               autoPlay={true}
               id="hero_video"
               style={{
@@ -299,7 +331,11 @@ export default function Featured({
           </>
         ) : (
           <>
-            <img src={pic} alt="" className="hero_img" />
+            <img
+              src={AppUrl.base_url + movies.img}
+              alt=""
+              className="hero_img"
+            />
           </>
         )}
 
@@ -337,7 +373,7 @@ export default function Featured({
 
         <div className="info">
           <img
-            src={title_pic}
+            src={AppUrl.base_url + movies.imgTitle}
             alt=""
             data-aos="fade-right"
             data-aos-duration="1000"
@@ -350,7 +386,7 @@ export default function Featured({
             data-aos-duration="1000"
             data-aos-easing="ease-in-out"
           >
-            {des}
+            {movies.desc}
           </span>
           <div
             className="buttons"
@@ -359,7 +395,10 @@ export default function Featured({
             data-aos-duration="1000"
             data-aos-easing="ease-in-out"
           >
-            <Link to="/watch/1" style={{ textDecoration: "none" }}>
+            <Link
+              to={"/watch/" + movies._id}
+              style={{ textDecoration: "none" }}
+            >
               <button
                 className="play animate__animated"
                 onMouseEnter={playNowAnimate}
@@ -420,7 +459,7 @@ export default function Featured({
                       //   stiffness: 80,
                       // }}
                     >
-                      <img src={pic} alt="" />
+                      <img src={AppUrl.base_url + movies.img} alt="" />
                     </motion.div>
                     <motion.div
                       className="more_card_info"
@@ -432,13 +471,13 @@ export default function Featured({
                         stiffness: 40,
                       }}
                     >
-                      <h4 className="more_card_info_title">{"Spider Man"}</h4>
+                      <h4 className="more_card_info_title">{movies.title}</h4>
                       <div className="more_card_info_other">
-                        <p className="more_card_info_year">{year}</p>
-                        <p className="more_card_info_age">{age}</p>
-                        <p className="more_card_info_time">{time}</p>
+                        <p className="more_card_info_year">{movies.year}</p>
+                        <p className="more_card_info_age">{movies.age}</p>
+                        <p className="more_card_info_time">{movies.time}</p>
                       </div>
-                      <p className="more_card_info_des">{des}</p>
+                      <p className="more_card_info_des">{movies.desc}</p>
                     </motion.div>
                   </motion.div>
                   <motion.div
@@ -452,7 +491,7 @@ export default function Featured({
                     }}
                   >
                     <Link
-                      to={"/watch/" + selectedId}
+                      to={"/watch/" + movies._id}
                       className="more_card_info_play_btn"
                     >
                       <PlayArrow className="more_card_info_play_icon " />
@@ -501,7 +540,7 @@ export default function Featured({
                   {startVideo ? (
                     <>
                       <video
-                        src={video}
+                        src={AppUrl.base_url + movies.trailer}
                         autoPlay={true}
                         loop
                         style={{
@@ -514,12 +553,16 @@ export default function Featured({
                     </>
                   ) : (
                     <>
-                      <img src={pic} alt="" className="more_modal_img" />
+                      <img
+                        src={AppUrl.base_url + movies.img}
+                        alt=""
+                        className="more_modal_img"
+                      />
                     </>
                   )}
 
                   <motion.img
-                    src={title_pic}
+                    src={AppUrl.base_url + movies.imgTitle}
                     alt=""
                     className="more_title_image"
                     initial={{ y: 100, opacity: 0 }}
@@ -546,7 +589,7 @@ export default function Featured({
                     exit={{ y: 100, opacity: 0 }}
                   >
                     <Link
-                      to={"/watch/" + selectedId}
+                      to={"/watch/" + movies._id}
                       onClick={() => startScroll()}
                     >
                       <PlayArrow className="more_modal_icon list_item_play_icon" />
@@ -599,14 +642,14 @@ export default function Featured({
                       exit={{ x: -100, opacity: 0 }}
                     >
                       <motion.div className="more_modal_itemInfoTop">
-                        <motion.span>{year}</motion.span>
+                        <motion.span>{movies.year}</motion.span>
                         <motion.span className="more_modal_limit">
-                          {age}
+                          {movies.age}
                         </motion.span>
-                        <motion.span>{time}</motion.span>
+                        <motion.span>{movies.time}</motion.span>
                       </motion.div>
                       <motion.div className="more_modal_iteminfo_des">
-                        {des}
+                        {movies.desc}
                       </motion.div>
                     </motion.div>
 
@@ -624,28 +667,35 @@ export default function Featured({
                     >
                       <motion.div className="more_modal_info_right_director">
                         <motion.p>
-                          <motion.span>Director:</motion.span> {director}
+                          <motion.span>Director:</motion.span> {movies.director}
                         </motion.p>
                       </motion.div>
                       <motion.div className="more_modal_info_right_cast">
                         <motion.p>
-                          <motion.span>Cast:</motion.span> {cast}
+                          <motion.span>Cast:</motion.span> {movies.cast}
                         </motion.p>
                       </motion.div>
                       <motion.div className="more_modal_info_right_writer">
                         <motion.p>
-                          <motion.span>Writer:</motion.span> {writer}
+                          <motion.span>Writer:</motion.span> {movies.writer}
                         </motion.p>
                       </motion.div>
                       <motion.div className="more_modal_info_right_genres">
                         <motion.p>
-                          <motion.span>Genres:</motion.span> {genre}
+                          <motion.span>Genres:</motion.span> {movies.genre}
                         </motion.p>
                       </motion.div>
                     </motion.div>
                   </motion.div>
 
-                  <ListModalSeries />
+                  {movies.type === "Series" && (
+                    <ListModalSeries
+                      mov={movies}
+                      more_detail={movies}
+                      selectedId={selectedId}
+                      setSelectedId={setSelectedId}
+                    />
+                  )}
 
                   <div className="more_like_div">
                     <motion.p
@@ -672,45 +722,58 @@ export default function Featured({
                         stiffness: 100,
                       }}
                     >
-                      {more_like.map((item, index) => (
-                        <motion.div
-                          className="more_like_card"
-                          onClick={() => watch_movie()}
-                          initial={{ scale: 1 }}
-                          whileHover={{ scale: 1.1 }}
-                          transition={{
-                            duration: 0.5,
-                            type: "spring",
-                            stiffness: 160,
-                          }}
-                        >
-                          <div className="more_like_img_div">
-                            <img
-                              src={item.pic}
-                              alt=""
-                              className="more_like_img"
-                            />
-                            <Link to={"/watch/" + selectedId}>
-                              <PlayArrow className="more_like_play_btn list_item_play_icon" />
-                            </Link>
-                          </div>
-                          <div className="more_like_info">
-                            <div className="more_like_info_top">
-                              <div>
-                                <span>{item.year}</span>
-                                <span className="more_like_limit">
-                                  {item.age}
-                                </span>
-                                <span>{item.time}</span>
+                      {mov
+                        // eslint-disable-next-line array-callback-return
+                        .filter((m) => {
+                          if (
+                            movies.genre
+                              .toLowerCase()
+
+                              .includes(m.genre.toLowerCase())
+                          ) {
+                            return m;
+                          }
+                        })
+                        .map((item, index) => (
+                          <motion.div
+                            key={item._id}
+                            className="more_like_card"
+                            onClick={() => watch_movie(item._id)}
+                            initial={{ scale: 1 }}
+                            whileHover={{ scale: 1.1 }}
+                            transition={{
+                              duration: 0.5,
+                              type: "spring",
+                              stiffness: 160,
+                            }}
+                          >
+                            <div className="more_like_img_div">
+                              <img
+                                src={AppUrl.base_url + item.imgSm}
+                                alt=""
+                                className="more_like_img"
+                              />
+                              <Link to={"/watch/" + item._id}>
+                                <PlayArrow className="more_like_play_btn list_item_play_icon" />
+                              </Link>
+                            </div>
+                            <div className="more_like_info">
+                              <div className="more_like_info_top">
+                                <div>
+                                  <span>{item.year}</span>
+                                  <span className="more_like_limit">
+                                    {item.age}
+                                  </span>
+                                  <span>{item.time}</span>
+                                </div>
+                                <Add className="more_like_add_icon" />
                               </div>
-                              <Add className="more_like_add_icon" />
+                              <div className="more_like_info_bottom">
+                                {item.desc.substring(0, 142)}
+                              </div>
                             </div>
-                            <div className="more_like_info_bottom">
-                              {item.des.substring(0, 142)}
-                            </div>
-                          </div>
-                        </motion.div>
-                      ))}
+                          </motion.div>
+                        ))}
                     </motion.div>
                   </div>
                 </motion.div>

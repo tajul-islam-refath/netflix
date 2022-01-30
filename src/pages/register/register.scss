@@ -2,7 +2,7 @@
   width: 100vw;
   height: 100vh;
   background: linear-gradient(0deg, #191a32 0%, rgba(25, 26, 50, 0) 218.84%),
-    url("https://cdn.hipwallpaper.com/i/98/21/dUyCkp.jpg");
+    url("https://icinemabd.com/icinema_bg.jpg");
   background-size: cover;
   position: relative;
 
@@ -29,7 +29,7 @@
       }
 
       .loginButton {
-        background-color: red;
+        background-color: var(--red-color);
         border: none;
         color: white;
         border-radius: 5px;

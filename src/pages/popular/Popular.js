@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 //import ListItem from "../../components/listItem/ListItem";
 import Navbar from "../../components/navbar/Navbar";
 import Featured from "../../components/featured/Featured";
@@ -6,8 +6,40 @@ import List from "../../components/list/List";
 import "./popular.scss";
 import Footer from "../../components/footer/Footer";
 import LazyLoad from "react-lazyload";
+import { ListContext } from "../../context/listContext/ListContext";
+import { getLists } from "../../context/listContext/apiCalls";
+import axios from "axios";
 
 const Popular = () => {
+  const { lists, dispatch: listDispatch } = useContext(ListContext);
+
+  useEffect(() => {
+    getLists(listDispatch);
+  }, [listDispatch]);
+
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const getMovies = async () => {
+      try {
+        const res = await axios.get("/movies/random", {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        });
+        console.log(res);
+        setMovies(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMovies();
+    return () => {
+      setMovies([]); // This worked for me
+    };
+  }, []);
+
   const pic =
     "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/9pS1daC2n6UGc3dUogvWIPMR_OU/AAAABUg2egbEe8xG5Fod6IeBEbIlLRZIqvRBJjFOAjsPBfftu8b0QJfzEIv4D1D-u73OYyo85uWb_vpZ08CprgpwfWqShzAA-bfL6Vexl60VeG4o9gBU5A.webp?r=cb2";
   const title_pic =
@@ -20,26 +52,47 @@ const Popular = () => {
     <>
       <div className="home">
         {/* <Navbar /> */}
-        <Featured
-          index={4}
-          pic={pic}
-          title_pic={title_pic}
-          des={des}
-          video={video}
-          year={"2021"}
-          age={"18+"}
-          time={"1h 30m"}
-          cast={"Ronald, Shreya"}
-          director={"Ronald"}
-          writer={"Ronald"}
-          genre={"Action, Comedy"}
-        />
-        <List list_header={"New on Icinema"} />
+        {movies
+          // eslint-disable-next-line array-callback-return
+          .filter((i) => {
+            if (i.type === "Series" || i.type === "Movie") {
+              return i;
+            }
+          })
+          .map((item) => (
+            <Featured
+              key={item._id}
+              index={4}
+              pic={pic}
+              title_pic={title_pic}
+              des={des}
+              video={video}
+              year={"2021"}
+              age={"18+"}
+              time={"1h 30m"}
+              cast={"Ronald, Shreya"}
+              director={"Ronald"}
+              writer={"Ronald"}
+              genre={"Action, Comedy"}
+              movies={item}
+            />
+          ))}
+        {lists
+          // eslint-disable-next-line array-callback-return
+          .filter((i) => {
+            if (i.type === "Popular") {
+              return i;
+            }
+          })
+          .map((item) => (
+            <List key={item._id} list_header={item.title} list_id={item._id} />
+          ))}
+        {/* <List list_header={"New on Icinema"} />
         <LazyLoad offset={50} once={true}>
           <List list_header={"Coming This Week"} />
           <List list_header={"Coming Next Week"} />
           <List list_header={"Worth The Wait"} />
-        </LazyLoad>
+        </LazyLoad> */}
       </div>
       {/* <div className="mylist">
         <Navbar />

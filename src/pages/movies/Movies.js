@@ -12,11 +12,36 @@ import { ListContext } from "../../context/listContext/ListContext";
 import { getLists } from "../../context/listContext/apiCalls";
 
 const Movies = () => {
+  const [selectTerm, setSelectTerm] = useState("");
+
   const { lists, dispatch: listDispatch } = useContext(ListContext);
 
   useEffect(() => {
     getLists(listDispatch);
   }, [listDispatch]);
+
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const getMovies = async () => {
+      try {
+        const res = await axios.get("/movies/random", {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        });
+        console.log(res);
+        setMovies(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMovies();
+    return () => {
+      setMovies([]); // This worked for me
+    };
+  }, []);
 
   // const [list, setList] = useState([]);
 
@@ -50,30 +75,45 @@ const Movies = () => {
     <>
       <div className="home">
         {/* <Navbar /> */}
-        <Featured
-          index={2}
-          pic={pic}
-          title_pic={title_pic}
-          des={des}
-          video={video}
-          year={"2021"}
-          age={"18+"}
-          time={"1h 30m"}
-          cast={"Ronald, Shreya"}
-          director={"Ronald"}
-          writer={"Ronald"}
-          genre={"Action, Comedy"}
-          type={"movie"}
-        />
-        {lists
+        {movies
           // eslint-disable-next-line array-callback-return
           .filter((i) => {
-            if (i.type === "Movies") {
+            if (i.type === "Movie") {
               return i;
             }
           })
           .map((item) => (
-            <List list_header={item.title} list_id={item._id} />
+            <Featured
+              key={item._id}
+              index={2}
+              pic={pic}
+              title_pic={title_pic}
+              des={des}
+              video={video}
+              year={"2021"}
+              age={"18+"}
+              time={"1h 30m"}
+              cast={"Ronald, Shreya"}
+              director={"Ronald"}
+              writer={"Ronald"}
+              genre={"Action, Comedy"}
+              type={"movie"}
+              selectTerm={selectTerm}
+              setSelectTerm={setSelectTerm}
+              movies={item}
+            />
+          ))}
+        {lists
+          // eslint-disable-next-line array-callback-return
+          .filter((i) => {
+            if (selectTerm === "" && i.type === "Movies") {
+              return i;
+            } else if (i._id === selectTerm && i.type === "Movies") {
+              return i;
+            }
+          })
+          .map((item) => (
+            <List key={item._id} list_header={item.title} list_id={item._id} />
           ))}
         {/* <List list_header={"Recently Added"} /> */}
         {/* <LazyLoad offset={50} once={true}>
