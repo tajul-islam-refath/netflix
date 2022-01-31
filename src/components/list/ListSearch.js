@@ -2,7 +2,7 @@ import {
   ArrowBackIosOutlined,
   ArrowForwardIosOutlined,
 } from "@material-ui/icons";
-import { useRef, useState, useEffect, Suspense, lazy } from "react";
+import { useRef, useState, useEffect, Suspense, lazy, useContext } from "react";
 //import ListItem from "../listItem/ListItem";
 import { FiPlay } from "react-icons/fi";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -32,6 +32,7 @@ import AppUrl from "../../classes/AppUrl";
 import ListModal from "./ListModal";
 import PrevArrow from "../musicList/PrevArrow";
 import NextArrow from "../musicList/NextArrow";
+import { UserContext } from "../../context/userContext/UserContext";
 
 const ListItem = lazy(() => import("../listItem/ListItem"));
 
@@ -50,6 +51,31 @@ export default function ListSearch({
   const [selectedId, setSelectedId] = useState(null);
   const [startVideo, setStartVideo] = useState(false);
   const [more_detail, setMoreDetail] = useState(null);
+
+  const { user } = useContext(UserContext);
+  const [singleUser, setSingleUser] = useState("");
+
+  useEffect(() => {
+    const getUsers = async () => {
+      try {
+        const res = await axios.get("/users/find/" + user._id, {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        });
+        console.log(res);
+        setSingleUser(res.data);
+        //console.log(singleUser);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUsers();
+    return () => {
+      setSingleUser(""); // This worked for me
+    };
+  }, []);
 
   //const [volume_detail, setVolumeDetail] = useState(false);
 
@@ -564,6 +590,8 @@ export default function ListSearch({
         startVideo={startVideo}
         setStartVideo={setStartVideo}
         openScroll={openScroll}
+        singleUser={singleUser}
+        mov={movies}
       />
     </>
   );

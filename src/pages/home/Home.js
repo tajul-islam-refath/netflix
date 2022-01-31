@@ -10,7 +10,7 @@ import AppUrl from "../../classes/AppUrl";
 import { ListContext } from "../../context/listContext/ListContext";
 import { getLists } from "../../context/listContext/apiCalls";
 
-const Home = () => {
+const Home = ({ user, singleUser }) => {
   const { lists, dispatch: listDispatch } = useContext(ListContext);
 
   useEffect(() => {
@@ -107,7 +107,13 @@ const Home = () => {
             }
           })
           .map((item) => (
-            <List key={item._id} list_header={item.title} list_id={item._id} />
+            <List
+              key={item._id}
+              list_header={item.title}
+              list_id={item._id}
+              user={user}
+              singleUser={singleUser}
+            />
           ))}
         {/* <List list_header={"Continue Watching"} /> */}
         {/* <LazyLoad offset={50} once={true}>

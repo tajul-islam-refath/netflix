@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 
 //import ListItem from "../listItem/ListItem";
 import "./list.scss";
@@ -33,6 +33,7 @@ const ListModal = ({
   setStartVideo,
   openScroll,
   mov,
+  singleUser,
 }) => {
   const [volume_detail, setVolumeDetail] = useState(false);
 
@@ -41,7 +42,7 @@ const ListModal = ({
   const [addToList, setAddToList] = useState(false);
 
   const [id, setId] = useState(user._id);
-  const [mylist, setMyList] = useState([]);
+  //const [mylist, setMyList] = useState([]);
 
   const navigate = useNavigate();
 
@@ -58,17 +59,20 @@ const ListModal = ({
     openScroll();
   };
 
-  const addToFav = async (id, myList) => {
+  //console.log(user);
+
+  const addToFav = async (id, myList, myListId) => {
     setAddToList(true);
 
     //setMyList([...user.myList, myList]);
-    user.myList = [...user.myList, myList];
-    setMyList(user.myList);
+    // user.myList = [...user.myList, myList];
+    // setMyList(user.myList);
     // setMyList([...mylist, myList]);
-    console.log(mylist);
+    //console.log(myList);
 
-    var formdata = new FormData();
-    formdata.append("data", JSON.stringify(mylist));
+    // var formdata = new FormData();
+    // formdata.append("data", JSON.stringify(myList));
+    // console.log(formdata);
 
     // fetch(`/users/${id}`, {
     //   method: "PUT",
@@ -85,7 +89,7 @@ const ListModal = ({
     // });
 
     try {
-      const res = await axios.put("/users/" + id, formdata, {
+      const res = await axios.put("/users/addmylist/" + id, myList, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -93,8 +97,25 @@ const ListModal = ({
             "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
         },
       });
-      //console.log(res);
-      setMyList(res.data);
+      console.log(res);
+      //setMyList(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const removeFromFav = async (id, myList, myListId) => {
+    try {
+      const res = await axios.put("/users/removemylist/" + id, myList, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          token:
+            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+        },
+      });
+      console.log(res);
+      //setMyList(res.data);
     } catch (err) {
       console.log(err);
     }
@@ -381,34 +402,67 @@ const ListModal = ({
                     >
                       <PlayArrow className="more_modal_icon list_item_play_icon" />
                     </Link>
-                    {addToList ? (
+                    {/* {addToList ? (
                       <>
                         <BsCheck2
                           id={"more_modal_remove_from_list" + more_detail._id}
                           className="more_modal_icon"
                           onClick={() => {
                             setAddToList(false);
-                            // updateUser(
-                            //   { $pull: { myList: null } },
-                            //   id,
-                            //   dispatch
-                            // );
+                            
+                          }}
+                        />
+                      </>
+                    ) : (
+                      <> */}
+                    {singleUser.myList.find((elem) => {
+                      if (elem._id === more_detail._id) {
+                        return true;
+                      }
+                    }) ? (
+                      <>
+                        <BsCheck2
+                          id={"more_modal_remove_from_list" + more_detail._id}
+                          className="more_modal_icon"
+                          onClick={() => {
+                            setAddToList(false);
+                            removeFromFav(id, more_detail, more_detail._id);
                           }}
                         />
                       </>
                     ) : (
                       <>
-                        <Add
-                          id={"more_modal_add_to_list" + more_detail._id}
-                          className="more_modal_icon"
-                          onClick={() => {
-                            addToFav(id, more_detail);
-                            // setAddToList(true);
-                            // updateUser({ myList: more_detail }, id, dispatch);
-                          }}
-                        />
+                        {addToList ? (
+                          <>
+                            <BsCheck2
+                              id={
+                                "more_modal_remove_from_list" + more_detail._id
+                              }
+                              className="more_modal_icon"
+                              onClick={() => {
+                                setAddToList(false);
+                                removeFromFav(id, more_detail, more_detail._id);
+                              }}
+                            />
+                          </>
+                        ) : (
+                          <>
+                            <Add
+                              id={"more_modal_add_to_list" + more_detail._id}
+                              className="more_modal_icon"
+                              onClick={() => {
+                                addToFav(id, more_detail, more_detail._id);
+                                // setAddToList(true);
+                                // updateUser({ myList: more_detail }, id, dispatch);
+                              }}
+                            />
+                          </>
+                        )}
                       </>
                     )}
+
+                    {/* </>
+                    )} */}
 
                     <ThumbUpAltOutlined className="more_modal_icon" />
                     <ThumbDownOutlined className="more_modal_icon" />

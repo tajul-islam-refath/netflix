@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Footer from "../../components/footer/Footer";
 import Navbar from "../../components/navbar/Navbar";
 import "./details.scss";
@@ -10,17 +10,67 @@ import {
   InfoOutlined,
 } from "@material-ui/icons";
 import { HiOutlineDownload } from "react-icons/hi";
-import { Link, useLocation } from "react-router-dom";
+import { BsCheck2 } from "react-icons/bs";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import ListModalSeries from "../../components/list/ListModalSeries";
 import AppUrl from "../../classes/AppUrl";
 import axios from "axios";
+import { UserContext } from "../../context/userContext/UserContext";
 
-const Details = () => {
+const Details = ({ user, singleUser }) => {
   const [selectedId, setSelectedId] = useState(null);
   const { pathname } = useLocation();
 
-  const last_url = pathname.substring(pathname.lastIndexOf("/") + 1);
+  //const last_url = pathname.substring(pathname.lastIndexOf("/") + 1);
+  const navigate = useNavigate();
+  const [last_url, setLastUrl] = useState(
+    pathname.substring(pathname.lastIndexOf("/") + 1)
+  );
+
+  const gotodetail = (e, id) => {
+    e.preventDefault();
+    setLastUrl(id);
+    navigate("/details/" + id);
+  };
+
+  const [addToList, setAddToList] = useState(false);
+
+  const addToFav = async (id, myList, myListId) => {
+    setAddToList(true);
+
+    try {
+      const res = await axios.put("/users/addmylist/" + id, myList, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          token:
+            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+        },
+      });
+      console.log(res);
+      //setMyList(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const removeFromFav = async (id, myList, myListId) => {
+    try {
+      const res = await axios.put("/users/removemylist/" + id, myList, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          token:
+            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+        },
+      });
+      console.log(res);
+      //setMyList(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const [movies, setMovies] = useState([]);
 
@@ -279,7 +329,65 @@ const Details = () => {
                 data-aos-easing="ease-in-out"
               />
             </Link>
-            <Link to="#">
+            {singleUser.myList.find((elem) => {
+              if (elem._id === mov._id) {
+                return true;
+              }
+            }) ? (
+              <>
+                <BsCheck2
+                  id={"details_remove_btn" + mov._id}
+                  className="details_add_btn details_btn"
+                  onClick={() => {
+                    setAddToList(false);
+                    removeFromFav(user._id, mov, mov._id);
+                  }}
+                  data-aos="fade-up"
+                  data-aos-offset="0"
+                  data-aos-delay="1500"
+                  data-aos-duration="500"
+                  data-aos-easing="ease-in-out"
+                />
+              </>
+            ) : (
+              <>
+                {addToList ? (
+                  <>
+                    <BsCheck2
+                      id={"details_remove_btn" + mov._id}
+                      className="details_add_btn details_btn"
+                      onClick={() => {
+                        setAddToList(false);
+                        removeFromFav(user._id, mov, mov._id);
+                      }}
+                      data-aos="fade-up"
+                      data-aos-offset="0"
+                      data-aos-delay="1500"
+                      data-aos-duration="500"
+                      data-aos-easing="ease-in-out"
+                    />
+                  </>
+                ) : (
+                  <>
+                    <Add
+                      id={"details_add_btn" + mov._id}
+                      className="details_add_btn details_btn"
+                      onClick={() => {
+                        addToFav(user._id, mov, mov._id);
+                        // setAddToList(true);
+                        // updateUser({ myList: more_detail }, id, dispatch);
+                      }}
+                      data-aos="fade-up"
+                      data-aos-offset="0"
+                      data-aos-delay="1500"
+                      data-aos-duration="500"
+                      data-aos-easing="ease-in-out"
+                    />
+                  </>
+                )}
+              </>
+            )}
+            {/* <Link to="#">
               <Add
                 className="details_add_btn details_btn"
                 data-aos="fade-up"
@@ -288,7 +396,7 @@ const Details = () => {
                 data-aos-duration="500"
                 data-aos-easing="ease-in-out"
               />
-            </Link>
+            </Link> */}
             <Link to="#">
               <ThumbUpAltOutlined
                 className="details_like_btn details_btn"
@@ -446,9 +554,12 @@ const Details = () => {
                   </Link>
 
                   <Link
-                    to={"/details/" + single_mov._id}
+                    to="!#"
                     className="more_card_info_play_btn"
-                    onClick={() => setSelectedId(null)}
+                    onClick={(e) => {
+                      setSelectedId(null);
+                      gotodetail(e, single_mov._id);
+                    }}
                   >
                     <InfoOutlined className="more_card_info_play_icon" />
                     Details

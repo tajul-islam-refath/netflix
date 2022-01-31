@@ -2,7 +2,7 @@ import {
   ArrowBackIosOutlined,
   ArrowForwardIosOutlined,
 } from "@material-ui/icons";
-import { useRef, useState, useEffect, Suspense, lazy } from "react";
+import { useRef, useState, useEffect, Suspense, lazy, useContext } from "react";
 //import ListItem from "../listItem/ListItem";
 import "./list.scss";
 import {
@@ -19,15 +19,23 @@ import { FiVolume2, FiVolumeX } from "react-icons/fi";
 
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import LazyLoad from "react-lazyload";
 import axios from "axios";
 import AppUrl from "../../classes/AppUrl";
 import ListModal from "./ListModal";
+import { UserContext } from "../../context/userContext/UserContext";
 
 const ListItem = lazy(() => import("../listItem/ListItem"));
 
-export default function List({ list_header, list, list_id }) {
+export default function List({
+  list_header,
+  list,
+  list_id,
+  pathname,
+  user,
+  singleUser,
+}) {
   const [isMoved, setIsMoved] = useState(false);
   const [isMovedRight, setIsMovedRight] = useState(true);
   const [slideNumber, setSlideNumber] = useState(0);
@@ -36,6 +44,33 @@ export default function List({ list_header, list, list_id }) {
   const [selectedId, setSelectedId] = useState(null);
   const [startVideo, setStartVideo] = useState(false);
   const [more_detail, setMoreDetail] = useState(null);
+
+  //const { pathname } = useLocation();
+
+  // const { user } = useContext(UserContext);
+  // const [singleUser, setSingleUser] = useState("");
+
+  // useEffect(() => {
+  //   const getUsers = async () => {
+  //     try {
+  //       const res = await axios.get("/users/find/" + user._id, {
+  //         headers: {
+  //           token:
+  //             "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+  //         },
+  //       });
+  //       console.log(res);
+  //       setSingleUser(res.data);
+  //       //console.log(singleUser);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   getUsers();
+  //   return () => {
+  //     setSingleUser(""); // This worked for me
+  //   };
+  // }, []);
 
   //const [volume_detail, setVolumeDetail] = useState(false);
 
@@ -6026,62 +6061,113 @@ export default function List({ list_header, list, list_id }) {
             <>
               <motion.div className="main_div">
                 <div className="center_div">
-                  {movies
-                    // eslint-disable-next-line array-callback-return
-                    .filter((m) => {
-                      if (m.category === list_id) {
-                        return m;
-                      }
-                    })
-                    .map((item, index) => (
-                      <Suspense fallback={<div></div>} key={item._id}>
-                        {/* <LazyLoad
+                  {pathname !== "/my-list" ? (
+                    <>
+                      {movies
+                        // eslint-disable-next-line array-callback-return
+                        .filter((m) => {
+                          if (m.category === list_id) {
+                            return m;
+                          }
+                        })
+                        .map((item, index) => (
+                          <Suspense fallback={<div></div>} key={item._id}>
+                            {/* <LazyLoad
                         offset={50}
                         height={200}
                         once={true}
                         scroll={true}
                         
                       > */}
-                        <ListItem
-                          item_id={item._id}
-                          setSelectedId={setSelectedId}
-                          info={item}
-                          setMoreDetail={setMoreDetail}
-                        />
-                        {/* </LazyLoad> */}
-                      </Suspense>
-                    ))}
+                            <ListItem
+                              item_id={item._id}
+                              setSelectedId={setSelectedId}
+                              info={item}
+                              setMoreDetail={setMoreDetail}
+                            />
+                            {/* </LazyLoad> */}
+                          </Suspense>
+                        ))}
+                    </>
+                  ) : (
+                    <>
+                      {singleUser.myList.map((item, index) => (
+                        <Suspense fallback={<div></div>} key={item._id}>
+                          {/* <LazyLoad
+                        offset={50}
+                        height={200}
+                        once={true}
+                        scroll={true}
+                        
+                      > */}
+                          <ListItem
+                            item_id={item._id}
+                            setSelectedId={setSelectedId}
+                            info={item}
+                            setMoreDetail={setMoreDetail}
+                          />
+                          {/* </LazyLoad> */}
+                        </Suspense>
+                      ))}
+                    </>
+                  )}
                 </div>
               </motion.div>
             </>
           ) : (
             <>
               <div className="container" ref={listRef}>
-                {movies
-                  // eslint-disable-next-line array-callback-return
-                  .filter((m) => {
-                    if (m.category === list_id) {
-                      return m;
-                    }
-                  })
-                  .map((item, index) => (
-                    <Suspense fallback={<div></div>} key={item._id}>
-                      <LazyLoad
-                        offset={50}
-                        height={200}
-                        once={true}
-                        scroll={true}
-                      >
-                        <ListItem
-                          item_id={item._id}
-                          setSelectedId={setSelectedId}
-                          info={item}
-                          setMoreDetail={setMoreDetail}
-                          marginBottom={"0px"}
-                        />
-                      </LazyLoad>
-                    </Suspense>
-                  ))}
+                {pathname !== "/my-list" ? (
+                  <>
+                    {movies
+                      // eslint-disable-next-line array-callback-return
+                      .filter((m) => {
+                        if (m.category === list_id) {
+                          return m;
+                        }
+                      })
+                      .map((item, index) => (
+                        <Suspense fallback={<div></div>} key={item._id}>
+                          <LazyLoad
+                            offset={50}
+                            height={200}
+                            once={true}
+                            scroll={true}
+                          >
+                            <ListItem
+                              item_id={item._id}
+                              setSelectedId={setSelectedId}
+                              info={item}
+                              setMoreDetail={setMoreDetail}
+                              marginBottom={"0px"}
+                            />
+                          </LazyLoad>
+                        </Suspense>
+                      ))}
+                  </>
+                ) : (
+                  <>
+                    {singleUser.myList.map((item, index) => (
+                      <Suspense fallback={<div></div>} key={item._id}>
+                        <LazyLoad
+                          offset={50}
+                          height={200}
+                          once={true}
+                          scroll={true}
+                        >
+                          <ListItem
+                            item_id={item._id}
+                            setSelectedId={setSelectedId}
+                            info={item}
+                            setMoreDetail={setMoreDetail}
+                            marginBottom={"0px"}
+                          />
+                        </LazyLoad>
+                      </Suspense>
+                    ))}
+                  </>
+                )}
+
                 {/* <ListItem index={0} setSelectedId={setSelectedId} /> */}
                 {/* <ListItem index={1} setSelectedId={setSelectedId} />
             <ListItem index={2} setSelectedId={setSelectedId} />
@@ -6112,7 +6198,8 @@ export default function List({ list_header, list, list_id }) {
         startVideo={startVideo}
         setStartVideo={setStartVideo}
         openScroll={openScroll}
-        mov = {movies}
+        mov={movies}
+        singleUser={singleUser}
       />
     </>
   );

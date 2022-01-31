@@ -21,6 +21,8 @@ import "aos/dist/aos.css";
 import Preloader from "./components/preloader/Preloader";
 import swal from "sweetalert";
 import { AuthContext } from "./context/authContext/AuthContext";
+import { UserContext } from "./context/userContext/UserContext";
+import axios from "axios";
 
 const Home = lazy(() => import("./pages/home/Home"));
 const Register = lazy(() => import("./pages/register/Register"));
@@ -66,6 +68,31 @@ const App = () => {
       setSearchPlaceHolder("Search by Movie/Series");
     }
   }, [pathname, searchPlaceHolder]);
+
+  const { user: users } = useContext(UserContext);
+  const [singleUser, setSingleUser] = useState("");
+
+  useEffect(() => {
+    const getUsers = async () => {
+      try {
+        const res = await axios.get("/users/find/" + users._id, {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        });
+        //console.log(res);
+        setSingleUser(res.data);
+        //console.log(singleUser);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUsers();
+    return () => {
+      setSingleUser(""); // This worked for me
+    };
+  }, []);
 
   //const [location_success, setLocationSuccess] = useState(false);
   const [countryName, setCountryName] = useState("");
@@ -146,7 +173,13 @@ const App = () => {
             exact
             path="/browse"
             // element={user ? <Home /> : <Navigate to="/login" />}
-            element={user ? <Home /> : <Navigate to="/login" />}
+            element={
+              user ? (
+                <Home user={users} singleUser={singleUser} />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
           />
           {/* {user ? (
                 <> */}
@@ -164,27 +197,61 @@ const App = () => {
           <Route
             exact
             path="/my-list"
-            element={user ? <MyList /> : <Navigate to="/login" />}
+            element={
+              user ? (
+                <MyList
+                  pathname={pathname}
+                  user={users}
+                  singleUser={singleUser}
+                />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
           />
           <Route
             exact
             path="/series"
-            element={user ? <Series /> : <Navigate to="/login" />}
+            element={
+              user ? (
+                <Series user={users} singleUser={singleUser} />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
           />
           <Route
             exact
             path="/movies"
-            element={user ? <Movies /> : <Navigate to="/login" />}
+            element={
+              user ? (
+                <Movies user={users} singleUser={singleUser} />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
           />
           <Route
             exact
             path="/popular"
-            element={user ? <Popular /> : <Navigate to="/login" />}
+            element={
+              user ? (
+                <Popular user={users} singleUser={singleUser} />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
           />
           <Route
             exact
             path="/details/:id"
-            element={user ? <Details /> : <Navigate to="/login" />}
+            element={
+              user ? (
+                <Details user={users} singleUser={singleUser} />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
           />
           <Route
             exact

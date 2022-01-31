@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 //import ListItem from "../../components/listItem/ListItem";
 import Navbar from "../../components/navbar/Navbar";
 import Featured from "../../components/featured/Featured";
@@ -6,8 +6,32 @@ import List from "../../components/list/List";
 import "./mylist.scss";
 import Footer from "../../components/footer/Footer";
 import LazyLoad from "react-lazyload";
+import axios from "axios";
 
-const MyList = () => {
+const MyList = ({ pathname, user, singleUser }) => {
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const getMovies = async () => {
+      try {
+        const res = await axios.get("/movies/random", {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        });
+        console.log(res);
+        setMovies(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMovies();
+    return () => {
+      setMovies([]); // This worked for me
+    };
+  }, []);
+
   const pic =
     "https://occ-0-58-64.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABQS96h1QM7IhWjzaOOECOgvAXWfbZzj_quaAFhZc7_9wfJeh_WRyE0RihNoaN5NAiarwfaaFF_Y5w1XiUITsI1R_6ayV.webp?r=5ef";
   const title_pic =
@@ -20,23 +44,40 @@ const MyList = () => {
     <>
       <div className="home">
         {/* <Navbar /> */}
-        <Featured
-          index={3}
-          pic={pic}
-          title_pic={title_pic}
-          des={des}
-          video={video}
-          year={"2021"}
-          age={"18+"}
-          time={"1h 30m"}
-          cast={"Ronald, Shreya"}
-          director={"Ronald"}
-          writer={"Ronald"}
-          genre={"Action, Comedy"}
-        />
-        <List list_header={"TV Shows"} />
+        {movies
+          // eslint-disable-next-line array-callback-return
+          .filter((i) => {
+            if (i.type === "Movie") {
+              return i;
+            }
+          })
+          .map((item) => (
+            <Featured
+              key={item._id}
+              index={2}
+              pic={pic}
+              title_pic={title_pic}
+              des={des}
+              video={video}
+              year={"2021"}
+              age={"18+"}
+              time={"1h 30m"}
+              cast={"Ronald, Shreya"}
+              director={"Ronald"}
+              writer={"Ronald"}
+              genre={"Action, Comedy"}
+              type={"movie"}
+              movies={item}
+            />
+          ))}
+        {/* <List list_header={"TV Shows"} /> */}
         <LazyLoad offset={50} once={true}>
-          <List list_header={"Movies"} />
+          <List
+            list_header={"My List"}
+            pathname={pathname}
+            user={user}
+            singleUser={singleUser}
+          />
         </LazyLoad>
         {/* <List />
         <List /> */}

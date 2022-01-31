@@ -10,7 +10,7 @@ import { ListContext } from "../../context/listContext/ListContext";
 import { getLists } from "../../context/listContext/apiCalls";
 import axios from "axios";
 
-const Series = () => {
+const Series = ({ user, singleUser }) => {
   const [selectTerm, setSelectTerm] = useState("");
 
   const { lists, dispatch: listDispatch } = useContext(ListContext);
@@ -91,7 +91,13 @@ const Series = () => {
             }
           })
           .map((item) => (
-            <List key={item._id} list_header={item.title} list_id={item._id} />
+            <List
+              key={item._id}
+              list_header={item.title}
+              list_id={item._id}
+              user={user}
+              singleUser={singleUser}
+            />
           ))}
         {/* <List list_header={"Korean TV Shows"} />
         <LazyLoad offset={50} once={true}>

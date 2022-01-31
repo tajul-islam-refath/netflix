@@ -9,11 +9,13 @@ import { Add, ThumbUpAltOutlined, ThumbDownOutlined } from "@material-ui/icons";
 import { FaTimesCircle } from "react-icons/fa";
 import { HiOutlineDownload } from "react-icons/hi";
 import { FiVolume2, FiVolumeX } from "react-icons/fi";
+import { BsCheck2 } from "react-icons/bs";
 import axios from "axios";
 import { ListContext } from "../../context/listContext/ListContext";
 import { getLists } from "../../context/listContext/apiCalls";
 import ListModalSeries from "../list/ListModalSeries";
 import AppUrl from "../../classes/AppUrl";
+import { UserContext } from "../../context/userContext/UserContext";
 
 export default function Featured({
   type,
@@ -46,6 +48,92 @@ export default function Featured({
   useEffect(() => {
     getLists(listDispatch);
   }, [listDispatch]);
+
+  const [addToList, setAddToList] = useState(false);
+  const { user } = useContext(UserContext);
+  const [singleUser, setSingleUser] = useState("");
+
+  useEffect(() => {
+    const getUsers = async () => {
+      try {
+        const res = await axios.get("/users/find/" + user._id, {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        });
+        console.log(res);
+        setSingleUser(res.data);
+        //console.log(singleUser);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUsers();
+    return () => {
+      setSingleUser(""); // This worked for me
+    };
+  }, []);
+
+  const addToFav = async (id, myList, myListId) => {
+    setAddToList(true);
+
+    //setMyList([...user.myList, myList]);
+    // user.myList = [...user.myList, myList];
+    // setMyList(user.myList);
+    // setMyList([...mylist, myList]);
+    //console.log(myList);
+
+    // var formdata = new FormData();
+    // formdata.append("data", JSON.stringify(myList));
+    // console.log(formdata);
+
+    // fetch(`/users/${id}`, {
+    //   method: "PUT",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //     token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+    //   },
+    //   body: JSON.stringify(item),
+    // }).then((result) => {
+    //   result.json().then((resp) => {
+    //     console.warn(resp);
+    //   });
+    // });
+
+    try {
+      const res = await axios.put("/users/addmylist/" + id, myList, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          token:
+            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+        },
+      });
+      console.log(res);
+      //setMyList(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const removeFromFav = async (id, myList, myListId) => {
+    try {
+      const res = await axios.put("/users/removemylist/" + id, myList, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          token:
+            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+        },
+      });
+      console.log(res);
+      //setMyList(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const navigate = useNavigate();
 
@@ -499,7 +587,7 @@ export default function Featured({
                     </Link>
 
                     <Link
-                      to={"/details/" + selectedId}
+                      to={"/details/" + movies._id}
                       className="more_card_info_play_btn"
                     >
                       <InfoOutlined className="more_card_info_play_icon" />
@@ -594,7 +682,49 @@ export default function Featured({
                     >
                       <PlayArrow className="more_modal_icon list_item_play_icon" />
                     </Link>
-                    <Add className="more_modal_icon" />
+                    {singleUser.myList.find((elem) => {
+                      if (elem._id === movies._id) {
+                        return true;
+                      }
+                    }) ? (
+                      <>
+                        <BsCheck2
+                          id={"more_modal_remove_from_list" + movies._id}
+                          className="more_modal_icon"
+                          onClick={() => {
+                            setAddToList(false);
+                            removeFromFav(user._id, movies, movies._id);
+                          }}
+                        />
+                      </>
+                    ) : (
+                      <>
+                        {addToList ? (
+                          <>
+                            <BsCheck2
+                              id={"more_modal_remove_from_list" + movies._id}
+                              className="more_modal_icon"
+                              onClick={() => {
+                                setAddToList(false);
+                                removeFromFav(user._id, movies, movies._id);
+                              }}
+                            />
+                          </>
+                        ) : (
+                          <>
+                            <Add
+                              id={"more_modal_add_to_list" + movies._id}
+                              className="more_modal_icon"
+                              onClick={() => {
+                                addToFav(user._id, movies, movies._id);
+                                // setAddToList(true);
+                                // updateUser({ myList: more_detail }, id, dispatch);
+                              }}
+                            />
+                          </>
+                        )}
+                      </>
+                    )}
                     <ThumbUpAltOutlined className="more_modal_icon" />
                     <ThumbDownOutlined className="more_modal_icon" />
                     <HiOutlineDownload className="more_modal_icon" />
@@ -766,7 +896,7 @@ export default function Featured({
                                   </span>
                                   <span>{item.time}</span>
                                 </div>
-                                <Add className="more_like_add_icon" />
+                                {/* <Add className="more_like_add_icon" /> */}
                               </div>
                               <div className="more_like_info_bottom">
                                 {item.desc.substring(0, 142)}

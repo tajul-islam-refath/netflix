@@ -10,7 +10,7 @@ import { ListContext } from "../../context/listContext/ListContext";
 import { getLists } from "../../context/listContext/apiCalls";
 import axios from "axios";
 
-const Popular = () => {
+const Popular = ({ user, singleUser }) => {
   const { lists, dispatch: listDispatch } = useContext(ListContext);
 
   useEffect(() => {
@@ -85,7 +85,13 @@ const Popular = () => {
             }
           })
           .map((item) => (
-            <List key={item._id} list_header={item.title} list_id={item._id} />
+            <List
+              key={item._id}
+              list_header={item.title}
+              list_id={item._id}
+              user={user}
+              singleUser={singleUser}
+            />
           ))}
         {/* <List list_header={"New on Icinema"} />
         <LazyLoad offset={50} once={true}>
