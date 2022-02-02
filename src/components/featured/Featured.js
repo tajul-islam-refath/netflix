@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useContext } from "react";
 import { Add, ThumbUpAltOutlined, ThumbDownOutlined } from "@material-ui/icons";
+import { AiFillLike, AiFillDislike } from "react-icons/ai";
 //import { FiMoreHorizontal } from "react-icons/fi";
 import { FaTimesCircle } from "react-icons/fa";
 import { HiOutlineDownload } from "react-icons/hi";
@@ -50,6 +51,9 @@ export default function Featured({
   }, [listDispatch]);
 
   const [addToList, setAddToList] = useState(false);
+  const [addtoLike, setAddtoLike] = useState(false);
+  const [addtoDislike, setAddtoDislike] = useState(false);
+
   const { user } = useContext(UserContext);
   const [singleUser, setSingleUser] = useState("");
 
@@ -130,6 +134,210 @@ export default function Featured({
       });
       console.log(res);
       //setMyList(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //like
+  const addToLike = async (id, myLike, myLikeId) => {
+    setAddtoLike(true);
+    setAddtoDislike(false);
+
+    try {
+      const res = await axios.put("/users/addmylike/" + id, myLike, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          token:
+            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+        },
+      });
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+
+    try {
+      const res = await axios.put("/movies/like/" + movies._id, singleUser, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          token:
+            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+        },
+      });
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+
+    try {
+      const res = await axios.put("/users/removemydislike/" + id, myLike, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          token:
+            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+        },
+      });
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+
+    try {
+      const res = await axios.put(
+        "/movies/removedislike/" + movies._id,
+        singleUser,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const removeFromLike = async (id, myLike, myLikeId) => {
+    setAddtoLike(false);
+
+    try {
+      const res = await axios.put("/users/removemylike/" + id, myLike, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          token:
+            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+        },
+      });
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+
+    try {
+      const res = await axios.put(
+        "/movies/removelike/" + movies._id,
+        singleUser,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //dislike
+  const addToDislike = async (id, myDislike, myDislikeId) => {
+    setAddtoDislike(true);
+    setAddtoLike(false);
+
+    try {
+      const res = await axios.put("/users/addmydislike/" + id, myDislike, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          token:
+            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+        },
+      });
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+
+    try {
+      const res = await axios.put("/movies/dislike/" + movies._id, singleUser, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          token:
+            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+        },
+      });
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+
+    try {
+      const res = await axios.put("/users/removemylike/" + id, myDislike, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          token:
+            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+        },
+      });
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+
+    try {
+      const res = await axios.put(
+        "/movies/removelike/" + movies._id,
+        singleUser,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const removeFromDislike = async (id, myDislike, myDislikeId) => {
+    setAddtoDislike(false);
+
+    try {
+      const res = await axios.put("/users/removemydislike/" + id, myDislike, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          token:
+            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+        },
+      });
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+
+    try {
+      const res = await axios.put(
+        "/movies/removedislike/" + movies._id,
+        singleUser,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
+      console.log(res);
     } catch (err) {
       console.log(err);
     }
@@ -725,8 +933,81 @@ export default function Featured({
                         )}
                       </>
                     )}
-                    <ThumbUpAltOutlined className="more_modal_icon" />
-                    <ThumbDownOutlined className="more_modal_icon" />
+
+                    {singleUser.myLike.find((elem) => {
+                      if (elem._id === movies._id) {
+                        return true;
+                      }
+                    }) ? (
+                      <>
+                        <AiFillLike
+                          className="more_modal_icon"
+                          onClick={() => {
+                            removeFromLike(user._id, movies, movies._id);
+                          }}
+                        />
+                      </>
+                    ) : (
+                      <>
+                        {addtoLike ? (
+                          <>
+                            <AiFillLike
+                              className="more_modal_icon"
+                              onClick={() => {
+                                removeFromLike(user._id, movies, movies._id);
+                              }}
+                            />
+                          </>
+                        ) : (
+                          <>
+                            <ThumbUpAltOutlined
+                              className="more_modal_icon"
+                              onClick={() => {
+                                addToLike(user._id, movies, movies._id);
+                              }}
+                            />
+                          </>
+                        )}
+                      </>
+                    )}
+
+                    {singleUser.myDislike.find((elem) => {
+                      if (elem._id === movies._id) {
+                        return true;
+                      }
+                    }) ? (
+                      <>
+                        <AiFillDislike
+                          className="more_modal_icon"
+                          onClick={() => {
+                            removeFromDislike(user._id, movies, movies._id);
+                          }}
+                        />
+                      </>
+                    ) : (
+                      <>
+                        {addtoDislike ? (
+                          <>
+                            <AiFillDislike
+                              className="more_modal_icon"
+                              onClick={() => {
+                                removeFromDislike(user._id, movies, movies._id);
+                              }}
+                            />
+                          </>
+                        ) : (
+                          <>
+                            <ThumbDownOutlined
+                              className="more_modal_icon"
+                              onClick={() => {
+                                addToDislike(user._id, movies, movies._id);
+                              }}
+                            />
+                          </>
+                        )}
+                      </>
+                    )}
+
                     <HiOutlineDownload className="more_modal_icon" />
                     {volume_detail ? (
                       <>

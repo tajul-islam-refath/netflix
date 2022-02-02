@@ -6084,6 +6084,7 @@ export default function List({
                               setSelectedId={setSelectedId}
                               info={item}
                               setMoreDetail={setMoreDetail}
+                              singleUser={singleUser}
                             />
                             {/* </LazyLoad> */}
                           </Suspense>
@@ -6105,6 +6106,7 @@ export default function List({
                             setSelectedId={setSelectedId}
                             info={item}
                             setMoreDetail={setMoreDetail}
+                            singleUser={singleUser}
                           />
                           {/* </LazyLoad> */}
                         </Suspense>
@@ -6140,6 +6142,7 @@ export default function List({
                               info={item}
                               setMoreDetail={setMoreDetail}
                               marginBottom={"0px"}
+                              singleUser={singleUser}
                             />
                           </LazyLoad>
                         </Suspense>
@@ -6161,6 +6164,7 @@ export default function List({
                             info={item}
                             setMoreDetail={setMoreDetail}
                             marginBottom={"0px"}
+                            singleUser={singleUser}
                           />
                         </LazyLoad>
                       </Suspense>
