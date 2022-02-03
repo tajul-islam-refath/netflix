@@ -22,6 +22,7 @@ function MusicPlayer({
   setMusicId,
   musicAudio,
   setMusicAudio,
+  audioPlayer,
 }) {
   const [isLove, setLove] = useState(false);
   const [isPlaying, setPlay] = useState(false);
@@ -29,7 +30,7 @@ function MusicPlayer({
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrenttime] = useState(0);
 
-  const audioPlayer = useRef(); //   reference to our audio component
+  // const audioPlayer = useRef(); //   reference to our audio component
   const progressBar = useRef(); //   reference to our prgressbar
   const animationRef = useRef(); //  reference to our animation
 
@@ -107,6 +108,7 @@ function MusicPlayer({
       </div>
       <div className="songAttributes">
         <audio
+          id={"audioPlayer" + musicId}
           src={musicAudio}
           preload="metadata"
           ref={audioPlayer}

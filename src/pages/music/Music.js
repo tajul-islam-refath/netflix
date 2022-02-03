@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import MusicHero from "../../components/musicHero/MusicHero";
 import MusicList from "../../components/musicList/MusicList";
 import MusicPlayer from "../../components/musicPlayer/MusicPlayer";
@@ -7,7 +7,9 @@ import { ListContext } from "../../context/listContext/ListContext";
 import "./music.scss";
 import axios from "axios";
 
-const Music = () => {
+const Music = ({ singleUser }) => {
+  const audioPlayer = useRef(); //   reference to our audio component
+
   const { lists, dispatch: listDispatch } = useContext(ListContext);
 
   useEffect(() => {
@@ -161,7 +163,7 @@ const Music = () => {
               header_below={"Enjoy some new awesome music"}
               // eslint-disable-next-line array-callback-return
               musicList={movies.filter((m) => {
-                if (m.type === "Music") {
+                if (m.type === "Music" && m.category === item._id) {
                   return m;
                 }
               })}
@@ -169,6 +171,13 @@ const Music = () => {
               setMusicId={setPlayMusicId}
               musicAudio={playMusicAudio}
               setMusicAudio={setPlayMusicAudio}
+              singleUser={singleUser}
+              audioPlayer={audioPlayer}
+              musicAll={movies.filter((m) => {
+                if (m.type === "Music") {
+                  return m;
+                }
+              })}
             />
           ))}
 
@@ -213,6 +222,7 @@ const Music = () => {
           setMusicId={setPlayMusicId}
           musicAudio={playMusicAudio}
           setMusicAudio={setPlayMusicAudio}
+          audioPlayer={audioPlayer}
         />
       </div>
     </>

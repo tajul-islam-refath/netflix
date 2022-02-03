@@ -76,42 +76,54 @@ export default function ListItem({
     setAddtoDislike(false);
 
     try {
-      const res = await axios.put("/users/addmylike/" + id, myLike, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          token:
-            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-        },
-      });
+      const res = await axios.put(
+        "/users/addmylike/" + id,
+        { movie_id: myLikeId },
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
       console.log(res);
     } catch (err) {
       console.log(err);
     }
 
     try {
-      const res = await axios.put("/movies/like/" + info._id, singleUser, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          token:
-            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-        },
-      });
+      const res = await axios.put(
+        "/movies/like/" + info._id,
+        { user_id: singleUser._id },
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
       console.log(res);
     } catch (err) {
       console.log(err);
     }
 
     try {
-      const res = await axios.put("/users/removemydislike/" + id, myLike, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          token:
-            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-        },
-      });
+      const res = await axios.put(
+        "/users/removemydislike/" + id,
+        { movie_id: myLikeId },
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
       console.log(res);
     } catch (err) {
       console.log(err);
@@ -120,7 +132,7 @@ export default function ListItem({
     try {
       const res = await axios.put(
         "/movies/removedislike/" + info._id,
-        singleUser,
+        { user_id: singleUser._id },
         {
           headers: {
             Accept: "application/json",
@@ -140,14 +152,18 @@ export default function ListItem({
     setAddtoLike(false);
 
     try {
-      const res = await axios.put("/users/removemylike/" + id, myLike, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          token:
-            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-        },
-      });
+      const res = await axios.put(
+        "/users/removemylike/" + id,
+        { movie_id: myLikeId },
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
       console.log(res);
     } catch (err) {
       console.log(err);
@@ -156,7 +172,7 @@ export default function ListItem({
     try {
       const res = await axios.put(
         "/movies/removelike/" + info._id,
-        singleUser,
+        { user_id: singleUser._id },
         {
           headers: {
             Accept: "application/json",
@@ -178,42 +194,54 @@ export default function ListItem({
     setAddtoLike(false);
 
     try {
-      const res = await axios.put("/users/addmydislike/" + id, myDislike, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          token:
-            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-        },
-      });
+      const res = await axios.put(
+        "/users/addmydislike/" + id,
+        { movie_id: myDislikeId },
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
       console.log(res);
     } catch (err) {
       console.log(err);
     }
 
     try {
-      const res = await axios.put("/movies/dislike/" + info._id, singleUser, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          token:
-            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-        },
-      });
+      const res = await axios.put(
+        "/movies/dislike/" + info._id,
+        { user_id: singleUser._id },
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
       console.log(res);
     } catch (err) {
       console.log(err);
     }
 
     try {
-      const res = await axios.put("/users/removemylike/" + id, myDislike, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          token:
-            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-        },
-      });
+      const res = await axios.put(
+        "/users/removemylike/" + id,
+        { movie_id: myDislikeId },
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
       console.log(res);
     } catch (err) {
       console.log(err);
@@ -222,7 +250,7 @@ export default function ListItem({
     try {
       const res = await axios.put(
         "/movies/removelike/" + info._id,
-        singleUser,
+        { user_id: singleUser._id },
         {
           headers: {
             Accept: "application/json",
@@ -242,14 +270,18 @@ export default function ListItem({
     setAddtoDislike(false);
 
     try {
-      const res = await axios.put("/users/removemydislike/" + id, myDislike, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          token:
-            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-        },
-      });
+      const res = await axios.put(
+        "/users/removemydislike/" + id,
+        { movie_id: myDislikeId },
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
       console.log(res);
     } catch (err) {
       console.log(err);
@@ -258,7 +290,7 @@ export default function ListItem({
     try {
       const res = await axios.put(
         "/movies/removedislike/" + info._id,
-        singleUser,
+        { user_id: singleUser._id },
         {
           headers: {
             Accept: "application/json",

@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import "./musicList.scss";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FiPlay } from "react-icons/fi";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { RiDislikeLine, RiDislikeFill } from "react-icons/ri";
 import { CgMore } from "react-icons/cg";
+import { HiOutlineDownload } from "react-icons/hi";
 import PrevArrow from "./PrevArrow";
 import NextArrow from "./NextArrow";
 import AppUrl from "../../classes/AppUrl";
+import { UserContext } from "../../context/userContext/UserContext";
+import axios from "axios";
+import MusicListItem from "./MusicListItem";
 
 const MusicList = ({
   header,
@@ -19,6 +24,9 @@ const MusicList = ({
   setMusicId,
   musicAudio,
   setMusicAudio,
+  singleUser,
+  audioPlayer,
+  musicAll,
 }) => {
   var settings1 = {
     // dots: true,
@@ -84,12 +92,6 @@ const MusicList = ({
     ],
   };
 
-  const playMusic = (id, audio) => {
-    setMusicId(id);
-    setMusicAudio(audio);
-    document.querySelector(".audio_player").play();
-  };
-
   //const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
 
   return (
@@ -102,37 +104,18 @@ const MusicList = ({
         <div className="music_list_main">
           <Slider className="music_list_slider_main" {...settings1}>
             {musicList.map((item, index) => (
-              <div
-                className="music_list_slider_card"
-                data-aos="zoom-in"
-                data-aos-offset="100"
-                data-aos-delay={index * 150}
-                data-aos-duration="500"
-                // data-aos-easing="ease-in-out"
-              >
-                <img src={AppUrl.base_url + item.imgSm} alt="" />
-                <div className="music_list_slider_card_info">
-                  <p className="music_list_slider_card_name">{item.title}</p>
-                  <p className="music_list_slider_card_artist">{item.cast}</p>
-                </div>
-                {/* <audio src="horse.mp3" type="audio/mpeg" controls /> */}
-
-                <div className="red_shade"></div>
-                <div className="red_shade_info">
-                  <div className="red_shade_icons">
-                    <AiOutlineHeart className="red_shade_heart_icon" />{" "}
-                    <FiPlay
-                      className="red_shade_play_icon"
-                      onClick={() => playMusic(item.id, item.video)}
-                    />
-                    <CgMore className="red_shade_more_icon" />
-                  </div>
-                  <div className="red_shade_name_info">
-                    <p className="red_shade_name">{item.title}</p>
-                    <p className="red_shade_artist">{item.cast}</p>
-                  </div>
-                </div>
-              </div>
+              <MusicListItem
+                key={item._id}
+                item={item}
+                index={index}
+                singleUser={singleUser}
+                setMusicId={setMusicId}
+                musicAudio={musicAudio}
+                setMusicAudio={setMusicAudio}
+                audioPlayer={audioPlayer}
+                musicList={musicList}
+                musicAll={musicAll}
+              />
             ))}
           </Slider>
         </div>

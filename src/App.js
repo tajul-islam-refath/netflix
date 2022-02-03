@@ -92,7 +92,7 @@ const App = () => {
     return () => {
       setSingleUser(""); // This worked for me
     };
-  }, []);
+  }, [users._id, pathname]);
 
   //const [location_success, setLocationSuccess] = useState(false);
   const [countryName, setCountryName] = useState("");
@@ -276,7 +276,13 @@ const App = () => {
           <Route
             exact
             path="/music"
-            element={user ? <Music /> : <Navigate to="/login" />}
+            element={
+              user ? (
+                <Music singleUser={singleUser} />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
           />
           <Route
             exact

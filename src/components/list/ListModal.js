@@ -130,23 +130,9 @@ const ListModal = ({
     setAddtoDislike(false);
 
     try {
-      const res = await axios.put("/users/addmylike/" + id, myLike, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          token:
-            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-        },
-      });
-      console.log(res);
-    } catch (err) {
-      console.log(err);
-    }
-
-    try {
       const res = await axios.put(
-        "/movies/like/" + more_detail._id,
-        singleUser,
+        "/users/addmylike/" + id,
+        { movie_id: myLikeId },
         {
           headers: {
             Accept: "application/json",
@@ -162,14 +148,36 @@ const ListModal = ({
     }
 
     try {
-      const res = await axios.put("/users/removemydislike/" + id, myLike, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          token:
-            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-        },
-      });
+      const res = await axios.put(
+        "/movies/like/" + more_detail._id,
+        { user_id: singleUser._id },
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+
+    try {
+      const res = await axios.put(
+        "/users/removemydislike/" + id,
+        { movie_id: myLikeId },
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
       console.log(res);
     } catch (err) {
       console.log(err);
@@ -178,7 +186,7 @@ const ListModal = ({
     try {
       const res = await axios.put(
         "/movies/removedislike/" + more_detail._id,
-        singleUser,
+        { user_id: singleUser._id },
         {
           headers: {
             Accept: "application/json",
@@ -198,14 +206,18 @@ const ListModal = ({
     setAddtoLike(false);
 
     try {
-      const res = await axios.put("/users/removemylike/" + id, myLike, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          token:
-            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-        },
-      });
+      const res = await axios.put(
+        "/users/removemylike/" + id,
+        { movie_id: myLikeId },
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
       console.log(res);
     } catch (err) {
       console.log(err);
@@ -214,7 +226,7 @@ const ListModal = ({
     try {
       const res = await axios.put(
         "/movies/removelike/" + more_detail._id,
-        singleUser,
+        { user_id: singleUser._id },
         {
           headers: {
             Accept: "application/json",
@@ -236,23 +248,9 @@ const ListModal = ({
     setAddtoLike(false);
 
     try {
-      const res = await axios.put("/users/addmydislike/" + id, myDislike, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          token:
-            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-        },
-      });
-      console.log(res);
-    } catch (err) {
-      console.log(err);
-    }
-
-    try {
       const res = await axios.put(
-        "/movies/dislike/" + more_detail._id,
-        singleUser,
+        "/users/addmydislike/" + id,
+        { movie_id: myDislikeId },
         {
           headers: {
             Accept: "application/json",
@@ -268,14 +266,36 @@ const ListModal = ({
     }
 
     try {
-      const res = await axios.put("/users/removemylike/" + id, myDislike, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          token:
-            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-        },
-      });
+      const res = await axios.put(
+        "/movies/dislike/" + more_detail._id,
+        { user_id: singleUser._id },
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+
+    try {
+      const res = await axios.put(
+        "/users/removemylike/" + id,
+        { movie_id: myDislikeId },
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
       console.log(res);
     } catch (err) {
       console.log(err);
@@ -284,7 +304,7 @@ const ListModal = ({
     try {
       const res = await axios.put(
         "/movies/removelike/" + more_detail._id,
-        singleUser,
+        { user_id: singleUser._id },
         {
           headers: {
             Accept: "application/json",
@@ -304,14 +324,18 @@ const ListModal = ({
     setAddtoDislike(false);
 
     try {
-      const res = await axios.put("/users/removemydislike/" + id, myDislike, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          token:
-            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-        },
-      });
+      const res = await axios.put(
+        "/users/removemydislike/" + id,
+        { movie_id: myDislikeId },
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
       console.log(res);
     } catch (err) {
       console.log(err);
@@ -320,7 +344,7 @@ const ListModal = ({
     try {
       const res = await axios.put(
         "/movies/removedislike/" + more_detail._id,
-        singleUser,
+        { user_id: singleUser._id },
         {
           headers: {
             Accept: "application/json",
