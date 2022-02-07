@@ -391,7 +391,7 @@ export default function ListItem({
                 <div className="itemInfo">
                   <div className="icons">
                     <Link
-                      to={"/watch/" + item_id}
+                      to={"/watch/" + info._id}
                       onClick={(e) => preventCardClick(e)}
                     >
                       <PlayArrow

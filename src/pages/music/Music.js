@@ -10,6 +10,10 @@ import axios from "axios";
 const Music = ({ singleUser }) => {
   const audioPlayer = useRef(); //   reference to our audio component
 
+  const [isPlaying, setPlay] = useState(false);
+
+  const [musicImg, setMusicImg] = useState("");
+
   const { lists, dispatch: listDispatch } = useContext(ListContext);
 
   useEffect(() => {
@@ -146,7 +150,24 @@ const Music = ({ singleUser }) => {
   return (
     <>
       <div className="music_div">
-        <MusicHero musics={movies} />
+        <MusicHero
+          musics={movies}
+          musicId={playMusicId}
+          setMusicId={setPlayMusicId}
+          musicAudio={playMusicAudio}
+          setMusicAudio={setPlayMusicAudio}
+          singleUser={singleUser}
+          audioPlayer={audioPlayer}
+          musicAll={movies.filter((m) => {
+            if (m.type === "Music") {
+              return m;
+            }
+          })}
+          isPlaying={isPlaying}
+          setPlay={setPlay}
+          musicImg={musicImg}
+          setMusicImg={setMusicImg}
+        />
 
         {lists
           // eslint-disable-next-line array-callback-return
@@ -178,6 +199,10 @@ const Music = ({ singleUser }) => {
                   return m;
                 }
               })}
+              isPlaying={isPlaying}
+              setPlay={setPlay}
+              musicImg={musicImg}
+              setMusicImg={setMusicImg}
             />
           ))}
 
@@ -223,6 +248,10 @@ const Music = ({ singleUser }) => {
           musicAudio={playMusicAudio}
           setMusicAudio={setPlayMusicAudio}
           audioPlayer={audioPlayer}
+          isPlaying={isPlaying}
+          setPlay={setPlay}
+          musicImg={musicImg}
+          setMusicImg={setMusicImg}
         />
       </div>
     </>

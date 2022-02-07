@@ -163,6 +163,7 @@
               font-weight: normal;
               margin: 30px;
               transition: 0.5s;
+              // display: none;
 
               &:hover {
                 transform: scale(1.1);
@@ -178,6 +179,10 @@
                 font-size: 50px;
               }
             }
+
+            // .red_shade_play_icon_active {
+            //   display: block;
+            // }
             .red_shade_more_icon {
               font-size: 26px;
               transition: 0.5s;

@@ -4,8 +4,9 @@ import {
 } from "@material-ui/icons";
 import { useRef, useState, useEffect, Suspense, lazy, useContext } from "react";
 //import ListItem from "../listItem/ListItem";
-import { FiPlay } from "react-icons/fi";
-import { AiOutlineHeart } from "react-icons/ai";
+import { FiPlay, FiPause } from "react-icons/fi";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { RiDislikeLine, RiDislikeFill } from "react-icons/ri";
 import { CgMore } from "react-icons/cg";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -33,6 +34,8 @@ import ListModal from "./ListModal";
 import PrevArrow from "../musicList/PrevArrow";
 import NextArrow from "../musicList/NextArrow";
 import { UserContext } from "../../context/userContext/UserContext";
+import ListMusicSearch from "./ListMusicSearch";
+import MusicPlayer from "../musicPlayer/MusicPlayer";
 
 const ListItem = lazy(() => import("../listItem/ListItem"));
 
@@ -76,6 +79,253 @@ export default function ListSearch({
       setSingleUser(""); // This worked for me
     };
   }, []);
+
+  // const [playicon, setPlayicon] = useState(false);
+
+  const audioPlayer = useRef(); //   reference to our audio component
+  //const { user } = useContext(UserContext);
+
+  // //const [addToList, setAddToList] = useState(false);
+  // const [addtoLike, setAddtoLike] = useState(false);
+  // const [addtoDislike, setAddtoDislike] = useState(false);
+
+  // //like
+  // const addToLike = async (id, myLike, myLikeId) => {
+  //   setAddtoLike(true);
+  //   setAddtoDislike(false);
+
+  //   try {
+  //     const res = await axios.put(
+  //       "/users/addmylike/" + id,
+  //       { movie_id: myLikeId },
+  //       {
+  //         headers: {
+  //           Accept: "application/json",
+  //           "Content-Type": "application/json",
+  //           token:
+  //             "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+  //         },
+  //       }
+  //     );
+  //     console.log(res);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+
+  //   try {
+  //     const res = await axios.put(
+  //       "/movies/like/" + myLikeId,
+  //       { user_id: singleUser._id },
+  //       {
+  //         headers: {
+  //           Accept: "application/json",
+  //           "Content-Type": "application/json",
+  //           token:
+  //             "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+  //         },
+  //       }
+  //     );
+  //     console.log(res);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+
+  //   try {
+  //     const res = await axios.put(
+  //       "/users/removemydislike/" + id,
+  //       { movie_id: myLikeId },
+  //       {
+  //         headers: {
+  //           Accept: "application/json",
+  //           "Content-Type": "application/json",
+  //           token:
+  //             "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+  //         },
+  //       }
+  //     );
+  //     console.log(res);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+
+  //   try {
+  //     const res = await axios.put(
+  //       "/movies/removedislike/" + myLikeId,
+  //       { user_id: singleUser._id },
+  //       {
+  //         headers: {
+  //           Accept: "application/json",
+  //           "Content-Type": "application/json",
+  //           token:
+  //             "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+  //         },
+  //       }
+  //     );
+  //     console.log(res);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  // const removeFromLike = async (id, myLike, myLikeId) => {
+  //   setAddtoLike(false);
+
+  //   try {
+  //     const res = await axios.put(
+  //       "/users/removemylike/" + id,
+  //       { movie_id: myLikeId },
+  //       {
+  //         headers: {
+  //           Accept: "application/json",
+  //           "Content-Type": "application/json",
+  //           token:
+  //             "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+  //         },
+  //       }
+  //     );
+  //     console.log(res);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+
+  //   try {
+  //     const res = await axios.put(
+  //       "/movies/removelike/" + myLikeId,
+  //       { user_id: singleUser._id },
+  //       {
+  //         headers: {
+  //           Accept: "application/json",
+  //           "Content-Type": "application/json",
+  //           token:
+  //             "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+  //         },
+  //       }
+  //     );
+  //     console.log(res);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+
+  //   console.log(id, myLikeId);
+  // };
+
+  // //dislike
+  // const addToDislike = async (id, myDislike, myDislikeId) => {
+  //   setAddtoDislike(true);
+  //   setAddtoLike(false);
+
+  //   try {
+  //     const res = await axios.put(
+  //       "/users/addmydislike/" + id,
+  //       { movie_id: myDislikeId },
+  //       {
+  //         headers: {
+  //           Accept: "application/json",
+  //           "Content-Type": "application/json",
+  //           token:
+  //             "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+  //         },
+  //       }
+  //     );
+  //     console.log(res);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+
+  //   try {
+  //     const res = await axios.put(
+  //       "/movies/dislike/" + myDislikeId,
+  //       { user_id: singleUser._id },
+  //       {
+  //         headers: {
+  //           Accept: "application/json",
+  //           "Content-Type": "application/json",
+  //           token:
+  //             "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+  //         },
+  //       }
+  //     );
+  //     console.log(res);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+
+  //   try {
+  //     const res = await axios.put(
+  //       "/users/removemylike/" + id,
+  //       { movie_id: myDislikeId },
+  //       {
+  //         headers: {
+  //           Accept: "application/json",
+  //           "Content-Type": "application/json",
+  //           token:
+  //             "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+  //         },
+  //       }
+  //     );
+  //     console.log(res);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+
+  //   try {
+  //     const res = await axios.put(
+  //       "/movies/removelike/" + myDislikeId,
+  //       { user_id: singleUser._id },
+  //       {
+  //         headers: {
+  //           Accept: "application/json",
+  //           "Content-Type": "application/json",
+  //           token:
+  //             "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+  //         },
+  //       }
+  //     );
+  //     console.log(res);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  // const removeFromDislike = async (id, myDislike, myDislikeId) => {
+  //   setAddtoDislike(false);
+
+  //   try {
+  //     const res = await axios.put(
+  //       "/users/removemydislike/" + id,
+  //       { movie_id: myDislikeId },
+  //       {
+  //         headers: {
+  //           Accept: "application/json",
+  //           "Content-Type": "application/json",
+  //           token:
+  //             "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+  //         },
+  //       }
+  //     );
+  //     console.log(res);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+
+  //   try {
+  //     const res = await axios.put(
+  //       "/movies/removedislike/" + myDislikeId,
+  //       { user_id: singleUser._id },
+  //       {
+  //         headers: {
+  //           Accept: "application/json",
+  //           "Content-Type": "application/json",
+  //           token:
+  //             "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+  //         },
+  //       }
+  //     );
+  //     console.log(res);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   //const [volume_detail, setVolumeDetail] = useState(false);
 
@@ -231,6 +481,53 @@ export default function ListSearch({
   // let one_movie = "";
   // one_movie = onemovie.map((item) => item);
 
+  const [musicAudio, setMusicAudio] = useState("");
+
+  // const playMusic = (id, audio, img) => {
+  //   // setMusicId(id);
+  //   setMusicAudio(audio);
+  //   // setPlayicon(!playicon);
+  //   // document.querySelector("#audioPlayer" + id).play();
+  //   // musicAll
+  //   //   .filter((mu) => {
+  //   //     if (mu._id !== id) {
+  //   //       return mu;
+  //   //     }
+  //   //   })
+  //   //   .map((i) => setPauseIcon(false));
+
+  //   //document.querySelector("#audioPlayer" + id).play();
+  //   var playPromise = audioPlayer.current.play();
+  //   if (playPromise !== undefined) {
+  //     playPromise
+  //       .then(() => {
+  //         setPlayicon(!playicon);
+  //         // setPlay(!playicon);
+  //         // setMusicImg(AppUrl.base_url + img);
+  //         audioPlayer.current.play();
+  //         //console.log(musicImg);
+  //         // Automatic playback started!
+  //         // Show playing UI.
+  //         // We can now safely pause video...
+  //         //audioPlayer.current.pause();
+  //       })
+  //       .catch((error) => {
+  //         // Auto-play was prevented
+  //         // Show paused UI.
+  //         audioPlayer.current.pause();
+  //       });
+  //   }
+  //   //console.log(musicAudio);
+  // };
+
+  // const pauseMusic = (id, audio, img) => {
+  //   setPlayicon(!playicon);
+  //   // setPlay(!playicon);
+  //   // setMusicImg(AppUrl.base_url + img);
+  //   //document.querySelector("#audioPlayer" + id).pause();
+  //   audioPlayer.current.pause();
+  // };
+
   return (
     <>
       <h4 className="searched_content_text">
@@ -309,6 +606,7 @@ export default function ListSearch({
                               setSelectedId={setSelectedId}
                               info={item}
                               setMoreDetail={setMoreDetail}
+                              singleUser={singleUser}
                             />
                             {/* </LazyLoad> */}
                           </Suspense>
@@ -365,44 +663,54 @@ export default function ListSearch({
                             // }
                           })
                           .map((item, index) => (
-                            <div
-                              className="music_list_slider_card"
-                              data-aos="zoom-in"
-                              data-aos-offset="100"
-                              data-aos-delay={index * 150}
-                              data-aos-duration="500"
-                              // data-aos-easing="ease-in-out"
+                            <ListMusicSearch
                               key={item._id}
-                            >
-                              <img src={AppUrl.base_url + item.imgSm} alt="" />
-                              <div className="music_list_slider_card_info">
-                                <p className="music_list_slider_card_name">
-                                  {item.title}
-                                </p>
-                                <p className="music_list_slider_card_artist">
-                                  {item.cast}
-                                </p>
-                              </div>
-                              {/* <audio src="horse.mp3" type="audio/mpeg" controls /> */}
+                              item={item}
+                              index={index}
+                              singleUser={singleUser}
+                              audioPlayer={audioPlayer}
+                              user_id={user._id}
+                              musicAudio={musicAudio}
+                              setMusicAudio={setMusicAudio}
+                            />
+                            // <div
+                            //   className="music_list_slider_card"
+                            //   data-aos="zoom-in"
+                            //   data-aos-offset="100"
+                            //   data-aos-delay={index * 150}
+                            //   data-aos-duration="500"
+                            //   // data-aos-easing="ease-in-out"
+                            //   key={item._id}
+                            // >
+                            //   <img src={AppUrl.base_url + item.imgSm} alt="" />
+                            //   <div className="music_list_slider_card_info">
+                            //     <p className="music_list_slider_card_name">
+                            //       {item.title}
+                            //     </p>
+                            //     <p className="music_list_slider_card_artist">
+                            //       {item.cast}
+                            //     </p>
+                            //   </div>
+                            //   {/* <audio src="horse.mp3" type="audio/mpeg" controls /> */}
 
-                              <div className="red_shade"></div>
-                              <div className="red_shade_info">
-                                <div className="red_shade_icons">
-                                  <AiOutlineHeart className="red_shade_heart_icon" />{" "}
-                                  <FiPlay
-                                    className="red_shade_play_icon"
-                                    //   onClick={() => playMusic(item.id, item.video)}
-                                  />
-                                  <CgMore className="red_shade_more_icon" />
-                                </div>
-                                <div className="red_shade_name_info">
-                                  <p className="red_shade_name">{item.title}</p>
-                                  <p className="red_shade_artist">
-                                    {item.cast}
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
+                            //   <div className="red_shade"></div>
+                            //   <div className="red_shade_info">
+                            //     <div className="red_shade_icons">
+                            //       <AiOutlineHeart className="red_shade_heart_icon" />{" "}
+                            //       <FiPlay
+                            //         className="red_shade_play_icon"
+                            //         //   onClick={() => playMusic(item.id, item.video)}
+                            //       />
+                            //       <CgMore className="red_shade_more_icon" />
+                            //     </div>
+                            //     <div className="red_shade_name_info">
+                            //       <p className="red_shade_name">{item.title}</p>
+                            //       <p className="red_shade_artist">
+                            //         {item.cast}
+                            //       </p>
+                            //     </div>
+                            //   </div>
+                            // </div>
                           ))}
                       </div>
                     </div>
@@ -472,6 +780,7 @@ export default function ListSearch({
                               info={item}
                               setMoreDetail={setMoreDetail}
                               marginBottom={"20px"}
+                              singleUser={singleUser}
                             />
                           </LazyLoad>
                         </Suspense>
@@ -527,44 +836,16 @@ export default function ListSearch({
                             // }
                           })
                           .map((item, index) => (
-                            <div
-                              className="music_list_slider_card"
-                              data-aos="zoom-in"
-                              data-aos-offset="100"
-                              data-aos-delay={index * 150}
-                              data-aos-duration="500"
-                              // data-aos-easing="ease-in-out"
+                            <ListMusicSearch
                               key={item._id}
-                            >
-                              <img src={AppUrl.base_url + item.imgSm} alt="" />
-                              <div className="music_list_slider_card_info">
-                                <p className="music_list_slider_card_name">
-                                  {item.title}
-                                </p>
-                                <p className="music_list_slider_card_artist">
-                                  {item.cast}
-                                </p>
-                              </div>
-                              {/* <audio src="horse.mp3" type="audio/mpeg" controls /> */}
-
-                              <div className="red_shade"></div>
-                              <div className="red_shade_info">
-                                <div className="red_shade_icons">
-                                  <AiOutlineHeart className="red_shade_heart_icon" />{" "}
-                                  <FiPlay
-                                    className="red_shade_play_icon"
-                                    //   onClick={() => playMusic(item.id, item.video)}
-                                  />
-                                  <CgMore className="red_shade_more_icon" />
-                                </div>
-                                <div className="red_shade_name_info">
-                                  <p className="red_shade_name">{item.title}</p>
-                                  <p className="red_shade_artist">
-                                    {item.cast}
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
+                              item={item}
+                              index={index}
+                              singleUser={singleUser}
+                              audioPlayer={audioPlayer}
+                              user_id={user._id}
+                              musicAudio={musicAudio}
+                              setMusicAudio={setMusicAudio}
+                            />
                           ))}
                       </div>
                     </div>
@@ -593,6 +874,15 @@ export default function ListSearch({
         singleUser={singleUser}
         mov={movies}
       />
+
+      {/* <audio
+        // id={"audioPlayer" + musicId}
+        src={AppUrl.base_url + musicAudio}
+        preload="metadata"
+        ref={audioPlayer}
+        className="audio_player"
+        style={{ display: "hidden" }}
+      /> */}
     </>
   );
 }

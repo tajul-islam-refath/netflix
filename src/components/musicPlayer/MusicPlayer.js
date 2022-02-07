@@ -23,9 +23,13 @@ function MusicPlayer({
   musicAudio,
   setMusicAudio,
   audioPlayer,
+  isPlaying,
+  setPlay,
+  musicImg,
+  setMusicImg,
 }) {
   const [isLove, setLove] = useState(false);
-  const [isPlaying, setPlay] = useState(false);
+  // const [isPlaying, setPlay] = useState(false);
   //   duration state
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrenttime] = useState(0);
@@ -100,11 +104,7 @@ function MusicPlayer({
   return (
     <div className="musicPlayer">
       <div className="songImage">
-        <img
-          src="https://occ-0-58-64.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABX6QPuU2wUKTrISH7UkthsTD4mTPRpfGIojVGAfhTtmlwB_K-b-yujeN1zgpW0txJLLNWCDMCSPBP8qwhmFVX5jn32FM.webp?r=d57"
-          alt=""
-          className="music_player_img"
-        />
+        <img src={musicImg} alt="" className="music_player_img" />
       </div>
       <div className="songAttributes">
         <audio
@@ -117,7 +117,7 @@ function MusicPlayer({
 
         <div className="top">
           <div className="left">
-            <div className="loved" onClick={changeSongLove}>
+            {/* <div className="loved" onClick={changeSongLove}>
               {isLove ? (
                 <i>
                   <FaRegHeart />
@@ -127,7 +127,9 @@ function MusicPlayer({
                   <FaHeart />
                 </i>
               )}
-            </div>
+            </div> */}
+            {/* <p>ABCD ABCD</p> */}
+
             <i className="download">
               <BsDownload />
             </i>

@@ -1,35 +1,20 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
+import AppUrl from "../../classes/AppUrl";
 import { FiPlay, FiPause } from "react-icons/fi";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { RiDislikeLine, RiDislikeFill } from "react-icons/ri";
-import { CgMore } from "react-icons/cg";
-import { HiOutlineDownload } from "react-icons/hi";
-import AppUrl from "../../classes/AppUrl";
 import axios from "axios";
-import { UserContext } from "../../context/userContext/UserContext";
-import MusicPlayer from "../musicPlayer/MusicPlayer";
 
-const MusicListItem = ({
+const ListMusicSearch = ({
   item,
   index,
   singleUser,
-  musicId,
-  setMusicId,
+  audioPlayer,
+  user_id,
   musicAudio,
   setMusicAudio,
-  audioPlayer,
-  musicList,
-  musicAll,
-  pauseIcon,
-  setPauseIcon,
-  isPlaying,
-  setPlay,
-  musicImg,
-  setMusicImg,
 }) => {
   const [playicon, setPlayicon] = useState(false);
-  const { user } = useContext(UserContext);
-
   //const [addToList, setAddToList] = useState(false);
   const [addtoLike, setAddtoLike] = useState(false);
   const [addtoDislike, setAddtoDislike] = useState(false);
@@ -273,8 +258,8 @@ const MusicListItem = ({
   };
 
   const playMusic = (id, audio, img) => {
-    setMusicId(id);
-    setMusicAudio(audio);
+    // setMusicId(id);
+    //setMusicAudio(audio);
     // setPlayicon(!playicon);
     // document.querySelector("#audioPlayer" + id).play();
     // musicAll
@@ -286,24 +271,28 @@ const MusicListItem = ({
     //   .map((i) => setPauseIcon(false));
 
     //document.querySelector("#audioPlayer" + id).play();
-    var playPromise = audioPlayer.current.play();
+    var playPromise = document.querySelector("#audioPlayer" + id).play();
+    //audioPlayer.current.play();
     if (playPromise !== undefined) {
       playPromise
         .then(() => {
           setPlayicon(!playicon);
-          setPlay(!playicon);
-          setMusicImg(AppUrl.base_url + img);
-          audioPlayer.current.play();
-          //console.log(musicImg);
+          // setPlay(!playicon);
+          // setMusicImg(AppUrl.base_url + img);
+          document.querySelector("#audioPlayer" + id).play();
+          //audioPlayer.current.play();
+          //console.log(musicAudio);
           // Automatic playback started!
           // Show playing UI.
-          // We can now safely pause video...
+          // We can now safely pause video.
+
           //audioPlayer.current.pause();
         })
         .catch((error) => {
           // Auto-play was prevented
           // Show paused UI.
-          audioPlayer.current.pause();
+          document.querySelector("#audioPlayer" + id).pause();
+          //audioPlayer.current.pause();
         });
     }
     //console.log(musicAudio);
@@ -311,16 +300,16 @@ const MusicListItem = ({
 
   const pauseMusic = (id, audio, img) => {
     setPlayicon(!playicon);
-    setPlay(!playicon);
-    setMusicImg(AppUrl.base_url + img);
+    // setPlay(!playicon);
+    // setMusicImg(AppUrl.base_url + img);
     //document.querySelector("#audioPlayer" + id).pause();
-    audioPlayer.current.pause();
+    document.querySelector("#audioPlayer" + id).pause();
+    //audioPlayer.current.pause();
   };
 
   return (
     <>
       <div
-        key={item._id}
         className="music_list_slider_card"
         data-aos="zoom-in"
         data-aos-offset="100"
@@ -328,6 +317,14 @@ const MusicListItem = ({
         data-aos-duration="500"
         // data-aos-easing="ease-in-out"
       >
+        <audio
+          id={"audioPlayer" + item._id}
+          src={AppUrl.base_url + item.video}
+          preload="metadata"
+          ref={audioPlayer}
+          className="audio_player"
+          style={{ display: "hidden" }}
+        />
         <img src={AppUrl.base_url + item.imgSm} alt="" />
         <div className="music_list_slider_card_info">
           <p className="music_list_slider_card_name">{item.title}</p>
@@ -347,7 +344,7 @@ const MusicListItem = ({
                 <AiFillHeart
                   className="red_shade_heart_icon"
                   onClick={() => {
-                    removeFromLike(user._id, item, item._id);
+                    removeFromLike(user_id, item, item._id);
                   }}
                 />
               </>
@@ -358,7 +355,7 @@ const MusicListItem = ({
                     <AiFillHeart
                       className="red_shade_heart_icon"
                       onClick={() => {
-                        removeFromLike(user._id, item, item._id);
+                        removeFromLike(user_id, item, item._id);
                       }}
                     />
                   </>
@@ -367,7 +364,7 @@ const MusicListItem = ({
                     <AiOutlineHeart
                       className="red_shade_heart_icon"
                       onClick={() => {
-                        addToLike(user._id, item, item._id);
+                        addToLike(user_id, item, item._id);
                       }}
                     />
                   </>
@@ -375,7 +372,6 @@ const MusicListItem = ({
               </>
             )}
             {/* <AiOutlineHeart className="red_shade_heart_icon" />{" "} */}
-
             {playicon ? (
               <>
                 <FiPause
@@ -403,20 +399,24 @@ const MusicListItem = ({
                 />
               </>
             )}
-
+            {/* <FiPlay
+                                    className="red_shade_play_icon"
+                                    //   onClick={() => playMusic(item.id, item.video)}
+                                  /> */}
+            {/* <CgMore className="red_shade_more_icon" /> */}
             {singleUser.myDislike.find((elem) => {
               if (elem.movie_id === item._id) {
                 return true;
               }
             }) ? (
-              <>
+              <div>
                 <RiDislikeFill
                   className="red_shade_more_icon"
                   onClick={() => {
-                    removeFromDislike(user._id, item, item._id);
+                    removeFromDislike(user_id, item, item._id);
                   }}
                 />
-              </>
+              </div>
             ) : (
               <>
                 {addtoDislike ? (
@@ -424,7 +424,7 @@ const MusicListItem = ({
                     <RiDislikeFill
                       className="red_shade_more_icon"
                       onClick={() => {
-                        removeFromDislike(user._id, item, item._id);
+                        removeFromDislike(user_id, item, item._id);
                       }}
                     />
                   </>
@@ -433,14 +433,13 @@ const MusicListItem = ({
                     <RiDislikeLine
                       className="red_shade_more_icon"
                       onClick={() => {
-                        addToDislike(user._id, item, item._id);
+                        addToDislike(user_id, item, item._id);
                       }}
                     />
                   </>
                 )}
               </>
             )}
-            {/* <RiDislikeLine className="red_shade_more_icon" /> */}
           </div>
           <div className="red_shade_name_info">
             <p className="red_shade_name">{item.title}</p>
@@ -452,4 +451,4 @@ const MusicListItem = ({
   );
 };
 
-export default MusicListItem;
+export default ListMusicSearch;

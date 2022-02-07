@@ -7,7 +7,20 @@ import { Link } from "react-router-dom";
 import { InfoOutlined, PlayArrow } from "@material-ui/icons";
 import AppUrl from "../../classes/AppUrl";
 
-const MusicHero = ({ musics }) => {
+const MusicHero = ({
+  musics,
+  musicId,
+  setMusicId,
+  musicAudio,
+  setMusicAudio,
+  singleUser,
+  audioPlayer,
+  musicAll,
+  isPlaying,
+  setPlay,
+  musicImg,
+  setMusicImg,
+}) => {
   let settings = {
     // dots: true,
     infinite: true,
@@ -18,6 +31,42 @@ const MusicHero = ({ musics }) => {
     autoplay: true,
     autoplaySpeed: 7000,
     arrows: true,
+  };
+
+  const playHero = (e, item) => {
+    e.preventDefault();
+    setMusicId(item._id);
+    setMusicAudio(AppUrl.base_url + item.video);
+    // setPlayicon(!playicon);
+    // document.querySelector("#audioPlayer" + id).play();
+    // musicAll
+    //   .filter((mu) => {
+    //     if (mu._id !== id) {
+    //       return mu;
+    //     }
+    //   })
+    //   .map((i) => setPauseIcon(false));
+
+    //document.querySelector("#audioPlayer" + id).play();
+    var playPromise = audioPlayer.current.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          //setPlayicon(!playicon);
+          setPlay(true);
+          setMusicImg(AppUrl.base_url + item.imgSm);
+          audioPlayer.current.play();
+          // Automatic playback started!
+          // Show playing UI.
+          // We can now safely pause video...
+          //audioPlayer.current.pause();
+        })
+        .catch((error) => {
+          // Auto-play was prevented
+          // Show paused UI.
+          audioPlayer.current.pause();
+        });
+    }
   };
   return (
     <>
@@ -55,7 +104,11 @@ const MusicHero = ({ musics }) => {
                     data-aos-delay="1000"
                     data-aos-duration="1000"
                   >
-                    <Link to="#" className="music_hero_slider_button">
+                    <Link
+                      to="!#"
+                      className="music_hero_slider_button"
+                      onClick={(e) => playHero(e, item)}
+                    >
                       <PlayArrow className="music_hero_play_icon " />
                       <span>Play</span>
                     </Link>

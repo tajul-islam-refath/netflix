@@ -27,7 +27,12 @@ const MusicList = ({
   singleUser,
   audioPlayer,
   musicAll,
+  isPlaying,
+  setPlay,
+  musicImg,
+  setMusicImg,
 }) => {
+  const [pauseIcon, setPauseIcon] = useState(false);
   var settings1 = {
     // dots: true,
     // centerMode: true,
@@ -115,6 +120,12 @@ const MusicList = ({
                 audioPlayer={audioPlayer}
                 musicList={musicList}
                 musicAll={musicAll}
+                pauseIcon={pauseIcon}
+                setPauseIcon={setPauseIcon}
+                isPlaying={isPlaying}
+                setPlay={setPlay}
+                musicImg={musicImg}
+                setMusicImg={setMusicImg}
               />
             ))}
           </Slider>

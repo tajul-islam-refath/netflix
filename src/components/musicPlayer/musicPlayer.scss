@@ -31,7 +31,9 @@
 }
 
 .music_player_img {
-  background-size: cover !important;
+  width: 80px;
+  height: 80px;
+  object-fit: contain !important;
 }
 
 .musicPlayer .songAttributes {
