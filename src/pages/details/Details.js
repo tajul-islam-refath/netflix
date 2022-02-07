@@ -43,14 +43,18 @@ const Details = ({ user, singleUser }) => {
     setAddToList(true);
 
     try {
-      const res = await axios.put("/users/addmylist/" + id, myList, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          token:
-            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-        },
-      });
+      const res = await axios.put(
+        "/users/addmylist/" + id,
+        { movie_id: myListId },
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
       console.log(res);
       //setMyList(res.data);
     } catch (err) {
@@ -60,14 +64,18 @@ const Details = ({ user, singleUser }) => {
 
   const removeFromFav = async (id, myList, myListId) => {
     try {
-      const res = await axios.put("/users/removemylist/" + id, myList, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          token:
-            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-        },
-      });
+      const res = await axios.put(
+        "/users/removemylist/" + id,
+        { movie_id: myListId },
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
       console.log(res);
       //setMyList(res.data);
     } catch (err) {
