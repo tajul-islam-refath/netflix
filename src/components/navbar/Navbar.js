@@ -16,6 +16,7 @@ const Navbar = ({
   setSearchTerms,
   searchPlaceHolder,
   setSearchPlaceHolder,
+  singleUser,
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchbar, setSearchbar] = useState(false);
@@ -489,6 +490,8 @@ const Navbar = ({
         startVideo={startVideo}
         setStartVideo={setStartVideo}
         openScroll={openScroll}
+        mov={movies}
+        singleUser={singleUser}
       />
     </>
   );

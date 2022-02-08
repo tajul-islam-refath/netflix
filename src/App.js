@@ -154,6 +154,7 @@ const App = () => {
               setSearchTerms={setSearchTerms}
               searchPlaceHolder={searchPlaceHolder}
               setSearchPlaceHolder={setSearchPlaceHolder}
+              singleUser={singleUser}
             />
             <BottomNav />
             {/* </>
