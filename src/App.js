@@ -92,7 +92,7 @@ const App = () => {
     return () => {
       setSingleUser(""); // This worked for me
     };
-  }, [users._id, pathname]);
+  }, [users, pathname]);
 
   //const [location_success, setLocationSuccess] = useState(false);
   const [countryName, setCountryName] = useState("");

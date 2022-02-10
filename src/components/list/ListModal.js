@@ -38,8 +38,9 @@ const ListModal = ({
 }) => {
   const [volume_detail, setVolumeDetail] = useState(false);
 
-  const { user, error, dispatch } = useContext(UserContext);
-
+  const { user, error, dispatch, isBangla } = useContext(UserContext);
+  console.log(isBangla)
+  console.log(more_detail)
   const [addToList, setAddToList] = useState(false);
   const [addtoLike, setAddtoLike] = useState(false);
   const [addtoDislike, setAddtoDislike] = useState(false);
@@ -487,13 +488,13 @@ const ListModal = ({
                   <motion.div className="more_card">
                     <motion.div
                       className="more_card_img"
-                      // initial={{ x: "100vw" }}
-                      // animate={{ x: 0 }}
-                      // transition={{
-                      //   duration: 1.2,
-                      //   type: "spring",
-                      //   stiffness: 80,
-                      // }}
+                    // initial={{ x: "100vw" }}
+                    // animate={{ x: 0 }}
+                    // transition={{
+                    //   duration: 1.2,
+                    //   type: "spring",
+                    //   stiffness: 80,
+                    // }}
                     >
                       <img src={AppUrl.base_url + more_detail.imgSm} alt="" />
                     </motion.div>
@@ -509,20 +510,20 @@ const ListModal = ({
                     >
                       <div className="more_card_info_title_div">
                         <h4 className="more_card_info_title">
-                          {more_detail.title}
+                          {isBangla ? more_detail.title_bn : more_detail.title}
                         </h4>
                         <HiOutlineDownload className="more_card_info_download" />
                       </div>
                       <div className="more_card_info_other">
                         <p className="more_card_info_year">
-                          {more_detail.year}
+                          {isBangla ? more_detail.year_bn : more_detail.year}
                         </p>
                         <p className="more_card_info_age">{more_detail.age}</p>
                         <p className="more_card_info_time">
-                          {more_detail.time}
+                          {isBangla ? more_detail.time_bn : more_detail.time}
                         </p>
                       </div>
-                      <p className="more_card_info_des">{more_detail.desc}</p>
+                      <p className="more_card_info_des">{isBangla ? more_detail.desc_bn : more_detail.desc}</p>
                     </motion.div>
                   </motion.div>
                   <motion.div
@@ -582,7 +583,7 @@ const ListModal = ({
                     stiffness: 100,
                   }}
                   exit={{ y: "-100vh" }}
-                  // layoutId={selectedId}
+                // layoutId={selectedId}
                 >
                   {startVideo ? (
                     <>
@@ -827,14 +828,14 @@ const ListModal = ({
                       exit={{ x: -100, opacity: 0 }}
                     >
                       <motion.div className="more_modal_itemInfoTop">
-                        <motion.span>{more_detail.year}</motion.span>
+                        <motion.span>{isBangla ? more_detail.year_bn : more_detail.year}</motion.span>
                         <motion.span className="more_modal_limit">
-                          {more_detail.age}+
+                          {isBangla ? more_detail.age_bn : more_detail.age}+
                         </motion.span>
-                        <motion.span>{more_detail.time}</motion.span>
+                        <motion.span>{isBangla ? more_detail.time_bn : more_detail.time}</motion.span>
                       </motion.div>
                       <motion.div className="more_modal_iteminfo_des">
-                        {more_detail.desc}
+                        {isBangla ? more_detail.desc_bn : more_detail.desc}
                       </motion.div>
                     </motion.div>
 
@@ -852,24 +853,32 @@ const ListModal = ({
                     >
                       <motion.div className="more_modal_info_right_director">
                         <motion.p>
-                          <motion.span>Director:</motion.span>{" "}
-                          {more_detail.director}
+                          <motion.span>
+                            {isBangla ? "পরিচালক:" : "Director: "}
+                          </motion.span>{" "}
+                          {isBangla ? more_detail.director_bn : more_detail.director}
                         </motion.p>
                       </motion.div>
                       <motion.div className="more_modal_info_right_cast">
                         <motion.p>
-                          <motion.span>Cast:</motion.span> {more_detail.cast}
+                          <motion.span>
+                            {isBangla ? "কাস্ট:" : "Cast:"}
+                          </motion.span> {isBangla ? more_detail.cast_bn : more_detail.cast}
                         </motion.p>
                       </motion.div>
                       <motion.div className="more_modal_info_right_writer">
                         <motion.p>
-                          <motion.span>Writer:</motion.span>{" "}
-                          {more_detail.writer}
+                          <motion.span>
+                            {isBangla ? "লেখক:" : " Writer:"}
+                          </motion.span>{" "}
+                          {isBangla ? more_detail.writer_bn : more_detail.writer}
                         </motion.p>
                       </motion.div>
                       <motion.div className="more_modal_info_right_genres">
                         <motion.p>
-                          <motion.span>Genres:</motion.span> {more_detail.genre}
+                          <motion.span>
+                            {isBangla ? "জেনার:" : "Genres:"}
+                          </motion.span> {isBangla ? more_detail.genre_bn : more_detail.genre}
                         </motion.p>
                       </motion.div>
                     </motion.div>

@@ -3,6 +3,7 @@ import { createContext, useReducer, useEffect } from "react";
 
 const INITIAL_STATE = {
   user: JSON.parse(localStorage.getItem("user")) || null,
+  isBangla: JSON.parse(localStorage.getItem("isBangla")) === null ? false : JSON.parse(localStorage.getItem("isBangla")),
   isFetching: false,
   error: false,
 };
@@ -20,6 +21,7 @@ export const UserContextProvider = ({ children }) => {
     <UserContext.Provider
       value={{
         user: state.user,
+        isBangla: state.isBangla,
         isFetching: state.isFetching,
         error: state.error,
         dispatch,

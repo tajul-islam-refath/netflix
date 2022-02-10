@@ -16,7 +16,7 @@ const Account = () => {
   const [selectedModalPass, setSelectedModalPass] = useState(null);
   const [selectedModalPhone, setSelectedModalPhone] = useState(null);
 
-  const { user, error, dispatch } = useContext(UserContext);
+  const { user, error, dispatch, isBangla } = useContext(UserContext);
   const { dispatch: authDispatch } = useContext(AuthContext);
 
   const [username, setUsername] = useState(user.username);
@@ -148,7 +148,9 @@ const Account = () => {
       <div className="account">
         {/* <Navbar /> */}
         <div className="account_header">
-          <h4>Account</h4>
+          <h4>
+            {isBangla ? "একাউন্ট" : " Account"}
+          </h4>
           <img src="images/user.svg" alt="image_account" />
           <p>Member since {user.createdAt.substr(0, 10)}</p>
         </div>

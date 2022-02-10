@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
+import { UserContext } from "../../context/userContext/UserContext";
 import "./footer.scss";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -10,6 +11,8 @@ import {
 } from "react-icons/bs";
 
 const Footer = () => {
+  const { isBangla } = useContext(UserContext)
+
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -183,7 +186,8 @@ const Footer = () => {
             </div>
 
             <div className="footer_first_column_location_div">
-              All rights reserved by iCinema
+
+              {isBangla ? " iCinema - দ্বারা সংরক্ষিত সকল অধিকার" : " All rights reserved by iCinema"}
             </div>
 
             {/* <div className="footer_first_column_phone_div"></div>
@@ -256,7 +260,7 @@ const Footer = () => {
                 onMouseEnter={homeAnimate}
                 onMouseLeave={homeAnimateClose}
               >
-                Home
+                {isBangla ? "হোম" : "Home"}
               </Link>
               <Link
                 to="/movies"
@@ -264,7 +268,7 @@ const Footer = () => {
                 onMouseEnter={moviesAnimate}
                 onMouseLeave={moviesAnimateClose}
               >
-                Movies
+                {isBangla ? "সিনেমা" : "Movies "}
               </Link>
 
               <Link
@@ -273,7 +277,7 @@ const Footer = () => {
                 onMouseEnter={musicAnimate}
                 onMouseLeave={musicAnimateClose}
               >
-                Music
+                {isBangla ? "সঙ্গীত" : " Music"}
               </Link>
 
               <Link
@@ -282,7 +286,7 @@ const Footer = () => {
                 onMouseEnter={seriesAnimate}
                 onMouseLeave={seriesAnimateClose}
               >
-                Series
+                {isBangla ? "সিরিজ" : " Series "}
               </Link>
               {/* <Link
                 to="/contact"
@@ -326,7 +330,7 @@ const Footer = () => {
                 onMouseEnter={popularAnimate}
                 onMouseLeave={popularAnimateClose}
               >
-                New & Popular
+                {isBangla ? "নতুন এবং জনপ্রিয়" : "New and Popular"}
               </Link>
 
               <Link
@@ -335,7 +339,7 @@ const Footer = () => {
                 onMouseEnter={mylistAnimate}
                 onMouseLeave={mylistAnimateClose}
               >
-                My List
+                {isBangla ? "আমার তালিকা" : "My List "}
               </Link>
 
               <Link
@@ -344,7 +348,7 @@ const Footer = () => {
                 onMouseEnter={accountAnimate}
                 onMouseLeave={accountAnimateClose}
               >
-                Account
+                {isBangla ? "একাউন্ট" : " Account"}
               </Link>
 
               <Link
@@ -353,7 +357,7 @@ const Footer = () => {
                 onMouseEnter={storyAnimate}
                 onMouseLeave={storyAnimateClose}
               >
-                Our Story
+                {isBangla ? "আমাদের গল্প" : "Our Story"}
               </Link>
               {/* <a href="." className="footer_second_column_service_child">
               Menu
@@ -392,7 +396,8 @@ const Footer = () => {
                 onMouseEnter={privacyAnimate}
                 onMouseLeave={privacyAnimateClose}
               >
-                Privacy
+
+                {isBangla ? "গোপনীয়তা" : "Privacy "}
               </Link>
 
               <Link
@@ -401,7 +406,8 @@ const Footer = () => {
                 onMouseEnter={termsAnimate}
                 onMouseLeave={termsAnimateClose}
               >
-                Terms of Use
+
+                {isBangla ? "ব্যবহারের শর্তাবলী" : "Terms of Use "}
               </Link>
 
               {/* <a href="." className="footer_third_column_company_child">

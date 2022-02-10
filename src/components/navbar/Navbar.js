@@ -4,6 +4,8 @@ import "./navbar.scss";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { AuthContext } from "../../context/authContext/AuthContext";
+import { UserContext } from "../../context/userContext/UserContext";
+import { getIsBangla } from "../../context/userContext/UserActions";
 import { logout } from "../../context/authContext/AuthActions";
 //import { MovieContext } from "../../context/movieContext/MovieContext";
 //import { getMovies } from "../../context/movieContext/apiCalls";
@@ -20,6 +22,13 @@ const Navbar = ({
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchbar, setSearchbar] = useState(false);
   const [notiOpen, setNotiOpen] = useState(false);
+  // const [isBangla, setIsBanga] = useState(false)
+
+  const { dispatch: userDispatch } = useContext(UserContext)
+
+  const { isBangla } = useContext(UserContext)
+  // console.log(isBangla)
+
 
   const navigate = useNavigate();
 
@@ -38,6 +47,18 @@ const Navbar = ({
   // useEffect(() => {
   //   setSearchTerm(searchTerm);
   // }, [searchTerm]);
+
+  // Change language
+  const onLengChange = () => {
+    // console.log(JSON.parse(localStorage.getItem("isBangla")))
+    let len = JSON.parse(localStorage.getItem("isBangla")) !== null ? JSON.parse(localStorage.getItem("isBangla")) : false;
+    userDispatch(getIsBangla(!len))
+  }
+
+  useEffect(() => {
+    localStorage.setItem("isBangla", JSON.stringify(isBangla))
+  }, [isBangla])
+
 
   const searchMovie = (e) => {
     setSearchTerms(e.target.value);
@@ -88,7 +109,7 @@ const Navbar = ({
               "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
           },
         });
-        console.log(res);
+        // console.log(res);
         setMovies(res.data);
       } catch (err) {
         console.log(err);
@@ -255,6 +276,13 @@ const Navbar = ({
     document.querySelector(".noti_icon").classList.remove("animate__swing");
   };
 
+  const lenButtonAnimate = () => {
+    document.querySelector(".leng_btn").classList.add("animate__pulse");
+  };
+  const lenButtonAnimateClose = () => {
+    document.querySelector(".leng_btn").classList.remove("animate__pulse");
+  };
+
   return (
     <>
       <div className={isScrolled ? "navbar scrolled" : "navbar"}>
@@ -271,7 +299,9 @@ const Navbar = ({
               onMouseEnter={homeAnimate}
               onMouseLeave={homeAnimateClose}
             >
-              <span>Home</span>
+              <span>
+                {isBangla ? "হোম" : "Home"}
+              </span>
             </Link>
             <Link
               className="navbar_left_link animate__animated series"
@@ -280,7 +310,9 @@ const Navbar = ({
               onMouseEnter={seriesAnimate}
               onMouseLeave={seriesAnimateClose}
             >
-              <span>Series</span>
+              <span>
+                {isBangla ? "সিরিজ" : " Series "}
+              </span>
             </Link>
             <Link
               className="navbar_left_link animate__animated movies"
@@ -289,7 +321,9 @@ const Navbar = ({
               onMouseEnter={moviesAnimate}
               onMouseLeave={moviesAnimateClose}
             >
-              <span>Movies</span>
+              <span>
+                {isBangla ? "সিনেমা" : "Movies "}
+              </span>
             </Link>
             <Link
               className="navbar_left_link animate__animated popular"
@@ -298,7 +332,9 @@ const Navbar = ({
               onMouseEnter={popularAnimate}
               onMouseLeave={popularAnimateClose}
             >
-              <span>New and Popular</span>
+              <span>
+                {isBangla ? "নতুন এবং জনপ্রিয়" : "New and Popular"}
+              </span>
             </Link>
             <Link
               className="navbar_left_link animate__animated mylists"
@@ -307,7 +343,9 @@ const Navbar = ({
               onMouseEnter={mylistAnimate}
               onMouseLeave={mylistAnimateClose}
             >
-              <span>My List</span>
+              <span>
+                {isBangla ? "আমার তালিকা" : "My List "}
+              </span>
             </Link>
             <Link
               className="navbar_left_link animate__animated music"
@@ -316,7 +354,10 @@ const Navbar = ({
               onMouseEnter={musicAnimate}
               onMouseLeave={musicAnimateClose}
             >
-              <span>Music</span>
+              <span>
+
+                {isBangla ? "সঙ্গীত" : " Music"}
+              </span>
             </Link>
           </div>
           <div className="right">
@@ -336,7 +377,14 @@ const Navbar = ({
               onChange={(e) => searchMovie(e)}
             />
             {/* <span>KID</span> */}
-
+            <button
+              className="leng_btn animate__animated "
+              onClick={() => onLengChange()}
+              onMouseEnter={lenButtonAnimate}
+              onMouseLeave={lenButtonAnimateClose}
+            >
+              {isBangla ? "ইংরেজি" : "BENGALI"}
+            </button>
             <div
               className="noti"
               // onMouseLeave={closeNoti}
@@ -453,7 +501,8 @@ const Navbar = ({
                     to="/account"
                     style={{ color: "white", textDecoration: "none" }}
                   >
-                    Account{" "}
+
+                    {isBangla ? "একাউন্ট" : " Account"}
                   </Link>
                 </span>
                 {/* <span>Help Center</span> */}
@@ -462,7 +511,7 @@ const Navbar = ({
                     to="/my-downloads"
                     style={{ color: "white", textDecoration: "none" }}
                   >
-                    My Downloads{" "}
+                    {isBangla ? "মাই ডাউনলোডস" : "My Downloads"}
                   </Link>
                 </span>
 
@@ -472,7 +521,7 @@ const Navbar = ({
                     style={{ color: "white", textDecoration: "none" }}
                     onClick={(e) => signOut(e)}
                   >
-                    Sign out
+                    {isBangla ? "সাইন আউট" : "Sign out"}
                   </Link>
                 </span>
               </div>

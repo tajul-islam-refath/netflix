@@ -1,0 +1,205 @@
+.change_plan_div {
+  padding: 100px 50px;
+}
+
+@media screen and (max-width: 870px) {
+  .change_plan_div {
+    padding: 70px 20px;
+  }
+}
+
+.change_plan_div h4 {
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.change_plan_div .change_plan_card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  border: 3px solid gray;
+  border-radius: 15px;
+  position: relative;
+  cursor: pointer;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  margin-top: 15px;
+}
+
+@media screen and (max-width: 870px) {
+  .change_plan_div .change_plan_card {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+.change_plan_div .change_plan_card:after {
+  content: "";
+  position: absolute;
+  background: var(--main-color);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 15%;
+  /* Specify the width.. */
+  z-index: -1;
+}
+
+@media screen and (max-width: 552px) {
+  .change_plan_div .change_plan_card:after {
+    width: 100%;
+    height: 28%;
+  }
+}
+
+@media screen and (min-width: 553px) and (max-width: 870px) {
+  .change_plan_div .change_plan_card:after {
+    width: 100%;
+    height: 33%;
+  }
+}
+
+.change_plan_div .change_plan_card:hover {
+  border: 3px solid var(--red-color) !important;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  -webkit-transform: scale(1.02);
+          transform: scale(1.02);
+}
+
+.change_plan_div .change_plan_card .basic_plan_card_inside_header {
+  width: 5%;
+  padding: 2% 5.5%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.change_plan_div .change_plan_card .change_plan_card_check_icon {
+  position: absolute;
+  left: -20px;
+  color: var(--red-color);
+  font-size: 40px;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+@media screen and (max-width: 552px) {
+  .change_plan_div .change_plan_card .change_plan_card_check_icon {
+    top: 21%;
+    left: 45%;
+  }
+}
+
+@media screen and (min-width: 553px) and (max-width: 870px) {
+  .change_plan_div .change_plan_card .change_plan_card_check_icon {
+    top: 26%;
+    left: 47%;
+  }
+}
+
+.change_plan_div .change_plan_card .active_change_plan_card_check_icon {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.change_plan_div .change_plan_card p {
+  color: white;
+  font-size: 22px;
+}
+
+.change_plan_div .change_plan_card .change_plan_card_inside {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 80%;
+}
+
+.change_plan_div .change_plan_card .change_plan_card_inside p {
+  margin-left: 10px;
+  padding: 0px 0px;
+}
+
+.change_plan_div .change_plan_footer1,
+.change_plan_div .change_plan_footer2 {
+  color: #acacac;
+}
+
+.change_plan_div .change_plan_buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 50px;
+}
+
+.change_plan_div .change_plan_buttons .change_plan_btn1 {
+  background-color: lightgray;
+  padding: 10px 25px;
+  text-decoration: none;
+  color: black;
+  border-radius: 6px;
+  margin-right: 20px;
+  font-size: 18px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.change_plan_div .change_plan_buttons .change_plan_btn1:hover {
+  background-color: #c2c1c1 !important;
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.change_plan_div .change_plan_buttons .change_plan_btn2 {
+  background-color: var(--red-color);
+  padding: 10px 25px;
+  text-decoration: none;
+  color: white;
+  border-radius: 6px;
+  margin-right: 20px;
+  font-size: 18px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.change_plan_div .change_plan_buttons .change_plan_btn2:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+/*# sourceMappingURL=changePlan.css.map */

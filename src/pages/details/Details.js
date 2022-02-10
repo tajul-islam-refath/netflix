@@ -22,6 +22,7 @@ import { UserContext } from "../../context/userContext/UserContext";
 const Details = ({ user, singleUser }) => {
   const [selectedId, setSelectedId] = useState(null);
   const { pathname } = useLocation();
+  const { isBangla } = useContext(UserContext)
 
   //const last_url = pathname.substring(pathname.lastIndexOf("/") + 1);
   const navigate = useNavigate();
@@ -502,7 +503,7 @@ const Details = ({ user, singleUser }) => {
             data-aos-duration="1000"
             data-aos-easing="ease-in-out"
           >
-            {mov.title}
+            {isBangla ? mov.title_bn : mov.title}
           </p>
 
           <div
@@ -513,9 +514,9 @@ const Details = ({ user, singleUser }) => {
             data-aos-duration="500"
             data-aos-easing="ease-in-out"
           >
-            <span className="details_info_year">{mov.year}</span>
-            <span className="details_info_age">{mov.age}</span>
-            <span className="details_info_time">{mov.time}</span>
+            <span className="details_info_year">{isBangla ? mov.year_bn : mov.year}</span>
+            <span className="details_info_age">{isBangla ? mov.age_bn : mov.age}</span>
+            <span className="details_info_time">{isBangla ? mov.time_bn : mov.time}</span>
           </div>
 
           <div className="details_info_bottom">
@@ -526,7 +527,7 @@ const Details = ({ user, singleUser }) => {
               data-aos-duration="500"
               data-aos-easing="ease-in-out"
             >
-              {mov.desc}
+              {isBangla ? mov.desc_bn : mov.desc}
             </p>
             <p
               data-aos="fade-up"
@@ -535,7 +536,7 @@ const Details = ({ user, singleUser }) => {
               data-aos-duration="500"
               data-aos-easing="ease-in-out"
             >
-              <span>Starring:</span> {mov.cast}
+              <span>Starring:</span> {isBangla ? mov.cast_bn : mov.cast}
             </p>
             <p
               data-aos="fade-up"
@@ -544,7 +545,7 @@ const Details = ({ user, singleUser }) => {
               data-aos-duration="500"
               data-aos-easing="ease-in-out"
             >
-              <span>Director:</span> {mov.director}
+              <span>Director:</span> {isBangla ? mov.director_bn : mov.director}
             </p>
             <p
               data-aos="fade-up"
@@ -553,7 +554,7 @@ const Details = ({ user, singleUser }) => {
               data-aos-duration="500"
               data-aos-easing="ease-in-out"
             >
-              <span>Genre:</span> {mov.genre}
+              <span>Genre:</span> {isBangla ? mov.genre_bn : mov.genre}
             </p>
           </div>
 
@@ -837,13 +838,13 @@ const Details = ({ user, singleUser }) => {
                 <motion.div className="more_card">
                   <motion.div
                     className="more_card_img"
-                    // initial={{ x: "100vw" }}
-                    // animate={{ x: 0 }}
-                    // transition={{
-                    //   duration: 1.2,
-                    //   type: "spring",
-                    //   stiffness: 80,
-                    // }}
+                  // initial={{ x: "100vw" }}
+                  // animate={{ x: 0 }}
+                  // transition={{
+                  //   duration: 1.2,
+                  //   type: "spring",
+                  //   stiffness: 80,
+                  // }}
                   >
                     <img src={AppUrl.base_url + single_mov.imgSm} alt="" />
                   </motion.div>
@@ -857,13 +858,13 @@ const Details = ({ user, singleUser }) => {
                       stiffness: 40,
                     }}
                   >
-                    <h4 className="more_card_info_title">{single_mov.title}</h4>
+                    <h4 className="more_card_info_title">{isBangla ? single_mov.title_bn : single_mov.title}</h4>
                     <div className="more_card_info_other">
-                      <p className="more_card_info_year">{single_mov.year}</p>
-                      <p className="more_card_info_age">{single_mov.age}</p>
-                      <p className="more_card_info_time">{single_mov.time}</p>
+                      <p className="more_card_info_year">{isBangla ? single_mov.year_bn : single_mov.year}</p>
+                      <p className="more_card_info_age">{isBangla ? single_mov.age_bn : single_mov.age}</p>
+                      <p className="more_card_info_time">{isBangla ? single_mov.time_bn : single_mov.time}</p>
                     </div>
-                    <p className="more_card_info_des">{single_mov.desc}</p>
+                    <p className="more_card_info_des">{isBangla ? single_mov.desc_bn : single_mov.desc}</p>
                   </motion.div>
                 </motion.div>
                 <motion.div

@@ -1,3 +1,4 @@
+
 import {
   ArrowBackIosOutlined,
   ArrowForwardIosOutlined,
@@ -45,9 +46,11 @@ export default function List({
   const [startVideo, setStartVideo] = useState(false);
   const [more_detail, setMoreDetail] = useState(null);
 
+  const { isBangla } = useContext(UserContext);
+
   //const { pathname } = useLocation();
 
-  // const { user } = useContext(UserContext);
+
   // const [singleUser, setSingleUser] = useState("");
 
   // useEffect(() => {

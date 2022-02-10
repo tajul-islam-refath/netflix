@@ -1,4 +1,5 @@
-import React from "react";
+import { useContext } from "react";
+import { UserContext } from "../../context/userContext/UserContext";
 import "./bottomNav.scss";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import {
@@ -17,6 +18,7 @@ import { BsMusicNoteBeamed } from "react-icons/bs";
 //import { motion } from 'framer-motion';
 
 const BottomNav = () => {
+  const { isBangla } = useContext(UserContext)
   //   let nav = document.querySelector(".nav");
   //   if (nav !== null) {
   //     nav.querySelectorAll("li .bottom_nav_a").forEach((a, i) => {
@@ -145,7 +147,9 @@ const BottomNav = () => {
             onClick={clickMenu}
           >
             <MdMovieFilter className="navbar_menu_icon" />
-            <span className="title">Movies</span>
+            <span className="title">
+              {isBangla ? "সিনেমা" : "Movies "}
+            </span>
           </Link>
         </li>
 
@@ -156,7 +160,9 @@ const BottomNav = () => {
             onClick={clickStories}
           >
             <RiMovie2Fill className="navbar_stories_icon" />
-            <span className="title">Series</span>
+            <span className="title">
+              {isBangla ? "সিরিজ" : " Series "}
+            </span>
           </Link>
         </li>
 
@@ -168,7 +174,9 @@ const BottomNav = () => {
             onClick={clickHome}
           >
             <AiFillHome className="navbar_home_icon" />
-            <span className="title">Home</span>
+            <span className="title">
+              {isBangla ? "হোম" : "Home"}
+            </span>
           </Link>
         </li>
 
@@ -179,7 +187,9 @@ const BottomNav = () => {
             onClick={clickContact}
           >
             <MdLocalMovies className="navbar_contact_icon" />
-            <span className="title">My List</span>
+            <span className="title">
+              {isBangla ? "আমার তালিকা" : "My List "}
+            </span>
           </Link>
         </li>
 
@@ -190,7 +200,9 @@ const BottomNav = () => {
             onClick={clickAboutUs}
           >
             <BsMusicNoteBeamed className="navbar_about_us_icon" />
-            <span className="title">Music</span>
+            <span className="title">
+              {isBangla ? "সঙ্গীত" : " Music"}
+            </span>
           </Link>
         </li>
 

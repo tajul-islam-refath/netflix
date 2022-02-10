@@ -608,25 +608,25 @@ export default function Featured({
               </option>
               {type === "movie"
                 ? lists
-                    // eslint-disable-next-line array-callback-return
-                    .filter((i) => {
-                      if (i.type === "Movies") {
-                        return i;
-                      }
-                    })
-                    .map((item) => (
-                      <option value={item._id}>{item.title}</option>
-                    ))
+                  // eslint-disable-next-line array-callback-return
+                  .filter((i) => {
+                    if (i.type === "Movies") {
+                      return i;
+                    }
+                  })
+                  .map((item) => (
+                    <option value={item._id}>{item.title}</option>
+                  ))
                 : lists
-                    // eslint-disable-next-line array-callback-return
-                    .filter((i) => {
-                      if (i.type === "Series") {
-                        return i;
-                      }
-                    })
-                    .map((item) => (
-                      <option value={item._id}>{item.title}</option>
-                    ))}
+                  // eslint-disable-next-line array-callback-return
+                  .filter((i) => {
+                    if (i.type === "Series") {
+                      return i;
+                    }
+                  })
+                  .map((item) => (
+                    <option value={item._id}>{item.title}</option>
+                  ))}
               {/* <option value="adventure">Adventure</option>
               <option value="comedy">Comedy</option>
               <option value="crime">Crime</option>
@@ -779,13 +779,13 @@ export default function Featured({
                   <motion.div className="more_card">
                     <motion.div
                       className="more_card_img"
-                      // initial={{ x: "100vw" }}
-                      // animate={{ x: 0 }}
-                      // transition={{
-                      //   duration: 1.2,
-                      //   type: "spring",
-                      //   stiffness: 80,
-                      // }}
+                    // initial={{ x: "100vw" }}
+                    // animate={{ x: 0 }}
+                    // transition={{
+                    //   duration: 1.2,
+                    //   type: "spring",
+                    //   stiffness: 80,
+                    // }}
                     >
                       <img src={AppUrl.base_url + movies.img} alt="" />
                     </motion.div>
@@ -863,7 +863,7 @@ export default function Featured({
                   animate={{ y: 0 }}
                   transition={{ duration: 0.4, type: "spring", stiffness: 100 }}
                   exit={{ y: "-100vh" }}
-                  // layoutId={selectedId}
+                // layoutId={selectedId}
                 >
                   {startVideo ? (
                     <>

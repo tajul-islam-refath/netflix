@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700&family=Rubik&display=swap");
+* {
+  font-family: "Poppins", sans-serif;
+  font-family: "Rubik", sans-serif;
+}
+
+:root {
+  --main-color: #151531fa;
+  --red-color: #e72626;
+  --icinema-bg: "http://localhost:3000/images/icinema_bg.jpg";
+}
+
+html {
+  height: 100vh;
+  background-color: #151531fa;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.Toastify__toast-theme--light {
+  background-color: var(--toastify-color-dark) !important;
+  color: white !important;
+}
+
+.swal-overlay--show-modal .swal-modal {
+  border-radius: 15px;
+}
+
+.swal-button {
+  background-color: var(--main-color);
+}
+
+.swal-button:hover {
+  background-color: var(--main-color) !important;
+}
+
+/* html {
+  font-size: 62.5%;
+} */
+/*# sourceMappingURL=App.css.map */

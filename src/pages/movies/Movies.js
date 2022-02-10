@@ -8,12 +8,13 @@ import Footer from "../../components/footer/Footer";
 import LazyLoad from "react-lazyload";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { UserContext } from "../../context/userContext/UserContext";
 import { ListContext } from "../../context/listContext/ListContext";
 import { getLists } from "../../context/listContext/apiCalls";
 
 const Movies = ({ user, singleUser }) => {
   const [selectTerm, setSelectTerm] = useState("");
-
+  const { isBangla } = useContext(UserContext)
   const { lists, dispatch: listDispatch } = useContext(ListContext);
 
   useEffect(() => {
@@ -71,6 +72,7 @@ const Movies = ({ user, singleUser }) => {
     "In 1980s Naples, young Fabietto pursues his love for football as family tragedy strikes, shaping his uncertain but promising future as a filmmaker.";
   const video =
     "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4";
+
   return (
     <>
       <div className="home">

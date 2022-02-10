@@ -28,7 +28,7 @@ export default function ListItem({
 }) {
   const [isHovered, setIsHovered] = useState(false);
 
-  const { user } = useContext(UserContext);
+  const { user, isBangla } = useContext(UserContext);
 
   const [addToList, setAddToList] = useState(false);
   const [addtoLike, setAddtoLike] = useState(false);
@@ -344,7 +344,7 @@ export default function ListItem({
             data-aos-offset="0"
             data-aos-delay={item_id * 150}
             data-aos-duration="500"
-            // data-aos-easing="ease-in-out"
+          // data-aos-easing="ease-in-out"
           />
 
           {/* </LazyLoad> */}
@@ -546,8 +546,8 @@ export default function ListItem({
                     />
                   </div>
                   <div className="itemInfoTop">
-                    <span>{info.time}</span>
-                    <span className="limit">{info.age}+</span>
+                    <span>{isBangla ? info.time_bn : info.time}</span>
+                    <span className="limit">{isBangla ? info.age_bn : info.age}+</span>
                     {/* <span>1999</span> */}
                   </div>
                   {/* <div className="desc">
@@ -562,7 +562,7 @@ export default function ListItem({
                       {item} <span>•</span>
                     </span>
                   ))} */}
-                    <span>{info.genre}</span>
+                    <span>{isBangla ? info.genre_bn : info.genre}</span>
                     {/* <span>•</span> <span>Drama</span>{" "}
                 <span>•</span> <span>Horror</span> */}
                   </div>
